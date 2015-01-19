@@ -2,12 +2,17 @@
 
 class HomeController extends AppController{
 
-	public function __construct() {
+	public $uses = array('User');
+
+	function __construct() {
 		parent::__construct();
 	}
 
-	public function index(){
-		echo 'we are in index';
+	public function index($f3){
+		$f3->set('content', 'app/view/test.htm');
+
+		echo View::instance()->render('app/view/layout/default.htm');
+		// echo Template::instance()->render('app/view/layout/default.htm');
 	}
 
 }
