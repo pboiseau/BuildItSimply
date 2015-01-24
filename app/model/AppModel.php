@@ -1,9 +1,13 @@
 <?php
 
-class AppModel {
+use \Illuminate\Database\Eloquent\Model as Eloquent;
+
+class AppModel extends Eloquent{
+
+	private $f3;
 
 	protected $db;
-	private $f3;
+	protected $mapper;
 
 	public function __construct() {
 		$this->f3 = Base::instance();
@@ -13,8 +17,8 @@ class AppModel {
 			$this->f3->get('DB_USER'), $this->f3->get('DB_PASSWORD')
 		);
 
+		// $this->mapper = new \DB\Cortex($this->db, $this->table);
 	}
-
 
 
 }

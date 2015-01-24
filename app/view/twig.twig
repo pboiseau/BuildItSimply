@@ -2,4 +2,11 @@
 
 {% block body %}
 	Layout et view rendu avec twig
+	{% if users %}
+		<ul>
+			{% for user in users %}
+				<li>{{ user.firstname }}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
 {% endblock %}

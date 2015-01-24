@@ -5,16 +5,17 @@ class AppController {
 	protected $twig;
 	protected $layout = 'default';
 
-	public function __construct() {
+	private $f3;
 
-		$this->twig = $GLOBALS['twig'];
+	public function __construct() {
+		$this->f3 = Base::instance();
+		$this->twig = $this->f3->get('TWIG');
 
 		if(!empty($this->uses)){
 			foreach($this->uses as $model){
 				$this->loadModel($model);
 			}
 		}
-
 	}
 
 	protected function render($template, $data = array()){
@@ -23,7 +24,11 @@ class AppController {
 	}
 
 	private function loadModel($model){
-		$this->$model = new $model();
+		if(class_exists($model)){
+			$this->$model = new $model();
+		}else{
+			throw new Exception("Class " . $model . " doesn't exist");
+		}
 	}
 
 

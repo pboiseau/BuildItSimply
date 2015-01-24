@@ -1,21 +1,34 @@
 <?php
 
-$f3 = require('lib/base.php');
-require('vendor/twig/twig/lib/Twig/Autoloader.php');
+/**
+*	Autoload by composer
+**/
+require('vendor/autoload.php');
+
+// $f3 = require('lib/base.php');
+// require('vendor/twig/twig/lib/Twig/Autoloader.php');
+
+$f3 = Base::instance();
 
 Twig_Autoloader::register();
 
-$twig = new Twig_Environment(new Twig_Loader_Filesystem('app/view/'), [
+$f3->set('TWIG', new Twig_Environment(new Twig_Loader_Filesystem('app/view/'), [
 	'debug' => false,
 	'cache' => 'assets/cache/',
 	'auto_reload' => true
-]);
+]));
 
-// Load app configuration
+/**
+*	Load framework configuration
+**/
 $f3->config('app/config/config.ini');
 $f3->config('app/config/routes.ini');
 $f3->config('app/config/maps.ini');
 $f3->config('app/config/redirects.ini');
 
+/**
+*	Load Eloquent ORM
+**/
+$capsule = new Database();
 
 $f3->run();

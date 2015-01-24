@@ -2,7 +2,7 @@
 
 class HomeController extends AppController{
 
-	public $uses = array('User');
+	public $uses = array('Account');
 
 	public function __construct() {
 		parent::__construct();
