@@ -5,7 +5,8 @@
 	"license": "GPL-3.0",
 	"require": {
 		"php": ">=5.3.6",
-		"twig/twig": "~1.0"
+		"twig/twig": "~1.0",
+		"doctrine/orm": "*"
 	},
 	"repositories": [
 		{

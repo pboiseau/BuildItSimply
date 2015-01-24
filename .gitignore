@@ -2,3 +2,5 @@ lib/*
 sftp-config.json
 vendor/*
 .sass-cache/*
+node_modules/*
+assets/*
