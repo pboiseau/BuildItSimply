@@ -5,4 +5,4 @@ vendor/*
 node_modules/*
 assets/*
 
-app/config/config.ini
+

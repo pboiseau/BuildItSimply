@@ -12,7 +12,7 @@ $f3 = Base::instance();
 
 Twig_Autoloader::register();
 
-$f3->set('TWIG', new Twig_Environment(new Twig_Loader_Filesystem('app/view/'), [
+$f3->set('TWIG', new Twig_Environment(new Twig_Loader_Filesystem('app/views/'), [
 	'debug' => false,
 	'cache' => 'assets/cache/',
 	'auto_reload' => true

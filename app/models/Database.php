@@ -24,7 +24,7 @@ class Database{
 			'host' => $f3->get('DB_HOST'),
 			'database' => $f3->get('DB_NAME'),
 			'username' => $f3->get('DB_USER'),
-			'password' => $f3->get('DB_PASS'),
+			'password' => $f3->get('DB_PASSWORD'),
 			'charset' => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix' => ''
