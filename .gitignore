@@ -1,13 +1,7 @@
+app/config/config.ini
 lib/*
 sftp-config.json
 vendor/*
 .sass-cache/*
 node_modules/*
 assets/*
-
-
-
-
-app/config/config.ini
-
-app/config/config.ini

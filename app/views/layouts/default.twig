@@ -6,9 +6,16 @@
 		<link rel="stylesheet" href="{{css}}bootstrap.css" type="text/css" />
 	</head>
 	<body>
+		{% include 'partials/menu.twig' %}
 		<div class="container">
-			{% block menu %} {% endblock %}
+			{% block message %}
+				{% if message %}
+					<div class="alert alert-info" role="alert">{{ message }}</div>
+				{% endif %}
+			{% endblock %}
+
 			{% block body %} {% endblock%}
 		</div>
+		{% include 'partials/footer.twig' ignore missing %}
 	</body>
 </html>

@@ -8,10 +8,23 @@ class AccountController extends AppController{
 		parent::__construct();
 	}
 
+	/**
+	*	Authenticate and log client
+	**/
 	public function login(){
 		if($this->request() == 'POST'){
-			echo 'coucou anastasia';
-			die();
+			if($user = $this->Account->login($this->f3->get('POST'))){
+				$user = [
+					'firstname' => $user['firstname'],
+					'lastname' => $user['lastname']
+				];
+				$this->f3->set('SESSION', $user);
+				$this->setFlash('Authentification reussi');
+				$this->f3->reroute('/');
+			}else{
+				$this->setFlash('erreur');
+				$this->f3->reroute($this->f3->get('PATTERN'));
+			}
 		}
 
 		$this->render('accounts/login');

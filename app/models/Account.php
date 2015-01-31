@@ -13,6 +13,14 @@ class Account extends AppModel{
 		return $this->all();
 	}
 
+	public function login($login = array()){
+		$user = $this->where('mail', $login['email'])
+				->where('password', $login['password'])
+				->first();
+
+		return (!empty($user)) ? $user : false;
+	}
+
 
 }
 
