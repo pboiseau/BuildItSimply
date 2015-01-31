@@ -3,13 +3,12 @@
 	<head>
 		<meta charset="utf8">
 		<title>Build It Simply</title>
-
-		<link rel="stylesheet" href="webroot/css/base.css" type="text/css" />
-		<link rel="stylesheet" href="webroot/css/theme.css" type="text/css" />
+		<link rel="stylesheet" href="{{css}}bootstrap.css" type="text/css" />
 	</head>
 	<body>
-		{% block menu %} {% endblock %}
-
-		{% block body %} {% endblock%}
+		<div class="container">
+			{% block menu %} {% endblock %}
+			{% block body %} {% endblock%}
+		</div>
 	</body>
 </html>
