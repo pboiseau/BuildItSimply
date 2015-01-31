@@ -14,7 +14,8 @@ class HomeController extends AppController{
 
 	public function get($f3){
 		$users = $this->Account->get();
-		$this->render('twig', ['users' => $users]);
+		// $this->render('twig', ['users' => $users]);
+		$this->render('twig', compact('users'));
 	}
 
 }

@@ -4,5 +4,6 @@ vendor/*
 .sass-cache/*
 node_modules/*
 assets/*
+app/config/config.ini
 
 
