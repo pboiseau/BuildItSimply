@@ -3,7 +3,10 @@
 class Account extends AppModel{
 
 	public $timestamps = false;
+
 	protected $table = 'accounts';
+	protected $guarded = array('id');
+	protected $fillable = array('firstname', 'lastname', 'mail', 'password');
 
 	public function __construct(){
 		parent::__construct();
@@ -19,6 +22,10 @@ class Account extends AppModel{
 				->first();
 
 		return (!empty($user)) ? $user : false;
+	}
+
+	public function register($user){
+		$this->create($user);
 	}
 
 

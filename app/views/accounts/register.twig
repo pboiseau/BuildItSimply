@@ -1,5 +1,41 @@
 {% extends 'layouts/' ~ layout ~ '.twig' %}
 
 {% block body %}
-
+	<form method="post" action="{{home ~ request}}" class="form-horizontal">
+		<div class="form-group">
+			<label for="lastname" class="col-sm-2 control-label">Nom</label>
+			<div class="col-sm-10">
+				<input type="text" name="lastname" class="form-control" id="lastname" placeholder="Nom">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="firstname" class="col-sm-2 control-label">Prenom</label>
+			<div class="col-sm-10">
+				<input type="text" name="firstname" class="form-control" id="firstname" placeholder="Prenom">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="mail" class="col-sm-2 control-label">Adresse email</label>
+			<div class="col-sm-10">
+				<input type="email" name="mail" class="form-control" id="mail" placeholder="Adresse email">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="password" class="col-sm-2 control-label">Mot de passe</label>
+			<div class="col-sm-10">
+				<input type="password" name="password" class="form-control" id="password" placeholder="Mot de passe">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="repeatpassword" class="col-sm-2 control-label">Repeter mot de passe</label>
+			<div class="col-sm-10">
+				<input type="password" name="repeatpassword" class="form-control" id="repeatpassword" placeholder="Repeter mot de passe">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-default">S'inscrire</button>
+			</div>
+		</div>
+	</form>
 {% endblock %}

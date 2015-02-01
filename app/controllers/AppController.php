@@ -12,10 +12,13 @@ class AppController {
 		$this->twig = $this->f3->get('TWIG');
 
 		$this->config = [
-			'root' => $this->f3->get('ROOT'),
+			'prod' => $this->f3->get('PROD'),
+			'root' => ($this->f3->get('PROD')) ? $this->f3->get('ROOT') : $this->f3->get('DEV_ROOT'),
+			'home' => ($this->f3->get('PROD')) ? $this->f3->get('ROOT') : $this->f3->get('DEV_ROOT') . '/',
 			'webroot' => $this->f3->get('WEBROOT'),
 			'css' => $this->f3->get('CSS'),
 			'js' => $this->f3->get('JS'),
+			'request' => substr($this->f3->get('PATTERN'), 1, strlen($this->f3->get('PATTERN'))),
 			'message' => $this->f3->get('SESSION.message'),
 		];
 

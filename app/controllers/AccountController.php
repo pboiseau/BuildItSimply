@@ -35,7 +35,11 @@ class AccountController extends AppController{
 	}
 
 	public function register(){
-		$this->render('accounts/login');
+		if($this->request() == 'POST'){
+			$this->Account->register($this->f3->get('POST'));
+		}
+
+		$this->render('accounts/register');
 	}
 
 

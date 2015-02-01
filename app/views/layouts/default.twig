@@ -3,7 +3,11 @@
 	<head>
 		<meta charset="utf8">
 		<title>Build It Simply</title>
-		<link rel="stylesheet" href="{{css}}bootstrap.css" type="text/css" />
+		{% if not prod %}
+			<link rel="stylesheet" href="{{root ~ css}}bootstrap.css" type="text/css" />
+		{% else %}
+			<link rel="stylesheet" href="{{css}}bootstrap.css" type="text/css">
+		{% endif %}
 	</head>
 	<body>
 		{% include 'partials/menu.twig' %}
