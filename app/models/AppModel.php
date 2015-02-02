@@ -6,15 +6,10 @@ class AppModel extends Eloquent{
 
 	public $incrementing = true;
 
-	private $f3;
+	private $salt = '4234ePc9M28eWyx9';
 
-	protected $db;
-	protected $mapper;
-
-
-	public function __construct() {
-		$this->f3 = Base::instance();
+	public function hash($data){
+		return hash('sha256', $this->salt . $data);
 	}
-
 
 }

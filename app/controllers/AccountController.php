@@ -30,16 +30,28 @@ class AccountController extends AppController{
 		$this->render('accounts/login');
 	}
 
+	/**
+	*
+	**/
 	public function logout(){
 
 	}
 
+	/**
+	*
+	**/
 	public function register(){
 		if($this->request() == 'POST'){
-			$this->Account->register($this->f3->get('POST'));
+			$user = $this->f3->get('POST');
+			if(strcmp($user['password'], $user['repeatpassword']) == 0){
+				$this->Account->register($user);
+			}else{
+				$this->setFlash("Les mots de passe ne correspondent pas");
+				// $this->f3->reroute($this->f3->get('PATTERN'));
+			}
 		}
 
-		$this->render('accounts/register');
+		$this->render('accounts/register', (!empty($user) ? compact('user') : []));
 	}
 
 

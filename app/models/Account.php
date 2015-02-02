@@ -1,16 +1,12 @@
 <?php
 
-class Account extends AppModel{
+class Account extends AppModel {
 
 	public $timestamps = false;
 
 	protected $table = 'accounts';
 	protected $guarded = array('id');
-	protected $fillable = array('firstname', 'lastname', 'mail', 'password');
-
-	public function __construct(){
-		parent::__construct();
-	}
+	// protected $fillable = array();
 
 	public function get(){
 		return $this->all();
@@ -25,7 +21,10 @@ class Account extends AppModel{
 	}
 
 	public function register($user){
+		unset($user['repeatpassword']);
+		$user['password'] = $this->hash($user['password']);
 		$this->create($user);
+
 	}
 
 
