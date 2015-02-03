@@ -20,6 +20,7 @@ class AppController {
 			'js' => $this->f3->get('JS'),
 			'request' => substr($this->f3->get('PATTERN'), 1, strlen($this->f3->get('PATTERN'))),
 			'message' => $this->f3->get('SESSION.message'),
+			'login' => $this->f3->get('SESSION.user'),
 		];
 
 		if(!empty($this->uses)){
@@ -29,6 +30,11 @@ class AppController {
 		}
 	}
 
+	/**
+	*	Render a view using twig template
+	*	@param string $template
+	*	@param array $data
+	**/
 	protected function render($template, $data = array()){
 		$data['layout'] = $this->layout;
 
@@ -41,14 +47,26 @@ class AppController {
 		}
 	}
 
+	/**
+	*	Get the request type (get, post ...)
+	*	@return string request type
+	**/
 	protected function request(){
 		return $this->f3->get('VERB');
 	}
 
+	/**
+	*	Set flash message into user session
+	*	@param string $message
+	**/
 	protected function setFlash($message){
 		$this->f3->set('SESSION.message', $message);
 	}
 
+	/**
+	*	Instanciate and load a database model
+	*	@param string $model name
+	**/
 	private function loadModel($model){
 		if(class_exists($model)){
 			$this->$model = new $model();

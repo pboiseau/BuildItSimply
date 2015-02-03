@@ -9,13 +9,7 @@ class HomeController extends AppController{
 	}
 
 	public function index($f3){
-		$this->render('twig');
-	}
-
-	public function get($f3){
-		$users = $this->Account->get();
-		// $this->render('twig', ['users' => $users]);
-		$this->render('twig', compact('users'));
+		$this->render('index');
 	}
 
 }

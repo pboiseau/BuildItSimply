@@ -10,7 +10,11 @@
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="{{home}}users/login">Login</a></li>
+					{% if login %}
+						<li><a href="{{home}}users/logout">Logout</a></li>
+					{% else %}
+						<li><a href="{{home}}users/login">Login</a></li>
+					{% endif %}
 					<li><a href="{{home}}users/register">Register</a></li>
 				</ul>
 			</div>
