@@ -4,8 +4,7 @@
         "php": ">=5.3.6",
         "bcosca/fatfree": "~3.4",
         "twig/twig": "~1.17",
-        "illuminate/database": "~4.2",
-        "illuminate/validation": "~4.2"
+        "illuminate/database": "~4.2"
     },
     "authors": [
         {

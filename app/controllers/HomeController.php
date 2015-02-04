@@ -12,6 +12,10 @@ class HomeController extends AppController{
 		$this->render('index');
 	}
 
+	public function test(){
+
+	}
+
 }
 
 ?>
