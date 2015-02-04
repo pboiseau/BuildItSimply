@@ -7,6 +7,7 @@
 			<div class="col-sm-10">
 				<input type="text" name="lastname" value="{% if user.lastname %}{{ user.lastname }}{% endif %}"
 				class="form-control" id="lastname" placeholder="Nom">
+				<span class="help-block with-errors">{% if errors.lastname %}{{ errors.lastname }}{% endif %}</span>
 			</div>
 		</div>
 		<div class="form-group">
@@ -14,6 +15,7 @@
 			<div class="col-sm-10">
 				<input type="text" name="firstname" value="{% if user.firstname %}{{ user.firstname }}{% endif %}"
 				class="form-control" id="firstname" placeholder="Prenom">
+				<span class="help-block with-errors">{% if errors.firstname %}{{ errors.firstname }}{% endif %}</span>
 			</div>
 		</div>
 		<div class="form-group">
@@ -21,12 +23,14 @@
 			<div class="col-sm-10">
 				<input type="mail" name="mail" value="{% if user.mail %}{{ user.mail }}{% endif %}"
 				class="form-control" id="mail" placeholder="Adresse email">
+				<span class="help-block with-errors">{% if errors.mail %}{{ errors.mail }}{% endif %}</span>
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="password" class="col-sm-2 control-label">Mot de passe</label>
 			<div class="col-sm-10">
 				<input type="password" name="password" class="form-control" id="password" placeholder="Mot de passe">
+				<span class="help-block with-errors">{% if errors.password %}{{ errors.password }}{% endif %}</span>
 			</div>
 		</div>
 		<div class="form-group">

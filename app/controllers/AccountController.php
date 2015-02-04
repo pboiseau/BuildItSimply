@@ -42,12 +42,18 @@ class AccountController extends AppController{
 	*	Register a client using form and post data
 	**/
 	public function register(){
+		$user = array();
+		$errors = array();
+
 		if($this->request() == 'POST'){
 			$user = $this->f3->get('POST');
 			if(strcmp($user['password'], $user['repeatpassword']) == 0){
-				$this->Account->register($user);
-				$this->setFlash('Votre compte a été crée, bienvenue');
-				$this->f3->reroute('/users/profile');
+				if($this->Account->register($user)){
+					$this->setFlash('Votre compte a été crée, bienvenue');
+					$this->f3->reroute('/users/profile');
+				}else{
+					$errors = $this->Account->errors;
+				}
 			}else{
 				$this->setFlash("Les mots de passe ne correspondent pas");
 				// $this->f3->reroute($this->f3->get('PATTERN'));
@@ -55,11 +61,10 @@ class AccountController extends AppController{
 		}
 
 		$type = $this->Account->getEnumValues('type');
-		$this->render('accounts/register', (!empty($user) ? compact('user', 'type') : compact('type')));
+		$this->render('accounts/register', compact('user', 'errors', 'type'));
 	}
 
 	public function profile(){
-
 		$this->render('accounts/profile', []);
 	}
 
