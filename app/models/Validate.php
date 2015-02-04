@@ -20,9 +20,10 @@ class Validate extends Audit
 
 	public function isPassword($data, $entropy = null, $length = null)
 	{
-		$check = preg_match("#^[0-9a-zA-Z]{8,25}$#", $data);
+
+		$check = preg_match("#^[^ ;'\"]{8,25}#", $data);
 		$length = (!empty($length)) ? (strlen($data) <= $length) : true;
-		return ($check == 1) && ($length) && ($entropy > 20);
+		return ($check == 1) && ($length) && ($this->entropy($data) > $entropy);
 	}
 
 
