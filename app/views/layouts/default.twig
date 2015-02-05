@@ -5,8 +5,10 @@
 		<title>Build It Simply</title>
 		{% if not prod %}
 			<link rel="stylesheet" href="{{root ~ css}}bootstrap.css" type="text/css" />
+			<link rel="stylesheet" href="{{root ~ css}}bootstrap-tokenfield.css" type="text/css" />
+			<link rel="stylesheet" href="{{root ~ css}}bootstrap-typeahead.css" type="text/css" />
 		{% else %}
-			<link rel="stylesheet" href="{{css}}bootstrap.css" type="text/css">
+			<link rel="stylesheet" href="{{css}}dist.css" type="text/css">
 		{% endif %}
 	</head>
 	<body>
@@ -21,5 +23,12 @@
 			{% block body %} {% endblock%}
 		</div>
 		{% include 'partials/footer.twig' ignore missing %}
+		{% if not prod %}
+			<script src="{{root ~ js}}jquery.js"></script>
+			<script src="{{root ~ js}}bootstrap-tokenfield.js"></script>
+			<script src="{{root ~ js}}app.js"></script>
+		{% else %}
+			<script src="{{js}}dist.js"></script>
+		{% endif %}
 	</body>
 </html>

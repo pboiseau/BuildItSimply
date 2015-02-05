@@ -8,11 +8,6 @@ class Account extends AppModel {
 	protected $table = 'accounts';
 	protected $guarded = array('id');
 
-
-	public function get(){
-		return $this->all();
-	}
-
 	/**
 	*
 	**/
@@ -32,10 +27,20 @@ class Account extends AppModel {
 		unset($user['repeatpassword']);
 		if($this->validate($user)){
 			$user['password'] = $this->hash($user['password']);
-			return $this->create($user);
+			$create = $this->create($user);
+			return (!empty($create)) ? $create : false;
 		}else{
 			return false;
 		}
+	}
+
+	public function setSession($user){
+		Base::instance()->set('SESSION.user', [
+				'id' => $user['id'],
+				'firstname' => $user['firstname'],
+				'lastname' => $user['lastname'],
+				'type' => $user['type']
+			]);
 	}
 
 	private function validate($data = array()){
@@ -51,7 +56,7 @@ class Account extends AppModel {
 		}
 
 		if(!$validator->isString($data['firstname'], 100)){
-			$errors['lastname'] = 'Prenom invalide.';
+			$errors['firstname'] = 'Prenom invalide.';
 		}
 
 		if(!$validator->isPassword($data['password'], 15, 25)){

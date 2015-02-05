@@ -2,10 +2,16 @@
 
 class AccountController extends AppController{
 
-	public $uses = array('Account');
+	public $uses = array('Account', 'Freelance');
 
 	public function __construct(){
 		parent::__construct();
+	}
+
+	public function beforeroute(){
+	}
+
+	public function afterroute(){
 	}
 
 	/**
@@ -14,11 +20,7 @@ class AccountController extends AppController{
 	public function login(){
 		if($this->request() == 'POST'){
 			if($user = $this->Account->login($this->f3->get('POST'))){
-				$user = [
-					'firstname' => $user['firstname'],
-					'lastname' => $user['lastname']
-				];
-				$this->f3->set('SESSION.user', $user);
+				$this->Account->setSession($user);
 				$this->setFlash('Authentification reussi');
 				$this->f3->reroute('/');
 			}else{
@@ -48,8 +50,9 @@ class AccountController extends AppController{
 		if($this->request() == 'POST'){
 			$user = $this->f3->get('POST');
 			if(strcmp($user['password'], $user['repeatpassword']) == 0){
-				if($this->Account->register($user)){
-					$this->setFlash('Votre compte a été crée, bienvenue');
+				if($user = $this->Account->register($user)){
+					$this->Account->setSession($user);
+					$this->setFlash('Votre compte a été crée et vous avez automatiquement été connecté.');
 					$this->f3->reroute('/users/profile');
 				}else{
 					$errors = $this->Account->errors;
@@ -65,7 +68,16 @@ class AccountController extends AppController{
 	}
 
 	public function profile(){
-		$this->render('accounts/profile', []);
+		$user = $this->Account->find($this->f3->get('SESSION.user.id'));
+
+		if($user['type'] == "FREELANCE"){
+			$experiences = $this->Freelance->getEnumValues('experience');
+		}
+
+		$this->render('accounts/profile', compact(
+			'user',
+			(!empty($experiences) ? 'experiences' : '')
+		));
 	}
 
 }

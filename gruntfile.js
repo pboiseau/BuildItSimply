@@ -5,10 +5,10 @@ module.exports = function(grunt) {
 
 		clean: {
 			css: {
-				src: ["webroot/css/app.css"]
+				src: ["webroot/css/dist.css"]
 			},
 			js: {
-				src: ["webroot/js/app.js"]
+				src: ["webroot/js/dist.js"]
 			}
 		},
 		db_dump: {
@@ -27,18 +27,18 @@ module.exports = function(grunt) {
 			options: {},
 			js_dist: {
 				src: ['webroot/js/*.js'],
-				dest: 'webroot/js/app.js',
+				dest: 'webroot/js/dist.js',
 			},
 			css_dist: {
 				src: ['webroot/css/*.css'],
-				dest: 'webroot/css/app.css'
+				dest: 'webroot/css/dist.css'
 			}
 		},
 		uglify: {
 			options: {},
 			dist: {
 				files: {
-					'webroot/js/app.js': ['webroot/js/app.js']
+					'webroot/js/dist.js': ['webroot/js/dist.js']
 				}
 			}
 		}
