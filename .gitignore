@@ -5,3 +5,4 @@ vendor/*
 .sass-cache/*
 node_modules/*
 assets/*
+bower_components

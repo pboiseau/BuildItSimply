@@ -16,12 +16,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ecolehetic/BuildMyProject.git"
+    "url": "https://github.com/ecolehetic/BuildItSimply.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ecolehetic/BuildMyProject/issues"
+    "url": "https://github.com/ecolehetic/BuildItSimply/issues"
   },
-  "homepage": "https://github.com/ecolehetic/BuildMyProject"
+  "homepage": "https://github.com/ecolehetic/BuildItSimply"
 }
