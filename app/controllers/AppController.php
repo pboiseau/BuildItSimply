@@ -35,7 +35,7 @@ class AppController {
 	*	@param string $template
 	*	@param array $data
 	**/
-	protected function render($template, $data = array()){
+	protected function render($template = null, $data = array()){
 		$data['layout'] = $this->layout;
 
 		echo $this->twig->render($template . '.twig',
@@ -61,6 +61,20 @@ class AppController {
 	**/
 	protected function setFlash($message){
 		$this->f3->set('SESSION.message', $message);
+	}
+
+
+	/**
+	*	Data encode into JSON
+	*	@param $name
+	*	@param $data
+	**/
+	protected function encode($name, $data = array()){
+		header('Access-Control-Allow-Origin: *');
+		header('Acces-Control-Allow-Headers: Auth-Token');
+		header('Access-Control-Allow-Methods: *');
+		header('Content-Type: application/json');
+		return '{"' . $name . '": ' . json_encode($data, CASE_LOWER) . '}';
 	}
 
 	/**

@@ -49,6 +49,31 @@ LOCK TABLES `accounts` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `categories_skills`
+--
+
+DROP TABLE IF EXISTS `categories_skills`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `categories_skills` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updaded_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categories_skills`
+--
+
+LOCK TABLES `categories_skills` WRITE;
+/*!40000 ALTER TABLE `categories_skills` DISABLE KEYS */;
+/*!40000 ALTER TABLE `categories_skills` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `clients`
 --
 
@@ -99,6 +124,35 @@ CREATE TABLE `freelances` (
 LOCK TABLES `freelances` WRITE;
 /*!40000 ALTER TABLE `freelances` DISABLE KEYS */;
 /*!40000 ALTER TABLE `freelances` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `freelances_skills`
+--
+
+DROP TABLE IF EXISTS `freelances_skills`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `freelances_skills` (
+  `account_id` int(11) NOT NULL,
+  `skills_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updaded_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`account_id`,`skills_id`),
+  KEY `fk_freelances_skills_freelances1_idx` (`account_id`),
+  KEY `fk_freelances_skills_skills1_idx` (`skills_id`),
+  CONSTRAINT `fk_freelances_skills_freelances1` FOREIGN KEY (`account_id`) REFERENCES `freelances` (`account_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_freelances_skills_skills1` FOREIGN KEY (`skills_id`) REFERENCES `skills` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `freelances_skills`
+--
+
+LOCK TABLES `freelances_skills` WRITE;
+/*!40000 ALTER TABLE `freelances_skills` DISABLE KEYS */;
+/*!40000 ALTER TABLE `freelances_skills` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -194,9 +248,12 @@ DROP TABLE IF EXISTS `skills`;
 CREATE TABLE `skills` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `categories_skills_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_skills_categories_skills1_idx` (`categories_skills_id`),
+  CONSTRAINT `fk_skills_categories_skills1` FOREIGN KEY (`categories_skills_id`) REFERENCES `categories_skills` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -243,4 +300,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-02-04 14:29:06
+-- Dump completed on 2015-02-08 21:40:12
