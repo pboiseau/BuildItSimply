@@ -28,6 +28,7 @@ class AppController {
 				$this->loadModel($model);
 			}
 		}
+
 	}
 
 	/**
@@ -40,7 +41,7 @@ class AppController {
 
 		echo $this->twig->render($template . '.twig',
 			array_merge($data, $this->config)
-		);
+			);
 
 		if($this->f3->get('SESSION.message')){
 			$this->f3->set('SESSION.message', '');
@@ -87,6 +88,12 @@ class AppController {
 		}else{
 			throw new Exception("Class " . $model . " doesn't exist");
 		}
+	}
+
+	private function twigExtention(){
+		$this->twig->addFunction(new \Twig_SimpleFunction('javascript', function ($file) {
+			echo sprintf("<script src='/%s'></script>", $this->f3->get('JS') . $file);
+		}));
 	}
 
 }

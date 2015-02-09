@@ -33,7 +33,7 @@ class AccountController extends AppController{
 	}
 
 	/**
-	*
+	*	Logout client and destroy session
 	**/
 	public function logout(){
 		$this->f3->clear('SESSION');
@@ -67,7 +67,11 @@ class AccountController extends AppController{
 		$this->render('accounts/register', compact('user', 'errors', 'type'));
 	}
 
+	/**
+	*
+	**/
 	public function profile(){
+
 		$user = $this->Account->find($this->f3->get('SESSION.user.id'));
 
 		if($user['type'] == "FREELANCE"){
@@ -76,9 +80,28 @@ class AccountController extends AppController{
 
 		$this->render('accounts/profile', compact(
 			'user',
-			(!empty($experiences) ? 'experiences' : '')
-		));
+			(!empty($experiences) ? 'experiences' : ''))
+		);
 	}
+
+	public function update_profile() {
+		if($this->request() == 'POST'){
+			$profile = $this->f3->get('POST');
+			$profile['account_id'] = $this->f3->get('SESSION.user.id');
+			$type = $this->f3->get('SESSION.user.type');
+
+			if($type == 'FREELANCE'){
+				if($this->Freelance->updateProfile($profile)){
+
+				}else{
+					$errors = $this->Freelance->errors;
+				}
+			}else if($type == 'CLIENT'){
+
+			}
+		}
+	}
+
 
 }
 

@@ -3,32 +3,43 @@ var config = {
 	'root': '/'
 }
 
+/**
+*	Ajax request to get all database skills
+*	@param callback function show skills
+**/
+function getSkills(callback){
+	$.ajax({
+		url: config.dev_root + '/skills/all',
+		type: 'GET'
+	}).done(function(data, status, xhr){
+		callback.call(this, data);
+	}).fail(function(xhr, status, error){
+		console.log(error);
+	});
+}
 
-$(document).ready(function(){
+/**
+*	Callback on input click to get and show skills
+*	@param function getSkills
+**/
+$('#skills').click(getSkills(function(data){
 
-	function getSkills(){
-		$.ajax({
-			url: config.dev_root + '/skills/all',
-			type: 'GET'
-		}).done(function(data){
-			console.log(data);
-		});
-	}
-
-	getSkills();
+	var skills = [];
+	$.each(data.skills, function(key, value){
+		skills.push(data.skills[key].name);
+	});
 
 	$('#skills').tokenfield({
 		autocomplete: {
-			// source: ['red','blue','green','yellow','violet','brown','purple','black','white']
-			// source: [ { label: "Choice1", value: "value1" } ],
-			source: function(request, response){
-
-			},
+			source: skills,
 			delay: 100
 		},
 		showAutocompleteOnFocus: true,
 		inputType: 'text'
 	});
+}));
 
-});
+
+
+
 

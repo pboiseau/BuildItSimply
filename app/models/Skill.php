@@ -8,7 +8,12 @@ class Skill extends AppModel {
 	protected $table = 'skills';
 	protected $guarded = array('id');
 
+	/**
+	*	@param string skills
+	**/
+	private function explodeSkills($skills) {
 
+	}
 }
 
  ?>

@@ -4,7 +4,7 @@
 		<h3>{{ user.firstname ~ " " ~ user.lastname }} - {{ user.type }}</h3>
 	</div>
 	<div class="page-content">
-		<form method="post" action="{{home ~ request}}" class="form-horizontal">
+		<form method="post" action="{{home}}users/profile/update" class="form-horizontal">
 		<div class="form-group {{ (errors.lastname) ? 'has-error' : '' }}">
 			<label for="url" class="col-sm-2 control-label">Site personnel</label>
 			<div class="col-sm-10">
@@ -17,7 +17,7 @@
 			<div class="form-group">
 				<label for="type" class="col-sm-2 control-label">Experience en tant que Freelance</label>
 				<div class="col-sm-10">
-					<select name="type" id="type" class="form-control" required>
+					<select name="experience" id="type" class="form-control" required>
 						<option value="" disabled>Votre niveau ?</option>
 						{% for experience in experiences %}
 							<option value="{{ experience }}">{{ experience|lower }}</option>

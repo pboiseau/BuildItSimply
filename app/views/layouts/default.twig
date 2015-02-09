@@ -14,6 +14,7 @@
 	</head>
 	<body>
 		{% include 'partials/menu.twig' %}
+
 		<div class="container">
 			{% block message %}
 				{% if message %}
@@ -23,15 +24,21 @@
 
 			{% block body %} {% endblock%}
 		</div>
+
 		{% include 'partials/footer.twig' ignore missing %}
-		{% if not prod %}
-			<script src="{{root}}/bower_components/jquery/dist/jquery.js"></script>
-			<script src="{{root}}/bower_components/jquery-ui/jquery-ui.js"></script>
-			<script src="{{root}}/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-			<script src="{{root ~ js}}bootstrap-tokenfield.js"></script>
-			<script src="{{root ~ js}}app.js"></script>
-		{% else %}
-			<script src="{{js}}dist.js"></script>
-		{% endif %}
+
+		{% block js %}
+			{% if not prod %}
+				<script src="{{root}}/bower_components/jquery/dist/jquery.js"></script>
+				<script src="{{root}}/bower_components/jquery-ui/jquery-ui.js"></script>
+				<script src="{{root}}/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+				<script src="{{root ~ js}}bootstrap-tokenfield.js"></script>
+				<script src="{{root ~ js}}app.js"></script>
+			{% else %}
+				<script src="{{js}}dist.js"></script>
+			{% endif %}
+		{% endblock %}
+
+		{% block partial_js %} {% endblock %}
 	</body>
 </html>
