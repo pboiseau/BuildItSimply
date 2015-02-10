@@ -101,10 +101,12 @@ class AccountController extends AppController{
 	public function update_profile() {
 		if($this->request() == 'POST'){
 
+
 			$profile = $this->f3->get('POST');
-			$profile['account']['account_id'] = $this->f3->get('SESSION.user.id');
-			$profile['freelance']['account_id'] = $this->f3->get('SESSION.user.id');
-			$profile['client']['account_id'] = $this->f3->get('SESSION.user.id');
+			$userId = $this->f3->get('SESSION.user.id');
+			$profile['account']['account_id'] = $userId;
+			$profile['freelance']['account_id'] = $userId;
+			$profile['client']['account_id'] = $userId;
 			$type = $this->f3->get('SESSION.user.type');
 
 			$this->Account->updateAccount($profile['account']);

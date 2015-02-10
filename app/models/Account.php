@@ -35,6 +35,8 @@ class Account extends AppModel {
 		// check valide user
 		if($this->validate($user)){
 			unset($user['repeatpassword']);
+			$user['firstname'] = ucfirst(strtolower($user['firstname']));
+			$user['lastname'] = ucfirst(strtolower($user['lastname']));
 			$user['password'] = $this->hash($user['password']);
 			$create = $this->create($user);
 			return (!empty($create)) ? $create : false;
@@ -69,7 +71,7 @@ class Account extends AppModel {
 		}
 
 		if(empty($data['city'])){
-			unset($data['phone']);
+			unset($data['city']);
 		}
 
 		if(empty($data['description'])){
