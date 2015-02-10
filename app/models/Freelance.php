@@ -12,7 +12,8 @@ class Freelance extends AppModel {
 		unset($freelance['skills']);
 		if(!$this->validate($freelance)){ return false; }
 
-		if($profile = $this->where('account_id', $freelance['account_id'])->get()){
+
+		if($profile = $this->where('account_id', $freelance['account_id'])->first()){
 			// update freelance
 			return $this->where('account_id', $freelance['account_id'])->update([
 					'url' => $freelance['url'],
@@ -37,7 +38,7 @@ class Freelance extends AppModel {
 			$errors['url'] = "L'adresse web est incorrect";
 		}
 
-		if(!in_array($data['experience'], ['BEGINNER', 'CONFIRMED', 'EXPERT'])){
+		if(!in_array($data['experience'], ['DEBUTANT', 'CONFIRME', 'EXPERT'])){
 			$errors['experience'] = "Votre niveau d'experience est incorrect";
 		}
 

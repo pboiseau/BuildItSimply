@@ -8,6 +8,14 @@ class Skill extends AppModel {
 	protected $table = 'skills';
 	protected $guarded = array('id');
 
+	public function freelances_skills(){
+		return $this->hasMany('FreelanceSkill', 'skills_id', 'id');
+	}
+
+	public function categories_skills(){
+		return $this->belongsTo('CategorySkill', 'category_skill_id', 'id');
+	}
+
 	/**
 	*	@param string skills
 	**/
