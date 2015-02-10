@@ -5,40 +5,72 @@
 	</div>
 	<div class="page-content">
 		<form method="post" action="{{home}}users/profile/update" class="form-horizontal">
-		<div class="form-group {{ (errors.lastname) ? 'has-error' : '' }}">
-			<label for="url" class="col-sm-2 control-label">Site personnel</label>
-			<div class="col-sm-10">
-				<input type="url" name="url" value="{% if user.url %}{{ user.url }}{% endif %}"
-				class="form-control" id="url" placeholder="Url de votre site personnel">
-				<span class="help-block with-errors">{% if errors.lastname %}{{ errors.lastname }}{% endif %}</span>
-			</div>
-		</div>
-		{% if user.type == "FREELANCE" %}
-			<div class="form-group">
-				<label for="type" class="col-sm-2 control-label">Experience en tant que Freelance</label>
+			<div class="form-group {{ (errors.phone) ? 'has-error' : '' }}">
+				<label for="phone" class="col-sm-2 control-label">Téléphone</label>
 				<div class="col-sm-10">
-					<select name="experience" id="type" class="form-control" required>
-						<option value="" disabled>Votre niveau ?</option>
-						{% for experience in experiences %}
-							<option value="{{ experience }}">{{ experience|lower }}</option>
-						{% endfor %}
-					</select>
+					<input type="tel" name="account[phone]" value="{% if user.phone %}{{ user.phone }}{% endif %}"
+					class="form-control" id="phone" placeholder="Votre numero de téléphone">
+					<span class="help-block with-errors">{% if errors.phone %}{{ errors.phone }}{% endif %}</span>
 				</div>
 			</div>
-			<div class="form-group">
-				<label for="type" class="col-sm-2 control-label">Compétences</label>
+			<div class="form-group {{ (errors.city) ? 'has-error' : '' }}">
+				<label for="city" class="col-sm-2 control-label">Ville</label>
 				<div class="col-sm-10">
-					<input name="skills" type="text" class="form-control" id="skills">
+					<input type="text" name="account[city]" value="{% if user.city %}{{ user.city }}{% endif %}"
+					class="form-control" id="city" placeholder="Votre ville">
+					<span class="help-block with-errors">{% if errors.city %}{{ errors.city }}{% endif %}</span>
 				</div>
 			</div>
-		{% endif %}
-
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-default">Enregistrer les informations</button>
+			<div class="form-group {{ (errors.description) ? 'has-error' : '' }}">
+				<label for="city" class="col-sm-2 control-label">Description</label>
+				<div class="col-sm-10">
+					<textarea name="account[description]" class="form-control" rows="3"
+					placeholder="Description de votre profil">{% if user.description %}{{ user.description }}{% endif %}</textarea>
+				</div>
 			</div>
-		</div>
-	</form>
 
+			{% if user.type == "FREELANCE" %}
+				<div class="form-group {{ (errors.url) ? 'has-error' : '' }}">
+					<label for="url" class="col-sm-2 control-label">Site personnel</label>
+					<div class="col-sm-10">
+						<input type="url" name="freelance[url]" value="{% if user.freelance.url %}{{ user.freelance.url }}{% endif %}"
+						class="form-control" id="url" placeholder="Url de votre site personnel">
+						<span class="help-block with-errors">{% if errors.url %}{{ errors.url }}{% endif %}</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="type" class="col-sm-2 control-label">Experience en tant que Freelance</label>
+					<div class="col-sm-10">
+						<select name="freelance[experience]" id="type" class="form-control" required>
+							<option value="" disabled>Votre niveau ?</option>
+							{% for experience in experiences %}
+								<option value="{{ experience }}">{{ experience|lower }}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="type" class="col-sm-2 control-label">Compétences</label>
+					<div class="col-sm-10">
+						<input name="freelance[skills]" type="text" class="form-control" id="skills">
+					</div>
+				</div>
+			{% elseif user.type == "CLIENT" %}
+				<div class="form-group {{ (errors.activity) ? 'has-error' : '' }}">
+					<label for="phone" class="col-sm-2 control-label">Activité</label>
+					<div class="col-sm-10">
+						<input type="text" name="client[activity]" value="{% if user.activity %}{{ user.activity }}{% endif %}"
+						class="form-control" id="activity" placeholder="Votre numero de téléactivity">
+						<span class="help-block with-errors">{% if errors.activity %}{{ errors.activity }}{% endif %}</span>
+					</div>
+				</div>
+			{% endif %}
+
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-default">Enregistrer les informations</button>
+				</div>
+			</div>
+		</form>
 	</div>
 {% endblock %}

@@ -8,6 +8,14 @@ class Account extends AppModel {
 	protected $table = 'accounts';
 	protected $guarded = array('id');
 
+	public function freelance(){
+		return $this->hasOne('Freelance', 'account_id', 'id');
+	}
+
+	public function client(){
+		return $this->hasOne('Client', 'account_id', 'id');
+	}
+
 	/**
 	*
 	**/
@@ -35,6 +43,15 @@ class Account extends AppModel {
 		}
 	}
 
+	public function updateAccount($user){
+		if($this->find($user['account_id'])){
+			return $this->where('id', $user['account_id'])->update(
+				$this->validateOptional($user)
+			);
+		}
+		return false;
+	}
+
 	public function setSession($user){
 		Base::instance()->set('SESSION.user', [
 				'id' => $user['id'],
@@ -42,6 +59,24 @@ class Account extends AppModel {
 				'lastname' => $user['lastname'],
 				'type' => $user['type']
 			]);
+	}
+
+	private function validateOptional($data = array()){
+		unset($data['account_id']);
+
+		if(empty($data['phone'])){
+			unset($data['phone']);
+		}
+
+		if(empty($data['city'])){
+			unset($data['phone']);
+		}
+
+		if(empty($data['description'])){
+			unset($data['description']);
+		}
+
+		return $data;
 	}
 
 	private function validate($data = array()){

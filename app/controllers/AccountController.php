@@ -8,6 +8,11 @@ class AccountController extends AppController{
 		parent::__construct();
 	}
 
+	public function test(){
+		$test = $this->Account->find(1)->freelance;
+		var_dump($test);
+	}
+
 	/**
 	*	Authenticate and log client
 	**/
@@ -69,13 +74,21 @@ class AccountController extends AppController{
 		);
 
 		if(!empty($user)){
+
 			if($user['type'] == "FREELANCE"){
+				// freelance user
 				$experiences = $this->Freelance->getEnumValues('experience');
+				$user['freelance'] = $user->freelance;
+			}else if($user['type'] == 'CLIENT'){
+				// client user
+				$user['client'] = $user->client;
 			}
 
+			// render the profile view
 			$this->render('accounts/profile', compact('user',
 				(!empty($experiences) ? 'experiences' : ''))
 			);
+
 		}else{
 			$this->setFlash("Cet utilisateur n'existe pas.");
 			$this->f3->reroute('/');
@@ -87,25 +100,31 @@ class AccountController extends AppController{
 	**/
 	public function update_profile() {
 		if($this->request() == 'POST'){
+
 			$profile = $this->f3->get('POST');
-			$profile['account_id'] = $this->f3->get('SESSION.user.id');
+			$profile['account']['account_id'] = $this->f3->get('SESSION.user.id');
+			$profile['freelance']['account_id'] = $this->f3->get('SESSION.user.id');
+			$profile['client']['account_id'] = $this->f3->get('SESSION.user.id');
 			$type = $this->f3->get('SESSION.user.type');
 
+			$this->Account->updateAccount($profile['account']);
+
 			if($type == 'FREELANCE'){
-				if($this->Freelance->updateProfile($profile)){
-					$skills = $this->Skill->explodeSkills($profile['skills']);
+				if($this->Freelance->updateProfile($profile['freelance'])){
 
-					// TODO INSERT ALL FREELANCE SKILLS
-					$this->FreelanceSkill->add($skills);
-
+					// $skills = $this->Skill->explodeSkills($profile['freelance']['skills']);
+					// // TODO INSERT ALL FREELANCE SKILLS
+					// $this->FreelanceSkill->add($skills);
 					$this->setFlash("Votre profil a bien été mis à jour.");
 				}else{
+					$this->setFlash("Certaines informations sont erronées");
 					$errors = $this->Freelance->errors;
 				}
 			}else if($type == 'CLIENT'){
 
 			}
 		}
+
 		$this->f3->reroute('/users/profile');
 	}
 
