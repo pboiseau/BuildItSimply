@@ -2,16 +2,10 @@
 
 class AccountController extends AppController{
 
-	public $uses = array('Account', 'Freelance');
+	public $uses = array('Account', 'Freelance', 'Skill');
 
 	public function __construct(){
 		parent::__construct();
-	}
-
-	public function beforeroute(){
-	}
-
-	public function afterroute(){
 	}
 
 	/**
@@ -68,22 +62,33 @@ class AccountController extends AppController{
 	}
 
 	/**
-	*
+	*	Show user profile by ID or User Session ID
 	**/
-	public function profile(){
+	public function profile($f3, $params = null){
 
-		$user = $this->Account->find($this->f3->get('SESSION.user.id'));
-
-		if($user['type'] == "FREELANCE"){
-			$experiences = $this->Freelance->getEnumValues('experience');
-		}
-
-		$this->render('accounts/profile', compact(
-			'user',
-			(!empty($experiences) ? 'experiences' : ''))
+		// get user profile by ID or with session ID
+		$user = $this->Account->find((!empty($params['id'])) ?
+			$params['id'] :
+			$this->f3->get('SESSION.user.id')
 		);
+
+		if(!empty($user)){
+			if($user['type'] == "FREELANCE"){
+				$experiences = $this->Freelance->getEnumValues('experience');
+			}
+
+			$this->render('accounts/profile', compact('user',
+				(!empty($experiences) ? 'experiences' : ''))
+			);
+		}else{
+			$this->setFlash("Cet utilisateur n'existe pas.");
+			$this->f3->reroute('/');
+		}
 	}
 
+	/**
+	*
+	**/
 	public function update_profile() {
 		if($this->request() == 'POST'){
 			$profile = $this->f3->get('POST');
@@ -92,7 +97,12 @@ class AccountController extends AppController{
 
 			if($type == 'FREELANCE'){
 				if($this->Freelance->updateProfile($profile)){
+					$skills = $this->Skill->explodeSkills($profile['skills']);
 
+					// TODO INSERT ALL FREELANCE SKILLS
+					$this->FreelanceSkill->add($skills);
+
+					$this->setFlash("Votre profil a bien été mis à jour.");
 				}else{
 					$errors = $this->Freelance->errors;
 				}
@@ -100,9 +110,10 @@ class AccountController extends AppController{
 
 			}
 		}
+		$this->f3->reroute('/users/profile');
 	}
 
 
 }
 
- ?>
+?>

@@ -35,7 +35,8 @@ $('#skills').click(getSkills(function(data){
 			delay: 100
 		},
 		showAutocompleteOnFocus: true,
-		inputType: 'text'
+		inputType: 'text',
+		limit: 25
 	});
 }));
 

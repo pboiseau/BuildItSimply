@@ -11,8 +11,10 @@ class Skill extends AppModel {
 	/**
 	*	@param string skills
 	**/
-	private function explodeSkills($skills) {
-
+	public function explodeSkills($request_skills) {
+		$request_skills = explode(', ', $request_skills);
+		$skills = $this->whereIn('name', $request_skills)->get();
+		return $skills;
 	}
 }
 

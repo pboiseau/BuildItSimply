@@ -31,6 +31,15 @@ class AppController {
 
 	}
 
+	public function beforeroute(){
+		if(!$this->f3->get('SESSION.user')){
+			if (!in_array($this->f3->get('PATTERN'), ['/', '/users/login', '/users/register'])) {
+				$this->setFlash("Vous devez vous authentifier pour effectuer cette action.");
+				$this->f3->reroute('/');
+			}
+		}
+	}
+
 	/**
 	*	Render a view using twig template
 	*	@param string $template

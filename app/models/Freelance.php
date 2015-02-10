@@ -14,7 +14,7 @@ class Freelance extends AppModel {
 
 		if($profile = $this->where('account_id', $freelance['account_id'])->get()){
 			// update freelance
-			$this->where('account_id', $freelance['account_id'])->update([
+			return $this->where('account_id', $freelance['account_id'])->update([
 					'url' => $freelance['url'],
 					'experience' => $freelance['experience'],
 				]);
