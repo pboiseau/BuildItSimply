@@ -24,8 +24,9 @@ class Account extends AppModel {
 	*	@param array $user
 	**/
 	public function register($user){
-		unset($user['repeatpassword']);
+		// check valide user
 		if($this->validate($user)){
+			unset($user['repeatpassword']);
 			$user['password'] = $this->hash($user['password']);
 			$create = $this->create($user);
 			return (!empty($create)) ? $create : false;
@@ -61,6 +62,10 @@ class Account extends AppModel {
 
 		if(!$validator->isPassword($data['password'], 15, 25)){
 			$errors['password'] = "Votre mot de passe doit faire entre 8 et 25 caractères.";
+		}
+
+		if(strcmp($data['password'], $data['repeatpassword']) != 0){
+			$errors['password'] = "Les mots de passe ne correspondent pas.";
 		}
 
 		$this->errors = $errors;

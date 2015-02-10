@@ -43,17 +43,13 @@ class AccountController extends AppController{
 
 		if($this->request() == 'POST'){
 			$user = $this->f3->get('POST');
-			if(strcmp($user['password'], $user['repeatpassword']) == 0){
-				if($user = $this->Account->register($user)){
-					$this->Account->setSession($user);
+
+			if($newUser = $this->Account->register($user)){
+					$this->Account->setSession($newUser);
 					$this->setFlash('Votre compte a été crée et vous avez automatiquement été connecté.');
 					$this->f3->reroute('/users/profile');
-				}else{
-					$errors = $this->Account->errors;
-				}
 			}else{
-				$this->setFlash("Les mots de passe ne correspondent pas");
-				// $this->f3->reroute($this->f3->get('PATTERN'));
+				$errors = $this->Account->errors;
 			}
 		}
 
