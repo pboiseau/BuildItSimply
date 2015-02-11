@@ -1,6 +1,7 @@
 var config = {
 	'dev_root': '/builditsimply',
-	'root': '/'
+	'root': '/',
+	'request': $(location).attr('pathname').split('/')
 }
 
 /**
@@ -22,25 +23,21 @@ function getSkills(callback){
 *	Callback on input click to get and show skills
 *	@param function getSkills
 **/
-$('#skills').click(getSkills(function(data){
+if(config.request[config.request.length-1] === "profile"){
+	getSkills(function(data){
+		var skills = [];
+		$.each(data.skills, function(key, value){
+			skills.push(data.skills[key].name);
+		});
 
-	var skills = [];
-	$.each(data.skills, function(key, value){
-		skills.push(data.skills[key].name);
+		$('#skills').tokenfield({
+			autocomplete: {
+				source: skills,
+				delay: 100
+			},
+			showAutocompleteOnFocus: true,
+			inputType: 'text',
+			limit: 25
+		});
 	});
-
-	$('#skills').tokenfield({
-		autocomplete: {
-			source: skills,
-			delay: 100
-		},
-		showAutocompleteOnFocus: true,
-		inputType: 'text',
-		limit: 25
-	});
-}));
-
-
-
-
-
+}

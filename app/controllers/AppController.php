@@ -33,7 +33,7 @@ class AppController {
 
 	public function beforeroute(){
 		if(!$this->f3->get('SESSION.user')){
-			if (!in_array($this->f3->get('PATTERN'), ['/', '/users/login', '/users/register'])) {
+			if (!in_array($this->f3->get('PATTERN'), ['/', '/howitworks', '/users/login', '/users/register'])) {
 				$this->setFlash("Vous devez vous authentifier pour effectuer cette action.");
 				$this->f3->reroute('/');
 			}

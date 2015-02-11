@@ -8,12 +8,12 @@ class HomeController extends AppController{
 		parent::__construct();
 	}
 
-	public function index($f3){
+	public function index(){
 		$this->render('index');
 	}
 
-	public function test(){
-
+	public function howItWorks(){
+		$this->render('howitworks');
 	}
 
 }
