@@ -33,7 +33,8 @@ class Account extends AppModel {
 	**/
 	public function register($user){
 		// check valide user
-		if($this->validate($user)){
+		if($this->validate($user))
+		{
 			unset($user['repeatpassword']);
 
 			$user['firstname'] = ucfirst(strtolower($user['firstname']));
@@ -107,7 +108,7 @@ class Account extends AppModel {
 		$errors = array();
 
 		if(!$validator->email($data['mail'])){
-			$errors['mail'] = 'Email invalide ou faux.';
+			$errors['mail'] = 'Adresse mail invalide.';
 		}
 
 		if(!$validator->isString($data['lastname'], 100)){
@@ -126,14 +127,25 @@ class Account extends AppModel {
 			$errors['password'] = "Les mots de passe ne correspondent pas.";
 		}
 
+		if($this->emailFound($data['mail']))
+			$errors['mail'] = 'Adresse mail déjà utilisé.';
+
 		$this->errors = $errors;
 		return (empty($errors)) ? true : false;
 	}
 
+	/**
+	*	Verify syntax of each field before update informations in database
+	*	@param array $data
+	*	@return boolean
+	**/
 	private function validateUpdate($data = array())
 	{
 		$validator = new Validate();
 		$errors = array();
+
+		// Compare with REGEX into Validate Class
+
 
 		if(!$validator->isPhone($data['phone'], 16)){
 			$errors['phone'] = 'Téléphone invalide.';
@@ -142,6 +154,17 @@ class Account extends AppModel {
 		$this->errors = $errors;
 		print_r($this->errors);
 		return (empty($errors)) ? true : false;
+	}
+
+	/**
+	*	Search in database if mail is also use, before new registrer
+	*	@param String $mail
+	*	@return boolean
+	**/
+	private function emailFound($mail)
+	{
+		$users = $this->where('mail', '=', $mail)->get();
+		return ( $users->count() > 0 );
 	}
 
 

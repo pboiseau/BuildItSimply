@@ -52,4 +52,9 @@ class AppModel extends Eloquent{
 		return (!empty($db)) ? $db : false;
 	}
 
+	public function account()
+    {
+        return $this->hasMany('Account');
+    }
+
 }
