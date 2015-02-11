@@ -8,18 +8,21 @@ class Account extends AppModel {
 	protected $table = 'accounts';
 	protected $guarded = array('id');
 
-	public function freelance(){
+	public function freelance()
+	{
 		return $this->hasOne('Freelance', 'account_id', 'id');
 	}
 
-	public function client(){
+	public function client()
+	{
 		return $this->hasOne('Client', 'account_id', 'id');
 	}
 
 	/**
 	*
 	**/
-	public function login($login = array()){
+	public function login($login = array())
+	{
 		$user = $this->where('mail', $login['email'])
 				->where('password', $this->hash($login['password']))
 				->first();
@@ -31,7 +34,8 @@ class Account extends AppModel {
 	*	Register a new account
 	*	@param array $user
 	**/
-	public function register($user){
+	public function register($user)
+	{
 		// check valide user
 		if($this->validate($user))
 		{
@@ -65,7 +69,8 @@ class Account extends AppModel {
 	/**
 	*
 	**/
-	public function setSession($user){
+	public function setSession($user)
+	{
 		Base::instance()->set('SESSION.user', [
 				'id' => $user['id'],
 				'firstname' => $user['firstname'],
@@ -80,20 +85,19 @@ class Account extends AppModel {
 	*	@param array data
 	*	@return array $data restructured
 	**/
-	private function generateUpdate($data = array()){
+	private function generateUpdate($data = array())
+	{
 		unset($data['account_id']);
 
-		if(empty($data['phone'])){
+		if(empty($data['phone']))
 			unset($data['phone']);
-		}
 
-		if(empty($data['city'])){
+		if(empty($data['city']))
 			unset($data['city']);
-		}
 
-		if(empty($data['description'])){
+		if(empty($data['description']))
 			unset($data['description']);
-		}
+
 		return $data;
 	}
 
@@ -103,7 +107,8 @@ class Account extends AppModel {
 	*	@param array $data
 	*	@return boolean
 	**/
-	private function validate($data = array()){
+	private function validate($data = array())
+	{
 		$validator = new Validate();
 		$errors = array();
 
@@ -111,21 +116,17 @@ class Account extends AppModel {
 			$errors['mail'] = 'Adresse mail invalide.';
 		}
 
-		if(!$validator->isString($data['lastname'], 100)){
+		if(!$validator->isString($data['lastname'], 100))
 			$errors['lastname'] = 'Nom invalide.';
-		}
 
-		if(!$validator->isString($data['firstname'], 100)){
+		if(!$validator->isString($data['firstname'], 100))
 			$errors['firstname'] = 'Prenom invalide.';
-		}
 
-		if(!$validator->isPassword($data['password'], 15, 25)){
+		if(!$validator->isPassword($data['password'], 15, 25))
 			$errors['password'] = "Votre mot de passe doit faire entre 8 et 25 caractères.";
-		}
 
-		if(strcmp($data['password'], $data['repeatpassword']) != 0){
+		if(strcmp($data['password'], $data['repeatpassword']) != 0)
 			$errors['password'] = "Les mots de passe ne correspondent pas.";
-		}
 
 		if($this->emailFound($data['mail']))
 			$errors['mail'] = 'Adresse mail déjà utilisé.';
@@ -166,7 +167,6 @@ class Account extends AppModel {
 		$users = $this->where('mail', '=', $mail)->get();
 		return ( $users->count() > 0 );
 	}
-
 
 }
 
