@@ -6,8 +6,9 @@
 	<div class="page-content">
 		<form method="post" action="{{home}}users/profile/update" class="form-horizontal">
 			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<input type="file" class="btn" name="account[picture]" class="form-control">
+				<label for="picture" class="col-sm-2 control-label">Photo de profil</label>
+				<div class="col-sm-10">
+					<input type="file" class="btn" id="picture" name="account[picture]" class="form-control">
 				</div>
 			</div>
 			<div class="form-group {{ (errors.phone) ? 'has-error' : '' }}">
@@ -46,10 +47,10 @@
 				<div class="form-group">
 					<label for="type" class="col-sm-2 control-label">Experience en tant que Freelance</label>
 					<div class="col-sm-10">
-						<select name="freelance[experience]" id="type" class="form-control" required>
+						<select name="freelance[experience]" id="type" class="form-control">
 							<option value="" disabled>Votre niveau ?</option>
 							{% for experience in experiences %}
-								<option value="{{ experience }}">{{ experience|lower }}</option>
+								<option {{ (user.freelance.experience == experience) ? 'selected' : '' }} value="{{ experience }}">{{ experience|lower }}</option>
 							{% endfor %}
 						</select>
 					</div>
@@ -65,7 +66,7 @@
 					<label for="phone" class="col-sm-2 control-label">Activité</label>
 					<div class="col-sm-10">
 						<input type="text" name="client[activity]" value="{% if user.activity %}{{ user.activity }}{% endif %}"
-						class="form-control" id="activity" placeholder="Votre numero de téléactivity">
+						class="form-control" id="activity" placeholder="Description de votre activité">
 						<span class="help-block with-errors">{% if errors.activity %}{{ errors.activity }}{% endif %}</span>
 					</div>
 				</div>

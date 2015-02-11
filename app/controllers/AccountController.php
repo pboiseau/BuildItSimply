@@ -20,10 +20,10 @@ class AccountController extends AppController{
 		if($this->request() == 'POST'){
 			if($user = $this->Account->login($this->f3->get('POST'))){
 				$this->Account->setSession($user);
-				$this->setFlash('Authentification reussi');
+				$this->setFlash("Authentification reussi.");
 				$this->f3->reroute('/');
 			}else{
-				$this->setFlash('erreur');
+				$this->setFlash("Les informations ne sont pas valides.");
 				$this->f3->reroute($this->f3->get('PATTERN'));
 			}
 		}
@@ -36,6 +36,7 @@ class AccountController extends AppController{
 	**/
 	public function logout(){
 		$this->f3->clear('SESSION');
+		$this->setFlash("Votre compte a bien été deconnecté.");
 		$this->f3->reroute('/users/login');
 	}
 
