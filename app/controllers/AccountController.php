@@ -77,9 +77,12 @@ class AccountController extends AppController{
 		if(!empty($user)){
 
 			if($user['type'] == "FREELANCE"){
-				// freelance user
+				// freelance user info
 				$experiences = $this->Freelance->getEnumValues('experience');
 				$user['freelance'] = $user->freelance;
+				$user['freelance']['skills'] = $this->Skill->getFromFreelanceSkills(
+					$this->FreelanceSkill->getAll('account_id', $user->id));
+
 			}else if($user['type'] == 'CLIENT'){
 				// client user
 				$user['client'] = $user->client;
@@ -101,7 +104,6 @@ class AccountController extends AppController{
 	**/
 	public function update_profile() {
 		if($this->request() == 'POST'){
-
 
 			$profile = $this->f3->get('POST');
 			$userId = $this->f3->get('SESSION.user.id');

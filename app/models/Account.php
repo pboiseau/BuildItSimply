@@ -50,7 +50,7 @@ class Account extends AppModel {
 		if(($this->find($user['account_id'])) && ($this->validateUpdate($user)))
 		{
 			return $this->where('id', $user['account_id'])->update(
-				$this->validateOptional($user)
+				$this->generateUpdate($user)
 			);
 		}
 		return false;
@@ -65,7 +65,7 @@ class Account extends AppModel {
 			]);
 	}
 
-	private function validateOptional($data = array()){
+	private function generateUpdate($data = array()){
 		unset($data['account_id']);
 
 		if(empty($data['phone'])){
@@ -79,7 +79,6 @@ class Account extends AppModel {
 		if(empty($data['description'])){
 			unset($data['description']);
 		}
-
 		return $data;
 	}
 

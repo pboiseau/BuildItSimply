@@ -9,7 +9,11 @@ class FreelanceSkill extends AppModel {
     	protected $fillable = array('account_id', 'skill_id');
 
 	public function freelance(){
-		return $this->hasOne('Account', 'account_id');
+		return $this->hasOne('Freelance', 'account_id', 'account_id');
+	}
+
+	public function skills(){
+		return $this->hasOne('Skill', 'id', 'skill_id');
 	}
 
 	public function add($skills = array()){
@@ -27,6 +31,17 @@ class FreelanceSkill extends AppModel {
 				]);
 			}
 		}
+	}
+
+	/**
+	*	Get all Freelance Skills with restrictionby account_id or skill_id
+	*	@param string $field
+	*	@param int $id
+	*	@return array of Freelance Skills or false
+	**/
+	public function getAll($field, $id){
+		$freelance_skills = $this->where($field, $id)->get();
+		return (!empty($freelance_skills)) ? $freelance_skills : false;
 	}
 
 

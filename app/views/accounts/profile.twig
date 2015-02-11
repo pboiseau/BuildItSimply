@@ -58,7 +58,8 @@
 				<div class="form-group">
 					<label for="type" class="col-sm-2 control-label">Compétences</label>
 					<div class="col-sm-10">
-						<input name="freelance[skills]" type="text" class="form-control" id="skills">
+						<input name="freelance[skills]" type="text" class="form-control" id="skills"
+						value="{% for skill in user.freelance.skills %}{{ skill.name ~ ',' }}{% endfor %}">
 					</div>
 				</div>
 			{% elseif user.type == "CLIENT" %}
@@ -79,4 +80,7 @@
 			</div>
 		</form>
 	</div>
+
+
+
 {% endblock %}

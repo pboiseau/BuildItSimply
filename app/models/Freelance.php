@@ -8,10 +8,17 @@ class Freelance extends AppModel {
 	protected $table = 'freelances';
 	protected $guarded = array('created_at');
 
+	public function skills(){
+		return $this->belongsToMany('Skill', 'freelances_skills', 'account_id', 'skill_id');
+	}
+
+	public function freelances_skills(){
+		return $this->hasMany('FreelanceSkill', 'account_id', 'account_id');
+	}
+
 	public function updateProfile($freelance){
 		unset($freelance['skills']);
 		if(!$this->validate($freelance)){ return false; }
-
 
 		if($profile = $this->where('account_id', $freelance['account_id'])->first()){
 			// update freelance
