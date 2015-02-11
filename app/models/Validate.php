@@ -17,6 +17,13 @@ class Validate extends Audit
 		return (($check == 1) && $length);
 	}
 
+	public function isPhone($data, $length = null)
+	{
+		$check = preg_match("#^[+0-9][0-9]{0,16}$#", $data);
+		$length = (!empty($length)) ? (strlen($data) <= $length) : true;
+		return (($check == 1) && $length);
+	}
+
 
 	public function isPassword($data, $entropy = null, $length = null)
 	{

@@ -45,8 +45,10 @@ class Account extends AppModel {
 		}
 	}
 
-	public function updateAccount($user){
-		if($this->find($user['account_id'])){
+	public function updateAccount($user)
+	{
+		if(($this->find($user['account_id'])) && ($this->validateUpdate($user)))
+		{
 			return $this->where('id', $user['account_id'])->update(
 				$this->validateOptional($user)
 			);
@@ -97,6 +99,10 @@ class Account extends AppModel {
 			$errors['firstname'] = 'Prenom invalide.';
 		}
 
+		if(!$validator->isPhone($data['phone'], 16)){
+			$errors['phone'] = 'Téléphone invalide.';
+		}
+
 		if(!$validator->isPassword($data['password'], 15, 25)){
 			$errors['password'] = "Votre mot de passe doit faire entre 8 et 25 caractères.";
 		}
@@ -106,6 +112,20 @@ class Account extends AppModel {
 		}
 
 		$this->errors = $errors;
+		return (empty($errors)) ? true : false;
+	}
+
+	private function validateUpdate($data = array())
+	{
+		$validator = new Validate();
+		$errors = array();
+
+		if(!$validator->isPhone($data['phone'], 16)){
+			$errors['phone'] = 'Téléphone invalide.';
+		}
+
+		$this->errors = $errors;
+		print_r($this->errors);
 		return (empty($errors)) ? true : false;
 	}
 
