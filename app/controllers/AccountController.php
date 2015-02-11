@@ -2,7 +2,7 @@
 
 class AccountController extends AppController{
 
-	public $uses = array('Account', 'Freelance', 'Skill', 'FreelanceSkill');
+	public $uses = array('Account', 'Freelance', 'Client', 'Skill', 'FreelanceSkill');
 
 	public function __construct(){
 		parent::__construct();
@@ -114,17 +114,20 @@ class AccountController extends AppController{
 
 			if($type == 'FREELANCE'){
 				if($this->Freelance->updateProfile($profile['freelance'])){
-
 					$skills = $this->Skill->explodeSkills($profile['freelance']['skills']);
 					$this->FreelanceSkill->add($skills);
 					$this->setFlash("Votre profil a bien été mis à jour.");
-
 				}else{
 					$this->setFlash("Certaines informations sont erronées");
 					$errors = $this->Freelance->errors;
 				}
 			}else if($type == 'CLIENT'){
-
+				if($this->Client->updateProfile($profile['client'])){
+					$this->setFlash("Votre profil a bien été mis à jour.");
+				}else{
+					$this->setFlash("Certaines informations sont erronées");
+					$errors = $this->Client->errors;
+				}
 			}
 		}
 

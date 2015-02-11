@@ -65,9 +65,9 @@
 				<div class="form-group {{ (errors.activity) ? 'has-error' : '' }}">
 					<label for="phone" class="col-sm-2 control-label">Activité</label>
 					<div class="col-sm-10">
-						<input type="text" name="client[activity]" value="{% if user.activity %}{{ user.activity }}{% endif %}"
+						<input type="text" name="client[activity]" value="{% if user.client.activity %}{{ user.client.activity }}{% endif %}"
 						class="form-control" id="activity" placeholder="Description de votre activité">
-						<span class="help-block with-errors">{% if errors.activity %}{{ errors.activity }}{% endif %}</span>
+						<span class="help-block with-errors">{% if errors.client.activity %}{{ errors.client.activity }}{% endif %}</span>
 					</div>
 				</div>
 			{% endif %}
