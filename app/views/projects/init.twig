@@ -1,0 +1,50 @@
+{% extends 'layouts/' ~ layout ~ '.twig' %}
+
+{% block body %}
+	<h2>Contexte du projet</h2>
+
+	<div>
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+			Optio in ab similique quisquam expedita voluptatem nisi obcaecati
+			nostrum reiciendis aut id, saepe ducimus. Unde sed, est perferendis accusamus aspernatur aliquam!
+		</p>
+	</div>
+
+	<form method="post" action="{{home ~ request}}" class="form-horizontal">
+		<div class="form-group {{ (errors.name) ? 'has-error' : '' }}">
+			<label for="name" class="col-sm-2 control-label">Titre du projet</label>
+			<div class="col-sm-10">
+				<input type="text" name="name" value="{% if project.name %}{{ project.name }}{% endif %}"
+				class="form-control" id="name" placeholder="Titre du projet">
+				<span class="help-block with-errors">{% if errors.name %}{{ errors.name }}{% endif %}</span>
+			</div>
+		</div>
+		<div class="form-group {{ (errors.description) ? 'has-error' : '' }}">
+			<label for="description" class="col-sm-2 control-label">Description</label>
+			<div class="col-sm-10">
+				<textarea name="description" id="description" class="form-control" rows="5" placeholder="Veuillez décrire brievement votre projet"></textarea>
+				<span class="help-block with-errors">{% if errors.description %}{{ errors.description }}{% endif %}</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="targets" class="col-sm-2 control-label">Cibles</label>
+			<div class="col-sm-10">
+				<input name="targets" type="text" class="form-control" id="targets" placeholder="Adulte, Jeune, Femme ...">
+			</div>
+		</div>
+		<div class="form-group {{ (errors.recommendation) ? 'has-error' : '' }}">
+			<label for="recommendation" class="col-sm-2 control-label">Recommendations</label>
+			<div class="col-sm-10">
+				<textarea name="recommendation" id="recommendation" class="form-control" rows="5" placeholder="Mentionner toutes informations complémentaires pouvant faciliter le travail des Freelances."></textarea>
+				<span class="help-block with-errors">{% if errors.recommendation %}{{ errors.recommendation }}{% endif %}</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-default">Continuer</button>
+			</div>
+		</div>
+	</form>
+
+{% endblock %}

@@ -35,16 +35,21 @@ class Account extends AppModel {
 		// check valide user
 		if($this->validate($user)){
 			unset($user['repeatpassword']);
+
 			$user['firstname'] = ucfirst(strtolower($user['firstname']));
 			$user['lastname'] = ucfirst(strtolower($user['lastname']));
 			$user['password'] = $this->hash($user['password']);
-			$create = $this->create($user);
-			return (!empty($create)) ? $create : false;
+
+			$newUser = $this->create($user);
+			return (!empty($newUser)) ? $newUser : false;
 		}else{
 			return false;
 		}
 	}
 
+	/**
+	*
+	**/
 	public function updateAccount($user)
 	{
 		if(($this->find($user['account_id'])) && ($this->validateUpdate($user)))
@@ -56,6 +61,9 @@ class Account extends AppModel {
 		return false;
 	}
 
+	/**
+	*
+	**/
 	public function setSession($user){
 		Base::instance()->set('SESSION.user', [
 				'id' => $user['id'],
@@ -65,6 +73,12 @@ class Account extends AppModel {
 			]);
 	}
 
+	/**
+	*	Generate array structure of an Account in order to save data
+	*	Unset all missing field to avoid destroy them when data will be updated
+	*	@param array data
+	*	@return array $data restructured
+	**/
 	private function generateUpdate($data = array()){
 		unset($data['account_id']);
 
@@ -82,6 +96,12 @@ class Account extends AppModel {
 		return $data;
 	}
 
+	/**
+	*	Validate mandatory information before save into database
+	*	Fill errors property if needed
+	*	@param array $data
+	*	@return boolean
+	**/
 	private function validate($data = array()){
 		$validator = new Validate();
 		$errors = array();
@@ -96,10 +116,6 @@ class Account extends AppModel {
 
 		if(!$validator->isString($data['firstname'], 100)){
 			$errors['firstname'] = 'Prenom invalide.';
-		}
-
-		if(!$validator->isPhone($data['phone'], 16)){
-			$errors['phone'] = 'Téléphone invalide.';
 		}
 
 		if(!$validator->isPassword($data['password'], 15, 25)){

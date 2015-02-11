@@ -12,6 +12,9 @@
 
 				<ul class="nav navbar-nav navbar-right">
 					{% if login %}
+						{% if login.type == 'CLIENT' %}
+							<li><a href="{{home}}projects/new">Proposer un projet</a></li>
+						{% endif %}
 						<li><a href="{{home}}users/logout">Logout</a></li>
 						<li><a href="{{home}}users/profile">Profile</a></li>
 					{% else %}
