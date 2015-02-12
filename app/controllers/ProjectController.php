@@ -21,6 +21,16 @@ class ProjectController extends AppController{
 		$this->render('projects/init', []);
 	}
 
+	public function show()
+	{
+
+	}
+
+	public function list()
+	{
+
+	}
+
 }
 
 ?>

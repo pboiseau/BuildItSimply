@@ -7,7 +7,8 @@ class AppController {
 	protected $twig;
 	protected $layout = 'default';
 
-	public function __construct() {
+	public function __construct()
+	{
 		$this->f3 = Base::instance();
 		$this->twig = $this->f3->get('TWIG');
 
@@ -23,7 +24,8 @@ class AppController {
 			'login' => $this->f3->get('SESSION.user'),
 		];
 
-		if(!empty($this->uses)){
+		if(!empty($this->uses))
+		{
 			foreach($this->uses as $model){
 				$this->loadModel($model);
 			}
@@ -31,7 +33,11 @@ class AppController {
 
 	}
 
-	public function beforeroute(){
+	/**
+	*	FatFree before route trigger
+	**/
+	public function beforeroute()
+	{
 		if(!$this->f3->get('SESSION.user')){
 			if (!in_array($this->f3->get('PATTERN'), ['/', '/howitworks', '/users/login', '/users/register'])) {
 				$this->setFlash("Vous devez vous authentifier pour effectuer cette action.");
@@ -45,7 +51,8 @@ class AppController {
 	*	@param string $template
 	*	@param array $data
 	**/
-	protected function render($template = null, $data = array()){
+	protected function render($template = null, $data = array())
+	{
 		$data['layout'] = $this->layout;
 
 		echo $this->twig->render($template . '.twig',
@@ -61,7 +68,8 @@ class AppController {
 	*	Get the request type (get, post ...)
 	*	@return string request type
 	**/
-	protected function request(){
+	protected function request()
+	{
 		return $this->f3->get('VERB');
 	}
 
@@ -69,7 +77,8 @@ class AppController {
 	*	Set flash message into user session
 	*	@param string $message
 	**/
-	protected function setFlash($message){
+	protected function setFlash($message)
+	{
 		$this->f3->set('SESSION.message', $message);
 	}
 
@@ -79,7 +88,8 @@ class AppController {
 	*	@param $name
 	*	@param $data
 	**/
-	protected function encode($name, $data = array()){
+	protected function encode($name, $data = array())
+	{
 		header('Access-Control-Allow-Origin: *');
 		header('Acces-Control-Allow-Headers: Auth-Token');
 		header('Access-Control-Allow-Methods: *');
@@ -91,7 +101,8 @@ class AppController {
 	*	Instanciate and load a database model
 	*	@param string $model name
 	**/
-	private function loadModel($model){
+	private function loadModel($model)
+	{
 		if(class_exists($model)){
 			$this->$model = new $model();
 		}else{
@@ -99,7 +110,8 @@ class AppController {
 		}
 	}
 
-	private function twigExtention(){
+	private function twigExtention()
+	{
 		$this->twig->addFunction(new \Twig_SimpleFunction('javascript', function ($file) {
 			echo sprintf("<script src='/%s'></script>", $this->f3->get('JS') . $file);
 		}));

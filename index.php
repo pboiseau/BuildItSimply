@@ -5,8 +5,6 @@
 **/
 require('vendor/autoload.php');
 
-// $f3 = require('lib/base.php');
-// require('vendor/twig/twig/lib/Twig/Autoloader.php');
 
 $f3 = Base::instance();
 

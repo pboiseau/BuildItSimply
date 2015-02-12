@@ -37,7 +37,16 @@ if(config.request[config.request.length-1] === "profile"){
 			},
 			showAutocompleteOnFocus: true,
 			inputType: 'text',
+			minLength: 1,
 			limit: 25
 		});
 	});
 }
+
+/**
+*	Tokenfield for project targets
+**/
+$('#targets').tokenfield({
+	minLength: 2,
+	limit: 10
+});

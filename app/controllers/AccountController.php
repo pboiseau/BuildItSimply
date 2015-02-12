@@ -97,10 +97,16 @@ class AccountController extends AppController{
 				$user['client'] = $user->client;
 			}
 
-			// render the profile view
-			$this->render('accounts/profile', compact('user',
-				(!empty($experiences) ? 'experiences' : ''))
-			);
+			if($user->id == $this->f3->get('SESSION.user.id'))
+			{
+				// render the profile editing view
+				$this->render('accounts/edit',
+					compact('user',(!empty($experiences) ? 'experiences' : '')));
+			}else{
+				// render the profile show view
+				$this->render('accounts/show',
+					compact('user',(!empty($experiences) ? 'experiences' : '')));
+			}
 
 		}else{
 			$this->setFlash("Cet utilisateur n'existe pas.");
