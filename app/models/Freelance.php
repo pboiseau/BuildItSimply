@@ -6,17 +6,30 @@ class Freelance extends AppModel {
 	public $errors;
 
 	protected $table = 'freelances';
-	protected $guarded = array('created_at');
+    protected $primaryKey = 'account_id';
+    protected $guarded = array('created_at');
 
-	public function skills(){
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function skills(){
 		return $this->belongsToMany('Skill', 'freelances_skills', 'account_id', 'skill_id');
 	}
 
-	public function freelances_skills(){
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function freelances_skills(){
 		return $this->hasMany('FreelanceSkill', 'account_id', 'account_id');
 	}
 
-	public function updateProfile($freelance){
+    /**
+     * Update freelance profile
+     * @param $freelance
+     * @return bool|static
+     */
+    public function updateProfile($freelance)
+    {
 		unset($freelance['skills']);
 		if(!$this->validate($freelance)){ return false; }
 

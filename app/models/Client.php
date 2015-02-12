@@ -7,17 +7,30 @@ class Client extends AppModel
     public $errors;
 
     protected $table = 'clients';
+    protected $primaryKey = 'account_id';
     protected $guarded = array('created_at', 'updated_at');
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function project()
     {
-        return $this->hasMany('Project', 'account_id', 'client_id');
+        return $this->hasMany('Project', 'client_id', 'account_id');
     }
 
-    public function coucou(){
-        echo 'coucou';
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function account()
+    {
+        return $this->hasOne('Account', 'id', 'account_id');
     }
 
+    /**
+     * Update client profile
+     * @param $client
+     * @return bool|static
+     */
     public function updateProfile($client)
     {
         if (!$this->validate($client)) {
@@ -39,7 +52,6 @@ class Client extends AppModel
     /**
      * Check if data are valide
      * @param array data
-     *
      * @return bool
      */
     private function validate($data = array())

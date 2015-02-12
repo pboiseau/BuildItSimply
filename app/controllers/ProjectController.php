@@ -9,30 +9,38 @@ class ProjectController extends AppController{
 		parent::__construct();
 	}
 
-	public function init()
+    /**
+     *
+     */
+    public function init()
 	{
 		if($this->request() == "POST")
 		{
 			$project = $this->f3->get('POST');
-			$project['client_id'] = $this->f3->get('SESSION.user.id');
-			$this->Project->create($project);
+			$this->Project->initialize($project);
 		}
 
 		$this->render('projects/init', []);
 	}
 
-	public function show()
+    /**
+     *
+     */
+    public function show()
 	{
-
+        $project = $this->Project->show($this->f3->get('PARAMS.id'));
+        var_dump($project);
 	}
 
-	public function all()
-	{
-        $projects = $this->Project->client()->get();
-        // $projects = $this->Project->all();
-
-		var_dump($projects);
-
+    /**
+     *
+     */
+    public function all()
+    {
+        $projects = $this->Project->all();
+        foreach($projects as $key => $project){
+            $projects[$key]['client'] = $project->account()->first();
+        }
         $this->render('projects/all', compact('projects'));
 	}
 

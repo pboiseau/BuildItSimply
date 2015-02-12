@@ -1,7 +1,9 @@
 {% extends 'layouts/' ~ layout ~ '.twig' %}
 
 {% block body %}
+    <ul>
     {% for project in projects %}
-        <p>{{ project.name }}</p>
+        <li>{{ project.name }} - Proposé par {{ project.client.firstname ~ project.client.lastname }}</li>
     {% endfor %}
+    </ul>
 {% endblock %}
