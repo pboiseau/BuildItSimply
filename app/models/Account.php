@@ -137,7 +137,8 @@ class Account extends AppModel
             $errors['password'] = "Les mots de passe ne correspondent pas.";
         }
 
-        if ($this->emailFound($data['mail'])) {
+        if ($this->where('mail', '=', $data['mail'])->first())
+        {
             $errors['mail'] = 'Adresse mail déjà utilisé.';
         }
 
@@ -165,17 +166,6 @@ class Account extends AppModel
         $this->errors = $errors;
         print_r($this->errors);
         return (empty($errors)) ? true : false;
-    }
-
-    /**
-     *    Search in database if mail is also use, before new registrer
-     * @param String $mail
-     * @return boolean
-     **/
-    private function emailFound($mail)
-    {
-        $users = $this->where('mail', '=', $mail)->get();
-        return ($users->count() > 0);
     }
 
 }
