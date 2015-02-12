@@ -9,6 +9,10 @@ class Project extends AppModel
     protected $table = 'projects';
     protected $guarded = array('id', 'created_at', 'updated_at');
 
+    public function client()
+    {
+        return $this->belongsTo('Client', 'client_id', 'account_id');
+    }
 
     /**
      *    Validate mandatory information before save into database
@@ -27,4 +31,3 @@ class Project extends AppModel
 
 }
 
-?>

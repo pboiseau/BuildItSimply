@@ -1,0 +1,7 @@
+{% extends 'layouts/' ~ layout ~ '.twig' %}
+
+{% block body %}
+    {% for project in projects %}
+        <p>{{ project.name }}</p>
+    {% endfor %}
+{% endblock %}

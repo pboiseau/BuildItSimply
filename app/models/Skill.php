@@ -20,8 +20,8 @@ class Skill extends AppModel
     }
 
     /**
-     *    Get skills in string format like 'Php, Javascript, HTML'
-     *    Need to explode the string on the comma in order to execute request skill by skill
+     * Get skills in string format like 'Php, Javascript, HTML'
+     * Need to explode the string on the comma in order to execute request skill by skill
      * @param string skills
      * @return array $skills
      **/
@@ -33,7 +33,7 @@ class Skill extends AppModel
     }
 
     /**
-     *    Get skills from an array of FreelanceSkills ('account_id', 'skill_id')
+     * Get skills from an array of FreelanceSkills ('account_id', 'skill_id')
      * @param array $skills
      * @return array $freelance_skills or false
      **/
@@ -45,6 +45,8 @@ class Skill extends AppModel
         }
         return (!empty($freelance_skills)) ? $freelance_skills : false;
     }
+
+
 }
 
 ?>

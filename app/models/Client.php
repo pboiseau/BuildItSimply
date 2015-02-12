@@ -7,7 +7,16 @@ class Client extends AppModel
     public $errors;
 
     protected $table = 'clients';
-    protected $guarded = array('created_at');
+    protected $guarded = array('created_at', 'updated_at');
+
+    public function project()
+    {
+        return $this->hasMany('Project', 'account_id', 'client_id');
+    }
+
+    public function coucou(){
+        echo 'coucou';
+    }
 
     public function updateProfile($client)
     {
@@ -28,9 +37,11 @@ class Client extends AppModel
     }
 
     /**
-     *    Check if data are valide
+     * Check if data are valide
      * @param array data
-     **/
+     *
+     * @return bool
+     */
     private function validate($data = array())
     {
         $validator = new Validate();

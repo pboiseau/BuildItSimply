@@ -2,7 +2,7 @@
 
 class ProjectController extends AppController{
 
-	public $uses = array('Project');
+	public $uses = array('Project', 'Client');
 
 	public function __construct()
 	{
@@ -26,9 +26,14 @@ class ProjectController extends AppController{
 
 	}
 
-	public function list()
+	public function all()
 	{
+        $projects = $this->Project->client()->get();
+        // $projects = $this->Project->all();
 
+		var_dump($projects);
+
+        $this->render('projects/all', compact('projects'));
 	}
 
 }

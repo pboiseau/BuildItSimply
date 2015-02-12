@@ -1,10 +1,32 @@
 {% extends 'layouts/' ~ layout ~ '.twig' %}
-{% block body %}
-	<div class="page-header">
-		<h3>{{ user.firstname ~ " " ~ user.lastname }} - {{ user.type }}</h3>
-	</div>
-	<div class="page-content">
 
-	</div>
+{% block body %}
+
+    <div class="col-md-4">
+        <h3>
+            <span class="type">{{ user.type }}</span>
+            <span class="experience">{{ (user.type == 'FREELANCE') ? user.freelance.experience : '' }}</span>
+        </h3>
+        <h4>{{ user.firstname ~ ' ' ~ user.lastname }}</h4>
+    </div>
+
+    <div class="col-md-8">
+        <div class="profile-header">
+            <div class="profile-description">
+                <h3>Description</h3>
+                <p>{{ user.description }}</p>
+            </div>
+            {% if user.freelance.skills %}
+                <div class="profile-skill">
+                    <h3>Mes compétences</h3>
+                    <ul class="skills">
+                        {% for skill in user.freelance.skills %}
+                            <li>{{ skill.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    </div>
 
 {% endblock %}
