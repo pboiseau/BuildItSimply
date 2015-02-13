@@ -122,11 +122,20 @@ class AccountController extends AppController{
 		if($this->request() == 'POST')
 		{
 			$profile = $this->f3->get('POST');
+
+
+
 			$userId = $this->f3->get('SESSION.user.id');
 			$profile['account']['account_id'] = $userId;
 			$profile['freelance']['account_id'] = $userId;
 			$profile['client']['account_id'] = $userId;
 			$type = $this->f3->get('SESSION.user.type');
+
+			/*
+				Upload working, have to configure view and BDD now
+			$this->upload($this->f3, $userId);
+			die();
+			*/
 
 			$this->Account->updateAccount($profile['account']);
 
@@ -154,6 +163,22 @@ class AccountController extends AppController{
 
 		$this->f3->reroute('/users/profile');
 	}
+
+	public function upload($f3, $idUser)
+	{
+		$this->idUser = $idUser;
+    	\Web::instance()->receive(
+    		function($file)
+    		{
+    			var_dump($file);
+    		},
+    		true, 
+    		function($BaseFileName)
+    		{
+				return ($this->idUser.'.'.(explode('.', $BaseFileName)[1]));
+			}
+    	);
+ 	}
 
 
 }

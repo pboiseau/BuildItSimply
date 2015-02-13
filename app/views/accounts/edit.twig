@@ -4,7 +4,7 @@
 		<h3>{{ user.firstname ~ " " ~ user.lastname }} - {{ user.type }}</h3>
 	</div>
 	<div class="page-content">
-		<form method="post" action="{{home}}users/profile/update" class="form-horizontal">
+		<form method="post" action="{{home}}users/profile/update" class="form-horizontal" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="picture" class="col-sm-2 control-label">Photo de profil</label>
 				<div class="col-sm-10">
