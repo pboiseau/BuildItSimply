@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class Project
+ */
 class Project extends AppModel
 {
 
@@ -26,14 +29,28 @@ class Project extends AppModel
     }
 
     /**
+     * @param $id
+     * @param array $field
+     * @return mixed
+     */
+    public function getById($id, $field = array())
+    {
+        return $this->where('id', $id)->first($field);
+    }
+
+    /**
      * @param array $project
      * @return static
      */
     public function initialize($project = array())
     {
-        $project['client_id'] = Base::instance()->get('SESSION.user.id');
-        $project['status'] = 'OUVERT';
-        return $this->create($project);
+        if ($this->validate($project)) {
+            $project['client_id'] = Base::instance()->get('SESSION.user.id');
+            $project['status'] = 'OUVERT';
+            return $this->create($project);
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -42,12 +59,16 @@ class Project extends AppModel
      */
     public function show($id)
     {
-        return $this->where('id', $id)->get();
+        $project = $this->where('id', $id)->first();
+        if (!empty($project)) {
+            $project['client'] = $project->account()->first();
+        }
+        return (!empty($project)) ? $project : false;
     }
 
     /**
-     *    Validate mandatory information before save into database
-     *    Fill errors property if needed
+     * Validate mandatory information before save into database
+     * Fill errors property if needed
      * @param array $data
      * @return boolean
      **/
@@ -55,6 +76,22 @@ class Project extends AppModel
     {
         $validator = new Validate();
         $errors = array();
+
+        if (!empty($data['url']) && !$validator->url($data['url'])) {
+            $errors['url'] = "Ceci n'est pas une URL de site web valide.";
+        }
+
+        if (empty($data['name'])) {
+            $errors['name'] = "Le titre du projet ne peut pas être vide.";
+        }
+
+        if (empty($data['description'])) {
+            $errors['description'] = "La description du projet ne peut pas être vide.";
+        }
+
+        if (empty($data['targets'])) {
+            $errors['targets'] = "Vous devez renseigner au moins une cible.";
+        }
 
         $this->errors = $errors;
         return (empty($errors)) ? true : false;

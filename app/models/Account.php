@@ -137,8 +137,7 @@ class Account extends AppModel
             $errors['password'] = "Les mots de passe ne correspondent pas.";
         }
 
-        if ($this->where('mail', '=', $data['mail'])->first())
-        {
+        if ($this->where('mail', '=', $data['mail'])->first()) {
             $errors['mail'] = 'Adresse mail déjà utilisé.';
         }
 

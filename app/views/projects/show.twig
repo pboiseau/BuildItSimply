@@ -1,5 +1,28 @@
 {% extends 'layouts/' ~ layout ~ '.twig' %}
 
 {% block body %}
+    <h2>{{ project.name }}</h2>
+    <div class="jumbotron">
+        <p>{{ project.description }}</p>
 
+        <p>Proposé par
+            <a href="{{ home }}users/profile/{{ project.client.id }}">
+                {{ project.client.firstname ~ ' ' ~ project.client.lastname }}
+            </a>
+        </p>
+
+        <ul class="targets">
+            {% set targets = project.targets|split(',') %}
+            {% for target in targets %}
+                <li>{{ target }}</li>
+            {% endfor %}
+        </ul>
+
+        <div class="participate">
+        {% if login.type == 'FREELANCE' %}
+            <a class="btn btn-primary btn-md" href="{{ home }}projects/join/{{ project.id }}" role="button">Je souhaite participer</a>
+        {% endif %}
+        </div>
+
+    </div>
 {% endblock %}

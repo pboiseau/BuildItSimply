@@ -3,7 +3,9 @@
 {% block body %}
     <ul>
     {% for project in projects %}
-        <li>{{ project.name }} - Proposé par {{ project.client.firstname ~ project.client.lastname }}</li>
+        <li>
+            <a href="{{ home }}projects/{{ project.id }}">{{ project.name }}</a>
+        </li>
     {% endfor %}
     </ul>
 {% endblock %}

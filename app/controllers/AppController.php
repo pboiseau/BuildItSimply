@@ -7,7 +7,10 @@ class AppController {
 	protected $twig;
 	protected $layout = 'default';
 
-	public function __construct()
+    /**
+     * @throws Exception
+     */
+    public function __construct()
 	{
 		$this->f3 = Base::instance();
 		$this->twig = $this->f3->get('TWIG');
@@ -84,9 +87,9 @@ class AppController {
 
 
 	/**
-	*	Data encode into JSON
-	*	@param $name
-	*	@param $data
+	* Data encode into JSON
+	* @param $name
+	* @param $data
 	**/
 	protected function encode($name, $data = array())
 	{
@@ -98,9 +101,9 @@ class AppController {
 	}
 
 	/**
-	*	Instanciate and load a database model
-	*	@param string $model name
-	**/
+	* Instanciate and load a database model
+	* @param string $model name
+	*/
 	private function loadModel($model)
 	{
 		if(class_exists($model)){
@@ -110,7 +113,10 @@ class AppController {
 		}
 	}
 
-	private function twigExtention()
+    /**
+     *
+     */
+    private function twigExtention()
 	{
 		$this->twig->addFunction(new \Twig_SimpleFunction('javascript', function ($file) {
 			echo sprintf("<script src='/%s'></script>", $this->f3->get('JS') . $file);
