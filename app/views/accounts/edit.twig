@@ -108,8 +108,8 @@
                             if(result.length > 0){
                                 var coordonate = result[0].geometry.location;
                                 // console.log(coordonate.lat() + " - " + coordonate.lng());
-                                $('input[name="lat"]').val(coordonate.lat());
-                                $('input[name="lng"]').val(coordonate.lng());
+                                $('input[name="account[lat]"]').val(coordonate.lat());
+                                $('input[name="account[lng]"]').val(coordonate.lng());
                             }
                         }
                 );
