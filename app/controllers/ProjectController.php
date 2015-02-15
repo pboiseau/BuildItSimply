@@ -69,15 +69,50 @@ class ProjectController extends AppController
         $user = $this->f3->get('SESSION.user');
         if ($project && $user['type'] == 'FREELANCE') {
 
-            if($this->Participate->demand($project->id, $user['id'])){
+            if ($this->Participate->demand($project->id, $user['id'])) {
                 $this->setFlash("Votre participation a bien été prise en compte.");
-            }else{
+            } else {
                 $this->setFlash("Vous participez déjà à ce projet.");
             }
         }
         $this->f3->reroute('/projects/' . $this->f3->get('PARAMS.id'));
     }
 
+    /**
+     *
+     */
+    public function edit()
+    {
+
+    }
+
+    /**
+     * Cancel a project and update his status to "ANNULE"
+     * @param GET ID of the project
+     */
+    public function delete()
+    {
+        $project = $this->Project->find($this->f3->get('PARAMS.id'));
+        if ($project->client_id == $this->f3->get('SESSION.user.id')) {
+            $delete = $project->update([
+                'status' => 'ANNULE'
+            ]);
+            if ($delete) {
+                $this->setFlash("Votre projet a bien été annulé");
+            }
+        }
+        $this->f3->reroute('/projects/' . $this->f3->get('PARAMS.id'));
+    }
+
+    /**
+     * Show all client's projects
+     */
+    public function client_list()
+    {
+        $projects = $this->Project->where('client_id', $this->f3->get('SESSION.user.id'))->get();
+
+        $this->render('projects/client_list', compact('projects'));
+    }
 }
 
 ?>

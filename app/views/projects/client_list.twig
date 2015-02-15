@@ -1,0 +1,11 @@
+{% extends 'layouts/' ~ layout ~ '.twig' %}
+
+{% block body %}
+    <ul>
+        {% for project in projects %}
+            <li>
+                <a href="{{ home }}projects/{{ project.id }}">{{ project.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

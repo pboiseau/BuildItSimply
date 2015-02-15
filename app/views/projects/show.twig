@@ -11,6 +11,8 @@
             </a>
         </p>
 
+        <p>Status: {{ project.status }}</p>
+
         <ul class="targets">
             {% set targets = project.targets|split(',') %}
             {% for target in targets %}
@@ -18,11 +20,13 @@
             {% endfor %}
         </ul>
 
-        <div class="participate">
         {% if login.type == 'FREELANCE' %}
+        <div class="participate">
             <a class="btn btn-primary btn-md" href="{{ home }}projects/join/{{ project.id }}" role="button">Je souhaite participer</a>
-        {% endif %}
         </div>
+        {% elseif (login.type == 'CLIENT') and (login.id == project.client_id) %}
+            <a class="btn btn-primary btn-md" href="{{ home }}projects/delete/{{ project.id }}" role="button">Annuler ce projet</a>
+        {% endif %}
 
     </div>
 {% endblock %}
