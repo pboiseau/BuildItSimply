@@ -39,8 +39,19 @@ if(config.request[config.request.length-1] === "profile"){
 			inputType: 'text',
 			minLength: 1,
 			limit: 25
-		});
+		}).on('tokenfield:removedtoken', function(e){
+            $.ajax({
+                url: config.dev_root + "/skills/freelance/delete",
+                type: 'POST',
+                data: { name: e.attrs.value }
+            }).done(function(data, status, xhr){
+                //$('#info').append(data.delete.message).fadeIn();
+            }).fail(function(xhr, status, error){
+                console.log(error);
+            });
+        });
 	});
+
 }
 
 /**
