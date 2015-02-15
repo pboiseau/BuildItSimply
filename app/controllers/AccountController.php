@@ -131,12 +131,12 @@ class AccountController extends AppController{
 			$profile['client']['account_id'] = $userId;
 			$type = $this->f3->get('SESSION.user.type');
 
-			/*
-				Upload working, have to configure view and BDD now
-			$this->upload($this->f3, $userId);
-			die();
-			*/
 
+			$fileName = $this->upload($this->f3, $userId) ;
+			if($fileName != '-1')
+				$profile['account']['picture'] = $fileName;
+ 
+ 
 			$this->Account->updateAccount($profile['account']);
 
 			if($type == 'FREELANCE')
@@ -164,20 +164,38 @@ class AccountController extends AppController{
 		$this->f3->reroute('/users/profile');
 	}
 
+   /**
+     * Download a picture from a file upload by user
+     * @param Base $f3
+     * @param int $idUser
+     * @return String $fileName   -1 if upload is invalid
+     **/
 	public function upload($f3, $idUser)
 	{
 		$this->idUser = $idUser;
+		
     	\Web::instance()->receive(
     		function($file)
     		{
-    			var_dump($file);
+    			// Check file < 3Mb and type = image
+    			if(($file['size'] < (3 * 1024 * 1024)) && (substr($file['type'], 0, 5) == 'image'))
+    				return true;
+
+    			// If not, don't place it in uploads folder
+    			$this->fileName = '-1';
+    			return false;
+    			
     		},
-    		true, 
+    		true,
     		function($BaseFileName)
     		{
-				return ($this->idUser.'.'.(explode('.', $BaseFileName)[1]));
+    			$this->fileName = $this->idUser.'.'.(explode('.', $BaseFileName)[1]);
+				return ($this->fileName);
 			}
     	);
+
+    	return $this->fileName;
+
  	}
 
 

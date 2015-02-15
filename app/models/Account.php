@@ -103,6 +103,10 @@ class Account extends AppModel
             unset($data['description']);
         }
 
+        if (empty($data['picture'])) {
+            unset($data['picture']);
+        }
+
         return $data;
     }
 
