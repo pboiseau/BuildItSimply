@@ -132,7 +132,7 @@ class AccountController extends AppController
 
 
             $fileName = $this->upload();
-            if ($fileName != '-1') {
+            if (!empty($fileName) && $fileName != '-1') {
                 $profile['account']['picture'] = $fileName;
             }
 
@@ -169,6 +169,7 @@ class AccountController extends AppController
      **/
     public function upload()
     {
+        $this->fileName = "";
         \Web::instance()->receive(function ($file) {
                 // Check file < 3Mb and type = image
                 if (($file['size'] < (3 * 1024 * 1024)) && (substr($file['type'], 0, 5) == 'image')) {
