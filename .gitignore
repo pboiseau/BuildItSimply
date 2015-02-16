@@ -9,3 +9,4 @@ bower_components/
 .idea/*
 
 webroot/js/dist.js
+webroot/uploads/

@@ -131,7 +131,7 @@ class AccountController extends AppController
             $type = $this->f3->get('SESSION.user.type');
 
 
-            $fileName = $this->upload($this->f3, $userId);
+            $fileName = $this->upload();
             if ($fileName != '-1') {
                 $profile['account']['picture'] = $fileName;
             }
@@ -165,16 +165,11 @@ class AccountController extends AppController
 
     /**
      * Download a picture from a file upload by user
-     * @param Base $f3
-     * @param int $idUser
      * @return String $fileName   -1 if upload is invalid
      **/
-    public function upload($f3, $idUser)
+    public function upload()
     {
-        $this->idUser = $idUser;
-
-        \Web::instance()->receive(
-            function ($file) {
+        \Web::instance()->receive(function ($file) {
                 // Check file < 3Mb and type = image
                 if (($file['size'] < (3 * 1024 * 1024)) && (substr($file['type'], 0, 5) == 'image')) {
                     return true;
@@ -184,10 +179,12 @@ class AccountController extends AppController
                 $this->fileName = '-1';
                 return false;
 
-            },
-            true,
-            function ($BaseFileName) {
-                $this->fileName = $this->idUser . '.' . (explode('.', $BaseFileName)[1]);
+            }, true, function ($BaseFileName) {
+                $this->fileName =
+                    $this->f3->get('SESSION.user.id') . "-" .
+                    $this->f3->get('SESSION.user.firstname') . "-" .
+                    $this->f3->get('SESSION.user.lastname') . "-" .
+                    (explode('.', $BaseFileName)[1]);
                 return ($this->fileName);
             }
         );
