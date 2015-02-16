@@ -29,11 +29,27 @@ class Project extends AppModel
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function freelances()
+    {
+        return $this->belongsToMany('Freelance', 'participates', 'project_id', 'freelance_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function participates()
+    {
+        return $this->hasMany('Participate', 'project_id', 'id');
+    }
+
+    /**
      * @param $id
      * @param array $field
      * @return mixed
      */
-    public function getById($id, $field = array())
+    public function getById($id, $field = array('*'))
     {
         return $this->where('id', $id)->first($field);
     }

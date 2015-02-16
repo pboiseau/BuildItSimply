@@ -27,6 +27,22 @@ class Freelance extends AppModel
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function projects()
+    {
+        return $this->belongsToMany('Project', 'participates', 'freelance_id', 'project_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function participates()
+    {
+        return $this->hasMany('Participate', 'freelance_id', 'account_id');
+    }
+
+    /**
      * Update freelance profile
      * @param $freelance
      * @return bool|static
@@ -51,10 +67,12 @@ class Freelance extends AppModel
         }
     }
 
+
     /**
-     *    Check if data are valide
-     * @param array data
-     **/
+     * Check if data is valid
+     * @param array $data
+     * @return bool
+     */
     private function validate($data = array())
     {
         $validator = new Validate();

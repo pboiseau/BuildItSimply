@@ -7,3 +7,5 @@ node_modules/*
 assets/*
 bower_components/
 .idea/*
+
+webroot/js/dist.js

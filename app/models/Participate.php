@@ -39,4 +39,5 @@ class Participate extends AppModel
         return $this->where('project_id', $project_id)
             ->where('freelance_id', $freelance_id)->first();
     }
+
 }

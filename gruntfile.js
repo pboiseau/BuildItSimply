@@ -30,6 +30,8 @@ module.exports = function(grunt) {
 					'bower_components/jquery/dist/jquery.js',
 					'bower_components/jquery-ui/jquery-ui.js',
 					'bower_components/bootstrap/dist/bootstrap.js',
+					'webroot/js/bootstrap-tokenfield.js',
+					'webroot/js/app.js',
 					'webroot/js/*.js'
 				],
 				dest: 'webroot/js/dist.js',

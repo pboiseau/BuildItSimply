@@ -65,12 +65,20 @@ class ProjectController extends AppController
      */
     public function join()
     {
-        $project = $this->Project->getById($this->f3->get('PARAMS.id'), array('id'));
+        $project = $this->Project->getById($this->f3->get('PARAMS.id'), array('id', 'client_id'));
         $user = $this->f3->get('SESSION.user');
         if ($project && $user['type'] == 'FREELANCE') {
 
+            $client = $project->account()->first();
+
             if ($this->Participate->demand($project->id, $user['id'])) {
+
+                $subject = $user['firstname'] . " " . $user['lastname'] . " souhaite participer à votre projet";
+                $message = $user['firstname'] . " " . $user['lastname'] . " souhaite participer à votre projet";
+
+                $this->Participate->sendMail($client->mail, $subject, $message);
                 $this->setFlash("Votre participation a bien été prise en compte.");
+
             } else {
                 $this->setFlash("Vous participez déjà à ce projet.");
             }
