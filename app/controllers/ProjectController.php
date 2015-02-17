@@ -116,7 +116,7 @@ class ProjectController extends AppController
 
 
         if($this->request() == "POST"){
-            if($project->update($this->f3->get('POST'))){
+            if($this->Project->updateProject($project->id, $this->f3->get('POST'))){
                 $this->setFlash("Les modifications de votre projet ont bien été effectué.");
                 $this->f3->reroute('/projects/edit/' . $project->id);
             }

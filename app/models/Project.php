@@ -82,6 +82,18 @@ class Project extends AppModel
         return (!empty($project)) ? $project : false;
     }
 
+
+    /**
+     * Update a project
+     * @param $id
+     * @param $data
+     * @return mixed
+     */
+    public function updateProject($id, $data)
+    {
+        return $this->where('id', $id)->update($data);
+    }
+
     /**
      * Validate mandatory information before save into database
      * Fill errors property if needed
