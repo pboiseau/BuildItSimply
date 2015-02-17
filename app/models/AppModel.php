@@ -19,31 +19,6 @@ class AppModel extends Eloquent
         return hash('sha256', $this->salt . $data);
     }
 
-
-    /**
-     * Send email using Fatfree SMTP class
-     * @param $to
-     * @param $subject
-     * @param $message
-     * @return bool
-     */
-    public function sendMail($to, $subject, $message)
-    {
-        $f3 = Base::instance();
-        $smtp = new SMTP(
-            $f3->get('HOST_MAIL'),
-            $f3->get('PORT_MAIL'),
-            'ssl',
-            'paul.boiseau@hetic.net',
-            $f3->get('PWD_MAIL')
-        );
-
-        $smtp->set('From', '"Build It Simply" <builditsimply@paulboiseau.com>');
-        $smtp->set('To', '<' . $to . '>');
-        $smtp->set('Subject', $subject);
-        return $smtp->send($message);
-    }
-
     /**
      *    Get enumerate values from a table field
      *    Feature not supported in Eloquent ORM

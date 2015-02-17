@@ -93,8 +93,8 @@ class ProjectController extends AppController
                 $subject = $user['firstname'] . " " . $user['lastname'] . " souhaite participer à votre projet";
                 $message = $user['firstname'] . " " . $user['lastname'] . " souhaite participer à votre projet";
 
-                $this->Participate->sendMail($client->mail, $subject, $message);
                 $this->setFlash("Votre participation a bien été prise en compte.");
+                $this->MailHelper->sendMail($client->mail, $subject, $message);
 
             } else {
                 $this->setFlash("Vous participez déjà à ce projet.");

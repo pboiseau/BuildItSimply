@@ -14,6 +14,7 @@ class AppController {
 	{
 		$this->f3 = Base::instance();
 		$this->twig = $this->f3->get('TWIG');
+        $this->MailHelper = new MailHelper();
 
 		$this->config = [
 			'prod' => $this->f3->get('PROD'),

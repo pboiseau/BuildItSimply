@@ -3,7 +3,20 @@
 class SkillController extends AppController
 {
 
-    public $uses = array('Skill', 'FreelanceSkill');
+    public $uses = array('Skill', 'FreelanceSkill', 'CategorySkill');
+
+    public function add()
+    {
+        if($this->request() == "POST"){
+            if($this->Skill->create($this->f3->get('POST'))){
+                $this->setFlash("La compétence a bien été ajouté.");
+                $this->f3->reroute($this->f3->get('PATTERN'));
+            }
+        }
+
+        $categories = $this->CategorySkill->all();
+        $this->render('skills/new', compact('categories'));
+    }
 
     /**
      *
