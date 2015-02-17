@@ -10,6 +10,23 @@ class ProjectController extends AppController
         parent::__construct();
     }
 
+    public function beforeroute()
+    {
+        if($this->f3->get('PATTERN') == "/projects/@id"){
+            $project = $this->Project->find($this->f3->get('PARAMS.id'));
+            if($project->client_id == $this->f3->get('SESSION.user.id')){
+                $this->f3->reroute('/projects/edit/' . $this->f3->get('PARAMS.id'));
+            }
+        }
+
+        if($this->f3->get('PATTERN') == "/projects/edit/@id"){
+            if($this->f3->get('SESSION.user.type') != "CLIENT"){
+                $this->setFlash("En tant que Freelance vous ne pouvez pas acceder à cette zone");
+                $this->f3->reroute('/projects/');
+            }
+        }
+    }
+
     /**
      * Initialize a project
      */
@@ -87,11 +104,25 @@ class ProjectController extends AppController
     }
 
     /**
-     *
+     * Edit a project with his ID
      */
     public function edit()
     {
+        $project = $this->Project->find($this->f3->get('PARAMS.id'));
+        // if project doesn't exist or isn't own by the client
+        if(empty($project) || $project->client_id != $this->f3->get('SESSION.user.id')){
+            return $this->f3->reroute('/projects/');
+        }
 
+
+        if($this->request() == "POST"){
+            if($project->update($this->f3->get('POST'))){
+                $this->setFlash("Les modifications de votre projet ont bien été effectué.");
+                $this->f3->reroute('/projects/edit/' . $project->id);
+            }
+        }
+
+        $this->render('projects/edit', compact('project'));
     }
 
     /**
