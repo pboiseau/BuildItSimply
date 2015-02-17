@@ -3,7 +3,7 @@
 class AccountController extends AppController
 {
 
-    public $uses = array('Account', 'Freelance', 'Client', 'Skill', 'FreelanceSkill');
+    public $uses = array('Account', 'Freelance', 'Client', 'Skill', 'FreelanceSkill', 'Project');
 
     public function __construct()
     {
@@ -194,9 +194,21 @@ class AccountController extends AppController
 
     }
 
+    /**
+     *
+     */
     public function notification()
     {
+        $notifications = array();
+        $projects = $this->Project->where('client_id', $this->f3->get('SESSION.user.id'));
 
+        foreach($projects->get() as $project){
+            $notifications[]['project'] = $project;
+            $notifications[]['participate'] = $project->participates()->get();
+            $notifications[]['freelance'] = $project->freelances()->get();
+        }
+
+        $this->render('accounts/notification', compact('notifications'));
     }
 
 
