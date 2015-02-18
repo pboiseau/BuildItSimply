@@ -50,14 +50,22 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
+            <div class="col-sm-offset-2 col-sm-5">
                 <button type="submit" class="btn btn-default">Mettre à jour les informations</button>
+            </div>
+            <div class="col-sm-offset-3 col-sm-2">
+                <a class="btn btn-default" href="{{ home }}projects/delete/{{ project.id }}">Annuler le projet</a>
             </div>
         </div>
     </form>
 
-    <div>
-        <a class="btn btn-default" href="{{ home }}projects/delete/{{ project.id }}">Annuler le projet</a>
+    <div class="jumbotron">
+        <h3>Vos propositions</h3>
+        <ul class="propositions">
+        {% for proposition in propositions %}
+            <li>{{ proposition.firstname ~ " " ~ proposition.lastname }}</li>
+        {% endfor %}
+        </ul>
     </div>
 
 {% endblock %}

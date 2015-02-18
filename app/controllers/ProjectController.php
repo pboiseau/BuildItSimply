@@ -115,11 +115,16 @@ class ProjectController extends AppController
     public function edit()
     {
         $project = $this->Project->find($this->f3->get('PARAMS.id'));
+
         // if project doesn't exist or isn't own by the client
         if(empty($project) || $project->client_id != $this->f3->get('SESSION.user.id')){
             return $this->f3->reroute('/projects/');
         }
 
+        $propositions = $this->Participate->where('project_id', $project->id)
+            ->join('accounts', 'freelance_id', '=', 'id')
+            ->orderBy('participates.created_at', 'desc')
+            ->get();
 
         if($this->request() == "POST"){
             if($this->Project->updateProject($project->id, $this->f3->get('POST'))){
@@ -128,7 +133,7 @@ class ProjectController extends AppController
             }
         }
 
-        $this->render('projects/edit', compact('project'));
+        $this->render('projects/edit', compact('project', 'propositions'));
     }
 
     /**
