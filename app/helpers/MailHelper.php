@@ -38,6 +38,6 @@ class MailHelper{
      */
     private function layout($template, $data = array())
     {
-        return $this->twig->render('mails/' . $template . '.twig', $data);
+        return $this->twig->render('mails/' . $template . '.twig', compact('data'));
     }
 }

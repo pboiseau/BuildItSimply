@@ -3,7 +3,7 @@
 class AccountController extends AppController
 {
 
-    public $uses = array('Account', 'Freelance', 'Client', 'Skill', 'FreelanceSkill', 'Project');
+    public $uses = array('Account', 'Freelance', 'Client', 'Skill', 'FreelanceSkill', 'Project', 'Participate');
 
     public function __construct()
     {
@@ -195,20 +195,26 @@ class AccountController extends AppController
     }
 
     /**
-     *
+     * Get user notifications
+     * If user is client: get project demands
      */
     public function notification()
     {
-        $notifications = array();
-        $projects = $this->Project->where('client_id', $this->f3->get('SESSION.user.id'));
+        // get project demand if user is a client
+        if($this->f3->get('SESSION.user.type') == "CLIENT"){
+            $participations = $this->Participate->whereIn('project_id', function($query){
+                $query->select('id')
+                    ->from('projects')
+                    ->where('client_id', $this->f3->get('SESSION.user.id'));
+            })->get();
 
-        foreach($projects->get() as $project){
-            $notifications[]['project'] = $project;
-            $notifications[]['participate'] = $project->participates()->get();
-            $notifications[]['freelance'] = $project->freelances()->get();
+            foreach($participations as $key => $participation){
+                $participations[$key]['freelance'] = $participation->account()->first();
+                $participations[$key]['project'] = $participation->project()->first();
+            }
         }
 
-        $this->render('accounts/notification', compact('notifications'));
+        $this->render('accounts/notification', compact('participations'));
     }
 
 

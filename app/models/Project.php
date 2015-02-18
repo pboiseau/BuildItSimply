@@ -36,6 +36,11 @@ class Project extends AppModel
         return $this->belongsToMany('Freelance', 'participates', 'project_id', 'freelance_id');
     }
 
+    public function accounts()
+    {
+        return $this->belongsToMany('Account', 'participates', 'project_id', 'freelance_id');
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

@@ -11,6 +11,14 @@ class Freelance extends AppModel
     protected $guarded = array('created_at');
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function account()
+    {
+        return $this->hasOne('Account', 'account_id', 'id');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function skills()

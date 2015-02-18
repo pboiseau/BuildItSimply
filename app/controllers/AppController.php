@@ -15,6 +15,8 @@ class AppController
     {
         $this->f3 = Base::instance();
         $this->twig = $this->f3->get('TWIG');
+
+        // instanciate helpers
         $this->MailHelper = new MailHelper();
 
         $this->config = [
@@ -88,10 +90,11 @@ class AppController
 
 
     /**
-     * Data encode into JSON
+     * Encode data into JSON
      * @param $name
-     * @param $data
-     **/
+     * @param array $data
+     * @return string
+     */
     protected function encode($name, $data = array())
     {
         header('Access-Control-Allow-Origin: *');
@@ -101,9 +104,11 @@ class AppController
         return '{"' . $name . '": ' . json_encode($data, CASE_LOWER) . '}';
     }
 
+
     /**
      * Instanciate and load a database model
-     * @param string $model name
+     * @param $model
+     * @throws Exception
      */
     private function loadModel($model)
     {

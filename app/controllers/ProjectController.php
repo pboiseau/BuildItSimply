@@ -71,7 +71,7 @@ class ProjectController extends AppController
      */
     public function all()
     {
-        $projects = $this->Project->all();
+        $projects = $this->Project->whereNotIn('status', ['ANNULE'])->get();
         foreach ($projects as $key => $project) {
             $projects[$key]['client'] = $project->account()->first();
         }
@@ -96,7 +96,7 @@ class ProjectController extends AppController
                 $this->setFlash("Votre participation a bien été prise en compte.");
 
                 $this->MailHelper->sendMail("demand", $client->mail, [
-                    'subject' => $user['firstname'] . " " . $user['lastname'] . " souhaite participer à votre projet " . $project->name,
+                    'subject' => "Nouvelle demande pour votre projet " . $project->name,
                     'firstname' => $user['firstname'],
                     'lastname' => $user['lastname'],
                     'project' => $project

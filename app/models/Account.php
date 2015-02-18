@@ -165,7 +165,6 @@ class Account extends AppModel
 
         // Compare with REGEX into Validate Class
 
-
         if (!$validator->isPhone($data['phone'], 16)) {
             $errors['phone'] = 'Téléphone invalide.';
         }

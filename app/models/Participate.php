@@ -12,6 +12,22 @@ class Participate extends AppModel
     protected $guarded = array('created_at', 'updated_at');
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function account()
+    {
+        return $this->belongsTo('Account', 'freelance_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function project()
+    {
+        return $this->belongsTo('Project', 'project_id', 'id');
+    }
+
+    /**
      * @param $project_id
      * @param $freelance_id
      * @return bool|static

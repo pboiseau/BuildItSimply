@@ -5,5 +5,8 @@
 {% endblock %}
 
 {% block content %}
-    <p>Coucou</p>
+    <p>
+        Bonjour, {{ data.firstname ~ " " ~ data.lastname }} souhaite participer à votre projet {{ data.project.name }}</h3>
+    </p>
 {% endblock %}
+
