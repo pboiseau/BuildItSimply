@@ -14,6 +14,7 @@
         <div class="profile-header">
             <div class="profile-description">
                 <h3>Description</h3>
+
                 <p>{{ user.description }}</p>
             </div>
             {% if user.freelance.skills %}
@@ -29,4 +30,58 @@
         </div>
     </div>
 
+
+    <div id="maps" style="width: 300px; height: 300px;">
+
+    </div>
+
+{% endblock %}
+
+{% block partial_js %}
+    {{ parent() }}
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBINLv5Zv0AOt5n54TdBDQn-T9sJ5ZIqHg"></script>
+    <script>
+
+        function getPosition(callback) {
+            var lat = "{{ user.lat }}";
+            var lng = "{{ user.lng }}";
+            var position;
+
+            if (lat == "" || lat == "") {
+                geocoder = new google.maps.Geocoder();
+                geocoder.geocode({
+                    address: "Paris, France"
+                }, function (result, status) {
+                    if (status === "OK") {
+                        position = result[0].geometry.location;
+                        callback.call(this, position);
+                    }
+                });
+            }
+            callback.call(this, new google.maps.LatLng(lat, lng));
+        }
+
+
+        function initialize() {
+            getPosition(function (position) {
+                var mapOptions = {
+                    center: position,
+                    zoom: 12
+                };
+
+                var map = new google.maps.Map(document.getElementById("maps"),
+                        mapOptions);
+
+                var marker = new google.maps.Marker({
+                    title: "Adresse",
+                    visible: true,
+                    map: map,
+                    position: position
+                });
+            });
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
 {% endblock %}

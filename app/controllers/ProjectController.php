@@ -12,6 +12,9 @@ class ProjectController extends AppController
 
     public function beforeroute()
     {
+        // call parent beforeroute
+        parent::beforeroute();
+
         if($this->f3->get('PATTERN') == "/projects/@id"){
             $project = $this->Project->find($this->f3->get('PARAMS.id'));
             if($project->client_id == $this->f3->get('SESSION.user.id')){
@@ -82,7 +85,7 @@ class ProjectController extends AppController
      */
     public function join()
     {
-        $project = $this->Project->getById($this->f3->get('PARAMS.id'), array('id', 'client_id'));
+        $project = $this->Project->getById($this->f3->get('PARAMS.id'));
         $user = $this->f3->get('SESSION.user');
         if ($project && $user['type'] == 'FREELANCE') {
 
@@ -90,11 +93,14 @@ class ProjectController extends AppController
 
             if ($this->Participate->demand($project->id, $user['id'])) {
 
-                $subject = $user['firstname'] . " " . $user['lastname'] . " souhaite participer à votre projet";
-                $message = $user['firstname'] . " " . $user['lastname'] . " souhaite participer à votre projet";
-
                 $this->setFlash("Votre participation a bien été prise en compte.");
-                $this->MailHelper->sendMail($client->mail, $subject, $message);
+
+                $this->MailHelper->sendMail("demand", $client->mail, [
+                    'subject' => $user['firstname'] . " " . $user['lastname'] . " souhaite participer à votre projet " . $project->name,
+                    'firstname' => $user['firstname'],
+                    'lastname' => $user['lastname'],
+                    'project' => $project
+                ]);
 
             } else {
                 $this->setFlash("Vous participez déjà à ce projet.");

@@ -107,6 +107,10 @@ class Account extends AppModel
             unset($data['picture']);
         }
 
+        if (empty($data['lat']) || empty($data['lng'])) {
+            unset($data['lat'], $data['lng']);
+        }
+
         return $data;
     }
 
