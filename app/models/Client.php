@@ -59,8 +59,8 @@ class Client extends AppModel
         $validator = new Validate();
         $errors = array();
 
-        if (!$validator->isString($data['activity'])) {
-            $errors['url'] = "Votre activité est incorrect.";
+        if (!empty($data['activity']) && !$validator->isString($data['activity'])) {
+            $errors['activity'] = "Votre activité est incorrect.";
         }
 
         $this->errors = $errors;
