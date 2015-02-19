@@ -1,0 +1,18 @@
+/* line 5, ../sass/app.scss */
+#main {
+  background-color: blue;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+/* line 8, ../sass/app.scss */
+#main .header {
+  width: 50px;
+  height: 50px;
+}
+/* line 11, ../sass/app.scss */
+#main .header:hover {
+  background-color: red;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  opacity: 0.5;
+}
