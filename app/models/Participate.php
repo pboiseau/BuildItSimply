@@ -65,11 +65,27 @@ class Participate extends AppModel
      */
     public function choice($project_id, $freelance_id, $status)
     {
+        if ($status == "accept") {
+            if ($this->number($project_id) >= 3) {
+                return false;
+            }
+        }
+
         return $this->where('project_id', $project_id)
             ->where('freelance_id', $freelance_id)
             ->update([
                 'status' => $status
             ]);
+    }
+
+    /**
+     * Get the number of participations of a particular status
+     * @param $project_id
+     * @param string $status
+     */
+    public function number($project_id, $status = 'ACCEPT')
+    {
+        return $this->where('project_id', $project_id)->where('status', $status)->count();
     }
 
 }

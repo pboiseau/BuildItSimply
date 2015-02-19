@@ -36,8 +36,8 @@ class ProjectController extends AppController
 
         // if request content @id params
         // check if project exist
-        if(!empty($this->f3->get('PARAMS.id'))){
-            if(!$this->Project->exists($this->f3->get('PARAMS.id'))){
+        if (!empty($this->f3->get('PARAMS.id'))) {
+            if (!$this->Project->exists($this->f3->get('PARAMS.id'))) {
                 $this->setFlash("Ce projet n'existe pas.");
                 $this->f3->reroute('/projects/');
             }
@@ -85,7 +85,10 @@ class ProjectController extends AppController
      */
     public function all()
     {
-        $projects = $this->Project->whereNotIn('status', ['ANNULE'])->get();
+        $projects = $this->Project->whereNotIn('status', ['ANNULE'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+
         foreach ($projects as $key => $project) {
             $projects[$key]['client'] = $project->account()->first();
         }
@@ -103,7 +106,7 @@ class ProjectController extends AppController
         $user = $this->f3->get('SESSION.user');
 
         // check if project is status OPEN
-        if($project->status != "OUVERT"){
+        if ($project->status != "OUVERT") {
             $this->setFlash("Ce projet n'est pas ouvert à de nouveaux freelances.");
             $this->f3->reroute("/projects/" . $project->id);
         }
@@ -198,18 +201,24 @@ class ProjectController extends AppController
         if ($this->f3->get('AJAX')) {
             $req = $this->f3->get('POST');
 
+
             $participate = $this->Participate->where('project_id', $req['project_id'])
                 ->where('freelance_id', $req['freelance_id'])
                 ->first();
 
             if ($participate->status == "PENDING") {
+
                 // update status
                 $update = $this->Participate->choice($req['project_id'], $req['freelance_id'], $req['status']);
 
                 if ($update) {
-                    echo $this->encode("demand", ["message" => "project " . $update . " successfully updated"], "ok");
+                    echo $this->encode("proposition", [
+                        "message" => "freelance " . $req['status']
+                    ]);
                 } else {
-                    echo $this->encode("demand", ["message" => "error"], "ko");
+                    echo $this->encode("proposition", [
+                        "message" => "Vous ne pouvez choisir que 3 freelances au maximum"
+                    ]);
                 }
             }
         }
@@ -225,14 +234,14 @@ class ProjectController extends AppController
         // stay in request builder mode
         $propositions = $this->Participate->where('project_id', $project_id);
 
-        if($propositions->where('status', 'ACCEPT')->count() >= 1){
+        if ($propositions->where('status', 'ACCEPT')->count() >= 1) {
             $update = $this->Project->where('id', $project_id)->update([
                 'status' => 'EN COURS'
             ]);
-            if($update){
+            if ($update) {
                 $this->setFlash("Les demandes pour votre projet sont maintenant fermés.");
             }
-        }else{
+        } else {
             $this->setFlash("Vous ne pouvez cloturer les demandes que si vous en avez au moins accepté une.");
         }
 
