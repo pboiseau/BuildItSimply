@@ -19,8 +19,8 @@
                 <li>{{ target }}</li>
             {% endfor %}
         </ul>
-
-        {% if login.type == 'FREELANCE' %}
+        
+        {% if login.type == 'FREELANCE' and project.status == "OUVERT" %}
         <div class="participate">
             <a class="btn btn-primary btn-md" href="{{ home }}projects/join/{{ project.id }}" role="button">Je souhaite participer</a>
         </div>

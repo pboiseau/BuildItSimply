@@ -61,11 +61,57 @@
 
     <div class="jumbotron">
         <h3>Vos propositions</h3>
-        <ul class="propositions">
-        {% for proposition in propositions %}
-            <li>{{ proposition.firstname ~ " " ~ proposition.lastname }}</li>
-        {% endfor %}
+        <ul class="propositions" style="list-style: none;">
+            {% for proposition in propositions %}
+                <li class="row">
+                    <div class="col-xs-1 picture">
+                        <a href="{{ home }}users/profile/{{ proposition.id }}" class="thumbnail">
+                            <img height="20px" width="20px"
+                                 src="{{ (proposition.picture) ? home ~ proposition.picture : "http://placehold.it/20x20" }}"
+                                 alt=""/>
+                        </a>
+                    </div>
+                    <div class="col-xs-5 information">
+                        {{ proposition.firstname ~ " " ~ proposition.lastname }}
+                        , {{ proposition.type|lower ~ " de niveau " ~ proposition.experience|lower|capitalize }}
+                    </div>
+                    <div class="col-xs-6">
+                        <button class="demand btn btn-default btn-sm" data-choice="accept" data-project-id="{{ project.id }}"
+                                data-freelance-id="{{ proposition.freelance_id }}">Accepter
+                        </button>
+                        <button class="demand btn btn-default btn-sm" data-choice="decline" data-project-id="{{ project.id }}"
+                                data-freelance-id="{{ proposition.freelance_id }}">Refuser
+                        </button>
+                    </div>
+                </li>
+            {% endfor %}
         </ul>
+        <a class="btn btn-success btn-sm" href="{{ home }}projects/{{ project.id }}/proposition/close">Cloturer les demandes</a>
     </div>
 
+{% endblock %}
+
+{% block partial_js %}
+    {{ parent() }}
+    <script>
+        $('.demand').click(function(e){
+            var project_id = $(this).attr("data-project-id");
+            var freelance_id = $(this).attr("data-freelance-id");
+            var choice = $(this).attr("data-choice");
+
+            $.ajax({
+                url: "{{ home }}projects/proposition/choice",
+                type: "POST",
+                data: {
+                    project_id: project_id,
+                    freelance_id: freelance_id,
+                    status: choice
+                }
+            }).done(function(data, textStatus, jqXHR){
+                console.log(data);
+                console.log(textStatus);
+            });
+
+        });
+    </script>
 {% endblock %}

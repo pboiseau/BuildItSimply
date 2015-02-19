@@ -50,6 +50,14 @@ class Project extends AppModel
     }
 
     /**
+     *
+     */
+    public function exists($id)
+    {
+        return ($project = $this->find($id)) ? $project : false;
+    }
+
+    /**
      * @param $id
      * @param array $field
      * @return mixed

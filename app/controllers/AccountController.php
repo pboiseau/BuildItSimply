@@ -133,7 +133,7 @@ class AccountController extends AppController
 
             $fileName = $this->upload();
             if (!empty($fileName) && $fileName != '-1') {
-                $profile['account']['picture'] = $fileName;
+                $profile['account']['picture'] = $this->f3->get('UPLOADS') . $fileName;
             }
 
 
@@ -201,15 +201,15 @@ class AccountController extends AppController
     public function notification()
     {
         // get project demand if user is a client
-        if($this->f3->get('SESSION.user.type') == "CLIENT"){
+        if ($this->f3->get('SESSION.user.type') == "CLIENT") {
 
-            $participations = $this->Participate->whereIn('project_id', function($query){
+            $participations = $this->Participate->whereIn('project_id', function ($query) {
                 $query->select('id')
                     ->from('projects')
                     ->where('client_id', $this->f3->get('SESSION.user.id'));
             })->orderBy('created_at', 'desc')->get();
 
-            foreach($participations as $key => $participation){
+            foreach ($participations as $key => $participation) {
                 $participations[$key]['freelance'] = $participation->account()->first();
                 $participations[$key]['project'] = $participation->project()->first();
             }

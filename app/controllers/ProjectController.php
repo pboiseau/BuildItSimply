@@ -10,21 +10,35 @@ class ProjectController extends AppController
         parent::__construct();
     }
 
+    /**
+     * Trigger execute before routing the client
+     * Overload the parent beforeroute method
+     * Adding some control routing for the project controller
+     */
     public function beforeroute()
     {
         // call parent beforeroute
         parent::beforeroute();
 
-        if($this->f3->get('PATTERN') == "/projects/@id"){
+        if ($this->f3->get('PATTERN') == "/projects/@id") {
             $project = $this->Project->find($this->f3->get('PARAMS.id'));
-            if($project->client_id == $this->f3->get('SESSION.user.id')){
+            if ($project->client_id == $this->f3->get('SESSION.user.id')) {
                 $this->f3->reroute('/projects/edit/' . $this->f3->get('PARAMS.id'));
             }
         }
 
-        if($this->f3->get('PATTERN') == "/projects/edit/@id"){
-            if($this->f3->get('SESSION.user.type') != "CLIENT"){
+        if ($this->f3->get('PATTERN') == "/projects/edit/@id") {
+            if ($this->f3->get('SESSION.user.type') != "CLIENT") {
                 $this->setFlash("En tant que Freelance vous ne pouvez pas acceder à cette zone");
+                $this->f3->reroute('/projects/');
+            }
+        }
+
+        // if request content @id params
+        // check if project exist
+        if(!empty($this->f3->get('PARAMS.id'))){
+            if(!$this->Project->exists($this->f3->get('PARAMS.id'))){
+                $this->setFlash("Ce projet n'existe pas.");
                 $this->f3->reroute('/projects/');
             }
         }
@@ -67,7 +81,7 @@ class ProjectController extends AppController
     }
 
     /**
-     *
+     * Get all projects and display them on a list
      */
     public function all()
     {
@@ -87,6 +101,14 @@ class ProjectController extends AppController
     {
         $project = $this->Project->getById($this->f3->get('PARAMS.id'));
         $user = $this->f3->get('SESSION.user');
+
+        // check if project is status OPEN
+        if($project->status != "OUVERT"){
+            $this->setFlash("Ce projet n'est pas ouvert à de nouveaux freelances.");
+            $this->f3->reroute("/projects/" . $project->id);
+        }
+
+
         if ($project && $user['type'] == 'FREELANCE') {
 
             $client = $project->account()->first();
@@ -117,17 +139,18 @@ class ProjectController extends AppController
         $project = $this->Project->find($this->f3->get('PARAMS.id'));
 
         // if project doesn't exist or isn't own by the client
-        if(empty($project) || $project->client_id != $this->f3->get('SESSION.user.id')){
+        if (empty($project) || $project->client_id != $this->f3->get('SESSION.user.id')) {
             return $this->f3->reroute('/projects/');
         }
 
         $propositions = $this->Participate->where('project_id', $project->id)
             ->join('accounts', 'freelance_id', '=', 'id')
+            ->join('freelances', 'freelance_id', '=', 'account_id')
             ->orderBy('participates.created_at', 'desc')
             ->get();
 
-        if($this->request() == "POST"){
-            if($this->Project->updateProject($project->id, $this->f3->get('POST'))){
+        if ($this->request() == "POST") {
+            if ($this->Project->updateProject($project->id, $this->f3->get('POST'))) {
                 $this->setFlash("Les modifications de votre projet ont bien été effectué.");
                 $this->f3->reroute('/projects/edit/' . $project->id);
             }
@@ -162,6 +185,58 @@ class ProjectController extends AppController
         $projects = $this->Project->where('client_id', $this->f3->get('SESSION.user.id'))->get();
 
         $this->render('projects/client_list', compact('projects'));
+    }
+
+
+    /**
+     * Update the proposition status with the client's choice
+     * Call in AJAX mode
+     * @return JSON
+     */
+    public function choice()
+    {
+        if ($this->f3->get('AJAX')) {
+            $req = $this->f3->get('POST');
+
+            $participate = $this->Participate->where('project_id', $req['project_id'])
+                ->where('freelance_id', $req['freelance_id'])
+                ->first();
+
+            if ($participate->status == "PENDING") {
+                // update status
+                $update = $this->Participate->choice($req['project_id'], $req['freelance_id'], $req['status']);
+
+                if ($update) {
+                    echo $this->encode("demand", ["message" => "project " . $update . " successfully updated"], "ok");
+                } else {
+                    echo $this->encode("demand", ["message" => "error"], "ko");
+                }
+            }
+        }
+    }
+
+    /**
+     * Close proposition for this project
+     */
+    public function close()
+    {
+        $project_id = $this->f3->get('PARAMS.id');
+
+        // stay in request builder mode
+        $propositions = $this->Participate->where('project_id', $project_id);
+
+        if($propositions->where('status', 'ACCEPT')->count() >= 1){
+            $update = $this->Project->where('id', $project_id)->update([
+                'status' => 'EN COURS'
+            ]);
+            if($update){
+                $this->setFlash("Les demandes pour votre projet sont maintenant fermés.");
+            }
+        }else{
+            $this->setFlash("Vous ne pouvez cloturer les demandes que si vous en avez au moins accepté une.");
+        }
+
+        $this->f3->reroute("/projects/" . $project_id);
     }
 }
 

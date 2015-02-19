@@ -93,14 +93,22 @@ class AppController
      * Encode data into JSON
      * @param $name
      * @param array $data
+     * @param string $status
      * @return string
      */
-    protected function encode($name, $data = array())
+    protected function encode($name, $data = array(), $status = null)
     {
         header('Access-Control-Allow-Origin: *');
         header('Acces-Control-Allow-Headers: Auth-Token');
         header('Access-Control-Allow-Methods: *');
         header('Content-Type: application/json');
+
+        if($status == "ok")
+            header("HTTP/1.0 200 OK");
+        else if($status == "ko")
+            header("HTTP/1.0 404 Not Found");
+
+
         return '{"' . $name . '": ' . json_encode($data, CASE_LOWER) . '}';
     }
 

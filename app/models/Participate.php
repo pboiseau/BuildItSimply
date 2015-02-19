@@ -34,13 +34,13 @@ class Participate extends AppModel
      */
     public function demand($project_id, $freelance_id)
     {
-        if(!$this->exists($project_id, $freelance_id)){
+        if (!$this->exists($project_id, $freelance_id)) {
             return $this->create([
                 'project_id' => $project_id,
                 'freelance_id' => $freelance_id,
                 'status' => 'PENDING'
             ]);
-        }else{
+        } else {
             return false;
         }
     }
@@ -54,6 +54,22 @@ class Participate extends AppModel
     {
         return $this->where('project_id', $project_id)
             ->where('freelance_id', $freelance_id)->first();
+    }
+
+
+    /**
+     * @param $project_id
+     * @param $freelance_id
+     * @param $status
+     * @return mixed
+     */
+    public function choice($project_id, $freelance_id, $status)
+    {
+        return $this->where('project_id', $project_id)
+            ->where('freelance_id', $freelance_id)
+            ->update([
+                'status' => $status
+            ]);
     }
 
 }
