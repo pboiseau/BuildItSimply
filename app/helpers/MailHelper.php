@@ -1,11 +1,13 @@
 <?php
 
-class MailHelper{
+/**
+ * Class MailHelper
+ */
+class MailHelper extends BaseHelper{
 
     public function __construct()
     {
-        $this->f3 = Base::instance();
-        $this->twig = $this->f3->get('TWIG');
+        parent::__construct();
         $this->smtp = new SMTP(
             $this->f3->get('HOST_MAIL'),
             $this->f3->get('PORT_MAIL'),
