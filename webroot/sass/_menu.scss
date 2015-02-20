@@ -1,0 +1,16 @@
+// _menu.scss
+nav{
+    background: white;
+    color: $colorCla;
+}
+.nav > li > a:hover, .nav > li > a:focus{
+    background-color: transparent;
+}
+.navbar-nav > li > a {
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+.navbar-brand{
+    padding: 25px;
+    height: 71px;
+}

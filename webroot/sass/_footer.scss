@@ -1,0 +1,45 @@
+// _footer.scss
+footer{
+    background: #f4f4f4;
+    .wrapper{
+        padding: 45px 0 40px 0;
+    }
+    ul{
+        float: left;
+        width: 100%;
+        li{
+            float: left;
+            a{
+                color: #c0c5ca;
+                font-size: 14px;
+                margin-right: 30px;
+                position: relative;
+                bottom: 2px;
+                @include transition(all,0.2s,linear);
+                &:hover{
+                    color: #aeb4ba;
+                }
+            }
+            img{
+                    margin-right: 110px;
+            }
+        }
+    }
+}
+.socialFooter{
+    float: right;
+    @include transition(all,0.2s,linear);
+    a{
+        bottom: 0 !important;
+        right: 0;
+    }
+    a img{
+        margin-right: 0;
+    }
+    &:last-of-type a{
+        bottom: 1px !important;
+    }
+    &:hover{
+        @include opacity(0.80);
+    }
+}

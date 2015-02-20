@@ -1,6 +1,11 @@
 @import "compass/css3";
+@import "compass/reset";
+@import "font";
+@import "styles";
+@import "menu";
+@import "footer";
 
-$background-header: blue;
+$background-header: yellow;
 
 #main{
 	background-color: $background-header;	
@@ -21,3 +26,4 @@ $background-header: blue;
 	}
 
 }
+

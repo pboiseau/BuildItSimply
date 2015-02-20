@@ -1,16 +1,462 @@
-/* line 5, ../sass/app.scss */
+/* line 5, ../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+@font-face {
+  font-family: 'montserratregular';
+  src: url("../font/Montserrat-Regular-webfont.eot");
+  src: url("../font/Montserrat-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("../font/Montserrat-Regular-webfont.woff2") format("woff2"), url("../font/Montserrat-Regular-webfont.woff") format("woff"), url("../font/Montserrat-Regular-webfont.ttf") format("truetype"), url("../font/Montserrat-Regular-webfont.svg#montserratregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'montserratlight';
+  src: url("../font/Montserrat-Light-webfont.eot");
+  src: url("../font/Montserrat-Light-webfont.eot?#iefix") format("embedded-opentype"), url("../font/Montserrat-Light-webfont.woff2") format("woff2"), url("../font/Montserrat-Light-webfont.woff") format("woff"), url("../font/Montserrat-Light-webfont.ttf") format("truetype"), url("../font/Montserrat-Light-webfont.svg#montserratlight") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'montserratbold';
+  src: url("../font/Montserrat-Bold-webfont.eot");
+  src: url("../font/Montserrat-Bold-webfont.eot?#iefix") format("embedded-opentype"), url("../font/Montserrat-Bold-webfont.woff2") format("woff2"), url("../font/Montserrat-Bold-webfont.woff") format("woff"), url("../font/Montserrat-Bold-webfont.ttf") format("truetype"), url("../font/Montserrat-Bold-webfont.svg#montserratbold") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/* line 7, ../sass/_styles.scss */
+body {
+  font-family: "montserratregular", helvetica, arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-size: 16px;
+  color: #444;
+  line-height: 1.5;
+}
+
+/* line 15, ../sass/_styles.scss */
+a {
+  color: #005f78;
+  text-decoration: none;
+}
+/* line 18, ../sass/_styles.scss */
+a:hover {
+  text-decoration: none;
+}
+
+/* line 22, ../sass/_styles.scss */
+h2 {
+  font-size: 32px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  color: #005f78;
+  padding-bottom: 50px;
+}
+
+/* line 30, ../sass/_styles.scss */
+h3 {
+  font-size: 16px;
+  text-transform: uppercase;
+  color: #005f78;
+  text-align: center;
+}
+
+/* line 36, ../sass/_styles.scss */
+.clear {
+  height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+/* line 44, ../sass/_styles.scss */
+.wrapper {
+  max-width: 1080px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 90px 0 100px 0;
+}
+
+/* line 50, ../sass/_styles.scss */
+.button, .buttonWhite {
+  text-transform: uppercase;
+  color: #005f78;
+  font-size: 16px;
+  padding: 15px 20px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  background: #ffffff;
+  -moz-transition: all, 0.4s, linear;
+  -o-transition: all, 0.4s, linear;
+  -webkit-transition: all, 0.4s, linear;
+  transition: all, 0.4s, linear;
+}
+/* line 58, ../sass/_styles.scss */
+.button:hover, .buttonWhite:hover {
+  background: #004456;
+  color: white;
+}
+
+/* line 63, ../sass/_styles.scss */
+.buttonWhite {
+  color: white;
+  background: #005f78;
+}
+/* line 66, ../sass/_styles.scss */
+.buttonWhite:hover {
+  color: white;
+  background: #004456;
+}
+
+/************************************************************************/
+/*  PAGE
+/************************************************************************/
+/* line 74, ../sass/_styles.scss */
+#headerHome {
+  background: url("../images/background-header.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 610px;
+  text-align: center;
+  position: relative;
+}
+/* line 83, ../sass/_styles.scss */
+#headerHome .headerSection {
+  width: 50%;
+  float: left;
+  margin-top: 160px;
+}
+/* line 88, ../sass/_styles.scss */
+#headerHome h2, #headerHome p {
+  width: 430px;
+  margin: 0 auto;
+  text-align: center;
+  color: white;
+}
+/* line 94, ../sass/_styles.scss */
+#headerHome h2 {
+  padding: 0;
+  margin-bottom: 40px;
+}
+/* line 98, ../sass/_styles.scss */
+#headerHome p {
+  color: white;
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+  font-size: 20px;
+  margin-bottom: 80px;
+}
+/* line 104, ../sass/_styles.scss */
+#headerHome img {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -4px;
+}
+
+/* line 111, ../sass/_styles.scss */
+#homeTotal {
+  background: #223843;
+  position: relative;
+}
+/* line 114, ../sass/_styles.scss */
+#homeTotal .wrapper {
+  padding: 38px 0;
+}
+/* line 117, ../sass/_styles.scss */
+#homeTotal ul {
+  z-index: 10;
+  text-align: center;
+  font-size: 16px;
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+  text-transform: uppercase;
+  float: left;
+}
+/* line 124, ../sass/_styles.scss */
+#homeTotal ul li {
+  color: #ebebeb;
+  float: left;
+  width: 360px;
+  z-index: 10;
+  position: relative;
+  height: 65px;
+}
+/* line 131, ../sass/_styles.scss */
+#homeTotal ul li span {
+  font-size: 36px;
+  position: relative;
+  bottom: 5px;
+  z-index: 10;
+}
+/* line 137, ../sass/_styles.scss */
+#homeTotal ul li p {
+  z-index: 10;
+  position: relative;
+  bottom: 15px;
+}
+/* line 142, ../sass/_styles.scss */
+#homeTotal ul li:nth-child(2) {
+  border-left: 1px solid #d9d9d9;
+  border-right: 1px solid #d9d9d9;
+}
+
+/* line 149, ../sass/_styles.scss */
+.separateBack {
+  position: absolute;
+  z-index: 5;
+  top: 0px;
+  left: 0px;
+  width: 50%;
+  height: 100%;
+  background-color: #263f4c;
+}
+
+/* line 158, ../sass/_styles.scss */
+#howitwork {
+  text-align: center;
+}
+/* line 160, ../sass/_styles.scss */
+#howitwork ul {
+  float: left;
+  margin-bottom: 60px;
+}
+/* line 163, ../sass/_styles.scss */
+#howitwork ul li {
+  width: 320px;
+  margin: 0 20px;
+  float: left;
+  text-align: center;
+}
+/* line 168, ../sass/_styles.scss */
+#howitwork ul li h3 {
+  margin: 10px 0;
+}
+/* line 171, ../sass/_styles.scss */
+#howitwork ul li p {
+  color: #888888;
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+  font-size: 14px;
+}
+
+/* line 179, ../sass/_styles.scss */
+#testimonial {
+  position: relative;
+  background: #f2f2f2;
+}
+/* line 182, ../sass/_styles.scss */
+#testimonial .wrapper {
+  position: relative;
+  z-index: 10;
+}
+/* line 186, ../sass/_styles.scss */
+#testimonial .separateBack {
+  background-color: #f8f8f8;
+}
+/* line 190, ../sass/_styles.scss */
+#testimonial ul li {
+  width: 469px;
+  float: left;
+}
+/* line 193, ../sass/_styles.scss */
+#testimonial ul li:first-of-type {
+  margin-right: 142px;
+}
+/* line 196, ../sass/_styles.scss */
+#testimonial ul li img {
+  float: left;
+}
+/* line 199, ../sass/_styles.scss */
+#testimonial ul li p {
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+  padding-left: 130px;
+}
+/* line 203, ../sass/_styles.scss */
+#testimonial ul li p:last-of-type {
+  color: #666666;
+  margin: 13px 0;
+}
+/* line 206, ../sass/_styles.scss */
+#testimonial ul li p:last-of-type span {
+  color: #5192a3;
+}
+/* line 210, ../sass/_styles.scss */
+#testimonial ul li img:last-of-type {
+  padding-left: 30px;
+}
+
+/* line 216, ../sass/_styles.scss */
+.subsribe {
+  padding: 75px 0;
+  background: #005f78;
+  text-align: center;
+}
+
+/* line 2, ../sass/_menu.scss */
+nav {
+  background: white;
+  color: #005f78;
+}
+
+/* line 6, ../sass/_menu.scss */
+.nav > li > a:hover, .nav > li > a:focus {
+  background-color: transparent;
+}
+
+/* line 9, ../sass/_menu.scss */
+.navbar-nav > li > a {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+/* line 13, ../sass/_menu.scss */
+.navbar-brand {
+  padding: 25px;
+  height: 71px;
+}
+
+/* line 2, ../sass/_footer.scss */
+footer {
+  background: #f4f4f4;
+}
+/* line 4, ../sass/_footer.scss */
+footer .wrapper {
+  padding: 45px 0 40px 0;
+}
+/* line 7, ../sass/_footer.scss */
+footer ul {
+  float: left;
+  width: 100%;
+}
+/* line 10, ../sass/_footer.scss */
+footer ul li {
+  float: left;
+}
+/* line 12, ../sass/_footer.scss */
+footer ul li a {
+  color: #c0c5ca;
+  font-size: 14px;
+  margin-right: 30px;
+  position: relative;
+  bottom: 2px;
+  -moz-transition: all, 0.2s, linear;
+  -o-transition: all, 0.2s, linear;
+  -webkit-transition: all, 0.2s, linear;
+  transition: all, 0.2s, linear;
+}
+/* line 19, ../sass/_footer.scss */
+footer ul li a:hover {
+  color: #aeb4ba;
+}
+/* line 23, ../sass/_footer.scss */
+footer ul li img {
+  margin-right: 110px;
+}
+
+/* line 29, ../sass/_footer.scss */
+.socialFooter {
+  float: right;
+  -moz-transition: all, 0.2s, linear;
+  -o-transition: all, 0.2s, linear;
+  -webkit-transition: all, 0.2s, linear;
+  transition: all, 0.2s, linear;
+}
+/* line 32, ../sass/_footer.scss */
+.socialFooter a {
+  bottom: 0 !important;
+  right: 0;
+}
+/* line 36, ../sass/_footer.scss */
+.socialFooter a img {
+  margin-right: 0;
+}
+/* line 39, ../sass/_footer.scss */
+.socialFooter:last-of-type a {
+  bottom: 1px !important;
+}
+/* line 42, ../sass/_footer.scss */
+.socialFooter:hover {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+  opacity: 0.8;
+}
+
+/* line 10, ../sass/app.scss */
 #main {
-  background-color: blue;
+  background-color: yellow;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px;
 }
-/* line 8, ../sass/app.scss */
+/* line 13, ../sass/app.scss */
 #main .header {
   width: 50px;
   height: 50px;
 }
-/* line 11, ../sass/app.scss */
+/* line 16, ../sass/app.scss */
 #main .header:hover {
   background-color: red;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);

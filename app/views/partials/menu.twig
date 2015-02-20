@@ -1,5 +1,5 @@
 {% block menu %}
-	<nav class="navbar navbar-default navbar-fixied-top" style="border-radius:0;">
+	<nav>
 		<div class="container">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="{{home}}">Build It Simply</a>
@@ -7,8 +7,8 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="{{home}}howitworks">How it works</a></li>
-                    <li><a href="{{ home }}projects/">Projects</a></li>
+					<li><a href="{{home}}howitworks">Comment ça marche</a></li>
+                    <li><a href="{{ home }}projects/">Projets</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -21,8 +21,8 @@
 						<li><a href="{{home}}users/logout">Logout</a></li>
 						<li><a href="{{home}}users/profile">Profile</a></li>
 					{% else %}
-						<li><a href="{{home}}users/login">Login</a></li>
-						<li><a href="{{home}}users/register">Register</a></li>
+						<li><a href="{{home}}users/register">S'inscrire</a></li>
+						<li><a href="{{home}}users/login">Se connecter</a></li>
 					{% endif %}
 				</ul>
 			</div>

@@ -1,0 +1,224 @@
+// _styles.scss
+$colorCla: #005f78;
+$colorClaHover: #004456;
+
+$font : "montserratregular", helvetica, arial, sans-serif;
+$fontLight : "montserratlight", helvetica, arial, sans-serif;
+body{
+    font-family: $font;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-size: 16px;
+    color: #444;
+    line-height: 1.5;
+}
+a{
+    color: #005f78;
+    text-decoration: none;
+    &:hover{
+        text-decoration: none;
+    }
+}
+h2{
+    font-size: 32px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    color: $colorCla;
+    padding-bottom: 50px;
+}
+h3{
+    font-size: 16px;
+    text-transform: uppercase;
+    color: $colorCla;
+    text-align: center;
+}
+.clear{
+  height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  clear: both;
+  visibility: hidden;
+}
+.wrapper{
+    max-width: 1080px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 90px 0 100px 0;
+}
+.button, .buttonWhite{
+    text-transform: uppercase;
+    color: $colorCla;
+    font-size: 16px;
+    padding: 15px 20px;
+    @include border-radius (2px);
+    background: #ffffff;
+    @include transition(all,0.4s,linear);
+    &:hover{
+        background: $colorClaHover;
+        color: white;
+    }
+}
+.buttonWhite{
+    color: white;
+    background: $colorCla;
+    &:hover{
+        color: white;
+        background: $colorClaHover;
+    }
+}
+/************************************************************************/
+/*  PAGE
+/************************************************************************/
+#headerHome{
+    background: url("../images/background-header.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 610px;
+    text-align: center;
+    position: relative;
+    .headerSection{
+        width: 50%;
+        float: left;
+        margin-top: 160px;
+    }
+    h2, p{
+        width: 430px;
+        margin: 0 auto;
+        text-align: center;
+        color: white;
+    }
+    h2{
+        padding: 0;
+        margin-bottom: 40px;
+    }
+    p{
+        color: white;
+        font-family: $fontLight;
+        font-size: 20px;
+        margin-bottom: 80px;
+    }
+    img{
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        margin-left: -4px;
+    }
+}
+#homeTotal{
+    background: #223843;
+    position: relative;
+    .wrapper{
+        padding: 38px 0;
+    }
+    ul{
+        z-index: 10;
+        text-align: center;
+        font-size: 16px;
+        font-family: $fontLight;
+        text-transform: uppercase;
+        float: left;
+        li{
+            color: #ebebeb;
+            float: left;
+            width: 360px;
+            z-index: 10;
+            position: relative;
+            height: 65px;
+            span{
+                font-size: 36px;
+                position: relative;
+                bottom: 5px;
+                z-index: 10;
+            }
+            p{
+                z-index: 10;
+                position: relative;
+                bottom: 15px;
+            }
+            &:nth-child(2){
+                border-left: 1px solid #d9d9d9;
+                border-right: 1px solid #d9d9d9;
+            }
+        }
+    }
+}
+.separateBack{
+    position: absolute;
+    z-index: 5;
+    top: 0px;
+    left: 0px;
+    width: 50%;
+    height: 100%;
+    background-color: #263f4c; 
+}
+#howitwork{
+    text-align: center;
+    ul{
+        float: left;
+        margin-bottom: 60px;
+        li{
+            width: 320px;
+            margin: 0 20px;
+            float: left;
+            text-align: center;
+            h3{
+                margin: 10px 0;
+            }
+            p{
+                color: #888888;
+                font-family: $fontLight;
+                font-size: 14px;
+            }
+        }
+    }
+}
+#testimonial{
+    position: relative;
+    background: #f2f2f2;
+    .wrapper{
+        position: relative;
+        z-index: 10;
+    }
+    .separateBack{
+        background-color: #f8f8f8;
+    }
+    ul{
+        li{
+            width: 469px;
+            float: left;
+            &:first-of-type{
+                margin-right: 142px;
+            }
+            img{
+                float: left;
+            }
+            p{
+                font-family: $fontLight;
+                padding-left: 130px;
+            }
+            p:last-of-type{
+                color: #666666;
+                margin: 13px 0;
+                span{
+                    color: #5192a3;
+                }
+            }
+            img:last-of-type{
+                padding-left: 30px;
+            }
+        }
+    }
+}
+.subsribe{
+    padding: 75px 0;
+    background: $colorCla;
+    text-align: center;
+
+
+}
+
+
