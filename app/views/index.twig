@@ -2,14 +2,89 @@
 
 {% block body %}
 
-    <div>
-        <p>{{ project }} projets total</p>
-    </div>
-    <div>
-        <p>{{ client }} clients inscrits</p>
-    </div>
-    <div>
-        <p>{{ freelance }} freelances disponibles</p>
-    </div>
-    
-{% endblock %}
+<div class="page">
+	<div id="headerHome">
+		<div class="headerSection">
+			<h2>recruteurs</h2>
+			<p>Déposer votre offre et nous nous chargeons de vous trouver les freelances qui vous correspondent.</p>
+		</div>
+		<div class="headerSection">
+			<h2>freelances</h2>
+			<p>Des offres privées ciblant vos compétences vous sera mis directement en relation.
+				Merci hugo potetresloin.</p>
+			</div>
+			<a href="#" class="button">s'inscrire</a>
+			<img src="webroot/images/scroll-down.png" alt" "/>
+		</div>
+
+		<div id="homeTotal">
+			<div class="wrapper">
+				<ul>
+					<li>
+						<span>1 461</span>
+						<p>Clients inscrits</p>
+					</li>
+					<li>
+						<span>469</span>
+						<p>Projet total</p>
+					</li>
+					<li>
+						<span>14 843</span>
+						<p>Freelances inscrits</p>
+					</li>
+				</ul>
+				<hr class="clear" />
+			</div>
+			<div class="separateBack"></div>
+		</div>
+		<div id="howitwork">
+			<div class="wrapper">
+				<h2>comment ça marche</h2>
+				<ul>
+					<li>
+						<img src="webroot/images/icon-oppotunites.png" alt="opportunités" />
+						<h3>Opportunités</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+					</li>
+					<li>
+						<img src="webroot/images/icon-relation.png" alt="Mises en relations" />
+						<h3>Mises en relations</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+					</li>
+					<li>
+						<img src="webroot/images/icon-accord.png" alt="Conclure un accord" />
+						<h3>Conclure un accord</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+					</li>
+				</ul>
+				<hr class="clear" />
+				<a class="buttonWhite" href="#">En savoir plus</a>
+			</div>
+		</div>
+		<div id="testimonial">
+			<div class="wrapper">
+				<h2>Ils ont réalisé un projet</h2>
+				<ul>
+					<li>
+						<img src="webroot/images/client-testimonial.png" alt="Client testimonial" />
+						<p>“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor”</p>
+						<p><span>Paul Issier</span>, CEO Google</p>
+						<img src="webroot/images/logo-testimonial.png" alt="Logo testimonial" />
+					</li>
+					<li>
+						<img src="webroot/images/freelance-testimonial.png" alt="Client testimonial" />
+						<p>“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor”</p>
+						<p><span>Sasha Touille</span>, Graphic design</p>
+						<img src="webroot/images/logo-testimonial.png" alt="Logo testimonial" />
+					</li>
+				</ul>
+				<hr class="clear" />
+			</div>
+			<div class="separateBack"></div>
+		</div>
+		<div class="subsribe">
+			<a class="button" href="#">S'inscrire</a>
+		</div>
+	</div>
+	
+	{% endblock %}
