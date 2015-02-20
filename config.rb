@@ -2,7 +2,7 @@ require 'compass/import-once/activate'
 # Require any additional compass plugins here.
 
 # Set this to the root of your project when deployed:
-http_path = "/"
+http_path = "/builditsimply/"
 css_dir = "webroot/css"
 sass_dir = "webroot/sass"
 images_dir = "webroot/images"

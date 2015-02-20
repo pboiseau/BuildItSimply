@@ -177,41 +177,40 @@ h3 {
 /************************************************************************/
 /* line 74, ../sass/_styles.scss */
 #headerHome {
-  background: url("../images/background-header.jpg") no-repeat center center fixed;
-  -webkit-background-size: cover;
+  background: url('/builditsimply/webroot/images/background-header.jpg?1424428153') no-repeat center center fixed;
   -moz-background-size: cover;
   -o-background-size: cover;
+  -webkit-background-size: cover;
   background-size: cover;
   height: 610px;
   text-align: center;
-  position: relative;
 }
-/* line 83, ../sass/_styles.scss */
+/* line 80, ../sass/_styles.scss */
 #headerHome .headerSection {
   width: 50%;
   float: left;
   margin-top: 160px;
 }
-/* line 88, ../sass/_styles.scss */
+/* line 85, ../sass/_styles.scss */
 #headerHome h2, #headerHome p {
   width: 430px;
   margin: 0 auto;
   text-align: center;
   color: white;
 }
-/* line 94, ../sass/_styles.scss */
+/* line 91, ../sass/_styles.scss */
 #headerHome h2 {
   padding: 0;
   margin-bottom: 40px;
 }
-/* line 98, ../sass/_styles.scss */
+/* line 95, ../sass/_styles.scss */
 #headerHome p {
   color: white;
   font-family: "montserratlight", helvetica, arial, sans-serif;
   font-size: 20px;
   margin-bottom: 80px;
 }
-/* line 104, ../sass/_styles.scss */
+/* line 101, ../sass/_styles.scss */
 #headerHome img {
   position: absolute;
   bottom: 0;
@@ -219,16 +218,16 @@ h3 {
   margin-left: -4px;
 }
 
-/* line 111, ../sass/_styles.scss */
+/* line 108, ../sass/_styles.scss */
 #homeTotal {
   background: #223843;
   position: relative;
 }
-/* line 114, ../sass/_styles.scss */
+/* line 111, ../sass/_styles.scss */
 #homeTotal .wrapper {
   padding: 38px 0;
 }
-/* line 117, ../sass/_styles.scss */
+/* line 114, ../sass/_styles.scss */
 #homeTotal ul {
   z-index: 10;
   text-align: center;
@@ -237,7 +236,7 @@ h3 {
   text-transform: uppercase;
   float: left;
 }
-/* line 124, ../sass/_styles.scss */
+/* line 121, ../sass/_styles.scss */
 #homeTotal ul li {
   color: #ebebeb;
   float: left;
@@ -246,26 +245,26 @@ h3 {
   position: relative;
   height: 65px;
 }
-/* line 131, ../sass/_styles.scss */
+/* line 128, ../sass/_styles.scss */
 #homeTotal ul li span {
   font-size: 36px;
   position: relative;
   bottom: 5px;
   z-index: 10;
 }
-/* line 137, ../sass/_styles.scss */
+/* line 134, ../sass/_styles.scss */
 #homeTotal ul li p {
   z-index: 10;
   position: relative;
   bottom: 15px;
 }
-/* line 142, ../sass/_styles.scss */
+/* line 139, ../sass/_styles.scss */
 #homeTotal ul li:nth-child(2) {
   border-left: 1px solid #d9d9d9;
   border-right: 1px solid #d9d9d9;
 }
 
-/* line 149, ../sass/_styles.scss */
+/* line 146, ../sass/_styles.scss */
 .separateBack {
   position: absolute;
   z-index: 5;
@@ -276,80 +275,80 @@ h3 {
   background-color: #263f4c;
 }
 
-/* line 158, ../sass/_styles.scss */
+/* line 155, ../sass/_styles.scss */
 #howitwork {
   text-align: center;
 }
-/* line 160, ../sass/_styles.scss */
+/* line 157, ../sass/_styles.scss */
 #howitwork ul {
   float: left;
   margin-bottom: 60px;
 }
-/* line 163, ../sass/_styles.scss */
+/* line 160, ../sass/_styles.scss */
 #howitwork ul li {
   width: 320px;
   margin: 0 20px;
   float: left;
   text-align: center;
 }
-/* line 168, ../sass/_styles.scss */
+/* line 165, ../sass/_styles.scss */
 #howitwork ul li h3 {
   margin: 10px 0;
 }
-/* line 171, ../sass/_styles.scss */
+/* line 168, ../sass/_styles.scss */
 #howitwork ul li p {
   color: #888888;
   font-family: "montserratlight", helvetica, arial, sans-serif;
   font-size: 14px;
 }
 
-/* line 179, ../sass/_styles.scss */
+/* line 176, ../sass/_styles.scss */
 #testimonial {
   position: relative;
   background: #f2f2f2;
 }
-/* line 182, ../sass/_styles.scss */
+/* line 179, ../sass/_styles.scss */
 #testimonial .wrapper {
   position: relative;
   z-index: 10;
 }
-/* line 186, ../sass/_styles.scss */
+/* line 183, ../sass/_styles.scss */
 #testimonial .separateBack {
   background-color: #f8f8f8;
 }
-/* line 190, ../sass/_styles.scss */
+/* line 187, ../sass/_styles.scss */
 #testimonial ul li {
   width: 469px;
   float: left;
 }
-/* line 193, ../sass/_styles.scss */
+/* line 190, ../sass/_styles.scss */
 #testimonial ul li:first-of-type {
   margin-right: 142px;
 }
-/* line 196, ../sass/_styles.scss */
+/* line 193, ../sass/_styles.scss */
 #testimonial ul li img {
   float: left;
 }
-/* line 199, ../sass/_styles.scss */
+/* line 196, ../sass/_styles.scss */
 #testimonial ul li p {
   font-family: "montserratlight", helvetica, arial, sans-serif;
   padding-left: 130px;
 }
-/* line 203, ../sass/_styles.scss */
+/* line 200, ../sass/_styles.scss */
 #testimonial ul li p:last-of-type {
   color: #666666;
   margin: 13px 0;
 }
-/* line 206, ../sass/_styles.scss */
+/* line 203, ../sass/_styles.scss */
 #testimonial ul li p:last-of-type span {
   color: #5192a3;
 }
-/* line 210, ../sass/_styles.scss */
+/* line 207, ../sass/_styles.scss */
 #testimonial ul li img:last-of-type {
   padding-left: 30px;
 }
 
-/* line 216, ../sass/_styles.scss */
+/* line 213, ../sass/_styles.scss */
 .subsribe {
   padding: 75px 0;
   background: #005f78;
@@ -442,23 +441,4 @@ footer ul li img {
 .socialFooter:hover {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
   opacity: 0.8;
-}
-
-/* line 10, ../sass/app.scss */
-#main {
-  background-color: yellow;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-}
-/* line 13, ../sass/app.scss */
-#main .header {
-  width: 50px;
-  height: 50px;
-}
-/* line 16, ../sass/app.scss */
-#main .header:hover {
-  background-color: red;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
-  opacity: 0.5;
 }

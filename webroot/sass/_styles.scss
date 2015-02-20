@@ -72,14 +72,11 @@ h3{
 /*  PAGE
 /************************************************************************/
 #headerHome{
-    background: url("../images/background-header.jpg") no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    // background: url("../images/background-header.jpg") no-repeat center center fixed; 
+    background: image-url("background-header.jpg") no-repeat center center fixed;
+    @include background-size(cover);
     height: 610px;
     text-align: center;
-    position: relative;
     .headerSection{
         width: 50%;
         float: left;
