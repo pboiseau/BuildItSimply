@@ -36,7 +36,8 @@ class ProjectController extends AppController
 
         // if request content @id params
         // check if project exist
-        if (!empty($this->f3->get('PARAMS.id'))) {
+        $id = $this->f3->get('PARAMS.id'); // fix php error version 5.4.10
+        if (!empty($id)) {
             if (!$this->Project->exists($this->f3->get('PARAMS.id'))) {
                 $this->setFlash("Ce projet n'existe pas.");
                 $this->f3->reroute('/projects/');
