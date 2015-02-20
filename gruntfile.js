@@ -38,8 +38,11 @@ module.exports = function(grunt) {
 			},
 			css_dist: {
 				src: [
+					'webroot/css/bootstrap.css',
 					'bower_components/jquery-ui/themes/smoothness/jquery-ui.css',
-					'webroot/css/*.css'
+					'webroot/css/bootstrap-tokenfield.css',
+					'webroot/css/tokenfield-typeahead.css',
+					'webroot/css/app.css'
 				],
 				dest: 'webroot/css/dist.css'
 			}
