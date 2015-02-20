@@ -10,6 +10,22 @@ class AccountController extends AppController
         parent::__construct();
     }
 
+
+    /**
+     * Check if user is already log in
+     */
+    public function beforeroute(){
+        parent::beforeroute();
+
+        if($this->f3->get('SESSION.user')){
+            $request = $this->f3->get('PATTERN');
+            if(in_array($request, ['/users/register', '/users/login'])){
+                $this->setFlash("Vous etes déjà authentifié.");
+                $this->f3->reroute('/users/profile/' . $this->f3->get('SESSION.user.id'));
+            }
+        }
+    }
+
     /**
      *    Authenticate and log client when receiving a POST request
      **/
