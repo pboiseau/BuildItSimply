@@ -200,6 +200,7 @@ class ProjectController extends AppController
     public function choice()
     {
         if ($this->f3->get('AJAX')) {
+
             $req = $this->f3->get('POST');
 
 
@@ -214,6 +215,7 @@ class ProjectController extends AppController
 
                 if ($update) {
                     echo $this->encode("proposition", [
+                        "status" => $req['status'],
                         "message" => "freelance " . $req['status']
                     ]);
                 } else {
