@@ -16,6 +16,12 @@
 	<body>
 		{% include 'partials/menu.twig' %}
 
+		{% block message %}
+			{% if message %}
+				<div class="alert alert-info" role="alert">{{ message }}</div>
+			{% endif %}
+		{% endblock %}
+
 		{% block body %}{% endblock %}
 
 		{% include 'partials/footer.twig' ignore missing %}
