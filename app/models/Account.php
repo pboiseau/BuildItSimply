@@ -92,23 +92,20 @@ class Account extends AppModel
         unset($data['account_id']);
 
         if (empty($data['phone'])) {
-            unset($data['phone']);
+           $data['phone'] = NULL;
         }
 
         if (empty($data['city'])) {
-            unset($data['city']);
+            $data['city'] = NULL;
         }
 
         if (empty($data['description'])) {
-            unset($data['description']);
-        }
-
-        if (empty($data['picture'])) {
-            unset($data['picture']);
+            $data['description'] = NULL;
         }
 
         if (empty($data['lat']) || empty($data['lng'])) {
-            unset($data['lat'], $data['lng']);
+            $data['lat'] = NULL;
+            $data['lng'] = NULL;
         }
 
         return $data;
@@ -167,8 +164,8 @@ class Account extends AppModel
             $errors['phone'] = 'Téléphone invalide.';
         }
 
+
         $this->errors = $errors;
-        print_r($this->errors);
         return (empty($errors)) ? true : false;
     }
 

@@ -162,26 +162,52 @@ class AccountController extends AppController
             }*/
 
 
-            $this->Account->updateAccount($profile['account']);
+            
 
-            if ($type == 'FREELANCE') {
-                if ($this->Freelance->updateProfile($profile['freelance'])) {
+            if ($type == 'FREELANCE') 
+            {
+                if ($this->Account->updateAccount($profile['account']) 
+                    && $this->Freelance->updateProfile($profile['freelance'])) 
+                {
                     $skills = $this->Skill->explodeSkills($profile['freelance']['skills']);
                     $this->FreelanceSkill->add($skills);
                     $this->setFlash("Votre profil a bien été mis à jour.");
-                } else {
+                } 
+                else 
+                {
                     $this->setFlash("Certaines informations sont erronées");
-                    $errors = $this->Freelance->errors;
-                }
-            } else {
-                if ($type == 'CLIENT') {
-                    if ($this->Client->updateProfile($profile['client'])) {
-                        $this->setFlash("Votre profil a bien été mis à jour.");
-                    } else {
-                        $this->setFlash("Certaines informations sont erronées");
-                        $errors = $this->Client->errors;
+                    if($this->Account->errors)
+                    {
+                        if($this->Freelance->errors)
+                             $errors = array_merge($this->Account->errors, $this->Freelance->errors);
+                         else
+                            $errors = $this->Account->errors;
                     }
+                    else
+                        $errors = $this->Freelance->errors;
                 }
+            } 
+            else if ($type == 'CLIENT') 
+            {
+                if ($this->Account->updateAccount($profile['account']) 
+                    && $this->Client->updateProfile($profile['client'])) 
+                {
+                    $this->setFlash("Votre profil a bien été mis à jour.");
+                } 
+                else 
+                {
+                    $this->setFlash("Certaines informations sont erronées");
+                    if($this->Account->errors)
+                    {
+                        if($this->Client->errors)
+                            $errors = array_merge($this->Account->errors, $this->Client->errors);
+                         else
+                            $errors = $this->Account->errors;
+                    }
+                    else
+                        $errors = $this->Client->errors;
+                }
+            
             }
         }
 

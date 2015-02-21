@@ -86,7 +86,7 @@ class Freelance extends AppModel
         $validator = new Validate();
         $errors = array();
 
-        if (!$validator->url($data['url'])) {
+        if (!empty($data['url']) && !$validator->url($data['url'])) {
             $errors['url'] = "L'adresse web est incorrect";
         }
 
