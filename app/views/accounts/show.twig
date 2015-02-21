@@ -31,7 +31,7 @@
     </div>
 
 
-    <div id="maps" style="width: 300px; height: 300px;">
+    <div id="maps" style="width: 335px; height: 245px;">
 
     </div>
 
@@ -66,7 +66,7 @@
             getPosition(function (position) {
                 var mapOptions = {
                     center: position,
-                    zoom: 12
+                    zoom: 13
                 };
 
                 var map = new google.maps.Map(document.getElementById("maps"),
@@ -76,7 +76,16 @@
                     title: "Adresse",
                     visible: true,
                     map: map,
+                    position: position,
+                });
+
+                marker.info = new google.maps.InfoWindow({
+                    content: "<p>{{ user.firstname ~ " " ~ user.lastname }}</p><p> {{ user.city }}</p>",
                     position: position
+                });
+
+                google.maps.event.addListener(marker, 'click', function (e) {
+                    marker.info.open(map, marker);
                 });
             });
         }
