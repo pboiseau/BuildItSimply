@@ -10,69 +10,67 @@ class UploadHelper extends BaseHelper
      */
     public function __construct()
     {
+        parent::__construct();
         $this->url();
     }
 
+
     /**
-     * Upload a file in the server
-     *
-     * @param $file
-     *
+     * Upload a file
      * @return mixed
      * @throws Exception
      */
-    public function save($file)
+    public function upload()
     {
-        $type = stristr($file['type'], '/', true);
-        if ($type === 'image') {
-            //Upload the file in the repository
-            if (!$files = $this->web->receive(function ($file, $formFieldName) {
-                $this->checkSize($file['type'], $file['size']);
-            }, true, function ($file, $formFieldName) {
-                $tab = explode('.', $file);
-                $ext = $tab[count($tab) - 1];
-                return uniqid() . '.' . $ext;
-            })
-            ) {
-                throw new Exception('Error during upload');
-            }
-            $tab = explode('/', $file['type']);
-            $type = $tab[count($tab) - 1];
-            $this->resize(key($files), $type);
-            return key($files);
+        //Upload the file in the repository
+        if (!$files = $this->web->receive(function ($file) {
+            $this->checkSize($file['type'], $file['size']);
+        }, true, function ($file) {
+            $tab = explode('.', $file);
+            $extension = $tab[count($tab) - 1];
+            $this->file = uniqid() . '.' . $extension;
+            return $this->file;
+        })
+        ) {
+            throw new Exception('Error during upload');
         }
+
+        $this->resize($this->f3->get('UPLOADS') . $this->file);
+        return $this->file;
+
     }
 
+
     /**
-     * Resize Image
-     *
-     * @param $file
-     * @param $type
-     *
+     * Resize and crop image
+     * @param $filepath
      * @return bool
      */
-    private function resize($file, $type)
+    private function resize($filepath)
     {
-        $img = new \Image($file, true);
-        $img->resize($this->f3->get('AVATAR_SIZE'), $this->f3->get('AVATAR_SIZE'));
+        $height = $this->f3->get('AVATAR_SIZE_HEIGHT');
+        $width = $this->f3->get('AVATAR_SIZE_WIDTH');
+        $img = new \Image($filepath, true);
+        $img->resize($width, $height, true);
         $img->save();
-        if (file_put_contents($file, $img->dump($type))) {
+
+        if (file_put_contents($filepath, $img->dump())) {
             return true;
         } else {
             return false;
         }
     }
 
-    /*
-     * Check the Size of the Image
-     *
-     * @param file $fileType
-     * @param int $size
+
+    /**
+     * @param $fileType
+     * @param $size
+     * @return bool
      */
     private function checkSize($fileType, $size)
     {
         $type = stristr($fileType, '/', true);
-        if ($type === 'image' && $size <= (2 * 1024 * 1024)) {
+        if ($type === 'image' && $size <= ($this->f3->get('MAX_FILE_SIZE') * 1024 * 1024)) {
             return true;
         } else {
             return false;
@@ -80,7 +78,7 @@ class UploadHelper extends BaseHelper
     }
 
     /**
-     * Change the folder upload
+     * Change the upload directory
      */
     private function url()
     {
@@ -88,9 +86,9 @@ class UploadHelper extends BaseHelper
             $years = date("Y");
             $month = date("m");
             $day = date("d");
-            $this->f3->set('UPLOADS', 'uploads/' . $years . '/' . $month . '/' . $day . '/');
+            $this->f3->set('UPLOADS', 'webroot/uploads/' . $years . '/' . $month . '/' . $day . '/');
         } else {
-            $this->f3->set('UPLOADS', 'uploads/');
+            $this->f3->set('UPLOADS', 'webroot/uploads/');
         }
     }
 }

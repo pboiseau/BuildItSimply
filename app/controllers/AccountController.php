@@ -146,11 +146,17 @@ class AccountController extends AppController
             $profile['client']['account_id'] = $userId;
             $type = $this->f3->get('SESSION.user.type');
 
+            $upload = new UploadHelper();
+            $filename = $upload->upload();
 
-            $fileName = $this->upload();
+            if($filename){
+                $profile['account']['picture'] = $this->f3->get('UPLOADS') . $filename;
+            }
+
+            /*$fileName = $this->upload();
             if (!empty($fileName) && $fileName != '-1') {
                 $profile['account']['picture'] = $this->f3->get('UPLOADS') . $fileName;
-            }
+            }*/
 
 
             $this->Account->updateAccount($profile['account']);
