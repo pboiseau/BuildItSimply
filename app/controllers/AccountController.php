@@ -14,12 +14,13 @@ class AccountController extends AppController
     /**
      * Check if user is already log in
      */
-    public function beforeroute(){
+    public function beforeroute()
+    {
         parent::beforeroute();
 
-        if($this->f3->get('SESSION.user')){
+        if ($this->f3->get('SESSION.user')) {
             $request = $this->f3->get('PATTERN');
-            if(in_array($request, ['/users/register', '/users/login'])){
+            if (in_array($request, ['/users/register', '/users/login'])) {
                 $this->setFlash("Vous etes déjà authentifié.");
                 $this->f3->reroute('/users/profile/' . $this->f3->get('SESSION.user.id'));
             }
@@ -139,19 +140,21 @@ class AccountController extends AppController
         if ($this->request() == 'POST') {
             $profile = $this->f3->get('POST');
 
-
             $userId = $this->f3->get('SESSION.user.id');
             $profile['account']['account_id'] = $userId;
             $profile['freelance']['account_id'] = $userId;
             $profile['client']['account_id'] = $userId;
             $type = $this->f3->get('SESSION.user.type');
 
-            $upload = new UploadHelper();
-            $filename = $upload->upload();
+            if (!empty($this->f3->get('FILES.picture.name'))) {
+                $upload = new UploadHelper();
+                $filename = $upload->upload();
 
-            if($filename){
-                $profile['account']['picture'] = $this->f3->get('UPLOADS') . $filename;
+                if ($filename) {
+                    $profile['account']['picture'] = $this->f3->get('UPLOADS') . $filename;
+                }
             }
+
 
             /*$fileName = $this->upload();
             if (!empty($fileName) && $fileName != '-1') {
