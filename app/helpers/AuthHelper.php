@@ -21,4 +21,12 @@ class AuthHelper extends BaseHelper
         return ($this->f3->get('SESSION.user.type') == strtoupper($type)) ? true : false;
     }
 
+    /**
+     * Check if user log in
+     * @return bool
+     */
+    public function isLogin(){
+        return (!empty($this->f3->get('SESSION.user'))) ? true : false;
+    }
+
 }

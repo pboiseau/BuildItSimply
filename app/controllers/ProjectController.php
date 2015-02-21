@@ -113,7 +113,7 @@ class ProjectController extends AppController
         }
 
 
-        if ($project && $user['type'] == 'FREELANCE') {
+        if ($project && $this->Auth->is('freelance')) {
 
             $client = $project->account()->first();
 

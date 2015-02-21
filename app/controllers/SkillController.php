@@ -5,6 +5,9 @@ class SkillController extends AppController
 
     public $uses = array('Skill', 'FreelanceSkill', 'CategorySkill');
 
+    /**
+     * POST request for add skill in the database
+     */
     public function add()
     {
         if($this->request() == "POST"){

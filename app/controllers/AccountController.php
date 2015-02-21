@@ -18,11 +18,11 @@ class AccountController extends AppController
     {
         parent::beforeroute();
 
-        if ($this->f3->get('SESSION.user')) {
+        if ($this->Auth->isLogin()) {
             $request = $this->f3->get('PATTERN');
             if (in_array($request, ['/users/register', '/users/login'])) {
                 $this->setFlash("Vous etes déjà authentifié.");
-                $this->f3->reroute('/users/profile/' . $this->f3->get('SESSION.user.id'));
+                $this->f3->reroute('/users/profile');
             }
         }
     }
@@ -72,10 +72,8 @@ class AccountController extends AppController
                 // initialize client or freelance special account
                 if ($newUser->type == "CLIENT") {
                     $this->Client->create(['account_id' => $newUser->id]);
-                } else {
-                    if ($newUser->type == "FREELANCE") {
-                        $this->Freelance->create(['account_id' => $newUser->id]);
-                    }
+                } else if ($newUser->type == "FREELANCE") {
+                    $this->Freelance->create(['account_id' => $newUser->id]);
                 }
 
                 $this->Account->setSession($newUser);
@@ -109,11 +107,9 @@ class AccountController extends AppController
                 $user['freelance']['skills'] = $this->Skill->getFromFreelanceSkills(
                     $this->FreelanceSkill->getAll('account_id', $user->id));
 
-            } else {
-                if ($user['type'] == 'CLIENT') {
-                    // client user
-                    $user['client'] = $user->client;
-                }
+            } else if ($user['type'] == 'CLIENT') {
+                // client user
+                $user['client'] = $user->client;
             }
 
             if ($user->id == $this->f3->get('SESSION.user.id')) {
@@ -144,7 +140,6 @@ class AccountController extends AppController
             $profile['account']['account_id'] = $userId;
             $profile['freelance']['account_id'] = $userId;
             $profile['client']['account_id'] = $userId;
-            $type = $this->f3->get('SESSION.user.type');
 
             if (!empty($this->f3->get('FILES.picture.name'))) {
                 $upload = new UploadHelper();
@@ -155,13 +150,13 @@ class AccountController extends AppController
                 }
             }
 
-            if ($type == 'FREELANCE') {
-                if ($this->Account->updateAccount($profile['account']) 
+            if ($this->Auth->is('freelance')) {
+                if ($this->Account->updateAccount($profile['account'])
                     && $this->Freelance->updateProfile($profile['freelance'])) {
                     $skills = $this->Skill->explodeSkills($profile['freelance']['skills']);
                     $this->FreelanceSkill->add($skills);
                     $this->setFlash("Votre profil a bien été mis à jour.");
-                } 
+                }
                 else {
                     $this->setFlash("Certaines informations sont erronées");
                     if($this->Account->errors)
@@ -174,12 +169,12 @@ class AccountController extends AppController
                     else
                         $errors = $this->Freelance->errors;
                 }
-            } 
-            else if ($type == 'CLIENT') {
-                if ($this->Account->updateAccount($profile['account']) 
+            }
+            else if ($this->Auth->is('client')) {
+                if ($this->Account->updateAccount($profile['account'])
                     && $this->Client->updateProfile($profile['client'])) {
                     $this->setFlash("Votre profil a bien été mis à jour.");
-                } 
+                }
                 else {
                     $this->setFlash("Certaines informations sont erronées");
                     if($this->Account->errors) {
@@ -191,7 +186,7 @@ class AccountController extends AppController
                     else
                         $errors = $this->Client->errors;
                 }
-            
+
             }
         }
 
@@ -237,7 +232,7 @@ class AccountController extends AppController
     public function notification()
     {
         // get project demand if user is a client
-        if ($this->f3->get('SESSION.user.type') == "CLIENT") {
+        if ($this->Auth->is('client')) {
 
             $participations = $this->Participate->whereIn('project_id', function ($query) {
                 $query->select('id')
