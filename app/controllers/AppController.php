@@ -18,6 +18,7 @@ class AppController
 
         // instanciate helpers
         $this->MailHelper = new MailHelper();
+        $this->Auth = new AuthHelper();
 
         $this->config = [
             'prod' => $this->f3->get('PROD'),
@@ -26,7 +27,7 @@ class AppController
             'webroot' => $this->f3->get('WEBROOT'),
             'css' => $this->f3->get('CSS'),
             'js' => $this->f3->get('JS'),
-            'image' => ($this->f3->get('PROD')) ? $this->f3->get('ROOT') . $this->f3->get('IMAGE') : $this->f3->get('DEV_ROOT') . '/' .$this->f3->get('IMAGE'),
+            'image' => ($this->f3->get('PROD')) ? $this->f3->get('ROOT') . $this->f3->get('IMAGE') : $this->f3->get('DEV_ROOT') . '/' . $this->f3->get('IMAGE'),
             'request' => substr($this->f3->get('PATTERN'), 1, strlen($this->f3->get('PATTERN'))),
             'message' => $this->f3->get('SESSION.message'),
             'login' => $this->f3->get('SESSION.user'),
@@ -104,10 +105,13 @@ class AppController
         header('Access-Control-Allow-Methods: *');
         header('Content-Type: application/json');
 
-        if($status == "ok")
+        if ($status == "ok") {
             header("HTTP/1.0 200 OK");
-        else if($status == "ko")
-            header("HTTP/1.0 404 Not Found");
+        } else {
+            if ($status == "ko") {
+                header("HTTP/1.0 404 Not Found");
+            }
+        }
 
 
         return '{"' . $name . '": ' . json_encode($data, CASE_LOWER) . '}';

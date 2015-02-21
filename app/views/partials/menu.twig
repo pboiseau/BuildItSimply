@@ -1,31 +1,33 @@
 {% block menu %}
-	<nav>
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="{{home}}">Build It Simply</a>
-			</div>
+    <nav>
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{{ home }}">Build It Simply</a>
+            </div>
 
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li><a href="{{home}}howitworks">Comment ça marche</a></li>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ home }}howitworks">Comment ça marche</a></li>
                     <li><a href="{{ home }}projects/">Projets</a></li>
-				</ul>
+                </ul>
 
-				<ul class="nav navbar-nav navbar-right">
-					{% if login %}
-						{% if login.type == 'CLIENT' %}
-							<li><a href="{{ home }}projects/new">Proposer un projet</a></li>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if login %}
+                        {% if login.type == 'CLIENT' %}
+                            <li><a href="{{ home }}projects/new">Proposer un projet</a></li>
                             <li><a href="{{ home }}projects/list">Mes projets</a></li>
                             <li><a href="{{ home }}users/notifications">Notifications</a></li>
-						{% endif %}
-						<li><a href="{{home}}users/profile">Profil</a></li>
-						<li><a href="{{home}}users/logout">Se deconnecter</a></li>
-					{% else %}
-						<li><a href="{{home}}users/register">S'inscrire</a></li>
-						<li><a href="{{home}}users/login">Se connecter</a></li>
-					{% endif %}
-				</ul>
-			</div>
-		</div>
-	</nav>
+                        {% elseif login.type == 'FREELANCE' %}
+                            <li><a href="{{ home }}users/participations">Mes participations</a></li>
+                        {% endif %}
+                        <li><a href="{{ home }}users/profile">Profil</a></li>
+                        <li><a href="{{ home }}users/logout">Se deconnecter</a></li>
+                    {% else %}
+                        <li><a href="{{ home }}users/register">S'inscrire</a></li>
+                        <li><a href="{{ home }}users/login">Se connecter</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
 {% endblock %}

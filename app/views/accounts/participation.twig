@@ -1,0 +1,12 @@
+{% extends 'layouts/' ~ layout ~ '.twig' %}
+{% block body %}
+    <ul class="participations">
+        {% for participation in participations %}
+            <li>
+                Votre participation au projet <a
+                        href="{{ home }}projects/{{ participation.id }}">{{ participation.name }}</a> est en
+                status {{ participation.status }} depuis le {{ participation.updated_at }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
