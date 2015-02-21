@@ -155,15 +155,6 @@ class AccountController extends AppController
                 }
             }
 
-
-            /*$fileName = $this->upload();
-            if (!empty($fileName) && $fileName != '-1') {
-                $profile['account']['picture'] = $this->f3->get('UPLOADS') . $fileName;
-            }*/
-
-
-            
-
             if ($type == 'FREELANCE') 
             {
                 if ($this->Account->updateAccount($profile['account']) 
@@ -218,6 +209,7 @@ class AccountController extends AppController
      * Download a picture from a file upload by user
      * @return String $fileName   -1 if upload is invalid
      **/
+    /*
     public function upload()
     {
         $this->fileName = "";
@@ -243,7 +235,7 @@ class AccountController extends AppController
 
         return $this->fileName;
 
-    }
+    }*/
 
     /**
      * Get user notifications

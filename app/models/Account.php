@@ -92,20 +92,24 @@ class Account extends AppModel
         unset($data['account_id']);
 
         if (empty($data['phone'])) {
-           $data['phone'] = NULL;
+            unset($data['phone']);
         }
 
         if (empty($data['city'])) {
-            $data['city'] = NULL;
+            unset($data['city']);
         }
 
         if (empty($data['description'])) {
-            $data['description'] = NULL;
+            unset($data['description']);
         }
 
+        if (empty($data['picture'])) {
+            unset($data['picture']);
+        }
+
+
         if (empty($data['lat']) || empty($data['lng'])) {
-            $data['lat'] = NULL;
-            $data['lng'] = NULL;
+            unset($data['lat'], $data['lng']);
         }
 
         return $data;
