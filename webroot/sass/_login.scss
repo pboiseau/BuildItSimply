@@ -3,7 +3,21 @@
 	.wrapper{
 		padding-bottom: 40px !important;
 	}
-
+	.form-group{
+		&:first-of-type{
+			margin-right: 28px !important;
+		}
+	}
+	.wrapper{
+		// padding-top: 40px;
+		width: 700px;
+	}
+	.buttonWhite{
+		margin: 0 auto;
+		display: block;
+		position: relative;
+		top: 40px;
+	}
 }
 #loginInfo{
 	.form-group{
@@ -12,7 +26,9 @@
 		}
 	}
 	.wrapper{
-		padding-top: 40px;
+		padding-top: 0px;
+		// padding-top: 40px;
+		padding-bottom: 90px;
 		width: 700px;
 	}
 	.buttonWhite{

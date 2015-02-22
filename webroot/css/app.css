@@ -607,17 +607,33 @@ nav {
 #loginHead .wrapper {
   padding-bottom: 40px !important;
 }
+/* line 7, ../sass/_login.scss */
+#loginHead .form-group:first-of-type {
+  margin-right: 28px !important;
+}
+/* line 11, ../sass/_login.scss */
+#loginHead .wrapper {
+  width: 700px;
+}
+/* line 15, ../sass/_login.scss */
+#loginHead .buttonWhite {
+  margin: 0 auto;
+  display: block;
+  position: relative;
+  top: 40px;
+}
 
-/* line 10, ../sass/_login.scss */
+/* line 24, ../sass/_login.scss */
 #loginInfo .form-group:first-of-type {
   margin-right: 28px !important;
 }
-/* line 14, ../sass/_login.scss */
+/* line 28, ../sass/_login.scss */
 #loginInfo .wrapper {
-  padding-top: 40px;
+  padding-top: 0px;
+  padding-bottom: 90px;
   width: 700px;
 }
-/* line 18, ../sass/_login.scss */
+/* line 34, ../sass/_login.scss */
 #loginInfo .buttonWhite {
   margin: 0 auto;
   display: block;
