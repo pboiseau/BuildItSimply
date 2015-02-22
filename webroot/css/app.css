@@ -105,7 +105,7 @@ a:hover {
 }
 
 /* line 22, ../sass/_styles.scss */
-h2 {
+h2, h1 {
   font-size: 32px;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -353,6 +353,29 @@ h3 {
   padding: 75px 0;
   background: #005f78;
   text-align: center;
+}
+
+/* line 217, ../sass/_styles.scss */
+* {
+  margin: 0;
+}
+
+/* line 220, ../sass/_styles.scss */
+html, body {
+  height: 100%;
+}
+
+/* line 223, ../sass/_styles.scss */
+.page {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -109px;
+}
+
+/* line 229, ../sass/_styles.scss */
+footer .wrapper, .push {
+  height: 109px;
 }
 
 /* line 2, ../sass/_menu.scss */

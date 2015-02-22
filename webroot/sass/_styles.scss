@@ -19,7 +19,7 @@ a{
         text-decoration: none;
     }
 }
-h2{
+h2, h1{
     font-size: 32px;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -213,8 +213,21 @@ h3{
     padding: 75px 0;
     background: $colorCla;
     text-align: center;
-
-
+}
+* {
+margin: 0;
+}
+html, body {
+height: 100%;
+}
+.page {
+min-height: 100%;
+height: auto !important;
+height: 100%;
+margin: 0 auto -109px;
+}
+footer .wrapper, .push {
+height: 109px;
 }
 
 
