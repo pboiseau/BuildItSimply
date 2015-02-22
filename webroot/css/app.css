@@ -185,32 +185,32 @@ h3 {
   height: 610px;
   text-align: center;
 }
-/* line 80, ../sass/_styles.scss */
+/* line 79, ../sass/_styles.scss */
 #headerHome .headerSection {
   width: 50%;
   float: left;
   margin-top: 160px;
 }
-/* line 85, ../sass/_styles.scss */
+/* line 84, ../sass/_styles.scss */
 #headerHome h2, #headerHome p {
   width: 430px;
   margin: 0 auto;
   text-align: center;
   color: white;
 }
-/* line 91, ../sass/_styles.scss */
+/* line 90, ../sass/_styles.scss */
 #headerHome h2 {
   padding: 0;
   margin-bottom: 40px;
 }
-/* line 95, ../sass/_styles.scss */
+/* line 94, ../sass/_styles.scss */
 #headerHome p {
   color: white;
   font-family: "montserratlight", helvetica, arial, sans-serif;
   font-size: 20px;
   margin-bottom: 80px;
 }
-/* line 101, ../sass/_styles.scss */
+/* line 100, ../sass/_styles.scss */
 #headerHome img {
   position: absolute;
   bottom: 0;
@@ -218,16 +218,16 @@ h3 {
   margin-left: -4px;
 }
 
-/* line 108, ../sass/_styles.scss */
+/* line 107, ../sass/_styles.scss */
 #homeTotal {
   background: #223843;
   position: relative;
 }
-/* line 111, ../sass/_styles.scss */
+/* line 110, ../sass/_styles.scss */
 #homeTotal .wrapper {
   padding: 38px 0;
 }
-/* line 114, ../sass/_styles.scss */
+/* line 113, ../sass/_styles.scss */
 #homeTotal ul {
   z-index: 10;
   text-align: center;
@@ -236,7 +236,7 @@ h3 {
   text-transform: uppercase;
   float: left;
 }
-/* line 121, ../sass/_styles.scss */
+/* line 120, ../sass/_styles.scss */
 #homeTotal ul li {
   color: #ebebeb;
   float: left;
@@ -245,26 +245,26 @@ h3 {
   position: relative;
   height: 65px;
 }
-/* line 128, ../sass/_styles.scss */
+/* line 127, ../sass/_styles.scss */
 #homeTotal ul li span {
   font-size: 36px;
   position: relative;
   bottom: 5px;
   z-index: 10;
 }
-/* line 134, ../sass/_styles.scss */
+/* line 133, ../sass/_styles.scss */
 #homeTotal ul li p {
   z-index: 10;
   position: relative;
   bottom: 15px;
 }
-/* line 139, ../sass/_styles.scss */
+/* line 138, ../sass/_styles.scss */
 #homeTotal ul li:nth-child(2) {
   border-left: 1px solid #d9d9d9;
   border-right: 1px solid #d9d9d9;
 }
 
-/* line 146, ../sass/_styles.scss */
+/* line 145, ../sass/_styles.scss */
 .separateBack {
   position: absolute;
   z-index: 5;
@@ -275,80 +275,80 @@ h3 {
   background-color: #263f4c;
 }
 
-/* line 155, ../sass/_styles.scss */
+/* line 154, ../sass/_styles.scss */
 #howitwork {
   text-align: center;
 }
-/* line 157, ../sass/_styles.scss */
+/* line 156, ../sass/_styles.scss */
 #howitwork ul {
   float: left;
   margin-bottom: 60px;
 }
-/* line 160, ../sass/_styles.scss */
+/* line 159, ../sass/_styles.scss */
 #howitwork ul li {
   width: 320px;
   margin: 0 20px;
   float: left;
   text-align: center;
 }
-/* line 165, ../sass/_styles.scss */
+/* line 164, ../sass/_styles.scss */
 #howitwork ul li h3 {
   margin: 10px 0;
 }
-/* line 168, ../sass/_styles.scss */
+/* line 167, ../sass/_styles.scss */
 #howitwork ul li p {
   color: #888888;
   font-family: "montserratlight", helvetica, arial, sans-serif;
   font-size: 14px;
 }
 
-/* line 176, ../sass/_styles.scss */
+/* line 175, ../sass/_styles.scss */
 #testimonial {
   position: relative;
   background: #f2f2f2;
 }
-/* line 179, ../sass/_styles.scss */
+/* line 178, ../sass/_styles.scss */
 #testimonial .wrapper {
   position: relative;
   z-index: 10;
 }
-/* line 183, ../sass/_styles.scss */
+/* line 182, ../sass/_styles.scss */
 #testimonial .separateBack {
   background-color: #f8f8f8;
 }
-/* line 187, ../sass/_styles.scss */
+/* line 186, ../sass/_styles.scss */
 #testimonial ul li {
   width: 469px;
   float: left;
 }
-/* line 190, ../sass/_styles.scss */
+/* line 189, ../sass/_styles.scss */
 #testimonial ul li:first-of-type {
   margin-right: 142px;
 }
-/* line 193, ../sass/_styles.scss */
+/* line 192, ../sass/_styles.scss */
 #testimonial ul li img {
   float: left;
 }
-/* line 196, ../sass/_styles.scss */
+/* line 195, ../sass/_styles.scss */
 #testimonial ul li p {
   font-family: "montserratlight", helvetica, arial, sans-serif;
   padding-left: 130px;
 }
-/* line 200, ../sass/_styles.scss */
+/* line 199, ../sass/_styles.scss */
 #testimonial ul li p:last-of-type {
   color: #666666;
   margin: 13px 0;
 }
-/* line 203, ../sass/_styles.scss */
+/* line 202, ../sass/_styles.scss */
 #testimonial ul li p:last-of-type span {
   color: #5192a3;
 }
-/* line 207, ../sass/_styles.scss */
+/* line 206, ../sass/_styles.scss */
 #testimonial ul li img:last-of-type {
   padding-left: 30px;
 }
 
-/* line 213, ../sass/_styles.scss */
+/* line 212, ../sass/_styles.scss */
 .subsribe {
   padding: 75px 0;
   background: #005f78;
@@ -376,6 +376,191 @@ nav {
 .navbar-brand {
   padding: 25px;
   height: 71px;
+}
+
+/* line 5, ../sass/_register.scss */
+#registerHead {
+  text-align: center;
+  background: #005f78;
+}
+/* line 8, ../sass/_register.scss */
+#registerHead h2 {
+  color: white;
+}
+/* line 11, ../sass/_register.scss */
+#registerHead p {
+  color: #eaeaea;
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+  width: 700px;
+  margin: 0 auto;
+  margin-bottom: 25px;
+}
+/* line 18, ../sass/_register.scss */
+#registerHead .wrapper {
+  padding-bottom: 0;
+}
+
+/* line 23, ../sass/_register.scss */
+.radio-group {
+  width: 290px;
+  display: table;
+  table-layout: fixed;
+  border-spacing: 0;
+  border-collapse: separate;
+  margin: 0 auto;
+  position: relative;
+  top: 23px;
+  z-index: 10;
+  cursor: pointer;
+}
+
+/* line 35, ../sass/_register.scss */
+.radio-group__label {
+  display: table-cell;
+  background: #f6f6f6;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  vertical-align: middle;
+  text-align: center;
+  position: relative;
+  border: 2px solid #e2e2e2;
+  border-radius: 2px 0 0 2px;
+  cursor: pointer;
+  color: #005f78;
+  -moz-transition: all, 0.2s, linear;
+  -o-transition: all, 0.2s, linear;
+  -webkit-transition: all, 0.2s, linear;
+  transition: all, 0.2s, linear;
+  -moz-transition: border 250ms, color 250ms;
+  -o-transition: border 250ms, color 250ms;
+  -webkit-transition: border 250ms, color 250ms;
+  transition: border 250ms, color 250ms;
+}
+/* line 49, ../sass/_register.scss */
+.radio-group__label:first-of-type {
+  border-right: 1px solid #e2e2e2;
+}
+/* line 52, ../sass/_register.scss */
+.radio-group__label:last-of-type {
+  border-left: 1px solid #e2e2e2;
+}
+/* line 55, ../sass/_register.scss */
+.radio-group__label:hover {
+  background: #f2f2f2;
+  color: #004456;
+}
+
+/* line 60, ../sass/_register.scss */
+.radio-group__label + input + .radio-group__label {
+  border-radius: 0 2px 2px 0;
+}
+
+/* line 63, ../sass/_register.scss */
+.radio-group__label + input + .radio-group__label:before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: -2px;
+  width: 145px;
+  height: 48px;
+  border: 2px solid #004456;
+  border-radius: 2px 0 0 2px;
+  transform: translate3d(-115%, 0, 0);
+  transition: all 250ms;
+}
+
+/* line 75, ../sass/_register.scss */
+.radio-group__label + input:checked + .radio-group__label:before {
+  border-radius: 0 2px 2px 0;
+  transform: translate3d(-21px, 0, 0);
+}
+
+/* line 79, ../sass/_register.scss */
+.radio-group__option:checked + label {
+  color: #004456;
+  background: #f0f0f0;
+}
+
+/* line 83, ../sass/_register.scss */
+.radio-group__option {
+  display: none;
+}
+
+/* line 89, ../sass/_register.scss */
+#registerInfo .wrapper {
+  width: 700px;
+}
+/* line 92, ../sass/_register.scss */
+#registerInfo h3 {
+  text-align: left;
+}
+/* line 95, ../sass/_register.scss */
+#registerInfo p {
+  color: #767676;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* line 101, ../sass/_register.scss */
+.form-group {
+  width: 48%;
+  float: left;
+  margin: 28px 0 0 0 !important;
+}
+/* line 105, ../sass/_register.scss */
+.form-group:nth-child(1) {
+  margin-right: 28px !important;
+}
+/* line 108, ../sass/_register.scss */
+.form-group:nth-child(3) {
+  width: 100%;
+  margin: 13px 0 13px 0 !important;
+}
+/* line 112, ../sass/_register.scss */
+.form-group .col-sm-10 {
+  width: 100%;
+  padding: 0;
+}
+/* line 116, ../sass/_register.scss */
+.form-group input {
+  background: #f8f8f8;
+  border: 1px solid #ededed;
+  font-size: 14px;
+}
+/* line 61, ../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.3/stylesheets/compass/css3/_user-interface.scss */
+.form-group input[type="text"]:-moz-placeholder {
+  color: #a0a0a0;
+}
+/* line 64, ../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.3/stylesheets/compass/css3/_user-interface.scss */
+.form-group input[type="text"]::-moz-placeholder {
+  color: #a0a0a0;
+}
+/* line 67, ../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.3/stylesheets/compass/css3/_user-interface.scss */
+.form-group input[type="text"]:-ms-input-placeholder {
+  color: #a0a0a0;
+}
+/* line 56, ../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.3/stylesheets/compass/css3/_user-interface.scss */
+.form-group input[type="text"]::-webkit-input-placeholder {
+  color: #a0a0a0;
+}
+/* line 126, ../sass/_register.scss */
+.form-group .buttonWhite {
+  border-color: none;
+  border: none;
+}
+/* line 130, ../sass/_register.scss */
+.form-group:last-of-type {
+  width: 100%;
+  text-align: center;
+}
+/* line 133, ../sass/_register.scss */
+.form-group:last-of-type .col-sm-offset-2 {
+  margin: 0;
+}
+
+/* line 138, ../sass/_register.scss */
+.form-marg {
+  margin-right: 28px !important;
 }
 
 /* line 2, ../sass/_footer.scss */
