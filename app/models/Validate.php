@@ -33,6 +33,16 @@ class Validate extends Audit
         return (($check == 1) && $length && $strong);
     }
 
+    public function isKeyword($data, $length = null)
+    {
+        $check = preg_match("#^[^.;\"]{1,}#", $data);
+        $length = (!empty($length)) ? (strlen($data) <= $length) : true;
+        return (($check == 1) && $length);
+    }
+
+
+
+
 
 }
 

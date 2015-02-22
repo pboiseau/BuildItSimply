@@ -2,6 +2,11 @@
 
 {% block body %}
     <ul>
+    <form 
+    <form method="post" action="{{home}}projects/search" class="form-horizontal">
+	    <label for="search" class="sm-3">Rechercher</label>
+			<input type="text" name="searchWords" value="{% if searchWords %}{{ searchWords }}{% endif %}"
+				class="form-control" id="search" placeholder="Saisir des mots clés">
     {% for project in projects %}
         <li>
             <a href="{{ home }}projects/{{ project.id }}">{{ project.name }}</a>
