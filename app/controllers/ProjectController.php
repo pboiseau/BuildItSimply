@@ -96,6 +96,44 @@ class ProjectController extends AppController
         $this->render('projects/all', compact('projects'));
     }
 
+
+    /**
+     * Get projects that contains keywords and display them on a list
+     */
+    public function search()
+    {
+        if($this->request() == "POST")
+        {
+            $this->validator = new Validate();
+            $this->words = explode(' ', ($this->f3->get('POST')['searchWords']));
+
+            $request = $this->Project->whereNotIn('status', ['ANNULE']);
+            
+            $request->where(function($query)
+            {
+                foreach($this->words as $word)
+                {
+                    if($this->validator->isKeyword($word, 100))
+                    {   
+                        $query->orWhere('name', 'like', '%'.$word.'%')
+                            ->orWhere('description', 'like', '%'.$word.'%');
+                    }
+                }
+            });
+
+            $projects = $request->orderBy('created_at', 'desc')->get();
+
+            foreach ($projects as $key => $project) {
+                $projects[$key]['client'] = $project->account()->first();
+            }
+            $this->render('projects/all', compact('projects'));  
+        }
+
+
+    }
+
+    
+
     /**
      * Ask a client for participate to his project
      * Create a new project demand with pending status
