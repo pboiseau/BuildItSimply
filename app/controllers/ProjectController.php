@@ -105,7 +105,8 @@ class ProjectController extends AppController
         if($this->request() == "POST")
         {
             $this->validator = new Validate();
-            $this->words = explode(' ', ($this->f3->get('POST')['searchWords']));
+            $searchWords = $this->f3->get('POST')['searchWords'];
+            $this->words = explode(' ', $searchWords);
 
             $request = $this->Project->whereNotIn('status', ['ANNULE']);
             
@@ -116,7 +117,8 @@ class ProjectController extends AppController
                     if($this->validator->isKeyword($word, 100))
                     {   
                         $query->orWhere('name', 'like', '%'.$word.'%')
-                            ->orWhere('description', 'like', '%'.$word.'%');
+                            ->orWhere('description', 'like', '%'.$word.'%')
+                            ->orWhere('targets', 'like', '%'.$word.'%');
                     }
                 }
             });
@@ -126,9 +128,8 @@ class ProjectController extends AppController
             foreach ($projects as $key => $project) {
                 $projects[$key]['client'] = $project->account()->first();
             }
-            $this->render('projects/all', compact('projects'));  
+            $this->render('projects/all', compact('projects', 'searchWords'));  
         }
-
 
     }
 
