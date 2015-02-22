@@ -68,6 +68,15 @@ h3{
         background: $colorClaHover;
     }
 }
+.btn{
+    outline: none !important;
+    border-color: none !important;
+    border: none !important;
+    &:focus, &:active{
+        background-color: $colorClaHover !important;
+        border-color: none !important;
+    }
+}
 * {
 margin: 0;
 }

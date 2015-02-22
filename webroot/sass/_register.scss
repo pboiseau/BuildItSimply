@@ -2,7 +2,7 @@
 $toggle-active-color: #389E29;
 $trans-duration-base: 250ms;
 
-#registerHead{
+#registerHead, .connectionhead{
 	text-align: center;
 	background: $colorCla;
 	h2, h1{
@@ -102,10 +102,10 @@ $trans-duration-base: 250ms;
 	width: 48%;
 	float: left;
 	margin: 28px 0 0 0 !important;
-	&:nth-of-type(1){
+	#registerInfo &:nth-of-type(1){
 		margin-right: 28px !important;
 	}
-	&:nth-of-type(3){
+	#registerInfo &:nth-of-type(3){
 		width: 100%;
 		margin: 13px 0 13px 0 !important;
 	}
@@ -127,7 +127,7 @@ $trans-duration-base: 250ms;
 		border-color: none;
 		border: none;
 	}
-	&:last-of-type{
+	#registerInfo &:last-of-type{
 		width: 100%;
 		text-align: center;
 		.col-sm-offset-2{
@@ -138,6 +138,8 @@ $trans-duration-base: 250ms;
 .form-marg{
 	margin-right: 28px !important;
 }
-
+.has-error .help-block{
+	font-size: 14px;
+}
 
 
