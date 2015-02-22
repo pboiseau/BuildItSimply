@@ -3,7 +3,7 @@
 class ProjectController extends AppController
 {
 
-    public $uses = array('Project', 'Client', 'Participate');
+    public $uses = array('Account', 'Project', 'Client', 'Participate');
 
     public function __construct()
     {
@@ -102,23 +102,19 @@ class ProjectController extends AppController
      */
     public function search()
     {
-        if($this->request() == "POST")
-        {
+        if ($this->request() == "POST") {
             $this->validator = new Validate();
             $searchWords = $this->f3->get('POST')['searchWords'];
             $this->words = explode(' ', $searchWords);
 
             $request = $this->Project->whereNotIn('status', ['ANNULE']);
-            
-            $request->where(function($query)
-            {
-                foreach($this->words as $word)
-                {
-                    if($this->validator->isKeyword($word, 100))
-                    {   
-                        $query->orWhere('name', 'like', '%'.$word.'%')
-                            ->orWhere('description', 'like', '%'.$word.'%')
-                            ->orWhere('targets', 'like', '%'.$word.'%');
+
+            $request->where(function ($query) {
+                foreach ($this->words as $word) {
+                    if ($this->validator->isKeyword($word, 100)) {
+                        $query->orWhere('name', 'like', '%' . $word . '%')
+                            ->orWhere('description', 'like', '%' . $word . '%')
+                            ->orWhere('targets', 'like', '%' . $word . '%');
                     }
                 }
             });
@@ -128,12 +124,11 @@ class ProjectController extends AppController
             foreach ($projects as $key => $project) {
                 $projects[$key]['client'] = $project->account()->first();
             }
-            $this->render('projects/all', compact('projects', 'searchWords'));  
+            $this->render('projects/all', compact('projects', 'searchWords'));
         }
 
     }
 
-    
 
     /**
      * Ask a client for participate to his project
@@ -254,15 +249,39 @@ class ProjectController extends AppController
 
                 if ($update) {
                     echo $this->encode("proposition", [
+                        "error" => false,
                         "status" => $req['status'],
                         "message" => "freelance " . $req['status']
                     ]);
+
                 } else {
                     echo $this->encode("proposition", [
+                        "error" => true,
                         "message" => "Vous ne pouvez choisir que 3 freelances au maximum"
                     ]);
                 }
             }
+        }
+    }
+
+    public function sendResponse()
+    {
+        if($this->f3->get('AJAX')){
+            $req = $this->f3->get('POST');
+            $project = $this->Project->getById($req['project_id']);
+            $freelance = $this->Account->getById($req['freelance_id']);
+
+            $this->MailHelper->sendMail('response', $freelance->mail, [
+                'subject' => "Votre demande concernant le projet " . $project->name,
+                'project' => [
+                    'name' => $project->name,
+                    'firstname' => $project->firstname,
+                    'lastname' => $project->lastname
+                ],
+                'demand' => [
+                    'status' => $req['status']
+                ]
+            ]);
         }
     }
 

@@ -64,7 +64,9 @@ class Project extends AppModel
      */
     public function getById($id, $field = array('*'))
     {
-        return $this->where('id', $id)->first($field);
+        return $this->where($this->table.'.id', $id)
+            ->join('accounts', 'client_id', '=', 'accounts.id')
+            ->first($field);
     }
 
     /**

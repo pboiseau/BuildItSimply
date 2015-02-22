@@ -1,0 +1,11 @@
+{% extends 'layouts/mail.twig' %}
+
+{% block title %}
+    Votre demande concernant le projet {{ data.project.name }}
+{% endblock %}
+
+{% block content %}
+    <h3>Bonjour, </h3>
+    <p>Votre demande de participation au projet {{ data.project.name }} vient d'être {{ data.demand.status }} par {{ project.firstname ~ " " ~ project.lastname }}</p>
+{% endblock %}
+

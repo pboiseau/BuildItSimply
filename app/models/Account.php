@@ -20,6 +20,17 @@ class Account extends AppModel
     }
 
     /**
+     * @param $id
+     * @param array $field
+     * @return mixed
+     */
+    public function getById($id, $field = array('*'))
+    {
+        return $this->where($this->table.'.id', $id)
+            ->first($field);
+    }
+
+    /**
      *
      **/
     public function login($login = array())
