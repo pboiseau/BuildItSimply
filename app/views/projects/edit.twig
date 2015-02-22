@@ -63,7 +63,11 @@
 
     {# include the list of freelance demand #}
     <div class="container">
-        {% include 'projects/demand.twig' ignore missing %}
+        {% if project.status == "OUVERT" %}
+            {% include 'projects/demand.twig' ignore missing %}
+        {% elseif project.status == "EN COURS" %}
+            {% include 'projects/selection.twig' ignore missing %}
+        {% endif %}
     </div>
     {# include the list of freelance demand #}
 

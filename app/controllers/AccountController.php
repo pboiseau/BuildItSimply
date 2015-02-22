@@ -72,8 +72,10 @@ class AccountController extends AppController
                 // initialize client or freelance special account
                 if ($newUser->type == "CLIENT") {
                     $this->Client->create(['account_id' => $newUser->id]);
-                } else if ($newUser->type == "FREELANCE") {
-                    $this->Freelance->create(['account_id' => $newUser->id]);
+                } else {
+                    if ($newUser->type == "FREELANCE") {
+                        $this->Freelance->create(['account_id' => $newUser->id]);
+                    }
                 }
 
                 $this->Account->setSession($newUser);
@@ -107,9 +109,11 @@ class AccountController extends AppController
                 $user['freelance']['skills'] = $this->Skill->getFromFreelanceSkills(
                     $this->FreelanceSkill->getAll('account_id', $user->id));
 
-            } else if ($user['type'] == 'CLIENT') {
-                // client user
-                $user['client'] = $user->client;
+            } else {
+                if ($user['type'] == 'CLIENT') {
+                    // client user
+                    $user['client'] = $user->client;
+                }
             }
 
             if ($user->id == $this->f3->get('SESSION.user.id')) {
@@ -152,41 +156,43 @@ class AccountController extends AppController
 
             if ($this->Auth->is('freelance')) {
                 if ($this->Account->updateAccount($profile['account'])
-                    && $this->Freelance->updateProfile($profile['freelance'])) {
+                    && $this->Freelance->updateProfile($profile['freelance'])
+                ) {
                     $skills = $this->Skill->explodeSkills($profile['freelance']['skills']);
                     $this->FreelanceSkill->add($skills);
                     $this->setFlash("Votre profil a bien été mis à jour.");
-                }
-                else {
+                } else {
                     $this->setFlash("Certaines informations sont erronées");
-                    if($this->Account->errors)
-                    {
-                        if($this->Freelance->errors)
-                             $errors = array_merge($this->Account->errors, $this->Freelance->errors);
-                         else
+                    if ($this->Account->errors) {
+                        if ($this->Freelance->errors) {
+                            $errors = array_merge($this->Account->errors, $this->Freelance->errors);
+                        } else {
                             $errors = $this->Account->errors;
-                    }
-                    else
+                        }
+                    } else {
                         $errors = $this->Freelance->errors;
-                }
-            }
-            else if ($this->Auth->is('client')) {
-                if ($this->Account->updateAccount($profile['account'])
-                    && $this->Client->updateProfile($profile['client'])) {
-                    $this->setFlash("Votre profil a bien été mis à jour.");
-                }
-                else {
-                    $this->setFlash("Certaines informations sont erronées");
-                    if($this->Account->errors) {
-                        if($this->Client->errors)
-                            $errors = array_merge($this->Account->errors, $this->Client->errors);
-                         else
-                            $errors = $this->Account->errors;
                     }
-                    else
-                        $errors = $this->Client->errors;
                 }
+            } else {
+                if ($this->Auth->is('client')) {
+                    if ($this->Account->updateAccount($profile['account'])
+                        && $this->Client->updateProfile($profile['client'])
+                    ) {
+                        $this->setFlash("Votre profil a bien été mis à jour.");
+                    } else {
+                        $this->setFlash("Certaines informations sont erronées");
+                        if ($this->Account->errors) {
+                            if ($this->Client->errors) {
+                                $errors = array_merge($this->Account->errors, $this->Client->errors);
+                            } else {
+                                $errors = $this->Account->errors;
+                            }
+                        } else {
+                            $errors = $this->Client->errors;
+                        }
+                    }
 
+                }
             }
         }
 
@@ -234,11 +240,12 @@ class AccountController extends AppController
         // get project demand if user is a client
         if ($this->Auth->is('client')) {
 
-            $participations = $this->Participate->whereIn('project_id', function ($query) {
-                $query->select('id')
-                    ->from('projects')
-                    ->where('client_id', $this->f3->get('SESSION.user.id'));
-            })->orderBy('created_at', 'desc')->get();
+            $participations = $this->Participate->where('status', 'PENDING')
+                ->whereIn('project_id', function ($query) {
+                    $query->select('id')
+                        ->from('projects')
+                        ->where('client_id', $this->f3->get('SESSION.user.id'));
+                })->orderBy('created_at', 'desc')->get();
 
             foreach ($participations as $key => $participation) {
                 $participations[$key]['freelance'] = $participation->account()->first();
@@ -254,7 +261,7 @@ class AccountController extends AppController
      */
     public function participations()
     {
-        if($this->Auth->is('freelance')){
+        if ($this->Auth->is('freelance')) {
             $participations = $this->Participate->where('freelance_id', $this->f3->get('SESSION.user.id'))
                 ->join('projects', 'project_id', '=', 'id')
                 ->orderBy('participates.created_at', 'desc')
@@ -262,7 +269,7 @@ class AccountController extends AppController
 
             $this->render('accounts/participation', compact('participations'));
 
-        }else{
+        } else {
             $this->setFlash("Vous n'êtes pas Freelance");
             $this->f3->reroute('/users/profile');
         }

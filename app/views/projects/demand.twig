@@ -18,7 +18,6 @@
                         , {{ proposition.type|lower ~ " de niveau " ~ proposition.experience|lower|capitalize }}
                     </div>
                     <div class="col-xs-6 choice">
-
                         {% if proposition.status == "ACCEPT" or proposition.status == "PENDING" %}
                             <button class="demand btn btn-sm {{ (proposition.status == "ACCEPT") ? "btn-success" : "" }}" {{ (disable) ? "disabled" }}
                                     data-choice="accept"

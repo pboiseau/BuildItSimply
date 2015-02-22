@@ -88,4 +88,23 @@ class Participate extends AppModel
         return $this->where('project_id', $project_id)->where('status', $status)->count();
     }
 
+    /**
+     * Get all proposition of a project
+     * @param $project_id
+     * @return array|bool
+     */
+    public function proposition($project_id, $status = null)
+    {
+        $propositions = $this->where('project_id', $project_id)
+            ->join('accounts', 'freelance_id', '=', 'id')
+            ->join('freelances', 'freelance_id', '=', 'account_id')
+            ->orderBy('participates.created_at', 'desc');
+
+        if($status){
+            $propositions->where('status', $status);
+        }
+
+        return ($propositions->count() > 0) ? $propositions->get() : false;
+    }
+
 }

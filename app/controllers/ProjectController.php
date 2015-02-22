@@ -181,11 +181,12 @@ class ProjectController extends AppController
             return $this->f3->reroute('/projects/');
         }
 
-        $propositions = $this->Participate->where('project_id', $project->id)
-            ->join('accounts', 'freelance_id', '=', 'id')
-            ->join('freelances', 'freelance_id', '=', 'account_id')
-            ->orderBy('participates.created_at', 'desc')
-            ->get();
+        /*
+         * Get all proposition filter by status accept
+         * if project is in progress
+         */
+        $status = ($project->status == 'EN COURS') ? 'ACCEPT' : null;
+        $propositions = $this->Participate->proposition($project->id, $status);
 
         if ($this->request() == "POST") {
             if ($this->Project->updateProject($project->id, $this->f3->get('POST'))) {
@@ -308,6 +309,7 @@ class ProjectController extends AppController
 
         $this->f3->reroute("/projects/" . $project_id);
     }
+
 }
 
 ?>

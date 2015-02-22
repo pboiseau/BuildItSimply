@@ -1,0 +1,11 @@
+{% block body %}
+    <div class="jumbotron">
+        <h3>Votre selection</h3>
+        <ul>
+            {% for proposition in propositions %}
+                <li>{{ proposition.firstname ~ " " ~ proposition.lastname}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}
