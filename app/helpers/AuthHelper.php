@@ -26,7 +26,8 @@ class AuthHelper extends BaseHelper
      * @return bool
      */
     public function isLogin(){
-        return (!empty($this->f3->get('SESSION.user'))) ? true : false;
+        $user = $this->f3->get('SESSION.user');
+        return (!empty($user)) ? true : false;
     }
 
 }
