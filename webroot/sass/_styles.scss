@@ -68,6 +68,21 @@ h3{
         background: $colorClaHover;
     }
 }
+* {
+margin: 0;
+}
+html, body {
+height: 100%;
+}
+.page {
+min-height: 100%;
+height: auto !important;
+height: 100%;
+margin: 0 auto -109px;
+}
+footer .wrapper, .push {
+height: 109px;
+}
 /************************************************************************/
 /*  PAGE
 /************************************************************************/
@@ -214,20 +229,6 @@ h3{
     background: $colorCla;
     text-align: center;
 }
-* {
-margin: 0;
-}
-html, body {
-height: 100%;
-}
-.page {
-min-height: 100%;
-height: auto !important;
-height: 100%;
-margin: 0 auto -109px;
-}
-footer .wrapper, .push {
-height: 109px;
-}
+
 
 

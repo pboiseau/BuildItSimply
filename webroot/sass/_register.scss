@@ -5,7 +5,7 @@ $trans-duration-base: 250ms;
 #registerHead{
 	text-align: center;
 	background: $colorCla;
-	h2{
+	h2, h1{
 		color: white;
 	}
 	p{
@@ -102,10 +102,10 @@ $trans-duration-base: 250ms;
 	width: 48%;
 	float: left;
 	margin: 28px 0 0 0 !important;
-	&:nth-child(1){
+	&:nth-of-type(1){
 		margin-right: 28px !important;
 	}
-	&:nth-child(3){
+	&:nth-of-type(3){
 		width: 100%;
 		margin: 13px 0 13px 0 !important;
 	}

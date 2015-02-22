@@ -172,10 +172,33 @@ h3 {
   background: #004456;
 }
 
+/* line 71, ../sass/_styles.scss */
+* {
+  margin: 0;
+}
+
+/* line 74, ../sass/_styles.scss */
+html, body {
+  height: 100%;
+}
+
+/* line 77, ../sass/_styles.scss */
+.page {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -109px;
+}
+
+/* line 83, ../sass/_styles.scss */
+footer .wrapper, .push {
+  height: 109px;
+}
+
 /************************************************************************/
 /*  PAGE
 /************************************************************************/
-/* line 74, ../sass/_styles.scss */
+/* line 89, ../sass/_styles.scss */
 #headerHome {
   background: url('/builditsimply/webroot/images/background-header.jpg?1424428153') no-repeat center center fixed;
   -moz-background-size: cover;
@@ -185,32 +208,32 @@ h3 {
   height: 610px;
   text-align: center;
 }
-/* line 79, ../sass/_styles.scss */
+/* line 94, ../sass/_styles.scss */
 #headerHome .headerSection {
   width: 50%;
   float: left;
   margin-top: 160px;
 }
-/* line 84, ../sass/_styles.scss */
+/* line 99, ../sass/_styles.scss */
 #headerHome h2, #headerHome p {
   width: 430px;
   margin: 0 auto;
   text-align: center;
   color: white;
 }
-/* line 90, ../sass/_styles.scss */
+/* line 105, ../sass/_styles.scss */
 #headerHome h2 {
   padding: 0;
   margin-bottom: 40px;
 }
-/* line 94, ../sass/_styles.scss */
+/* line 109, ../sass/_styles.scss */
 #headerHome p {
   color: white;
   font-family: "montserratlight", helvetica, arial, sans-serif;
   font-size: 20px;
   margin-bottom: 80px;
 }
-/* line 100, ../sass/_styles.scss */
+/* line 115, ../sass/_styles.scss */
 #headerHome img {
   position: absolute;
   bottom: 0;
@@ -218,16 +241,16 @@ h3 {
   margin-left: -4px;
 }
 
-/* line 107, ../sass/_styles.scss */
+/* line 122, ../sass/_styles.scss */
 #homeTotal {
   background: #223843;
   position: relative;
 }
-/* line 110, ../sass/_styles.scss */
+/* line 125, ../sass/_styles.scss */
 #homeTotal .wrapper {
   padding: 38px 0;
 }
-/* line 113, ../sass/_styles.scss */
+/* line 128, ../sass/_styles.scss */
 #homeTotal ul {
   z-index: 10;
   text-align: center;
@@ -236,7 +259,7 @@ h3 {
   text-transform: uppercase;
   float: left;
 }
-/* line 120, ../sass/_styles.scss */
+/* line 135, ../sass/_styles.scss */
 #homeTotal ul li {
   color: #ebebeb;
   float: left;
@@ -245,26 +268,26 @@ h3 {
   position: relative;
   height: 65px;
 }
-/* line 127, ../sass/_styles.scss */
+/* line 142, ../sass/_styles.scss */
 #homeTotal ul li span {
   font-size: 36px;
   position: relative;
   bottom: 5px;
   z-index: 10;
 }
-/* line 133, ../sass/_styles.scss */
+/* line 148, ../sass/_styles.scss */
 #homeTotal ul li p {
   z-index: 10;
   position: relative;
   bottom: 15px;
 }
-/* line 138, ../sass/_styles.scss */
+/* line 153, ../sass/_styles.scss */
 #homeTotal ul li:nth-child(2) {
   border-left: 1px solid #d9d9d9;
   border-right: 1px solid #d9d9d9;
 }
 
-/* line 145, ../sass/_styles.scss */
+/* line 160, ../sass/_styles.scss */
 .separateBack {
   position: absolute;
   z-index: 5;
@@ -275,107 +298,84 @@ h3 {
   background-color: #263f4c;
 }
 
-/* line 154, ../sass/_styles.scss */
+/* line 169, ../sass/_styles.scss */
 #howitwork {
   text-align: center;
 }
-/* line 156, ../sass/_styles.scss */
+/* line 171, ../sass/_styles.scss */
 #howitwork ul {
   float: left;
   margin-bottom: 60px;
 }
-/* line 159, ../sass/_styles.scss */
+/* line 174, ../sass/_styles.scss */
 #howitwork ul li {
   width: 320px;
   margin: 0 20px;
   float: left;
   text-align: center;
 }
-/* line 164, ../sass/_styles.scss */
+/* line 179, ../sass/_styles.scss */
 #howitwork ul li h3 {
   margin: 10px 0;
 }
-/* line 167, ../sass/_styles.scss */
+/* line 182, ../sass/_styles.scss */
 #howitwork ul li p {
   color: #888888;
   font-family: "montserratlight", helvetica, arial, sans-serif;
   font-size: 14px;
 }
 
-/* line 175, ../sass/_styles.scss */
+/* line 190, ../sass/_styles.scss */
 #testimonial {
   position: relative;
   background: #f2f2f2;
 }
-/* line 178, ../sass/_styles.scss */
+/* line 193, ../sass/_styles.scss */
 #testimonial .wrapper {
   position: relative;
   z-index: 10;
 }
-/* line 182, ../sass/_styles.scss */
+/* line 197, ../sass/_styles.scss */
 #testimonial .separateBack {
   background-color: #f8f8f8;
 }
-/* line 186, ../sass/_styles.scss */
+/* line 201, ../sass/_styles.scss */
 #testimonial ul li {
   width: 469px;
   float: left;
 }
-/* line 189, ../sass/_styles.scss */
+/* line 204, ../sass/_styles.scss */
 #testimonial ul li:first-of-type {
   margin-right: 142px;
 }
-/* line 192, ../sass/_styles.scss */
+/* line 207, ../sass/_styles.scss */
 #testimonial ul li img {
   float: left;
 }
-/* line 195, ../sass/_styles.scss */
+/* line 210, ../sass/_styles.scss */
 #testimonial ul li p {
   font-family: "montserratlight", helvetica, arial, sans-serif;
   padding-left: 130px;
 }
-/* line 199, ../sass/_styles.scss */
+/* line 214, ../sass/_styles.scss */
 #testimonial ul li p:last-of-type {
   color: #666666;
   margin: 13px 0;
 }
-/* line 202, ../sass/_styles.scss */
+/* line 217, ../sass/_styles.scss */
 #testimonial ul li p:last-of-type span {
   color: #5192a3;
 }
-/* line 206, ../sass/_styles.scss */
+/* line 221, ../sass/_styles.scss */
 #testimonial ul li img:last-of-type {
   padding-left: 30px;
 }
 
-/* line 212, ../sass/_styles.scss */
+/* line 227, ../sass/_styles.scss */
 .subsribe {
   padding: 75px 0;
   background: #005f78;
   text-align: center;
-}
-
-/* line 217, ../sass/_styles.scss */
-* {
-  margin: 0;
-}
-
-/* line 220, ../sass/_styles.scss */
-html, body {
-  height: 100%;
-}
-
-/* line 223, ../sass/_styles.scss */
-.page {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  margin: 0 auto -109px;
-}
-
-/* line 229, ../sass/_styles.scss */
-footer .wrapper, .push {
-  height: 109px;
 }
 
 /* line 2, ../sass/_menu.scss */
@@ -407,7 +407,7 @@ nav {
   background: #005f78;
 }
 /* line 8, ../sass/_register.scss */
-#registerHead h2 {
+#registerHead h2, #registerHead h1 {
   color: white;
 }
 /* line 11, ../sass/_register.scss */
@@ -531,11 +531,11 @@ nav {
   margin: 28px 0 0 0 !important;
 }
 /* line 105, ../sass/_register.scss */
-.form-group:nth-child(1) {
+.form-group:nth-of-type(1) {
   margin-right: 28px !important;
 }
 /* line 108, ../sass/_register.scss */
-.form-group:nth-child(3) {
+.form-group:nth-of-type(3) {
   width: 100%;
   margin: 13px 0 13px 0 !important;
 }
