@@ -1,11 +1,11 @@
 {% extends 'layouts/' ~ layout ~ '.twig' %}
 {% block body %}
+    <h3>Vos participations</h3>
     <ul class="participations">
         {% for participation in participations %}
             <li>
-                Votre participation au projet <a
-                        href="{{ home }}projects/{{ participation.id }}">{{ participation.name }}</a> est en
-                status {{ participation.status }} depuis le {{ participation.updated_at }}
+                Vous avez participé au projet <a
+                        href="{{ home }}projects/{{ participation.id }}">{{ participation.name }}</a>
             </li>
         {% endfor %}
     </ul>

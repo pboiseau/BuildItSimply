@@ -230,11 +230,14 @@ class AccountController extends AppController
 
     /**
      * Show all freelance participation
+     * Status ACCEPT or CHOOSE only
      */
     public function participations()
     {
         if ($this->Auth->is('freelance')) {
-            $participations = $this->Participate->where('freelance_id', $this->f3->get('SESSION.user.id'))
+
+            $participations = $this->Participate->where('freelance_id', $this->Auth->getId())
+                ->whereIn('participates.status', ['ACCEPT', 'CHOOSE'])
                 ->join('projects', 'project_id', '=', 'id')
                 ->orderBy('participates.created_at', 'desc')
                 ->get(['projects.id', 'projects.name', 'participates.status', 'participates.updated_at']);
