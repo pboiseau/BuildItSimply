@@ -4,14 +4,47 @@
     <div class="container">
         <h2>Dites nous en un peu plus sur votre projet</h2>
 
-        <h3>De quoi s'agit-il ?</h3>
+        <div id="type-container" class="type">
+            <h3>Etape {{ step }}</h3>
 
-        <div class="type">
-        {% for type in types %}
-            <div class="col-md-4">
-                {{ type.type }}
-            </div>
-        {% endfor %}
+            <h3>De quoi s'agit-il ?</h3>
+
+            {% for type in types %}
+                <div class="col-md-4">
+                    <div class="col-md-12">
+                        <a href="#" class="project-type" data-step="{{ step }}" data-type="{{ type.id }}">
+                            <img src="http://placehold.it/250x275" alt="" class="img-rounded">
+                        </a>
+                    </div>
+                    <div class="col-md-12">{{ type.type | capitalize }}</div>
+                    <div class="col-md-12"><p>{{ type.description }}</p></div>
+                </div>
+            {% endfor %}
         </div>
+
     </div>
+{% endblock %}
+
+{% block partial_js %}
+    {{ parent() }}
+    <script>
+
+        $('.project-type').click(nextStep);
+
+        function nextStep(e) {
+            $.ajax({
+                url: "{{ home }}projects/step/" + $(e.currentTarget).attr('data-step'),
+                type: 'POST',
+                data: {
+                    type: $(e.currentTarget).attr('data-type'),
+                    step: $(e.currentTarget).attr('data-step')
+                }
+            }).done(function (data, textStatus, jqXHR) {
+                $('#type-container').empty().append(data);
+                $('.project-type').click(nextStep);
+            }).fail(function () {
+
+            });
+        }
+    </script>
 {% endblock %}

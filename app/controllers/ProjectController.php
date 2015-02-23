@@ -3,7 +3,7 @@
 class ProjectController extends AppController
 {
 
-    public $uses = array('Account', 'Project', 'Client', 'Participate', 'ProjectType');
+    public $uses = array('Account', 'Project', 'Client', 'Participate', 'ProjectType', 'ProjectStep');
 
     public function __construct()
     {
@@ -43,7 +43,7 @@ class ProjectController extends AppController
             }
         }
 
-        if ($this->f3->get('PATTERN') == "/projects/step/@step") {
+        if (in_array($this->f3->get('PATTERN'), ["/projects/step", "/projects/step/@step"])) {
             if (!$this->Auth->is('client') || !$this->f3->get('SESSION.project')) {
                 $this->f3->reroute('/projects/');
             }
@@ -63,7 +63,7 @@ class ProjectController extends AppController
             if ($this->Project->initialize($newProject)) {
 
                 $this->f3->set('SESSION.project', $newProject);
-                $this->f3->reroute('/projects/step/0');
+                $this->f3->reroute('/projects/step');
 
             } else {
                 $project = $newProject;
@@ -325,8 +325,9 @@ class ProjectController extends AppController
      */
     public function startingStep()
     {
+        $step = 0;
         $types = ProjectType::all();
-        $this->render('projects/start', compact('types'));
+        $this->render('projects/start', compact('types', 'step'));
     }
 
     /**
@@ -334,8 +335,21 @@ class ProjectController extends AppController
      */
     public function step()
     {
+        if ($this->f3->get('AJAX')) {
 
+            $request = $this->f3->get('POST');
+            $questions = $this->ProjectStep->changeStep($request['step'] + 1, $request['type']);
+
+            if ($questions) {
+                $step = $request['step'] + 1;
+                $type = $request['type'];
+                $this->render('projects/step', compact('step', 'questions', 'type'));
+            }
+
+        }
     }
+
+
 }
 
 

@@ -1,0 +1,19 @@
+{% block body %}
+
+    <div id="type-container">
+        <h3>Etape {{ step }}</h3>
+        <h3>{{ questions.0.question }}</h3>
+        {% for question in questions %}
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <a href="#" class="project-type" data-step="{{ step }}" data-type="{{ type }}">
+                        <img src="http://placehold.it/250x275" alt="" class="img-rounded">
+                    </a>
+                </div>
+                <div class="col-md-12">{{ question.response  }}</div>
+                <div class="col-md-12"><p>{{ question.description }}</p></div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
