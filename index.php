@@ -33,15 +33,4 @@ $f3->config('app/config/redirects.ini');
  **/
 $capsule = new Database();
 
-///**
-// * Catching errors
-// */
-//$f3->set('ONERROR', function ($f3) {
-//    $error = $f3->get('ERROR');
-//
-//    echo $f3->get('TWIG')->render('errors/' . $error['code'] . '.twig', [
-//        'error' => $error
-//    ]);
-//});
-
 $f3->run();

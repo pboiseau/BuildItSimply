@@ -1,0 +1,57 @@
+{% extends 'layouts/' ~ layout ~ '.twig' %}
+
+{% block body %}
+    <div class="container">
+
+        <form method="post" action="{{ home ~ request }}" class="form-horizontal">
+            <div class="form-group {{ (errors.type) ? 'has-error' : '' }}">
+                <label for="type" class="col-sm-2 control-label">Question</label>
+
+                <div class="col-sm-10">
+                    <input type="text" name="question" value="{% if question.name %}{{ question.name }}{% endif %}"
+                           class="form-control" id="name" placeholder="Question">
+                    <span class="help-block with-errors">{% if errors.question %}{{ errors.question }}{% endif %}</span>
+                </div>
+            </div>
+            <div class="form-group {{ (errors.project_type) ? 'has-error' : '' }}">
+                <label for="project_step" class="col-sm-2 control-label">Type de projet</label>
+
+                <div class="col-sm-10">
+                    <select name="project_type" class="form-control">
+                        {% for type in types %}
+                            <option value="{{ type.id }}">{{ type.type }}</option>
+                        {% endfor %}
+                    </select>
+                    <span class="help-block with-errors">{% if errors.project_type %}{{ errors.project_type }}{% endif %}</span>
+                </div>
+            </div>
+            <div class="form-group {{ (errors.project_step) ? 'has-error' : '' }}">
+                <label for="project_step" class="col-sm-2 control-label">Etape</label>
+
+                <div class="col-sm-10">
+                    <select name="step" class="form-control">
+                        {% for i in 1..10 %}
+                            <option value="{{ i }}">Etape {{ i }}</option>
+                        {% endfor %}
+                    </select>
+                    <span class="help-block with-errors">{% if errors.step %}{{ errors.step }}{% endif %}</span>
+                </div>
+            </div>
+            <div class="form-group {{ (errors.description) ? 'has-error' : '' }}">
+                <label for="description" class="col-sm-2 control-label">Description</label>
+
+                <div class="col-sm-10">
+                    <textarea name="description" class="form-control" rows="3"
+                              placeholder="Description de la question"></textarea>
+                    <span class="help-block with-errors">{% if errors.description %}{{ errors.description }}{% endif %}</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button id="submit" type="submit" class="btn btn-default">Ajouter la question</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+{% endblock %}

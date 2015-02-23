@@ -309,7 +309,6 @@ class ProjectController extends AppController
 
         $this->f3->reroute("/projects/" . $project_id);
     }
-
 }
 
 ?>
