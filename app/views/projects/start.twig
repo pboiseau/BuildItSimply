@@ -1,0 +1,17 @@
+{% extends 'layouts/' ~ layout ~ '.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h2>Dites nous en un peu plus sur votre projet</h2>
+
+        <h3>De quoi s'agit-il ?</h3>
+
+        <div class="type">
+        {% for type in types %}
+            <div class="col-md-4">
+                {{ type.type }}
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}

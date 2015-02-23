@@ -3,7 +3,7 @@
 class ProjectController extends AppController
 {
 
-    public $uses = array('Account', 'Project', 'Client', 'Participate');
+    public $uses = array('Account', 'Project', 'Client', 'Participate', 'ProjectType');
 
     public function __construct()
     {
@@ -22,13 +22,13 @@ class ProjectController extends AppController
 
         if ($this->f3->get('PATTERN') == "/projects/@id") {
             $project = $this->Project->find($this->f3->get('PARAMS.id'));
-            if ($project->client_id == $this->f3->get('SESSION.user.id')) {
+            if ($project->client_id == $this->Auth->getId()) {
                 $this->f3->reroute('/projects/edit/' . $this->f3->get('PARAMS.id'));
             }
         }
 
         if ($this->f3->get('PATTERN') == "/projects/edit/@id") {
-            if ($this->f3->get('SESSION.user.type') != "CLIENT") {
+            if (!$this->Auth->is('client')) {
                 $this->setFlash("En tant que Freelance vous ne pouvez pas acceder à cette zone");
                 $this->f3->reroute('/projects/');
             }
@@ -36,10 +36,15 @@ class ProjectController extends AppController
 
         // if request content @id params
         // check if project exist
-        $id = $this->f3->get('PARAMS.id'); // fix php error version 5.4.10
-        if (!empty($id)) {
+        if (!empty($this->f3->get('PARAMS.id'))) {
             if (!$this->Project->exists($this->f3->get('PARAMS.id'))) {
                 $this->setFlash("Ce projet n'existe pas.");
+                $this->f3->reroute('/projects/');
+            }
+        }
+
+        if ($this->f3->get('PATTERN') == "/projects/step/@step") {
+            if (!$this->Auth->is('client') || !$this->f3->get('SESSION.project')) {
                 $this->f3->reroute('/projects/');
             }
         }
@@ -56,6 +61,9 @@ class ProjectController extends AppController
         if ($this->request() == "POST") {
             $newProject = $this->f3->get('POST');
             if ($this->Project->initialize($newProject)) {
+
+                $this->f3->set('SESSION.project', $newProject);
+                $this->f3->reroute('/projects/step/0');
 
             } else {
                 $project = $newProject;
@@ -92,6 +100,7 @@ class ProjectController extends AppController
 
         foreach ($projects as $key => $project) {
             $projects[$key]['client'] = $project->account()->first();
+            $projects[$key]['proposition'] = $project->participates()->count();
         }
         $this->render('projects/all', compact('projects'));
     }
@@ -124,6 +133,7 @@ class ProjectController extends AppController
             foreach ($projects as $key => $project) {
                 $projects[$key]['client'] = $project->account()->first();
             }
+
             $this->render('projects/all', compact('projects', 'searchWords'));
         }
 
@@ -267,7 +277,7 @@ class ProjectController extends AppController
 
     public function sendResponse()
     {
-        if($this->f3->get('AJAX')){
+        if ($this->f3->get('AJAX')) {
             $req = $this->f3->get('POST');
             $project = $this->Project->getById($req['project_id']);
             $freelance = $this->Account->getById($req['freelance_id']);
@@ -309,6 +319,24 @@ class ProjectController extends AppController
 
         $this->f3->reroute("/projects/" . $project_id);
     }
+
+    /**
+     *
+     */
+    public function startingStep()
+    {
+        $types = ProjectType::all();
+        $this->render('projects/start', compact('types'));
+    }
+
+    /**
+     *
+     */
+    public function step()
+    {
+
+    }
 }
+
 
 ?>
