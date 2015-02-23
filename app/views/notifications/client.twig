@@ -1,0 +1,11 @@
+{% block body %}
+    <ul class="notifications">
+        {% for participation in participations %}
+            <li>
+                <a href="{{ home }}users/profile/{{ participation.freelance.id }}">{{ participation.freelance.firstname ~ " " ~ participation.freelance.lastname }}</a>
+                souhaite participer au projet <a
+                        href="{{ home }}projects/{{ participation.project.id }}">{{ participation.project.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

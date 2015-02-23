@@ -100,11 +100,41 @@ class Participate extends AppModel
             ->join('freelances', 'freelance_id', '=', 'account_id')
             ->orderBy('participates.created_at', 'desc');
 
-        if($status){
+        if ($status) {
             $propositions->where('status', $status);
         }
 
         return ($propositions->count() > 0) ? $propositions->get() : false;
+    }
+
+    /**
+     * Get notifications by client type
+     * @param $user_id
+     * @param $user_type
+     * @return array|bool
+     */
+    public function notification($user_id, $user_type)
+    {
+        $this->user_id = $user_id;
+        if ($user_type == 'freelance') {
+
+            $participations = $this->where('freelance_id', $user_id)
+                ->where('participates.status', '!=', 'PENDING')
+                ->join('projects', 'project_id', '=', 'id')
+                ->orderBy('participates.updated_at', 'desc')
+                ->get(['projects.id', 'projects.name', 'participates.status', 'participates.updated_at']);
+
+        } else if($user_type == 'client') {
+
+            $participations = $this->where('status', 'PENDING')
+                ->whereIn('project_id', function ($query) {
+                    $query->select('id')
+                        ->from('projects')
+                        ->where('client_id', $this->user_id);
+                })->orderBy('created_at', 'desc')->get();
+        }
+
+        return ($participations->count() > 0) ? $participations : false;
     }
 
 }

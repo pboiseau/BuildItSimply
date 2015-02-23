@@ -200,38 +200,6 @@ class AccountController extends AppController
     }
 
     /**
-     * Download a picture from a file upload by user
-     * @return String $fileName   -1 if upload is invalid
-     **/
-    /*
-    public function upload()
-    {
-        $this->fileName = "";
-        \Web::instance()->receive(function ($file) {
-                // Check file < 3Mb and type = image
-                if (($file['size'] < (3 * 1024 * 1024)) && (substr($file['type'], 0, 5) == 'image')) {
-                    return true;
-                }
-
-                // If not, don't place it in uploads folder
-                $this->fileName = '-1';
-                return false;
-
-            }, true, function ($BaseFileName) {
-                $this->fileName =
-                    $this->f3->get('SESSION.user.id') . "-" .
-                    $this->f3->get('SESSION.user.firstname') . "-" .
-                    $this->f3->get('SESSION.user.lastname') . "-" .
-                    (explode('.', $BaseFileName)[1]);
-                return ($this->fileName);
-            }
-        );
-
-        return $this->fileName;
-
-    }*/
-
-    /**
      * Get user notifications
      * If user is client: get project demands
      */
@@ -240,17 +208,21 @@ class AccountController extends AppController
         // get project demand if user is a client
         if ($this->Auth->is('client')) {
 
-            $participations = $this->Participate->where('status', 'PENDING')
-                ->whereIn('project_id', function ($query) {
-                    $query->select('id')
-                        ->from('projects')
-                        ->where('client_id', $this->f3->get('SESSION.user.id'));
-                })->orderBy('created_at', 'desc')->get();
+            $participations = $this->Participate->notification($this->Auth->getId(), 'client');
 
-            foreach ($participations as $key => $participation) {
-                $participations[$key]['freelance'] = $participation->account()->first();
-                $participations[$key]['project'] = $participation->project()->first();
+            if($participations) {
+                foreach ($participations as $key => $participation) {
+                    $participations[$key]['freelance'] = $participation->account()->first();
+                    $participations[$key]['project'] = $participation->project()->first();
+                }
             }
+
+        } else if($this->Auth->is('freelance')){
+
+            $participations = $this->Participate->notification($this->Auth->getId(), 'freelance');
+
+        }else{
+            $this->f3->reroute('/');
         }
 
         $this->render('accounts/notification', compact('participations'));

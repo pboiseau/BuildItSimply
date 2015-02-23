@@ -30,4 +30,12 @@ class AuthHelper extends BaseHelper
         return (!empty($user)) ? true : false;
     }
 
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->f3->get('SESSION.user.id');
+    }
+
 }

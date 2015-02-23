@@ -17,10 +17,10 @@
                         {% if login.type == 'CLIENT' %}
                             <li><a href="{{ home }}projects/new">Proposer un projet</a></li>
                             <li><a href="{{ home }}projects/list">Mes projets</a></li>
-                            <li><a href="{{ home }}users/notifications">Notifications</a></li>
                         {% elseif login.type == 'FREELANCE' %}
                             <li><a href="{{ home }}users/participations">Mes participations</a></li>
                         {% endif %}
+                        <li><a href="{{ home }}users/notifications">Notifications</a></li>
                         <li><a href="{{ home }}users/profile">Profil</a></li>
                         <li><a href="{{ home }}users/logout">Se deconnecter</a></li>
                     {% else %}

@@ -1,0 +1,11 @@
+{% block body %}
+    <ul class="notifications">
+        {% for participation in participations %}
+            <li>
+                <p>Votre demande de participation au projet <a
+                            href="{{ home }}projects/{{ participation.id }}">{{ participation.name }}</a> vient
+                    d'être {{ participation.status }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
