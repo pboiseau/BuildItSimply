@@ -46,13 +46,23 @@ class AppController
      **/
     public function beforeroute()
     {
-        if (!$this->f3->get('SESSION.user')) {
+        if (!$this->Auth->isLogin() && !$this->f3->get('ERROR')) {
             if (!in_array($this->f3->get('PATTERN'), ['/', '/howitworks', '/users/login', '/users/register'])) {
                 $this->setFlash("Vous devez vous authentifier pour effectuer cette action.");
                 $this->f3->reroute('/');
             }
         }
     }
+
+    /**
+     * Trigger when error is detected
+     */
+    public function error()
+    {
+        $error = $this->f3->get('ERROR');
+        $this->render('errors/' . $error['code'], compact('error'));
+    }
+
 
     /**
      *    Render a view using twig template
@@ -73,7 +83,7 @@ class AppController
     }
 
     /**
-     *    Get the request type (get, post ...)
+     * Get the request type (get, post ...)
      * @return string request type
      **/
     protected function request()
@@ -82,7 +92,7 @@ class AppController
     }
 
     /**
-     *    Set flash message into user session
+     * Set flash message into user session
      * @param string $message
      **/
     protected function setFlash($message)
@@ -107,12 +117,9 @@ class AppController
 
         if ($status == "ok") {
             header("HTTP/1.0 200 OK");
-        } else {
-            if ($status == "ko") {
-                header("HTTP/1.0 404 Not Found");
-            }
+        } else if ($status == "ko") {
+            header("HTTP/1.0 404 Not Found");
         }
-
 
         return '{"' . $name . '": ' . json_encode($data, CASE_LOWER) . '}';
     }
