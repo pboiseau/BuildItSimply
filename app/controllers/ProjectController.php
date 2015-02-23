@@ -22,8 +22,12 @@ class ProjectController extends AppController
 
         if ($this->f3->get('PATTERN') == "/projects/@id") {
             $project = $this->Project->find($this->f3->get('PARAMS.id'));
-            if ($project->client_id == $this->Auth->getId()) {
-                $this->f3->reroute('/projects/edit/' . $this->f3->get('PARAMS.id'));
+            if($project) {
+                if ($project->client_id == $this->Auth->getId()) {
+                    $this->f3->reroute('/projects/edit/' . $this->f3->get('PARAMS.id'));
+                }
+            }else{
+                $this->f3->reroute('/projects/');
             }
         }
 
@@ -43,7 +47,7 @@ class ProjectController extends AppController
             }
         }
 
-        if (in_array($this->f3->get('PATTERN'), ["/projects/step", "/projects/step/@step"])) {
+        if (in_array($this->f3->get('PATTERN'), ["/projects/detail/step", "/projects/detail/step/@step"])) {
             if (!$this->Auth->is('client') || !$this->f3->get('SESSION.project')) {
                 $this->f3->reroute('/projects/');
             }
@@ -63,7 +67,7 @@ class ProjectController extends AppController
             if ($this->Project->initialize($newProject)) {
 
                 $this->f3->set('SESSION.project', $newProject);
-                $this->f3->reroute('/projects/step');
+                $this->f3->reroute('/projects/detail/step');
 
             } else {
                 $project = $newProject;

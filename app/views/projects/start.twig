@@ -46,7 +46,7 @@
 
             if (step >= 0 && step <= 10) {
                 $.ajax({
-                    url: "{{ home }}projects/step/" + step,
+                    url: "{{ home }}projects/detail/step/" + step,
                     type: 'POST',
                     data: {
                         type: $(e.currentTarget).attr('data-type'),
