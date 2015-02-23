@@ -2,18 +2,25 @@
 
     <div id="type-container">
         <h3>Etape {{ step }}</h3>
+
         <h3>{{ questions.0.question }}</h3>
         {% for question in questions %}
             <div class="col-md-4">
                 <div class="col-md-12">
-                    <a href="#" class="project-type" data-step="{{ step }}" data-type="{{ type }}">
+                    <a href="#" class="nextStep" data-step="{{ step }}" data-type="{{ type }}" data-change="next">
                         <img src="http://placehold.it/250x275" alt="" class="img-rounded">
                     </a>
                 </div>
-                <div class="col-md-12">{{ question.response  }}</div>
+                <div class="col-md-12">{{ question.response }}</div>
                 <div class="col-md-12"><p>{{ question.description }}</p></div>
             </div>
         {% endfor %}
+        {% if step > 1 %}
+            <button id="prevStep" class="btn btn-default btn-sm" type="button" data-step="{{ step }}"
+                    data-type="{{ type }}" data-change="prev">Précédent
+            </button>
+        {% endif %}
     </div>
+
 
 {% endblock %}

@@ -321,7 +321,8 @@ class ProjectController extends AppController
     }
 
     /**
-     *
+     * First step of detail information about the project
+     * Client choose between our project type
      */
     public function startingStep()
     {
@@ -331,22 +332,33 @@ class ProjectController extends AppController
     }
 
     /**
-     *
+     * AJAX Call
+     * Get next or prev step for project details informations
+     * After all step redirect client to the finish page
      */
     public function step()
     {
         if ($this->f3->get('AJAX')) {
 
             $request = $this->f3->get('POST');
-            $questions = $this->ProjectStep->changeStep($request['step'] + 1, $request['type']);
+            $questions = $this->ProjectStep->changeStep($request['step'], $request['type']);
 
             if ($questions) {
-                $step = $request['step'] + 1;
+                $step = $request['step'];
                 $type = $request['type'];
-                $this->render('projects/step', compact('step', 'questions', 'type'));
+                return $this->render('projects/step', compact('step', 'questions', 'type'));
+            } else {
+                // all step finish send json object for redirect client to the validation page
+                echo $this->encode('step',
+                    ['status' => 'finish', 'redirect' => $this->config['home'] . 'projects/finish']);
             }
-
         }
+    }
+
+    public function finish()
+    {
+
+        $this->render('projects/finish', []);
     }
 
 

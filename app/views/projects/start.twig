@@ -12,7 +12,7 @@
             {% for type in types %}
                 <div class="col-md-4">
                     <div class="col-md-12">
-                        <a href="#" class="project-type" data-step="{{ step }}" data-type="{{ type.id }}">
+                        <a href="#" class="nextStep" data-step="{{ step }}" data-type="{{ type.id }}" data-change="next">
                             <img src="http://placehold.it/250x275" alt="" class="img-rounded">
                         </a>
                     </div>
@@ -29,22 +29,44 @@
     {{ parent() }}
     <script>
 
-        $('.project-type').click(nextStep);
+        $('.nextStep').click(changeStep);
+        $('#prevStep').click(changeStep);
 
-        function nextStep(e) {
-            $.ajax({
-                url: "{{ home }}projects/step/" + $(e.currentTarget).attr('data-step'),
-                type: 'POST',
-                data: {
-                    type: $(e.currentTarget).attr('data-type'),
-                    step: $(e.currentTarget).attr('data-step')
-                }
-            }).done(function (data, textStatus, jqXHR) {
-                $('#type-container').empty().append(data);
-                $('.project-type').click(nextStep);
-            }).fail(function () {
+        function changeStep(e) {
+            var step = $(e.currentTarget).attr('data-step');
+            var change = $(e.currentTarget).attr('data-change');
 
-            });
+            console.log(change);
+            if(change == 'next') {
+                step++;
+            }else if(change == 'prev') {
+                step--;
+            }
+
+
+            if (step >= 0 && step <= 10) {
+                $.ajax({
+                    url: "{{ home }}projects/step/" + step,
+                    type: 'POST',
+                    data: {
+                        type: $(e.currentTarget).attr('data-type'),
+                        step: step
+                    }
+                }).done(function (data, textStatus, jqXHR) {
+                    $('#type-container').empty().append(data);
+                    $('.nextStep').click(changeStep);
+                    $('#prevStep').click(changeStep);
+
+                    if(typeof data.step != "undefined" && data.step.status == "finish"){
+                        window.location.href = data.step.redirect;
+                    }
+
+                }).fail(function () {
+
+                });
+            }
         }
+
+
     </script>
 {% endblock %}

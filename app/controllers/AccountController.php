@@ -252,5 +252,3 @@ class AccountController extends AppController
     }
 
 }
-
-?>
