@@ -1,16 +1,101 @@
 {% extends 'layouts/' ~ layout ~ '.twig' %}
 
 {% block body %}
-    <ul>
-    <form 
-    <form method="post" action="{{home}}projects/search" class="form-horizontal">
-	    <label for="search" class="sm-3">Rechercher</label>
-			<input type="text" name="searchWords" value="{% if searchWords %}{{ searchWords }}{% endif %}"
-				class="form-control" id="search" placeholder="Saisir des mots clés">
-    {% for project in projects %}
-        <li>
-            <a href="{{ home }}projects/{{ project.id }}">{{ project.name }}</a>
-        </li>
-    {% endfor %}
-    </ul>
+    <div class="pageHead">
+        <h1>liste des projets</h1>
+    </div>
+    <div class="wrapper">
+        <div id="sidebar">
+        <h2>Rechercher un projet <span>par mot clé</span></h2>
+        <form method="post" action="{{home}}projects/search" class="form-horizontal">
+                    <input type="text" name="searchWords" value="{% if searchWords %}{{ searchWords }}{% endif %}"
+                        class="form-control" id="search" placeholder="Saisir des mots clés">
+            {% for project in projects %}
+            {% endfor %}
+        </form>
+        <h2>Catégorie des projets</h2>
+        <ul id="listCategorie">
+            <li class="listActive"><a href="#">Toutes les catégories <span>126</span></a></li>
+            <li><a href="#">Design <span>46</span></a></li>
+            <li><a href="#">Développement <span>89</span></a></li>
+            <li><a href="#">E-commerce <span>14</span></a></li>
+            <li><a href="#">Services <span>4</span></a></li>
+            <li><a href="#">Web marketing <span>21</span></a></li>
+        </ul>
+        </div>
+        <div id="listProjet">
+            <ul>
+                <li>
+                    <h3><a href="#">Cabinet d’avocats</a></h3>
+                    <p class="infoList">
+                        <span><img src="{{ image }}calendar.png" alt"Date de l'offre"/>7 Février 2015</span>
+                        <span><img src="{{ image }}user-list.png" alt"Nombre d'offre"/>38 Demandes d'offres</span></p>
+                    <p class="textList">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <p class="tagList"><a href="#">tag</a><a href="#">tag</a></p>
+                    <p class="budgetList">Budget estimé<span>500 €</span></p>
+                    <p class="etatList"><a href="">Création du projet</a></p>
+                    <hr class="clear"/>
+                </li>
+                <li>
+                    <h3><a href="#">Cabinet d’avocats</a></h3>
+                    <p class="infoList">
+                        <span><img src="{{ image }}calendar.png" alt"Date de l'offre"/>7 Février 2015</span>
+                        <span><img src="{{ image }}user-list.png" alt"Nombre d'offre"/>38 Demandes d'offres</span></p>
+                    <p class="textList">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p class="tagList"><a href="#">Design</a><a href="#">Logo</a><a href="#">Illustration</a><a href="#">Maquette</a></p>
+                    <p class="budgetList">Budget estimé<span>3 400 €</span></p>
+                    <p class="etatList"><a href="">Projet en attente</a></p>
+                    <hr class="clear"/>
+                </li>
+                <li>
+                    <h3><a href="#">Cabinet d’avocats</a></h3>
+                    <p class="infoList">
+                        <span><img src="{{ image }}calendar.png" alt"Date de l'offre"/>7 Février 2015</span>
+                        <span><img src="{{ image }}user-list.png" alt"Nombre d'offre"/>38 Demandes d'offres</span></p>
+                    <p class="textList">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <p class="tagList"><a href="#">tag</a><a href="#">tag</a></p>
+                    <p class="budgetList">Budget estimé<span>500 €</span></p>
+                    <p class="etatList"><a href="">Création du projet</a></p>
+                    <hr class="clear"/>
+                </li>
+                <li>
+                    <h3><a href="#">Cabinet d’avocats</a></h3>
+                    <p class="infoList">
+                        <span><img src="{{ image }}calendar.png" alt"Date de l'offre"/>7 Février 2015</span>
+                        <span><img src="{{ image }}user-list.png" alt"Nombre d'offre"/>38 Demandes d'offres</span></p>
+                    <p class="textList">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p class="tagList"><a href="#">tag</a><a href="#">tag</a></p>
+                    <p class="budgetList">Budget estimé<span>500 €</span></p>
+                    <p class="etatList"><a href="">Création du projet</a></p>
+                    <hr class="clear"/>
+                </li>
+            </ul>
+            <!-- <ul>
+            <form method="post" action="{{home}}projects/search" class="form-horizontal">
+            {% for project in projects %}
+                <li>
+                    <a href="{{ home }}projects/{{ project.id }}">{{ project.name }}</a>
+                </li>
+            {% endfor %}
+            </form>
+            </ul> -->
+        </div>
+        <hr class="clear"/>
+        <div id="pagination">
+            <ul>
+                <li class="previous"><a href="#">← Précédent</a></li>
+                <li class="pageActive"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li class="next"><a href="#">Suivant →</a></li>
+            </ul>
+            <hr class="clear"/>
+        </div>
+        
+    </div>
+
+    
+    <div class="push"></div>
+</div><!-- end page -->
 {% endblock %}

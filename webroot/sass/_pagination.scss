@@ -1,0 +1,40 @@
+// _pagination.scss
+
+#pagination{
+	width: 700px;
+	margin: 0 auto;
+	margin-top: 20px;
+	ul{
+		text-align: center;
+		li{
+			display: inline-block;
+			text-align: center;
+			a{
+				margin: 0 10px;
+				color: #999999;
+				@include transition(all,0.2s,linear);
+				&:hover{
+					color: $colorClaHover;
+				}
+			}
+		}
+		.pageActive{
+			a{
+				color: $colorCla;
+				
+			}
+			
+		}
+		.previous a{
+			margin-right: 25px !important;
+			margin-left: 0 !important;
+		}
+		.next a{
+			margin-left: 25px !important;
+			margin-right: 0 !important;
+		}
+	}
+	
+}
+
+

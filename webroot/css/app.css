@@ -390,6 +390,17 @@ footer .wrapper, .push {
   text-align: center;
 }
 
+/* line 241, ../sass/_styles.scss */
+.pageHead {
+  background: #005f78;
+  padding: 40px 0;
+}
+/* line 244, ../sass/_styles.scss */
+.pageHead h1 {
+  color: white;
+  padding: 0;
+}
+
 /* line 2, ../sass/_menu.scss */
 nav {
   background: white;
@@ -641,6 +652,257 @@ nav {
   top: 40px;
 }
 
+/* line 3, ../sass/_all.scss */
+#sidebar {
+  width: 275px;
+  margin-right: 40px;
+  float: left;
+}
+/* line 7, ../sass/_all.scss */
+#sidebar h2 {
+  font-size: 16px;
+  text-transform: uppercase;
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+  color: #005f78;
+  text-align: left;
+  line-height: 15px;
+  padding-bottom: 25px;
+}
+/* line 15, ../sass/_all.scss */
+#sidebar h2:last-of-type {
+  padding-top: 35px;
+}
+/* line 18, ../sass/_all.scss */
+#sidebar h2 span {
+  font-size: 12px;
+  display: inline-block;
+  color: #0188ac;
+}
+
+/* line 26, ../sass/_all.scss */
+#listCategorie li {
+  float: left;
+  width: 100%;
+  font-size: 14px;
+  color: #999999;
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+  margin-bottom: 5px;
+  -moz-transition: all, 0.2s, linear;
+  -o-transition: all, 0.2s, linear;
+  -webkit-transition: all, 0.2s, linear;
+  transition: all, 0.2s, linear;
+}
+/* line 34, ../sass/_all.scss */
+#listCategorie li a {
+  color: #999999;
+  display: block;
+  border-radius: 4px;
+  padding: 6px 13px 8px;
+  -moz-transition: all, 0.2s, linear;
+  -o-transition: all, 0.2s, linear;
+  -webkit-transition: all, 0.2s, linear;
+  transition: all, 0.2s, linear;
+}
+/* line 40, ../sass/_all.scss */
+#listCategorie li a:hover {
+  background-color: #f0f0f0;
+}
+/* line 44, ../sass/_all.scss */
+#listCategorie li span {
+  float: right;
+  font-size: 14px;
+  font-weight: normal;
+  color: #ffffff;
+  line-height: 1.615;
+  background-color: #d8dce0;
+  border-radius: 4px;
+  padding: 0 8px;
+}
+
+/* line 57, ../sass/_all.scss */
+.listActive a {
+  color: #005f78 !important;
+  background-color: #ecf0f1;
+  -moz-transition: all, 0.2s, linear;
+  -o-transition: all, 0.2s, linear;
+  -webkit-transition: all, 0.2s, linear;
+  transition: all, 0.2s, linear;
+}
+/* line 62, ../sass/_all.scss */
+.listActive span {
+  background-color: white !important;
+  color: #005f78 !important;
+}
+/* line 67, ../sass/_all.scss */
+.listActive:hover a {
+  background-color: #f3f3f3 !important;
+}
+
+/* line 72, ../sass/_all.scss */
+#listProjet {
+  float: right;
+  width: 765px;
+}
+/* line 75, ../sass/_all.scss */
+#listProjet li {
+  background: #fafafa;
+  border: 1px solid #f2f2f2;
+  border-radius: 2px;
+  margin-bottom: 30px;
+}
+/* line 80, ../sass/_all.scss */
+#listProjet li h3 {
+  font-size: 21px;
+  color: #005f78;
+  text-transform: none;
+  text-align: left;
+  margin-bottom: 3px;
+  padding: 25px 25px 0 25px;
+}
+/* line 88, ../sass/_all.scss */
+#listProjet li h3 a:hover {
+  color: #004456 !important;
+}
+/* line 94, ../sass/_all.scss */
+#listProjet li .infoList {
+  color: #888888;
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+  font-size: 14px;
+  padding: 0 25px;
+}
+/* line 99, ../sass/_all.scss */
+#listProjet li .infoList img {
+  margin-right: 5px;
+}
+/* line 102, ../sass/_all.scss */
+#listProjet li .infoList span {
+  margin-right: 15px;
+}
+/* line 106, ../sass/_all.scss */
+#listProjet li .textList {
+  font-size: 16px;
+  color: #666666;
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+  margin: 15px 0;
+  padding: 0 25px;
+}
+/* line 113, ../sass/_all.scss */
+#listProjet li .tagList {
+  padding: 0 25px;
+  margin-bottom: 25px;
+}
+/* line 117, ../sass/_all.scss */
+#listProjet li .tagList a {
+  padding: 5px 10px;
+  color: #666666;
+  background: #e3e3e3;
+  border-radius: 3px;
+  font-size: 14px;
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+  margin-right: 10px;
+  -moz-transition: all, 0.2s, linear;
+  -o-transition: all, 0.2s, linear;
+  -webkit-transition: all, 0.2s, linear;
+  transition: all, 0.2s, linear;
+}
+/* line 126, ../sass/_all.scss */
+#listProjet li .tagList a:last-of-type {
+  margin-right: 0;
+}
+/* line 129, ../sass/_all.scss */
+#listProjet li .tagList a:hover {
+  background: #dbdbdb;
+  color: #005f78 !important;
+}
+/* line 134, ../sass/_all.scss */
+#listProjet li .budgetList {
+  background: #f3f3f3;
+  border-top: 1px solid #f2f2f2;
+  font-size: 16px;
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+  color: #999999;
+  padding: 15px 25px;
+  float: left;
+  width: 548px;
+}
+/* line 143, ../sass/_all.scss */
+#listProjet li .budgetList span {
+  float: right;
+  color: #555555;
+}
+/* line 148, ../sass/_all.scss */
+#listProjet li .etatList {
+  color: #ebebeb;
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+  float: right;
+  text-align: center;
+  position: relative;
+  top: 1px;
+  left: 1px;
+  border-top: 1px solid #005f78;
+  border-bottom-right-radius: 2px;
+}
+/* line 158, ../sass/_all.scss */
+#listProjet li .etatList a {
+  color: #ebebeb;
+  background: #005f78;
+  width: 215px;
+  padding: 15px 25px;
+  display: block;
+  border-bottom-right-radius: 2px;
+  -moz-transition: all, 0.2s, linear;
+  -o-transition: all, 0.2s, linear;
+  -webkit-transition: all, 0.2s, linear;
+  transition: all, 0.2s, linear;
+}
+/* line 166, ../sass/_all.scss */
+#listProjet li .etatList a:hover {
+  background: #004456;
+}
+
+/* line 3, ../sass/_pagination.scss */
+#pagination {
+  width: 700px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+/* line 7, ../sass/_pagination.scss */
+#pagination ul {
+  text-align: center;
+}
+/* line 9, ../sass/_pagination.scss */
+#pagination ul li {
+  display: inline-block;
+  text-align: center;
+}
+/* line 12, ../sass/_pagination.scss */
+#pagination ul li a {
+  margin: 0 10px;
+  color: #999999;
+  -moz-transition: all, 0.2s, linear;
+  -o-transition: all, 0.2s, linear;
+  -webkit-transition: all, 0.2s, linear;
+  transition: all, 0.2s, linear;
+}
+/* line 16, ../sass/_pagination.scss */
+#pagination ul li a:hover {
+  color: #004456;
+}
+/* line 22, ../sass/_pagination.scss */
+#pagination ul .pageActive a {
+  color: #005f78;
+}
+/* line 28, ../sass/_pagination.scss */
+#pagination ul .previous a {
+  margin-right: 25px !important;
+  margin-left: 0 !important;
+}
+/* line 32, ../sass/_pagination.scss */
+#pagination ul .next a {
+  margin-left: 25px !important;
+  margin-right: 0 !important;
+}
+
 /* line 2, ../sass/_footer.scss */
 footer {
   background: #f4f4f4;
@@ -660,7 +922,7 @@ footer ul li {
 }
 /* line 12, ../sass/_footer.scss */
 footer ul li a {
-  color: #c0c5ca;
+  color: #aeb4ba;
   font-size: 14px;
   margin-right: 30px;
   position: relative;
@@ -672,7 +934,7 @@ footer ul li a {
 }
 /* line 19, ../sass/_footer.scss */
 footer ul li a:hover {
-  color: #aeb4ba;
+  color: #a5acb2;
 }
 /* line 23, ../sass/_footer.scss */
 footer ul li img {

@@ -10,14 +10,14 @@ footer{
         li{
             float: left;
             a{
-                color: #c0c5ca;
+                color: #aeb4ba;
                 font-size: 14px;
                 margin-right: 30px;
                 position: relative;
                 bottom: 2px;
                 @include transition(all,0.2s,linear);
                 &:hover{
-                    color: #aeb4ba;
+                    color: #a5acb2;
                 }
             }
             img{
