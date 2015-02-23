@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Administration BuildItSimply</title>
+
+    <link href="{{ root }}/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="{{ root }}/webroot/css/sb-admin.css" rel="stylesheet">
+    <link href="{{ root }}/bower_components/fontawesome/css/font-awesome.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    {% include 'partials/menu_admin.twig' %}
+
+    <div id="page-wrapper">
+
+        <div class="container-fluid">
+            {% block message %}
+                {% if message %}
+                    <div class="alert alert-info" role="alert">{{ message }}</div>
+                {% endif %}
+            {% endblock %}
+
+            {% block body %}{% endblock %}
+        </div>
+
+    </div>
+
+</div>
+<!-- /#wrapper -->
+
+{% block js %}
+    {% if not prod %}
+        <script src="{{ root }}/bower_components/jquery/dist/jquery.js"></script>
+        <script src="{{ root }}/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    {% else %}
+        <script src="{{ js }}admin_dist.js"></script>
+    {% endif %}
+{% endblock %}
+{% block partial_js %} {% endblock %}
+
+
+</body>
+
+</html>

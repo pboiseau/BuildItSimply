@@ -1,12 +1,12 @@
 <?php
 
-class ProjectQuestion extends AppModel
+class ProjectResponse extends AppModel
 {
 
     public $timestamps = true;
     public $errors;
 
-    protected $table = 'project_question';
+    protected $table = 'project_response';
     protected $guarded = array('id');
 
     public function validate($data = array())
@@ -14,12 +14,8 @@ class ProjectQuestion extends AppModel
         $validator = new Validate();
         $errors = array();
 
-        if (empty($data['question'])) {
-            $errors['question'] = 'Question vide.';
-        }
-
-        if (empty($data['step'])) {
-            $errors['step'] = 'Etape vide';
+        if (empty($data['response'])) {
+            $errors['response'] = 'Reponse vide.';
         }
 
         $this->errors = $errors;
