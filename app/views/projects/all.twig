@@ -8,7 +8,7 @@
         <div id="sidebar">
             <h2>Rechercher un projet <span>par mot clé</span></h2>
 
-            <form method="post" action="{{ home }}projects/search" class="form-horizontal">
+            <form method="post" action="{{ home }}projects/search" class="form-horizontal form-group">
                 <input type="text" name="searchWords" value="{% if searchWords %}{{ searchWords }}{% endif %}"
                        class="form-control" id="search" placeholder="Saisir des mots clés">
             </form>

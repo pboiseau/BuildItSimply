@@ -678,8 +678,18 @@ nav {
   display: inline-block;
   color: #0188ac;
 }
+/* line 24, ../sass/_all.scss */
+#sidebar .form-group {
+  width: 100%;
+  margin: 0 !important;
+  margin-bottom: 35px !important;
+}
+/* line 28, ../sass/_all.scss */
+#sidebar .form-group input {
+  background: #f8f8f8 url('/builditsimply/webroot/images/search.png?1424722579') no-repeat 235px 12px;
+}
 
-/* line 26, ../sass/_all.scss */
+/* line 34, ../sass/_all.scss */
 #listCategorie li {
   float: left;
   width: 100%;
@@ -692,7 +702,7 @@ nav {
   -webkit-transition: all, 0.2s, linear;
   transition: all, 0.2s, linear;
 }
-/* line 34, ../sass/_all.scss */
+/* line 42, ../sass/_all.scss */
 #listCategorie li a {
   color: #999999;
   display: block;
@@ -703,11 +713,11 @@ nav {
   -webkit-transition: all, 0.2s, linear;
   transition: all, 0.2s, linear;
 }
-/* line 40, ../sass/_all.scss */
+/* line 48, ../sass/_all.scss */
 #listCategorie li a:hover {
   background-color: #f0f0f0;
 }
-/* line 44, ../sass/_all.scss */
+/* line 52, ../sass/_all.scss */
 #listCategorie li span {
   float: right;
   font-size: 14px;
@@ -719,7 +729,7 @@ nav {
   padding: 0 8px;
 }
 
-/* line 57, ../sass/_all.scss */
+/* line 65, ../sass/_all.scss */
 .listActive a {
   color: #005f78 !important;
   background-color: #ecf0f1;
@@ -728,29 +738,29 @@ nav {
   -webkit-transition: all, 0.2s, linear;
   transition: all, 0.2s, linear;
 }
-/* line 62, ../sass/_all.scss */
+/* line 70, ../sass/_all.scss */
 .listActive span {
   background-color: white !important;
   color: #005f78 !important;
 }
-/* line 67, ../sass/_all.scss */
+/* line 75, ../sass/_all.scss */
 .listActive:hover a {
   background-color: #f3f3f3 !important;
 }
 
-/* line 72, ../sass/_all.scss */
+/* line 80, ../sass/_all.scss */
 #listProjet {
   float: right;
   width: 765px;
 }
-/* line 75, ../sass/_all.scss */
+/* line 83, ../sass/_all.scss */
 #listProjet li {
   background: #fafafa;
   border: 1px solid #f2f2f2;
   border-radius: 2px;
   margin-bottom: 30px;
 }
-/* line 80, ../sass/_all.scss */
+/* line 88, ../sass/_all.scss */
 #listProjet li h3 {
   font-size: 21px;
   color: #005f78;
@@ -759,26 +769,26 @@ nav {
   margin-bottom: 3px;
   padding: 25px 25px 0 25px;
 }
-/* line 88, ../sass/_all.scss */
+/* line 96, ../sass/_all.scss */
 #listProjet li h3 a:hover {
   color: #004456 !important;
 }
-/* line 94, ../sass/_all.scss */
+/* line 102, ../sass/_all.scss */
 #listProjet li .infoList {
   color: #888888;
   font-family: "montserratlight", helvetica, arial, sans-serif;
   font-size: 14px;
   padding: 0 25px;
 }
-/* line 99, ../sass/_all.scss */
+/* line 107, ../sass/_all.scss */
 #listProjet li .infoList img {
   margin-right: 5px;
 }
-/* line 102, ../sass/_all.scss */
+/* line 110, ../sass/_all.scss */
 #listProjet li .infoList span {
   margin-right: 15px;
 }
-/* line 106, ../sass/_all.scss */
+/* line 114, ../sass/_all.scss */
 #listProjet li .textList {
   font-size: 16px;
   color: #666666;
@@ -786,12 +796,12 @@ nav {
   margin: 15px 0;
   padding: 0 25px;
 }
-/* line 113, ../sass/_all.scss */
+/* line 121, ../sass/_all.scss */
 #listProjet li .tagList {
   padding: 0 25px;
   margin-bottom: 25px;
 }
-/* line 117, ../sass/_all.scss */
+/* line 125, ../sass/_all.scss */
 #listProjet li .tagList a {
   padding: 5px 10px;
   color: #666666;
@@ -805,16 +815,16 @@ nav {
   -webkit-transition: all, 0.2s, linear;
   transition: all, 0.2s, linear;
 }
-/* line 126, ../sass/_all.scss */
+/* line 134, ../sass/_all.scss */
 #listProjet li .tagList a:last-of-type {
   margin-right: 0;
 }
-/* line 129, ../sass/_all.scss */
+/* line 137, ../sass/_all.scss */
 #listProjet li .tagList a:hover {
   background: #dbdbdb;
   color: #005f78 !important;
 }
-/* line 134, ../sass/_all.scss */
+/* line 142, ../sass/_all.scss */
 #listProjet li .budgetList {
   background: #f3f3f3;
   border-top: 1px solid #f2f2f2;
@@ -825,12 +835,12 @@ nav {
   float: left;
   width: 548px;
 }
-/* line 143, ../sass/_all.scss */
+/* line 151, ../sass/_all.scss */
 #listProjet li .budgetList span {
   float: right;
   color: #555555;
 }
-/* line 148, ../sass/_all.scss */
+/* line 156, ../sass/_all.scss */
 #listProjet li .etatList {
   color: #ebebeb;
   font-family: "montserratlight", helvetica, arial, sans-serif;
@@ -842,7 +852,7 @@ nav {
   border-top: 1px solid #005f78;
   border-bottom-right-radius: 2px;
 }
-/* line 158, ../sass/_all.scss */
+/* line 166, ../sass/_all.scss */
 #listProjet li .etatList a {
   color: #ebebeb;
   background: #005f78;
@@ -855,7 +865,7 @@ nav {
   -webkit-transition: all, 0.2s, linear;
   transition: all, 0.2s, linear;
 }
-/* line 166, ../sass/_all.scss */
+/* line 174, ../sass/_all.scss */
 #listProjet li .etatList a:hover {
   background: #004456;
 }

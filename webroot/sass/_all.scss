@@ -21,6 +21,14 @@
 			color: #0188ac;
 		}
 	}
+	.form-group{
+		width: 100%;
+		margin: 0 !important;
+		margin-bottom: 35px !important;
+		input{
+			background: #f8f8f8 image-url("search.png") no-repeat 235px 12px;
+		}
+	}
 }
 #listCategorie{
 	li{
