@@ -1,16 +1,15 @@
 {% extends 'layouts/' ~ layout ~ '.twig' %}
 
 {% block body %}
-    <div class="container">
-        <h2>Contexte du projet</h2>
+<div class="pageHead">
+    <h1>liste des projets</h1>
+</div>
+<div id="ProjetInfo">
 
-        <div>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Optio in ab similique quisquam expedita voluptatem nisi obcaecati
-                nostrum reiciendis aut id, saepe ducimus. Unde sed, est perferendis accusamus aspernatur aliquam!
-            </p>
-        </div>
+    <div class="wrapper">
+        <h1>Contexte du projet</h1>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
         <form method="post" action="{{ home ~ request }}" class="form-horizontal">
             <div class="form-group {{ (errors.name) ? 'has-error' : '' }}">
@@ -18,7 +17,7 @@
 
                 <div class="col-sm-10">
                     <input type="text" name="name" value="{% if project.name %}{{ project.name }}{% endif %}"
-                           class="form-control" id="name" placeholder="Titre du projet">
+                    class="form-control" id="name" placeholder="Titre du projet">
                     <span class="help-block with-errors">{% if errors.name %}{{ errors.name }}{% endif %}</span>
                 </div>
             </div>
@@ -27,7 +26,7 @@
 
                 <div class="col-sm-10">
                     <textarea name="description" id="description" class="form-control" rows="5"
-                              placeholder="Veuillez décrire brievement votre projet"></textarea>
+                    placeholder="Veuillez décrire brievement votre projet"></textarea>
                     <span class="help-block with-errors">{% if errors.description %}{{ errors.description }}{% endif %}</span>
                 </div>
             </div>
@@ -36,7 +35,7 @@
 
                 <div class="col-sm-10">
                     <input type="url" name="url" value="{% if project.url %}{{ project.url }}{% endif %}"
-                           class="form-control" id="url" placeholder="Adresse URL du projet (si existant)">
+                    class="form-control" id="url" placeholder="Adresse URL du projet (si existant)">
                     <span class="help-block with-errors">{% if errors.url %}{{ errors.url }}{% endif %}</span>
                 </div>
             </div>
@@ -45,7 +44,7 @@
 
                 <div class="col-sm-10">
                     <input name="targets" type="text" class="form-control" id="targets"
-                           placeholder="Adulte, Jeune, Femme ...">
+                    placeholder="Adulte, Jeune, Femme ...">
                     <span class="help-block with-errors">{% if errors.targets %}{{ errors.targets }}{% endif %}</span>
                 </div>
             </div>
@@ -54,7 +53,7 @@
 
                 <div class="col-sm-10">
                     <textarea name="recommendation" id="recommendation" class="form-control" rows="5"
-                              placeholder="Mentionner toutes informations complémentaires pouvant faciliter le travail des Freelances."></textarea>
+                    placeholder="Mentionner toutes informations complémentaires pouvant faciliter le travail des Freelances."></textarea>
                     <span class="help-block with-errors">{% if errors.recommendation %}{{ errors.recommendation }}{% endif %}</span>
                 </div>
             </div>
@@ -64,6 +63,11 @@
                 </div>
             </div>
         </form>
+        <hr class="clear"/>
     </div>
+</div>
+
+<div class="push"></div>
+</div><!-- end page -->
 
 {% endblock %}

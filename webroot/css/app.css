@@ -940,7 +940,7 @@ nav {
 .custom-dropdown::after {
   /*  Custom dropdown arrow */
   content: " ";
-  background: url('/builditsimply/webroot/images/chevron-down-option.png?1424736416') no-repeat;
+  background: url('/builditsimply/webroot/images/chevron-down-option.png?1424737221') no-repeat;
   width: 14px;
   height: 8px;
   right: 20px;
@@ -993,6 +993,56 @@ nav {
 #pagination ul .next a {
   margin-left: 25px !important;
   margin-right: 0 !important;
+}
+
+/* line 4, ../sass/_init.scss */
+#ProjetInfo .wrapper {
+  text-align: center;
+}
+/* line 6, ../sass/_init.scss */
+#ProjetInfo .wrapper p {
+  font-size: 18px;
+  color: #666666;
+  width: 700px;
+  text-align: center;
+  margin: 0 auto;
+}
+/* line 13, ../sass/_init.scss */
+#ProjetInfo .wrapper form {
+  margin-top: 60px;
+}
+/* line 16, ../sass/_init.scss */
+#ProjetInfo .wrapper .form-group {
+  width: 845px;
+  clear: both;
+  margin: 0 !important;
+}
+/* line 20, ../sass/_init.scss */
+#ProjetInfo .wrapper .form-group label {
+  text-align: right;
+  float: left;
+  width: 340px;
+  padding: 0;
+  position: relative;
+  top: 10px;
+  text-transform: uppercase;
+  color: #005f78;
+}
+/* line 30, ../sass/_init.scss */
+#ProjetInfo .wrapper .form-group .form-group input {
+  width: 485px;
+}
+/* line 33, ../sass/_init.scss */
+#ProjetInfo .wrapper .form-group .col-sm-10 {
+  width: 485px;
+  float: right;
+}
+
+/* line 41, ../sass/_init.scss */
+.form-group textarea, .form-group .tokenfield {
+  background: #f8f8f8;
+  border: 1px solid #ededed;
+  font-size: 14px;
 }
 
 /* line 2, ../sass/_footer.scss */

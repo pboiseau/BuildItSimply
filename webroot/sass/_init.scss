@@ -1,0 +1,45 @@
+// _init.scss
+
+#ProjetInfo{
+	.wrapper{
+		text-align: center;
+		p{
+			font-size: 18px;
+			color: #666666;
+			width: 700px;
+			text-align: center;
+			margin: 0 auto;
+		}
+		form{
+			margin-top: 60px;
+		}
+		.form-group{
+			width: 845px;
+			clear: both;
+			margin: 0 !important;
+			label{
+				text-align: right;
+				float: left;
+				width: 340px;
+				padding: 0;
+				position: relative;
+				top: 10px;
+				text-transform: uppercase;
+				color: $colorCla;
+			}
+			.form-group input{
+				width: 485px;
+			}
+			.col-sm-10{
+				width: 485px;
+				float: right;
+			}
+		}
+	}
+	
+}
+.form-group textarea, .form-group .tokenfield{
+	background: #f8f8f8;
+	border: 1px solid #ededed;
+	font-size: 14px;
+}
