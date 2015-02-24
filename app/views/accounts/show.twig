@@ -1,4 +1,5 @@
 {% extends 'layouts/' ~ layout ~ '.twig' %}
+{% set type = user.type %}
 
 {% block body %}
 
@@ -7,18 +8,24 @@
 
             <div id="profileInfo">
 
-                <h1>Freelance <span>Débutant</span></h1>
+                <h1>{{ user.type }} <span>{{ (type == "FREELANCE") ? user.freelance.experience : '' }}</span></h1>
 
-                <img src="{{ image }}user-profile.png" alt="Freelance" />
+                {% set picture = (user.picture is empty) ? image ~ 'user-profile.png' : home ~ user.picture %}
+                <img src="{{ picture }}" alt="Freelance"/>
 
-                <h2>{{ user.firstname ~ ' ' ~ user.lastname }} <span>Web designer</span></h2>
+                <h2>{{ user.firstname ~ ' ' ~ user.lastname }}
+                    <span>{{ (type == "FREELANCE") ? user.freelance.activity : user.client.activity }}</span></h2>
 
                 <a class="buttonWhite" href="#">Envoyer une offre</a>
 
                 <ul>
                     <li>Projets réalisés <span>23</span></li>
-                    <li>Note des clients </li>
-                    <li><a href="#">www.marcelpatulacci.com</a></li>
+                    <li>Note des clients</li>
+                    {% if type == "FREELANCE" %}
+                        <li>
+                            <a href="{{ user.freelance.url }}" target="_blank">{{ user.freelance.url }}</a>
+                        </li>
+                    {% endif %}
                     <li>Me situer</li>
                 </ul>
                 <div id="maps" style="width: 348px; height: 245px;"></div>
@@ -28,14 +35,21 @@
             <div id="profileDescription">
 
                 <h3>Description</h3>
-                <p class="infoList">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et nisl tortor. Praesent vestibulum sem eu ligula rhoncus vestibulum. Etiam nec consequat ante. Donec arcu ligula, dictum consectetur venenatis ut.
-                </p>
-                <h3>Mes compétences</h3>
-                <p class="tagList"><a href="#">tag</a><a href="#">tag</a></p>
+
+                <p class="infoList">{{ user.description }}</p>
+
+                {% if type == "FREELANCE" %}
+                    <h3>Mes compétences</h3>
+
+                    <p class="tagList">
+                        {% for skill in user.freelance.skills %}
+                            <a href="#">{{ skill.name }}</a>
+                        {% endfor %}
+                    </p>
+                {% endif %}
             </div>
 
-            
+
             <div class="listProjet">
                 <h3>Derniers projets réalisés</h3>
                 <ul>
@@ -48,7 +62,8 @@
                             <span><img src="{{ image }}user-list.png" alt="Nombre d'offre"/>24 demande(s)</span>
                         </p>
 
-                        <p class="textList">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et nisl tortor. Praesent vestibulum sem eu ligula rhoncus vestibulum.</p>
+                        <p class="textList">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et nisl
+                            tortor. Praesent vestibulum sem eu ligula rhoncus vestibulum.</p>
 
                         <p class="tagList"><a href="#">tag</a><a href="#">tag</a></p>
 
@@ -63,12 +78,13 @@
                             <span><img src="{{ image }}user-list.png" alt="Nombre d'offre"/>24 demande(s)</span>
                         </p>
 
-                        <p class="textList">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et nisl tortor. Praesent vestibulum sem eu ligula rhoncus vestibulum.</p>
+                        <p class="textList">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et nisl
+                            tortor. Praesent vestibulum sem eu ligula rhoncus vestibulum.</p>
 
                         <p class="tagList"><a href="#">tag</a><a href="#">tag</a></p>
 
                         <hr class="clear"/>
-                    </li>                
+                    </li>
                 </ul>
                 <a class="buttonWhite" href="#">Voir tous les projets</a>
             </div>
@@ -82,6 +98,7 @@
                         <img src="{{ image }}recruteur-picture.png" alt="recruteur picture"/>
 
                         <p class="recruteurAvis"><a href="#">Jocyeline Bon <span>Peintre en batiment</span></a></p>
+
                         <p class="textList">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
 
@@ -93,6 +110,7 @@
                         <img src="{{ image }}recruteur-picture.png" alt="recruteur picture"/>
 
                         <p class="recruteurAvis"><a href="#">Jocyeline Bon <span>Peintre en batiment</span></a></p>
+
                         <p class="textList">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
 
@@ -105,67 +123,67 @@
 
             <hr class="clear"/>
         </div>
-    
+
     </div><!-- end PROFILE VIEW -->
     <div class="push"></div>
-</div>
+    </div>
 
 {% endblock %}
 
-{% block partial_js %}
-    {{ parent() }}
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBINLv5Zv0AOt5n54TdBDQn-T9sJ5ZIqHg"></script>
-    <script>
+    {% block partial_js %}
+        {{ parent() }}
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBINLv5Zv0AOt5n54TdBDQn-T9sJ5ZIqHg"></script>
+        <script>
 
-        function getPosition(callback) {
-            var lat = "{{ user.lat }}";
-            var lng = "{{ user.lng }}";
-            var position;
+            function getPosition(callback) {
+                var lat = "{{ user.lat }}";
+                var lng = "{{ user.lng }}";
+                var position;
 
-            if (lat == "" || lat == "") {
-                geocoder = new google.maps.Geocoder();
-                geocoder.geocode({
-                    address: "Paris, France"
-                }, function (result, status) {
-                    if (status === "OK") {
-                        position = result[0].geometry.location;
-                        callback.call(this, position);
-                    }
+                if (lat == "" || lat == "") {
+                    geocoder = new google.maps.Geocoder();
+                    geocoder.geocode({
+                        address: "Paris, France"
+                    }, function (result, status) {
+                        if (status === "OK") {
+                            position = result[0].geometry.location;
+                            callback.call(this, position);
+                        }
+                    });
+                }
+                callback.call(this, new google.maps.LatLng(lat, lng));
+            }
+
+
+            function initialize() {
+                getPosition(function (position) {
+                    var mapOptions = {
+                        center: position,
+                        zoom: 13
+                    };
+
+                    var map = new google.maps.Map(document.getElementById("maps"),
+                            mapOptions);
+
+                    var marker = new google.maps.Marker({
+                        title: "Adresse",
+                        visible: true,
+                        map: map,
+                        position: position,
+                    });
+
+                    marker.info = new google.maps.InfoWindow({
+                        content: "<p>{{ user.firstname ~ " " ~ user.lastname }}</p><p>{{ user.city }}</p><p>{{ user.phone }}</p>",
+                        position: position
+                    });
+
+                    google.maps.event.addListener(marker, 'click', function (e) {
+                        marker.info.open(map, marker);
+                    });
                 });
             }
-            callback.call(this, new google.maps.LatLng(lat, lng));
-        }
 
+            google.maps.event.addDomListener(window, 'load', initialize);
 
-        function initialize() {
-            getPosition(function (position) {
-                var mapOptions = {
-                    center: position,
-                    zoom: 13
-                };
-
-                var map = new google.maps.Map(document.getElementById("maps"),
-                        mapOptions);
-
-                var marker = new google.maps.Marker({
-                    title: "Adresse",
-                    visible: true,
-                    map: map,
-                    position: position,
-                });
-
-                marker.info = new google.maps.InfoWindow({
-                    content: "<p>{{ user.firstname ~ " " ~ user.lastname }}</p><p>{{ user.city }}</p><p>{{ user.phone }}</p>",
-                    position: position
-                });
-
-                google.maps.event.addListener(marker, 'click', function (e) {
-                    marker.info.open(map, marker);
-                });
-            });
-        }
-
-        google.maps.event.addDomListener(window, 'load', initialize);
-
-    </script>
-{% endblock %}
+        </script>
+    {% endblock %}

@@ -65,15 +65,11 @@ class Freelance extends AppModel
         if ($profile = $this->where('account_id', $freelance['account_id'])->first()) {
             // update freelance
             return $this->where('account_id', $freelance['account_id'])->update([
+                'activity' => $freelance['activity'],
                 'url' => $freelance['url'],
                 'experience' => $freelance['experience'],
             ]);
         }
-        /*else {
-            // create freelance
-            $create = $this->create($freelance);
-            return (!empty($create)) ? $create : false;
-        }*/
     }
 
 

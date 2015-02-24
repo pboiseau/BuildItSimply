@@ -416,7 +416,7 @@ class ProjectController extends AppController
 
         $type = ProjectType::find($project['project_type_id']);
         $responses = $this->ProjectResponse->getResponses($steps);
-        
+
         if ($this->request() == "POST") {
             $request = $this->f3->get('POST');
             $request['project_type_id'] = $project['project_type_id'];

@@ -146,7 +146,7 @@ class AccountController extends AppController
     }
 
     /**
-     *
+     * Update profile
      **/
     public function update_profile()
     {
@@ -168,6 +168,7 @@ class AccountController extends AppController
             }
 
             if ($this->Auth->is('freelance')) {
+
                 if ($this->Account->updateAccount($profile['account'])
                     && $this->Freelance->updateProfile($profile['freelance'])
                 ) {
