@@ -77,7 +77,7 @@ class Project extends AppModel
     {
         if ($this->validate($project)) {
             $project['client_id'] = Base::instance()->get('SESSION.user.id');
-            $project['status'] = 'OUVERT';
+            $project['status'] = 'EN CREATION';
             return $this->create($project);
         } else {
             return false;

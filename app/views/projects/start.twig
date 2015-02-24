@@ -12,7 +12,8 @@
             {% for type in types %}
                 <div class="col-md-4">
                     <div class="col-md-12">
-                        <a href="#" class="nextStep" data-step="{{ step }}" data-type="{{ type.id }}" data-change="next">
+                        <a href="#" class="nextStep" data-choice="{{ type.id }}" data-step="{{ step }}"
+                           data-type="{{ type.id }}" data-change="next">
                             <img src="http://placehold.it/250x275" alt="" class="img-rounded">
                         </a>
                     </div>
@@ -37,9 +38,9 @@
             var change = $(e.currentTarget).attr('data-change');
 
             console.log(change);
-            if(change == 'next') {
+            if (change == 'next') {
                 step++;
-            }else if(change == 'prev') {
+            } else if (change == 'prev') {
                 step--;
             }
 
@@ -50,14 +51,15 @@
                     type: 'POST',
                     data: {
                         type: $(e.currentTarget).attr('data-type'),
-                        step: step
+                        step: step,
+                        choice: $(e.currentTarget).attr('data-choice')
                     }
                 }).done(function (data, textStatus, jqXHR) {
                     $('#type-container').empty().append(data);
                     $('.nextStep').click(changeStep);
                     $('#prevStep').click(changeStep);
 
-                    if(typeof data.step != "undefined" && data.step.status == "finish"){
+                    if (typeof data.step != "undefined" && data.step.status == "finish") {
                         window.location.href = data.step.redirect;
                     }
 

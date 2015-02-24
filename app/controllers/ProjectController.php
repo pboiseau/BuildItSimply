@@ -339,6 +339,7 @@ class ProjectController extends AppController
      * AJAX Call
      * Get next or prev step for project details informations
      * After all step redirect client to the finish page
+     * @return int 0
      */
     public function step()
     {
@@ -346,23 +347,37 @@ class ProjectController extends AppController
 
             $request = $this->f3->get('POST');
             $questions = $this->ProjectStep->changeStep($request['step'], $request['type']);
+            $current_step = $request['step'] - 1;
 
             if ($questions) {
                 $step = $request['step'];
                 $type = $request['type'];
-                return $this->render('projects/step', compact('step', 'questions', 'type'));
+
+                $this->render('projects/step', compact('step', 'questions', 'type'));
             } else {
                 // all step finish send json object for redirect client to the validation page
                 echo $this->encode('step',
                     ['status' => 'finish', 'redirect' => $this->config['home'] . 'projects/finish']);
             }
+
+            $this->f3->set('SESSION.step.' . $current_step, $request['choice']);
         }
+
+        return 0;
     }
 
     public function finish()
     {
+        $project = $this->f3->get('SESSION.project');
 
-        $this->render('projects/finish', []);
+        var_dump($this->f3->get('SESSION.step'));
+
+        if($this->request() == "POST"){
+            $request = $this->f3->get('POST');
+            var_dump($request);
+        }
+
+        $this->render('projects/finish', compact('project'));
     }
 
 
