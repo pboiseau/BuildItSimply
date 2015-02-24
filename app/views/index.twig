@@ -2,89 +2,107 @@
 
 {% block body %}
 
-	<div id="headerHome">
-		<div class="headerSection">
-			<h2>recruteurs</h2>
-			<p>Déposer votre offre et nous nous chargeons de vous trouver les freelances qui vous correspondent.</p>
-		</div>
-		<div class="headerSection">
-			<h2>freelances</h2>
-			<p>Des offres privées ciblant vos compétences vous sera mis directement en relation.
-				Merci hugo potetresloin.</p>
-			</div>
-			<a href="{{ home }}users/register" class="button">s'inscrire</a>
-			<img src="{{ image }}scroll-down.png" alt" "/>
-		</div>
+    <div id="headerHome">
+        <div class="headerSection">
+            <h2>recruteurs</h2>
 
-		<div id="homeTotal">
-			<div class="wrapper">
-				<ul>
-					<li>
-						<span>{{ client }}</span>
-						<p>Clients inscrits</p>
-					</li>
-					<li>
-						<span>{{ project }}</span>
-						<p>Projet total</p>
-					</li>
-					<li>
-						<span>{{ freelance }}</span>
-						<p>Freelances inscrits</p>
-					</li>
-				</ul>
-				<hr class="clear" />
-			</div>
-			<div class="separateBack"></div>
-		</div>
-		<div id="howitwork">
-			<div class="wrapper">
-				<h2>comment ça marche</h2>
-				<ul>
-					<li>
-						<img src="{{ image }}icon-oppotunites.png" alt="opportunités" />
-						<h3>Opportunités</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
-					</li>
-					<li>
-						<img src="{{ image }}icon-relation.png" alt="Mises en relations" />
-						<h3>Mises en relations</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
-					</li>
-					<li>
-						<img src="{{ image }}icon-accord.png" alt="Conclure un accord" />
-						<h3>Conclure un accord</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
-					</li>
-				</ul>
-				<hr class="clear" />
-				<a class="buttonWhite" href="{{ home }}howitworks">En savoir plus</a>
-			</div>
-		</div>
-		<div id="testimonial">
-			<div class="wrapper">
-				<h2>Ils ont réalisé un projet</h2>
-				<ul>
-					<li>
-						<img src="{{ image }}client-testimonial.png" alt="Client testimonial" />
-						<p>“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor”</p>
-						<p><span>Paul Issier</span>, CEO Google</p>
-						<img src="{{ image }}logo-testimonial.png" alt="Logo testimonial" />
-					</li>
-					<li>
-						<img src="{{ image }}freelance-testimonial.png" alt="Client testimonial" />
-						<p>“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor”</p>
-						<p><span>Sasha Touille</span>, Graphic design</p>
-						<img src="{{ image }}logo-testimonial.png" alt="Logo testimonial" />
-					</li>
-				</ul>
-				<hr class="clear" />
-			</div>
-			<div class="separateBack"></div>
-		</div>
-		<div class="subsribe">
-			<a class="button" href="{{ home }}users/register">S'inscrire</a>
-		</div>
-		<div class="push"></div>
-	</div><!-- end page -->
-	
-	{% endblock %}
+            <p>Déposez votre projet en quelques clics,
+                nous vous guiderons pour trouver le freelance qu’il vous faut en toute simplicité !</p>
+        </div>
+        <div class="headerSection">
+            <h2>freelances</h2>
+
+            <p>Postulez pour le projet qui vous plaît sans vous soucier d’être jugé autrement que
+                par vos compétences !</p>
+        </div>
+        <a href="{{ home }}users/register" class="button">s'inscrire</a>
+        <img src="{{ image }}scroll-down.png" alt" "/>
+    </div>
+
+    <div id="homeTotal">
+        <div class="wrapper">
+            <ul>
+                <li>
+                    <span>{{ client }}</span>
+
+                    <p>Clients inscrits</p>
+                </li>
+                <li>
+                    <span>{{ project }}</span>
+
+                    <p>Projets total</p>
+                </li>
+                <li>
+                    <span>{{ freelance }}</span>
+
+                    <p>Freelances inscrits</p>
+                </li>
+            </ul>
+            <hr class="clear"/>
+        </div>
+        <div class="separateBack"></div>
+    </div>
+    <div id="howitwork">
+        <div class="wrapper">
+            <h2>comment ça marche</h2>
+            <ul>
+                <li>
+                    <img src="{{ image }}icon-oppotunites.png" alt="opportunités"/>
+
+                    <h3>Dépôt du projet</h3>
+
+                    <p>Pas besoin d’être un expert du Web, nous vous guiderons grâce à différentes étapes
+                        ultra-simplifiées !</p>
+                </li>
+                <li>
+                    <img src="{{ image }}icon-relation.png" alt="Mises en relations"/>
+
+                    <h3>Proposition des freelances</h3>
+
+                    <p>Sélectionnez les 3 profils qui vous feront un devis parmi votre liste de freelances.</p>
+                </li>
+                <li>
+                    <img src="{{ image }}icon-accord.png" alt="Conclure un accord"/>
+
+                    <h3>Conclure un accord</h3>
+
+                    <p>Votre choix final déterminera le freelance qui travaillera pour vous et avec qui vous serez alors
+                        mis en relation.</p>
+                </li>
+            </ul>
+            <hr class="clear"/>
+            <a class="buttonWhite" href="{{ home }}howitworks">En savoir plus</a>
+        </div>
+    </div>
+    <div id="testimonial">
+        <div class="wrapper">
+            <h2>Ils ont réalisé un projet</h2>
+            <ul>
+                <li>
+                    <img src="{{ image }}client-testimonial.png" alt="Client testimonial"/>
+
+                    <p>“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor”</p>
+
+                    <p><span>Paul Issier</span>, CEO Google</p>
+                    <img src="{{ image }}logo-testimonial.png" alt="Logo testimonial"/>
+                </li>
+                <li>
+                    <img src="{{ image }}freelance-testimonial.png" alt="Client testimonial"/>
+
+                    <p>“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor”</p>
+
+                    <p><span>Sasha Touille</span>, Graphic design</p>
+                    <img src="{{ image }}logo-testimonial.png" alt="Logo testimonial"/>
+                </li>
+            </ul>
+            <hr class="clear"/>
+        </div>
+        <div class="separateBack"></div>
+    </div>
+    <div class="subsribe">
+        <a class="button" href="{{ home }}users/register">S'inscrire</a>
+    </div>
+    <div class="push"></div>
+    </div><!-- end page -->
+
+{% endblock %}

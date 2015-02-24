@@ -68,11 +68,12 @@ class Freelance extends AppModel
                 'url' => $freelance['url'],
                 'experience' => $freelance['experience'],
             ]);
-        } else {
+        }
+        /*else {
             // create freelance
             $create = $this->create($freelance);
             return (!empty($create)) ? $create : false;
-        }
+        }*/
     }
 
 

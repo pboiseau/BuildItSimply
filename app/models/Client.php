@@ -42,11 +42,13 @@ class Client extends AppModel
             return $this->where('account_id', $client['account_id'])->update([
                 'activity' => $client['activity']
             ]);
-        } else {
+        }
+
+        /*else {
             // create client
             $create = $this->create($client);
             return (!empty($create)) ? $create : false;
-        }
+        }*/
     }
 
     /**
