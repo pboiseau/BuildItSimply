@@ -9,11 +9,18 @@
     "authors": [
         {
             "name": "Paul Boiseau",
+            "role": "Lead Developper",
             "email": "paulboiseau@gmail.com"
         },
         {
             "name": "Bernard Vong",
+            "role": "Back-end Developper",
             "email": "bernard.vong@hetic.net"
+        },
+        {
+            "name": "Robin Mastromarino",
+            "role": "Integrator",
+            "email": "robin.mastromarino@hetic.net"
         }
     ]
 }

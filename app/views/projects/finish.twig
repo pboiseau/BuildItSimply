@@ -109,7 +109,17 @@
             <div class="col-md-2">
 
                 <h3>Récapitulatif</h3>
-
+                <div class="col-md-12">
+                    <img src="{{ home ~ type.image }}" alt=""/>
+                    <h4>{{ type.type | capitalize }}</h4>
+                </div>
+                {% for response in responses %}
+                    <div class="col-md-12">
+                        <img src="{{ home ~ response.image }}" alt=""/>
+                        <h4>{{ response.response | capitalize }}</h4>
+                    </div>
+                {% endfor %}
+                
             </div>
         </div>
     </div>

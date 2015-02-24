@@ -18,7 +18,8 @@
             </div>
         {% endfor %}
         {% if step > 1 %}
-            <button id="prevStep" class="btn btn-default btn-sm" type="button" data-step="{{ step }}"
+            <button id="prevStep" class="btn btn-default btn-sm" type="button"
+                    data-choice="{{ question.response_id }}" data-step="{{ step }}"
                     data-type="{{ type }}" data-change="prev">Précédent
             </button>
         {% endif %}

@@ -3,7 +3,15 @@
 class ProjectController extends AppController
 {
 
-    public $uses = array('Account', 'Project', 'Client', 'Participate', 'ProjectType', 'ProjectStep');
+    public $uses = array(
+        'Account',
+        'Project',
+        'Client',
+        'Participate',
+        'ProjectType',
+        'ProjectStep',
+        'ProjectResponse'
+    );
 
     public function __construct()
     {
@@ -22,11 +30,11 @@ class ProjectController extends AppController
 
         if ($this->f3->get('PATTERN') == "/projects/@id") {
             $project = $this->Project->find($this->f3->get('PARAMS.id'));
-            if($project) {
+            if ($project) {
                 if ($project->client_id == $this->Auth->getId()) {
                     $this->f3->reroute('/projects/edit/' . $this->f3->get('PARAMS.id'));
                 }
-            }else{
+            } else {
                 $this->f3->reroute('/projects/');
             }
         }
@@ -48,8 +56,17 @@ class ProjectController extends AppController
         }
 
         if (in_array($this->f3->get('PATTERN'), ["/projects/detail/step", "/projects/detail/step/@step"])) {
+
+            // if user is not client or haven't create project
             if (!$this->Auth->is('client') || !$this->f3->get('SESSION.project')) {
                 $this->f3->reroute('/projects/');
+            }
+
+            // if project already publish redirect to project edit page
+            if ($project = $this->f3->get('SESSION.project')) {
+                if ($this->Project->getStatus($project['id']) != "EN CREATION") {
+                    $this->f3->reroute('/projects/' . $project['id']);
+                }
             }
         }
     }
@@ -64,8 +81,8 @@ class ProjectController extends AppController
 
         if ($this->request() == "POST") {
             $newProject = $this->f3->get('POST');
-            if ($this->Project->initialize($newProject)) {
-
+            if ($project = $this->Project->initialize($newProject)) {
+                $newProject['id'] = $project->id;
                 $this->f3->set('SESSION.project', $newProject);
                 $this->f3->reroute('/projects/detail/step');
 
@@ -98,7 +115,7 @@ class ProjectController extends AppController
      */
     public function all()
     {
-        $projects = $this->Project->whereNotIn('status', ['ANNULE'])
+        $projects = $this->Project->whereNotIn('status', ['EN CREATION', 'ANNULE'])
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -361,23 +378,38 @@ class ProjectController extends AppController
             }
 
             $this->f3->set('SESSION.step.' . $current_step, $request['choice']);
+            $this->f3->set('SESSION.project.project_type_id', $request['type']);
+
         }
 
         return 0;
     }
 
+    /**
+     *
+     */
     public function finish()
     {
         $project = $this->f3->get('SESSION.project');
+        $steps = $this->f3->get('SESSION.step');
 
-        var_dump($this->f3->get('SESSION.step'));
+        $type = ProjectType::find($project['project_type_id']);
+        $responses = $this->ProjectResponse->getResponses($steps);
 
-        if($this->request() == "POST"){
+        if ($this->request() == "POST") {
             $request = $this->f3->get('POST');
-            var_dump($request);
+            $request['project_type_id'] = $project['project_type_id'];
+
+            if ($this->Project->publish($project['id'], $request)) {
+                $this->setFlash("Votre projet vient d'être publié, merci.");
+                $this->f3->reroute('/projects/' . $project['id']);
+            } else {
+                $this->setFlash("Les informations renseignées ne sont pas valides.");
+                $this->f3->reroute($this->f3->get('PATTERN'));
+            }
         }
 
-        $this->render('projects/finish', compact('project'));
+        $this->render('projects/finish', compact('project', 'responses', 'type'));
     }
 
 

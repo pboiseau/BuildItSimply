@@ -50,11 +50,24 @@ class Project extends AppModel
     }
 
     /**
-     *
+     * Check if project exists in the database
+     * @param $id
+     * @return bool|\Illuminate\Support\Collection|null|static
      */
     public function exists($id)
     {
         return ($project = $this->find($id)) ? $project : false;
+    }
+
+    /**
+     * Get project status
+     * @param $id
+     * @return mixed
+     */
+    public function getStatus($id)
+    {
+        $project = $this->where('id', $id)->first(['id', 'status']);
+        return (!empty($project)) ? $project->status : false;
     }
 
     /**
@@ -107,6 +120,21 @@ class Project extends AppModel
     public function updateProject($id, $data)
     {
         return $this->where('id', $id)->update($data);
+    }
+
+    /**
+     * Publish the project to public
+     * @param $id
+     * @param $data
+     * @return bool
+     */
+    public function publish($id, $project)
+    {
+        if($this->validate($project)){
+            $project['status'] = 'EN COURS';
+            return $this->where('id', $id)->update($project);
+        }
+        return false;
     }
 
     /**

@@ -9,11 +9,17 @@ class Account extends AppModel
     protected $table = 'accounts';
     protected $guarded = array('id');
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function freelance()
     {
         return $this->hasOne('Freelance', 'account_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function client()
     {
         return $this->hasOne('Client', 'account_id', 'id');
