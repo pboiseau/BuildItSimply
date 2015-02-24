@@ -129,11 +129,10 @@ class ProjectController extends AppController
         $categories = $this->ProjectType->all();
 
         foreach ($projects as $key => $project) {
-            $projects[$key]['client'] = $project->account()->first();
             $projects[$key]['proposition'] = $project->participates()->count();
             $projects[$key]['tags'] = $project->tags;
         }
-        
+
         $this->render('projects/all', compact('projects', 'categories'));
     }
 
@@ -390,14 +389,16 @@ class ProjectController extends AppController
                     ['status' => 'finish', 'redirect' => $this->config['home'] . 'projects/finish']);
             }
 
+
             $response = ProjectResponse::find($request['choice']);
 
             $this->f3->set('SESSION.step.' . $current_step, $request['choice']);
             $this->f3->set('SESSION.project.price', $this->f3->get('SESSION.project.price') + $response->price);
             $this->f3->set('SESSION.project.project_type_id', $request['type']);
 
-            if (!empty($response['tag'])) {
-                $this->f3->set('SESSION.project.tag', $this->f3->get('SESSION.project.tag') . ',' . $response['tag']);
+            if (!empty($response['tag']) && $current_step > 0) {
+                $this->f3->set('SESSION.project.tag',
+                    $this->f3->get('SESSION.project.tag') . ',' . $response['tag']);
             }
 
         }
@@ -415,7 +416,7 @@ class ProjectController extends AppController
 
         $type = ProjectType::find($project['project_type_id']);
         $responses = $this->ProjectResponse->getResponses($steps);
-
+        
         if ($this->request() == "POST") {
             $request = $this->f3->get('POST');
             $request['project_type_id'] = $project['project_type_id'];

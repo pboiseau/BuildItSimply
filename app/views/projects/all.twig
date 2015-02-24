@@ -53,7 +53,9 @@
 
                         <p class="tagList">
                             <a href="">{{ project.type | capitalize }}</a>
-                            <a href="#">tag</a>
+                            {% for tag in project.tags %}
+                                <a href="">{{ tag.tag | capitalize }}</a>
+                            {% endfor %}
                         </p>
 
                         <p class="budgetList">Budget estimé<span>{{ project.price }} €</span></p>
