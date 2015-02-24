@@ -6,16 +6,14 @@
         <div class="header">
             <h2>Validation du projet</h2>
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                etdolore magna aliqua.</p>
+            <p>Voici un récapitulatif de votre projet et des options choisies. Vous pouvez également ajouter des
+                fichiers utiles pour le freelance.</p>
         </div>
 
         <div class="info">
             <h3>Informations générales du projet</h3>
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid commodi, consectetur cum exercitationem
-                facere fugiat incidunt ipsa neque optio praesentium quasi qui quibusdam repudiandae saepe unde. A fuga
-                labore quidem?</p>
+            <p>Veuillez vérifier que les informations ci-dessous sont exactes.</p>
 
             <div class="col-md-10">
 
@@ -100,7 +98,7 @@
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default">Valider le projet</button>
+                            <button type="submit" class="btn btn-default">Valider et publier le projet</button>
                         </div>
                     </div>
                 </form>
@@ -109,6 +107,7 @@
             <div class="col-md-2">
 
                 <h3>Récapitulatif</h3>
+
                 <div class="col-md-12">
                     <img src="{{ home ~ type.image }}" alt=""/>
                     <h4>{{ type.type | capitalize }}</h4>
@@ -119,7 +118,7 @@
                         <h4>{{ response.response | capitalize }}</h4>
                     </div>
                 {% endfor %}
-                
+
             </div>
         </div>
     </div>

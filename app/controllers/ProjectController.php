@@ -55,7 +55,8 @@ class ProjectController extends AppController
             }
         }
 
-        if (in_array($this->f3->get('PATTERN'), ["/projects/detail/step", "/projects/detail/step/@step"])) {
+        if (in_array($this->f3->get('PATTERN'),
+            ["/projects/detail/step", "/projects/detail/step/@step", "/projects/finish"])) {
 
             // if user is not client or haven't create project
             if (!$this->Auth->is('client') || !$this->f3->get('SESSION.project')) {
@@ -64,6 +65,7 @@ class ProjectController extends AppController
 
             // if project already publish redirect to project edit page
             if ($project = $this->f3->get('SESSION.project')) {
+
                 if ($this->Project->getStatus($project['id']) != "EN CREATION") {
                     $this->f3->reroute('/projects/' . $project['id']);
                 }
