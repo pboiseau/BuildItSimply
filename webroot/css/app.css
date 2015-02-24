@@ -665,7 +665,7 @@ nav {
   font-family: "montserratlight", helvetica, arial, sans-serif;
   color: #005f78;
   text-align: left;
-  line-height: 15px;
+  line-height: 21px;
   padding-bottom: 25px;
 }
 /* line 15, ../sass/_all.scss */
@@ -868,6 +868,88 @@ nav {
 /* line 174, ../sass/_all.scss */
 #listProjet li .etatList a:hover {
   background: #004456;
+}
+
+/* line 182, ../sass/_all.scss */
+#listMenu p {
+  float: left;
+  color: #aaaaaa;
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+}
+
+/* Custom dropdown */
+/* line 188, ../sass/_all.scss */
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: 25px;
+  width: 210px;
+  float: right;
+  cursor: pointer;
+}
+/* line 196, ../sass/_all.scss */
+.custom-dropdown:focus {
+  outline-offset: none;
+  outline: none;
+}
+
+/* line 202, ../sass/_all.scss */
+.custom-dropdown select {
+  background-color: #f8f8f8;
+  color: #fff;
+  font-size: inherit;
+  cursor: pointer;
+  width: 210px;
+  font-size: 14px;
+  color: #a0a0a0;
+  border: 1px solid #ededed;
+  padding: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin: 0;
+  border-radius: 3px;
+  text-indent: 0.01px;
+  -moz-transition: all, 0.2s, linear;
+  -o-transition: all, 0.2s, linear;
+  -webkit-transition: all, 0.2s, linear;
+  transition: all, 0.2s, linear;
+  text-overflow: '';
+  -webkit-appearance: button;
+  /* hide default arrow in chrome OSX */
+}
+/* line 220, ../sass/_all.scss */
+.custom-dropdown select:hover {
+  background-color: #f0f0f0;
+}
+/* line 223, ../sass/_all.scss */
+.custom-dropdown select:focus {
+  outline-offset: none;
+  outline: none;
+}
+
+/* line 229, ../sass/_all.scss */
+.custom-dropdown::before,
+.custom-dropdown::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+/* line 236, ../sass/_all.scss */
+.custom-dropdown::after {
+  /*  Custom dropdown arrow */
+  content: " ";
+  background: url('/builditsimply/webroot/images/chevron-down-option.png?1424736416') no-repeat;
+  width: 14px;
+  height: 8px;
+  right: 20px;
+  top: 18px;
+}
+
+/* line 256, ../sass/_all.scss */
+.custom-dropdown::after {
+  color: rgba(0, 0, 0, 0.4);
 }
 
 /* line 3, ../sass/_pagination.scss */
