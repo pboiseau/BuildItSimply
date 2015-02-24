@@ -114,7 +114,8 @@ $trans-duration-base: 250ms;
 		padding: 0;
 	}
 	input{
-		background: #f8f8f8;
+//		background: #f8f8f8;
+        background: $colorInputBg;
 		border: 1px solid #ededed;
 		font-size: 14px;
 	}

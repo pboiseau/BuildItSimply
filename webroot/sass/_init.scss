@@ -39,7 +39,8 @@
 	
 }
 .form-group textarea, .form-group .tokenfield{
-	background: #f8f8f8;
+//	background: #f8f8f8;
+    background: $colorInputBg;
 	border: 1px solid #ededed;
 	font-size: 14px;
 }

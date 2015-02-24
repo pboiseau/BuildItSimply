@@ -1,4 +1,5 @@
 // _all.scss
+$gray : #666666;
 
 #sidebar{
 	width: 275px;
@@ -26,7 +27,7 @@
 		margin: 0 !important;
 		margin-bottom: 35px !important;
 		input{
-			background: #f8f8f8 image-url("search.png") no-repeat 235px 12px;
+			background: $colorInputBg image-url("search.png") no-repeat 235px 12px;
 		}
 	}
 }
@@ -40,7 +41,8 @@
 		margin-bottom: 5px;
 		@include transition(all,0.2s,linear);
 		a{
-			color: #999999;
+//			color: #999999;
+            color: $gray;
 			display: block;
 			border-radius: 4px;
 			padding: 6px 13px 8px;
@@ -181,7 +183,8 @@
 
 #listMenu p{
 	float: left;
-	color: #aaaaaa;
+//	color: #aaaaaa;
+    color: $gray;
 	font-family: $fontLight;
 }
 /* Custom dropdown */
@@ -206,7 +209,8 @@
   cursor: pointer;
   width: 210px;
   font-size: 14px;
-  color: #a0a0a0;
+//  color: #a0a0a0;
+  color: $gray;
   border: 1px solid #ededed;
   padding: 10px;
   padding-right: 20px;	
