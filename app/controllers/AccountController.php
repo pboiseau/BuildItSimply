@@ -69,13 +69,19 @@ class AccountController extends AppController
             $user = $this->f3->get('POST');
 
             if ($newUser = $this->Account->register($user)) {
+
                 // initialize client or freelance special account
-                if ($newUser->type == "CLIENT") {
-                    $this->Client->create(['account_id' => $newUser->id]);
-                } else {
-                    if ($newUser->type == "FREELANCE") {
-                        $this->Freelance->create(['account_id' => $newUser->id]);
-                    }
+                if ($user['type'] == "CLIENT") {
+
+                    $this->Client->create([
+                        'account_id' => $newUser->id
+                    ]);
+
+                } else if ($user['type'] == "FREELANCE") {
+
+                    $this->Freelance->create([
+                        'account_id' => $newUser->id
+                    ]);
                 }
 
                 $this->Account->setSession($newUser);
@@ -93,27 +99,34 @@ class AccountController extends AppController
     /**
      *    Show user profile by ID or User Session ID
      **/
-    public function profile($f3, $params = null)
+    public function profile()
     {
+
+        $experiences = array();
+
         // get user profile by ID or with session ID
-        $user = $this->Account->find((!empty($params['id'])) ?
-                $params['id'] :
+        $user = $this->Account->find((!empty($this->f3->get('PARAMS.id'))) ?
+                $this->f3->get('PARAMS.id') :
                 $this->f3->get('SESSION.user.id')
         );
 
+
         if (!empty($user)) {
             if ($user['type'] == "FREELANCE") {
+
                 // freelance user info
-                $experiences = $this->Freelance->getEnumValues('experience');
                 $user['freelance'] = $user->freelance;
-                $user['freelance']['skills'] = $this->Skill->getFromFreelanceSkills(
+
+                $experiences = $this->Freelance->getEnumValues('experience');
+                $skills = $this->Skill->getFromFreelanceSkills(
                     $this->FreelanceSkill->getAll('account_id', $user->id));
 
-            } else {
-                if ($user['type'] == 'CLIENT') {
-                    // client user
-                    $user['client'] = $user->client;
-                }
+                $user['freelance']['skills'] = $skills;
+
+            } else if ($user['type'] == 'CLIENT') {
+
+                // client user
+                $user['client'] = $user->client;
             }
 
             if ($user->id == $this->f3->get('SESSION.user.id')) {
@@ -210,19 +223,21 @@ class AccountController extends AppController
 
             $participations = $this->Participate->notification($this->Auth->getId(), 'client');
 
-            if($participations) {
+            if ($participations) {
                 foreach ($participations as $key => $participation) {
                     $participations[$key]['freelance'] = $participation->account()->first();
                     $participations[$key]['project'] = $participation->project()->first();
                 }
             }
 
-        } else if($this->Auth->is('freelance')){
+        } else {
+            if ($this->Auth->is('freelance')) {
 
-            $participations = $this->Participate->notification($this->Auth->getId(), 'freelance');
+                $participations = $this->Participate->notification($this->Auth->getId(), 'freelance');
 
-        }else{
-            $this->f3->reroute('/');
+            } else {
+                $this->f3->reroute('/');
+            }
         }
 
         $this->render('accounts/notification', compact('participations'));

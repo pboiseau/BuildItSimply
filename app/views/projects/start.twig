@@ -14,7 +14,7 @@
                     <div class="col-md-12">
                         <a href="#" class="nextStep" data-choice="{{ type.id }}" data-step="{{ step }}"
                            data-type="{{ type.id }}" data-change="next">
-                            <img src="http://placehold.it/250x275" alt="" class="img-rounded">
+                            <img src="{{ home ~ type.image }}" alt="" class="img-rounded">
                         </a>
                     </div>
                     <div class="col-md-12">{{ type.type | capitalize }}</div>

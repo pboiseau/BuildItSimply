@@ -401,8 +401,14 @@ class ProjectController extends AppController
             $request['project_type_id'] = $project['project_type_id'];
 
             if ($this->Project->publish($project['id'], $request)) {
+
+                // cleaning session
+                $this->f3->clear('SESSION.project');
+                $this->f3->clear('SESSION.step');
+
                 $this->setFlash("Votre projet vient d'être publié, merci.");
                 $this->f3->reroute('/projects/' . $project['id']);
+
             } else {
                 $this->setFlash("Les informations renseignées ne sont pas valides.");
                 $this->f3->reroute($this->f3->get('PATTERN'));
