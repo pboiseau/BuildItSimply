@@ -186,25 +186,22 @@ class AccountController extends AppController
                         $errors = $this->Freelance->errors;
                     }
                 }
-            } else {
-                if ($this->Auth->is('client')) {
-                    if ($this->Account->updateAccount($profile['account'])
-                        && $this->Client->updateProfile($profile['client'])
-                    ) {
-                        $this->setFlash("Votre profil a bien été mis à jour.");
-                    } else {
-                        $this->setFlash("Certaines informations sont erronées");
-                        if ($this->Account->errors) {
-                            if ($this->Client->errors) {
-                                $errors = array_merge($this->Account->errors, $this->Client->errors);
-                            } else {
-                                $errors = $this->Account->errors;
-                            }
+            } else if ($this->Auth->is('client')) {
+                if ($this->Account->updateAccount($profile['account'])
+                    && $this->Client->updateProfile($profile['client'])
+                ) {
+                    $this->setFlash("Votre profil a bien été mis à jour.");
+                } else {
+                    $this->setFlash("Certaines informations sont erronées");
+                    if ($this->Account->errors) {
+                        if ($this->Client->errors) {
+                            $errors = array_merge($this->Account->errors, $this->Client->errors);
                         } else {
-                            $errors = $this->Client->errors;
+                            $errors = $this->Account->errors;
                         }
+                    } else {
+                        $errors = $this->Client->errors;
                     }
-
                 }
             }
         }

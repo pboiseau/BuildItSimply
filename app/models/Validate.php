@@ -5,7 +5,7 @@ class Validate extends Audit
 
     public function isString($data, $length = null)
     {
-        $check = preg_match("#^[a-zA-Z ]{1,}$#", $data);
+        $check = preg_match("#^[a-zA-Z éèàùç]{1,}$#", $data);
         $length = (!empty($length)) ? (strlen($data) <= $length) : true;
         return (($check == 1) && $length);
     }
