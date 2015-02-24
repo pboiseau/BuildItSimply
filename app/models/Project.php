@@ -50,6 +50,14 @@ class Project extends AppModel
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tags()
+    {
+        return $this->hasMany('ProjectTag', 'project_id', 'id');
+    }
+
+    /**
      * Check if project exists in the database
      * @param $id
      * @return bool|\Illuminate\Support\Collection|null|static
@@ -125,7 +133,7 @@ class Project extends AppModel
     /**
      * Publish the project to public
      * @param $id
-     * @param $data
+     * @param $project
      * @return bool
      */
     public function publish($id, $project)

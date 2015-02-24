@@ -18,15 +18,13 @@
             <h2>Catégorie des projets</h2>
             <ul id="listCategorie">
                 <li class="listActive"><a href="#">Toutes les catégories <span>126</span></a></li>
-                <li><a href="#">Design <span>46</span></a></li>
-                <li><a href="#">Développement <span>89</span></a></li>
-                <li><a href="#">E-commerce <span>14</span></a></li>
-                <li><a href="#">Services <span>4</span></a></li>
-                <li><a href="#">Web marketing <span>21</span></a></li>
+                {% for category in categories %}
+                    <li><a href="#">{{ category.type | capitalize }} <span>46</span></a></li>
+                {% endfor %}
             </ul>
         </div>
         <div id="listMenu">
-            <p>46 Projets trouvés</p>
+            <p>{{ projects | length }} Projets trouvés</p>
             <span class="custom-dropdown big">
                 <select>
                     <option>Projet récent</option>
@@ -38,7 +36,7 @@
         </div>
 
         <div class="listProjet">
-            
+
             <ul>
                 {% for project in projects %}
                     <li>
@@ -53,9 +51,12 @@
 
                         <p class="textList">{{ project.description }}</p>
 
-                        <p class="tagList"><a href="#">tag</a><a href="#">tag</a></p>
+                        <p class="tagList">
+                            <a href="">{{ project.type | capitalize }}</a>
+                            <a href="#">tag</a>
+                        </p>
 
-                        <p class="budgetList">Budget estimé<span>500 €</span></p>
+                        <p class="budgetList">Budget estimé<span>{{ project.price }} €</span></p>
 
                         <p class="etatList"><a href="{{ home }}projects/{{ project.id }}">{{ project.status }}</a></p>
                         <hr class="clear"/>

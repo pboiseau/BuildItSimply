@@ -10,7 +10,8 @@ class ProjectController extends AppController
         'Participate',
         'ProjectType',
         'ProjectStep',
-        'ProjectResponse'
+        'ProjectResponse',
+        'ProjectTag'
     );
 
     public function __construct()
@@ -118,14 +119,22 @@ class ProjectController extends AppController
     public function all()
     {
         $projects = $this->Project->whereNotIn('status', ['EN CREATION', 'ANNULE'])
-            ->orderBy('created_at', 'desc')
-            ->get();
+            ->join('project_type', 'project_type.id', '=', 'project_type_id')
+            ->orderBy('projects.created_at', 'desc')
+            ->get([
+                'projects.*',
+                'project_type.type'
+            ]);
+
+        $categories = $this->ProjectType->all();
 
         foreach ($projects as $key => $project) {
             $projects[$key]['client'] = $project->account()->first();
             $projects[$key]['proposition'] = $project->participates()->count();
+            $projects[$key]['tags'] = $project->tags;
         }
-        $this->render('projects/all', compact('projects'));
+        
+        $this->render('projects/all', compact('projects', 'categories'));
     }
 
 
@@ -351,6 +360,8 @@ class ProjectController extends AppController
     {
         $step = 0;
         $types = ProjectType::all();
+        $this->f3->set('SESSION.project.price', 0);
+        $this->f3->set('SESSION.project.tag', '');
         $this->render('projects/start', compact('types', 'step'));
     }
 
@@ -379,8 +390,15 @@ class ProjectController extends AppController
                     ['status' => 'finish', 'redirect' => $this->config['home'] . 'projects/finish']);
             }
 
+            $response = ProjectResponse::find($request['choice']);
+
             $this->f3->set('SESSION.step.' . $current_step, $request['choice']);
+            $this->f3->set('SESSION.project.price', $this->f3->get('SESSION.project.price') + $response->price);
             $this->f3->set('SESSION.project.project_type_id', $request['type']);
+
+            if (!empty($response['tag'])) {
+                $this->f3->set('SESSION.project.tag', $this->f3->get('SESSION.project.tag') . ',' . $response['tag']);
+            }
 
         }
 
@@ -401,8 +419,12 @@ class ProjectController extends AppController
         if ($this->request() == "POST") {
             $request = $this->f3->get('POST');
             $request['project_type_id'] = $project['project_type_id'];
+            $request['price'] = $project['price'];
 
             if ($this->Project->publish($project['id'], $request)) {
+
+                // adding tags
+                $this->ProjectTag->addTags($project['id'], $project['tag']);
 
                 // cleaning session
                 $this->f3->clear('SESSION.project');
