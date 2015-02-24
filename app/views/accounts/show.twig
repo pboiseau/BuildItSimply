@@ -2,38 +2,113 @@
 
 {% block body %}
 
-    <div class="col-md-4">
-        <h3>
-            <span class="type">{{ user.type }}</span>
-            <span class="experience">{{ (user.type == 'FREELANCE') ? user.freelance.experience : '' }}</span>
-        </h3>
-        <h4>{{ user.firstname ~ ' ' ~ user.lastname }}</h4>
-    </div>
+    <div id="profileView">
+        <div class="wrapper">
 
-    <div class="col-md-8">
-        <div class="profile-header">
-            <div class="profile-description">
-                <h3>Description</h3>
+            <div id="profileInfo">
 
-                <p>{{ user.description }}</p>
+                <h1>Freelance <span>Débutant</span></h1>
+
+                <img src="{{ image }}user-profile.png" alt="Freelance" />
+
+                <h2>{{ user.firstname ~ ' ' ~ user.lastname }} <span>Web designer</span></h2>
+
+                <a class="buttonWhite" href="#">Envoyer une offre</a>
+
+                <ul>
+                    <li>Projets réalisés <span>23</span></li>
+                    <li>Note des clients </li>
+                    <li><a href="#">www.marcelpatulacci.com</a></li>
+                    <li>Me situer</li>
+                </ul>
+                <div id="maps" style="width: 348px; height: 245px;"></div>
+
             </div>
-            {% if user.freelance.skills %}
-                <div class="profile-skill">
-                    <h3>Mes compétences</h3>
-                    <ul class="skills">
-                        {% for skill in user.freelance.skills %}
-                            <li>{{ skill.name }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endif %}
+
+            <div id="profileDescription">
+
+                <h3>Description</h3>
+                <p class="infoList">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et nisl tortor. Praesent vestibulum sem eu ligula rhoncus vestibulum. Etiam nec consequat ante. Donec arcu ligula, dictum consectetur venenatis ut.
+                </p>
+                <h3>Mes compétences</h3>
+                <p class="tagList"><a href="#">tag</a><a href="#">tag</a></p>
+            </div>
+
+            
+            <div class="listProjet">
+                <h3>Derniers projets réalisés</h3>
+                <ul>
+
+                    <li>
+                        <h4><a href="#">Projet name</a></h4>
+
+                        <p class="infoList">
+                            <span><img src="{{ image }}calendar.png" alt="Date de l'offre"/>12 Juin 2014</span>
+                            <span><img src="{{ image }}user-list.png" alt="Nombre d'offre"/>24 demande(s)</span>
+                        </p>
+
+                        <p class="textList">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et nisl tortor. Praesent vestibulum sem eu ligula rhoncus vestibulum.</p>
+
+                        <p class="tagList"><a href="#">tag</a><a href="#">tag</a></p>
+
+                        <hr class="clear"/>
+                    </li>
+
+                    <li>
+                        <h4><a href="#">Projet name</a></h4>
+
+                        <p class="infoList">
+                            <span><img src="{{ image }}calendar.png" alt="Date de l'offre"/>12 Juin 2014</span>
+                            <span><img src="{{ image }}user-list.png" alt="Nombre d'offre"/>24 demande(s)</span>
+                        </p>
+
+                        <p class="textList">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et nisl tortor. Praesent vestibulum sem eu ligula rhoncus vestibulum.</p>
+
+                        <p class="tagList"><a href="#">tag</a><a href="#">tag</a></p>
+
+                        <hr class="clear"/>
+                    </li>                
+                </ul>
+                <a class="buttonWhite" href="#">Voir tous les projets</a>
+            </div>
+
+            <div class="listProjet" id="profileAvis">
+                <h3>Avis des clients</h3>
+                <ul>
+
+                    <li>
+
+                        <img src="{{ image }}recruteur-picture.png" alt="recruteur picture"/>
+
+                        <p class="recruteurAvis"><a href="#">Jocyeline Bon <span>Peintre en batiment</span></a></p>
+                        <p class="textList">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+
+                        <hr class="clear"/>
+                    </li>
+
+                    <li>
+
+                        <img src="{{ image }}recruteur-picture.png" alt="recruteur picture"/>
+
+                        <p class="recruteurAvis"><a href="#">Jocyeline Bon <span>Peintre en batiment</span></a></p>
+                        <p class="textList">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+
+                        <hr class="clear"/>
+                    </li>
+
+                </ul>
+                <a class="buttonWhite" href="#">Voir tous les avis</a>
+            </div>
+
+            <hr class="clear"/>
         </div>
-    </div>
-
-
-    <div id="maps" style="width: 335px; height: 245px;">
-
-    </div>
+    
+    </div><!-- end PROFILE VIEW -->
+    <div class="push"></div>
+</div>
 
 {% endblock %}
 

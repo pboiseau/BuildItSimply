@@ -686,6 +686,215 @@ textarea::-webkit-input-placeholder, input::-webkit-input-placeholder {
   top: 40px;
 }
 
+/* line 3, ../sass/_show.scss */
+#profileView {
+  background: #f5f5f5;
+}
+
+/* line 6, ../sass/_show.scss */
+#profileInfo {
+  padding: 25px;
+  text-align: center;
+  float: left;
+  width: 400px;
+  margin-right: 30px;
+  border-radius: 2px;
+  background: white;
+  border: 1px solid #f2f2f2;
+}
+/* line 15, ../sass/_show.scss */
+#profileInfo h1 {
+  font-size: 21px;
+}
+/* line 17, ../sass/_show.scss */
+#profileInfo h1 span {
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+  letter-spacing: normal;
+}
+/* line 22, ../sass/_show.scss */
+#profileInfo h2 {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+/* line 25, ../sass/_show.scss */
+#profileInfo h2 span {
+  font-size: 16px;
+  text-transform: none;
+  color: #5d6e72;
+  display: block;
+}
+/* line 32, ../sass/_show.scss */
+#profileInfo h1, #profileInfo h2 {
+  padding: 0;
+}
+/* line 35, ../sass/_show.scss */
+#profileInfo img {
+  display: block;
+  margin: 0 auto;
+  padding: 30px 0 20px 0;
+}
+/* line 40, ../sass/_show.scss */
+#profileInfo ul {
+  margin-top: 40px;
+}
+/* line 42, ../sass/_show.scss */
+#profileInfo ul li {
+  float: left;
+  text-align: left;
+  clear: both;
+  color: #5d6e72;
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+  border-bottom: 1px solid #e8e8e8;
+  padding: 10px 0;
+  width: 100%;
+}
+
+/* line 54, ../sass/_show.scss */
+#profileDescription {
+  width: 650px;
+  float: right;
+  text-align: left;
+  padding: 25px;
+  background: #005f78;
+  border-radius: 2px;
+}
+/* line 61, ../sass/_show.scss */
+#profileDescription h3 {
+  text-align: left;
+  color: white;
+}
+/* line 65, ../sass/_show.scss */
+#profileDescription p {
+  color: #eeeeee;
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+  margin: 20px 0;
+}
+/* line 69, ../sass/_show.scss */
+#profileDescription p:last-of-type {
+  margin-bottom: 0;
+}
+/* line 74, ../sass/_show.scss */
+#profileDescription .tagList a {
+  padding: 5px 10px;
+  color: #666666;
+  background: #e3e3e3;
+  border-radius: 3px;
+  font-size: 14px;
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+  margin-right: 10px;
+  -moz-transition: all, 0.2s, linear;
+  -o-transition: all, 0.2s, linear;
+  -webkit-transition: all, 0.2s, linear;
+  transition: all, 0.2s, linear;
+}
+/* line 83, ../sass/_show.scss */
+#profileDescription .tagList a:hover {
+  background: white;
+  color: #005f78;
+}
+
+/* line 91, ../sass/_show.scss */
+#profileView .listProjet {
+  text-align: center;
+  width: 650px;
+}
+/* line 94, ../sass/_show.scss */
+#profileView .listProjet h3:first-of-type {
+  text-align: left;
+  padding: 40px 0 20px 0;
+}
+/* line 98, ../sass/_show.scss */
+#profileView .listProjet h4 {
+  font-size: 21px;
+  color: #005f78;
+  text-transform: none;
+  text-align: left;
+  margin-bottom: 3px;
+  padding: 25px 25px 0 25px;
+}
+/* line 105, ../sass/_show.scss */
+#profileView .listProjet h4 a {
+  -moz-transition: all, 0.2s, linear;
+  -o-transition: all, 0.2s, linear;
+  -webkit-transition: all, 0.2s, linear;
+  transition: all, 0.2s, linear;
+}
+/* line 107, ../sass/_show.scss */
+#profileView .listProjet h4 a:hover {
+  color: #004456;
+}
+/* line 113, ../sass/_show.scss */
+#profileView .listProjet ul li {
+  text-align: left;
+}
+/* line 116, ../sass/_show.scss */
+#profileView .listProjet li {
+  background: white;
+}
+
+/* line 121, ../sass/_show.scss */
+.listProjet#profileAvis {
+  width: 100%;
+  float: left;
+}
+
+/* line 126, ../sass/_show.scss */
+#profileAvis li {
+  width: 49%;
+  float: left;
+  padding: 25px 0;
+}
+/* line 130, ../sass/_show.scss */
+#profileAvis li:nth-child(odd) {
+  margin-right: 21px;
+}
+/* line 134, ../sass/_show.scss */
+#profileAvis img {
+  margin-left: 25px;
+  float: left;
+}
+/* line 138, ../sass/_show.scss */
+#profileAvis p {
+  float: left;
+  width: 365px;
+}
+/* line 141, ../sass/_show.scss */
+#profileAvis p:last-of-type {
+  font-size: 14px;
+}
+/* line 145, ../sass/_show.scss */
+#profileAvis .recruteurAvis {
+  padding-left: 25px;
+}
+/* line 147, ../sass/_show.scss */
+#profileAvis .recruteurAvis a {
+  -moz-transition: all, 0.2s, linear;
+  -o-transition: all, 0.2s, linear;
+  -webkit-transition: all, 0.2s, linear;
+  transition: all, 0.2s, linear;
+}
+/* line 149, ../sass/_show.scss */
+#profileAvis .recruteurAvis a:hover, #profileAvis .recruteurAvis a:hover span {
+  color: #004456;
+}
+/* line 152, ../sass/_show.scss */
+#profileAvis .recruteurAvis a span {
+  -moz-transition: all, 0.2s, linear;
+  -o-transition: all, 0.2s, linear;
+  -webkit-transition: all, 0.2s, linear;
+  transition: all, 0.2s, linear;
+  color: #5d6e72;
+  font-size: 14px;
+}
+/* line 156, ../sass/_show.scss */
+#profileAvis .recruteurAvis a span:hover {
+  color: #004456;
+}
+/* line 162, ../sass/_show.scss */
+#profileAvis .buttonWhite {
+  margin-top: 40px;
+}
+
 /* line 4, ../sass/_all.scss */
 #sidebar {
   width: 275px;
@@ -783,19 +992,19 @@ textarea::-webkit-input-placeholder, input::-webkit-input-placeholder {
 }
 
 /* line 82, ../sass/_all.scss */
-#listProjet {
+.listProjet {
   float: right;
   width: 765px;
 }
 /* line 85, ../sass/_all.scss */
-#listProjet li {
+.listProjet li {
   background: #fafafa;
   border: 1px solid #f2f2f2;
   border-radius: 2px;
   margin-bottom: 30px;
 }
 /* line 90, ../sass/_all.scss */
-#listProjet li h3 {
+.listProjet li h3 {
   font-size: 21px;
   color: #005f78;
   text-transform: none;
@@ -804,26 +1013,26 @@ textarea::-webkit-input-placeholder, input::-webkit-input-placeholder {
   padding: 25px 25px 0 25px;
 }
 /* line 98, ../sass/_all.scss */
-#listProjet li h3 a:hover {
+.listProjet li h3 a:hover {
   color: #004456 !important;
 }
 /* line 104, ../sass/_all.scss */
-#listProjet li .infoList {
+.listProjet li .infoList {
   color: #888888;
   font-family: "montserratlight", helvetica, arial, sans-serif;
   font-size: 14px;
   padding: 0 25px;
 }
 /* line 109, ../sass/_all.scss */
-#listProjet li .infoList img {
+.listProjet li .infoList img {
   margin-right: 5px;
 }
 /* line 112, ../sass/_all.scss */
-#listProjet li .infoList span {
+.listProjet li .infoList span {
   margin-right: 15px;
 }
 /* line 116, ../sass/_all.scss */
-#listProjet li .textList {
+.listProjet li .textList {
   font-size: 16px;
   color: #666666;
   font-family: "montserratlight", helvetica, arial, sans-serif;
@@ -831,12 +1040,12 @@ textarea::-webkit-input-placeholder, input::-webkit-input-placeholder {
   padding: 0 25px;
 }
 /* line 123, ../sass/_all.scss */
-#listProjet li .tagList {
+.listProjet li .tagList {
   padding: 0 25px;
   margin-bottom: 25px;
 }
 /* line 127, ../sass/_all.scss */
-#listProjet li .tagList a {
+.listProjet li .tagList a {
   padding: 5px 10px;
   color: #666666;
   background: #e3e3e3;
@@ -850,16 +1059,16 @@ textarea::-webkit-input-placeholder, input::-webkit-input-placeholder {
   transition: all, 0.2s, linear;
 }
 /* line 136, ../sass/_all.scss */
-#listProjet li .tagList a:last-of-type {
+.listProjet li .tagList a:last-of-type {
   margin-right: 0;
 }
 /* line 139, ../sass/_all.scss */
-#listProjet li .tagList a:hover {
+.listProjet li .tagList a:hover {
   background: #dbdbdb;
   color: #005f78 !important;
 }
 /* line 144, ../sass/_all.scss */
-#listProjet li .budgetList {
+.listProjet li .budgetList {
   background: #f3f3f3;
   border-top: 1px solid #f2f2f2;
   font-size: 16px;
@@ -870,12 +1079,12 @@ textarea::-webkit-input-placeholder, input::-webkit-input-placeholder {
   width: 548px;
 }
 /* line 153, ../sass/_all.scss */
-#listProjet li .budgetList span {
+.listProjet li .budgetList span {
   float: right;
   color: #555555;
 }
 /* line 158, ../sass/_all.scss */
-#listProjet li .etatList {
+.listProjet li .etatList {
   color: #ebebeb;
   font-family: "montserratlight", helvetica, arial, sans-serif;
   float: right;
@@ -887,7 +1096,7 @@ textarea::-webkit-input-placeholder, input::-webkit-input-placeholder {
   border-bottom-right-radius: 2px;
 }
 /* line 168, ../sass/_all.scss */
-#listProjet li .etatList a {
+.listProjet li .etatList a {
   color: #ebebeb;
   background: #005f78;
   width: 215px;
@@ -900,7 +1109,7 @@ textarea::-webkit-input-placeholder, input::-webkit-input-placeholder {
   transition: all, 0.2s, linear;
 }
 /* line 176, ../sass/_all.scss */
-#listProjet li .etatList a:hover {
+.listProjet li .etatList a:hover {
   background: #004456;
 }
 
@@ -1035,7 +1244,7 @@ textarea::-webkit-input-placeholder, input::-webkit-input-placeholder {
 }
 /* line 5, ../sass/_init.scss */
 #timelineHead ul {
-  background: url('/builditsimply/webroot/images/timeline-separator.png?1424783008') no-repeat 62px 6px;
+  background: url('/builditsimply/webroot/images/timeline-separator.png?1424783962') no-repeat 62px 6px;
   display: inline-block;
 }
 /* line 8, ../sass/_init.scss */
