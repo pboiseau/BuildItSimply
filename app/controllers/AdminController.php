@@ -11,6 +11,11 @@ class AdminController extends AppController
         parent::__construct();
     }
 
+    public function main()
+    {
+        $this->render('admin/');
+    }
+
     public function projectType()
     {
         if ($this->request() == "POST") {
@@ -43,15 +48,7 @@ class AdminController extends AppController
                     'description' => $request['description']
                 ]);
 
-                foreach ($request['response'] as $key => $response) {
-                    if ($this->ProjectResponse->validate($response)) {
-                        ProjectResponse::create([
-                            'response' => $response['response'],
-                            'description' => $response['description'],
-                            'question_id' => $question->id
-                        ]);
-                    }
-                }
+                $this->addResponses($request);
 
             } else {
                 $error = $this->ProjectQuestion->errors;
@@ -66,7 +63,7 @@ class AdminController extends AppController
                 ]);
             }
 
-            $this->setFlash("La question a bien été ajouté");
+            $this->setFlash("La question a bien été ajouté  ");
             $this->f3->reroute($this->f3->get('PATTERN'));
         }
 
@@ -77,7 +74,57 @@ class AdminController extends AppController
 
     public function projectResponse()
     {
-        $this->render('admin/projects/response', []);
+
+        if ($this->request() == "POST") 
+        {
+            $request = $this->f3->get('POST');
+
+            $this->addResponses($request);
+
+            $this->setFlash("Les réponses ont bien été ajoutées");
+            $this->f3->reroute($this->f3->get('PATTERN'));
+        }
+
+        $questions = ProjectQuestion::all(array('id', 'question'));
+
+        $this->render('admin/projects/response', compact('questions'));
+    }
+
+    public function addResponses($request)
+    {
+        foreach ($request['response'] as $key => $response) 
+        {
+            if ($this->ProjectResponse->validate($response)) 
+            {
+                if (!empty($this->f3->get('FILES.image.name')[$key])) 
+                {
+                    $upload = new UploadHelper($this->f3->get('RESPONSE_FILES'));
+                    $filename = $upload->upload();
+
+                    if ($filename) 
+                        $response['image']= $this->f3->get('RESPONSE_FILES') . $filename;
+                }
+
+                if(!empty($response['image']))
+                {
+                    ProjectResponse::create([
+                        'response'      => $response['response'],
+                        'description'   => $response['description'],
+                        'question_id'   => $request['project_question'],
+                        'image'         => $response['image']
+                    ]);
+                }
+                else
+                {
+                    ProjectResponse::create([
+                        'response'      => $response['response'],
+                        'description'   => $response['description'],
+                        'question_id'   => $request['project_question'],
+                    ]);
+                }
+
+            }
+        }
     }
 
 

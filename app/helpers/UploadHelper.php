@@ -8,10 +8,10 @@ class UploadHelper extends BaseHelper
     /**
      * Init the Folder
      */
-    public function __construct()
+    public function __construct($filepath=null)
     {
         parent::__construct();
-        $this->url();
+        $this->url($filepath);
     }
 
 
@@ -80,9 +80,11 @@ class UploadHelper extends BaseHelper
     /**
      * Change the upload directory
      */
-    private function url()
+    private function url($filepath)
     {
-        if ($this->f3->get('ORGANIZE_UPLOAD') === true) {
+        if(!empty($filepath))
+            $this->f3->set('UPLOADS', $filepath);
+        else if ($this->f3->get('ORGANIZE_UPLOAD') === true) {
             $years = date("Y");
             $month = date("m");
             $day = date("d");

@@ -35,8 +35,10 @@
         </div>
 
         <div class="form-group">
-            <button id="add_response" class="btn btn-success btn-sm" type="button">Ajouter une autre reponse
-            </button>
+            <div class="col-sm-offset-2 col-sm-10">
+                <button id="add_response" class="btn btn-sm" type="button">Ajouter une autre reponse
+                </button>
+            </div>
         </div>
 
         <div class="form-group {{ (errors.project_type) ? 'has-error' : '' }}">
@@ -73,8 +75,8 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button id="submit" type="submit" class="btn btn-default">Ajouter la question</button>
+           <div class="col-sm-offset-1 col-sm-10">
+                <button id="submit" type="submit" class="btn btn-success btn-default">Ajouter la question</button>
             </div>
         </div>
     </form>
