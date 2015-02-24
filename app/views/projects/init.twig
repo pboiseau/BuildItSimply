@@ -1,8 +1,13 @@
 {% extends 'layouts/' ~ layout ~ '.twig' %}
 
 {% block body %}
-<div class="pageHead">
-    <h1>liste des projets</h1>
+<div id="timelineHead" class="pageHead">
+    <ul>
+        <li class="timelineActive"><span></span>Information</li>
+        <li><span></span>Détails</li>
+        <li><span></span>Validation</li>
+    </ul>
+    <hr class="clear"/>
 </div>
 <div id="ProjetInfo">
 
@@ -59,7 +64,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">Continuer</button>
+                    <button type="submit" class="btn btn-default buttonWhite">Continuer</button>
                 </div>
             </div>
         </form>

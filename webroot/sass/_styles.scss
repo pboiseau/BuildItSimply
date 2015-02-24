@@ -78,6 +78,13 @@ h3{
         border-color: none !important;
     }
 }
+input, textarea{
+    outline: none !important;
+    &:focus{
+        outline: none;
+        outline-offset: none;
+    }
+}
 * {
 margin: 0;
 }

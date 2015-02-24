@@ -1,5 +1,44 @@
 // _init.scss
 
+#timelineHead{
+	text-align: center;
+	ul{
+		background: image-url("timeline-separator.png") no-repeat 62px 6px;
+		display: inline-block;
+		.timelineActive{
+			color: white;
+			span{
+				background: white;
+			}
+		}
+		li{
+			float: left;
+			text-transform: uppercase;
+			color: #c8c8c8;
+			font-size: 14px;
+			span{
+				width: 15px;
+				height: 15px;
+				border-radius: 100%;
+				display: block;
+				background: #c8c8c8;
+				margin: 0 auto;
+				margin-bottom: 6px;
+			}
+			&:nth-of-type(2){
+				margin: 0 97px 0 89px;
+			}
+			// &:nth-of-type(2):before{
+			// 	width: 145px;
+			// 	height: 2px;
+			// 	background: #c8c8c8;
+			// 	content: "";
+			// 	display: block;
+			// }
+		}
+	}
+}
+
 #ProjetInfo{
 	.wrapper{
 		text-align: center;
@@ -17,6 +56,7 @@
 			width: 845px;
 			clear: both;
 			margin: 0 !important;
+			margin-bottom: 13px !important;
 			label{
 				text-align: right;
 				float: left;
@@ -27,20 +67,32 @@
 				text-transform: uppercase;
 				color: $colorCla;
 			}
+			input, textarea{
+				width: 100%;
+				max-width: 485px;
+			}
 			.form-group input{
-				width: 485px;
+				max-width: 485px;
+				width: 100%;
 			}
 			.col-sm-10{
 				width: 485px;
 				float: right;
 			}
+			.tokenfield{
+				text-align: left;
+				input[type="text"] {
+				  @include input-placeholder {
+				    color: #a0a0a0 !important;
+				    text-align: left;
+				  }
+				}
+			}
 		}
 	}
 	
 }
-.form-group textarea, .form-group .tokenfield{
-//	background: #f8f8f8;
-    background: $colorInputBg;
-	border: 1px solid #ededed;
-	font-size: 14px;
+.tokenfield.focus{
+	box-shadow: none;
+	border-color: #2c3e50;
 }

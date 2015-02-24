@@ -116,12 +116,12 @@ $trans-duration-base: 250ms;
 	input{
 //		background: #f8f8f8;
         background: $colorInputBg;
-		border: 1px solid #ededed;
+		border: 1px solid #dbdbdb;
 		font-size: 14px;
 	}
 	input[type="text"] {
 	  @include input-placeholder {
-	    color: #a0a0a0;
+	    color: #a0a0a0 !important;
 	  }
 	}
 	.buttonWhite{
@@ -136,11 +136,22 @@ $trans-duration-base: 250ms;
 		}
 	}
 }
+.form-group textarea, .form-group .tokenfield{
+//	background: #f8f8f8;
+    background: $colorInputBg;
+	border: 1px solid #dbdbdb;
+	font-size: 14px;
+}
 .form-marg{
 	margin-right: 28px !important;
 }
 .has-error .help-block{
 	font-size: 14px;
 }
+textarea, input {
+	  @include input-placeholder {
+	    color: #a0a0a0 !important;
+	  }
+	}
 
 
