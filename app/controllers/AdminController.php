@@ -31,7 +31,24 @@ class AdminController extends AppController
 
     public function projectStep()
     {
-        $this->render('admin/projects/step', []);
+
+        if ($this->request() == "POST") 
+        {
+            $request = $this->f3->get('POST');
+            var_dump($request);
+            die();
+
+        }
+
+        $types = ProjectType::all(array('id', 'type'));
+        $steps = ProjectStep::where('project_question_id', '>', 0)
+            ->join('project_question', 'project_step.project_question_id', '=', 'project_question.id')
+            ->orderBy('project_step.step', 'asc')
+            ->get();
+
+        $this->render('admin/projects/step', compact('steps', 'types'));
+
+
     }
 
     public function projectQuestion()
@@ -41,14 +58,13 @@ class AdminController extends AppController
         if ($this->request() == "POST") {
             $request = $this->f3->get('POST');
 
-
             if ($this->ProjectQuestion->validate($request)) {
                 $question = ProjectQuestion::create([
                     'question' => $request['question'],
                     'description' => $request['description']
                 ]);
 
-                $this->addResponses($request);
+                $this->addResponses($request, $question->id);
 
             } else {
                 $error = $this->ProjectQuestion->errors;
@@ -86,12 +102,17 @@ class AdminController extends AppController
         }
 
         $questions = ProjectQuestion::all(array('id', 'question'));
+        $responses = ProjectResponse::all(array('response', 'question_id'));
 
-        $this->render('admin/projects/response', compact('questions'));
+        $this->render('admin/projects/response', compact('questions', 'responses'));
     }
 
-    public function addResponses($request)
+    public function addResponses($request, $idQuestion = null)
     {
+
+        if(empty($idQuestion))
+            $idQuestion = $request['project_question'];
+
         foreach ($request['response'] as $key => $response) 
         {
             if ($this->ProjectResponse->validate($response)) 
@@ -110,7 +131,9 @@ class AdminController extends AppController
                     ProjectResponse::create([
                         'response'      => $response['response'],
                         'description'   => $response['description'],
-                        'question_id'   => $request['project_question'],
+                        'price'         => $request['price'],
+                        'tag'           => $request['tag'],
+                        'question_id'   => $idQuestion,
                         'image'         => $response['image']
                     ]);
                 }
@@ -119,7 +142,9 @@ class AdminController extends AppController
                     ProjectResponse::create([
                         'response'      => $response['response'],
                         'description'   => $response['description'],
-                        'question_id'   => $request['project_question'],
+                        'price'         => $request['price'],
+                        'tag'           => $request['tag'],
+                        'question_id'   => $idQuestion
                     ]);
                 }
 

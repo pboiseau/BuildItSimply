@@ -9,10 +9,20 @@
 	    	<label for="question" class="col-sm-2 control-label">Question</label>
 	    	<div class="col-sm-9">
 	        <select id="question" name="project_question" class="form-control">
+                <option disabled selected> -- choisir une question -- </option>
 	            {% for question in questions %}
 	                <option value="{{ question.id }}">{{ question.question }}</option>
 	            {% endfor %}
 	        </select>
+
+            <!-- TODO: afficher les réponses déjà présentes --> 
+            <ul id="responses">
+                {% for response in responses if response.question_id == 0 %}
+                    <li>{{ response.response }}</li>
+                {% endfor %}
+            </ul>
+
+
 	        <span class="help-block with-errors">{% if errors.project_type %}{{ errors.project_type }}{% endif %}</span>
 	        </div>
 
@@ -47,6 +57,24 @@
         </div>
 
         <div class="form-group">
+            <label for="reponse" class="col-sm-2 control-label">Price</label>
+            <div class="col-sm-10">
+                <div class="col-sm-10">
+                    <input type="text" name="price" class="form-control" placeholder="Le prix de l'élément">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="reponse" class="col-sm-2 control-label">Tag</label>
+            <div class="col-sm-10">
+                <div class="col-sm-10">
+                    <input type="text" name="tag" class="form-control" placeholder="Saisir les tags associés">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-sm-offset-1 col-sm-10">
                 <button id="submit" type="submit" class="btn btn-success btn-default">Envoyer le(s) réponse(s)
                 </button>
@@ -69,6 +97,7 @@
                 $('.response-container').last().after("<div class='form-group response-container'>             <label for='reponse' class='col-sm-2 control-label'>Réponse</label> <div class='col-sm-10'> <div class='col-sm-10'> <input type='text' name='response[" + i + "][response]' class='form-control' placeholder='Réponse'> </div> </div> <div class='col-sm-10 col-sm-offset-2'> <div class='col-sm-10'> <textarea class='form-control' name='response[" + i + "][description]' cols='3' rows='3'placeholder='Description de la réponse'></textarea> </div> </div> <div class='col-sm-10 col-sm-offset-2'> <div class='col-sm-10'> <input type='file' name='image[]'> </div> </div></div>");
 
             });
+
         });
     </script>
 

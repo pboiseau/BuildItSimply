@@ -2,4 +2,64 @@
 
 {% block body %}
 
+	<form method="post" action="{{ home ~ request }}" class="form-horizontal">
+	{% for type in types %}
+		<div class=" panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<input type="checkbox" name="{{type.id}}" value="type"> 
+					{{type.type}}
+				</h3>
+			</div>
+			{% for step in steps if step.project_type_id == type.id %}
+			  	<div class="panel-body">
+			 		<input type="checkbox" name="{{step.project_question_id}}" value="question">
+			  		ETAPE {{step.step}}  
+			  		<input type="text" name"{{type.id}}" class="form-control" value="{{step.question}}">
+
+			  	</div>
+			{% endfor %}
+	 	</div>
+	{% endfor %}
+
+
+	    <div class="form-group">
+	    	<div class="col-sm-1">
+	        	<button id="submit" type="submit" class="btn btn-success btn-default">Enregistrer les modifications
+	            </button>
+	        </div>
+	        <div class="col-sm-offset-3">
+	            <button id="submit" type="submit" class="btn btn-danger btn-default">Supprimer la selection
+	            </button>
+	        </div>
+
+	    </div>
+	</form>
+
+{% endblock %}
+
+
+
+{% block partial_js %}
+
+    <script>
+        $(document).ready(function () 
+        {
+            $(':input[value="type"]').click(checkAll);
+
+            function checkAll()
+            {
+            	if( this.checked )
+            	{
+            		var parent = this.parentNode.parentNode.parentNode;
+            		var inputs = parent.getElementsByTagName('input');
+            		for(var i = 0; i<inputs.length; i++)
+            			inputs[i].checked = true;
+            	}
+            }
+
+
+        });
+    </script>
+
 {% endblock %}
