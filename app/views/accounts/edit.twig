@@ -1,81 +1,126 @@
 {% extends 'layouts/' ~ layout ~ '.twig' %}
+{% set type = user.type %}
+
 {% block body %}
-    <div class="container">
-        <div class="page-header">
-            <h3>{{ user.firstname ~ " " ~ user.lastname }} - {{ user.type }}</h3>
-        </div>
-        <div class="page-content">
-            <form method="post" action="{{ home }}users/profile/update" class="form-horizontal"
-                  enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="picture" class="col-sm-2 control-label">Photo de profil</label>
 
-                    <div class="col-sm-10">
-                        <img src="{{ home }}{% if user.picture %}{{ user.picture }}{% endif %}" alt='user picture'
-                             height="200" width="200" class="img-rounded"/>
-                        <input type="file" class="btn" id="picture" name="picture" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group {{ (errors.phone) ? 'has-error' : '' }}">
-                    <label for="phone" class="col-sm-2 control-label">Téléphone</label>
+    <div id="profileView">
+        <!-- begin FORM -->
+        <form method="post" action="{{ home }}users/profile/update" class="form-horizontal">
+            <div class="wrapper">
 
-                    <div class="col-sm-10">
-                        <input type="tel" name="account[phone]" value="{% if user.phone %}{{ user.phone }}{% endif %}"
-                               class="form-control" id="phone" placeholder="Votre numero de téléphone" readonly>
-                        <img src="" alt="edit">
-                        <span class="help-block with-errors">{% if errors.phone %}{{ errors.phone }}{% endif %}</span>
-                    </div>
-                </div>
-                <div class="form-group {{ (errors.city) ? 'has-error' : '' }}">
-                    <label for="city" class="col-sm-2 control-label">Ville</label>
+                <div id="profileInfo">
 
-                    <div class="col-sm-8">
-                        <input type="text" name="account[city]" value="{% if user.city %}{{ user.city }}{% endif %}"
-                               class="form-control" id="city" placeholder="Votre ville" readonly>
-                        <img src="" alt="edit">
-                        <input type="hidden" name="account[lat]">
-                        <input type="hidden" name="account[lng]">
-                        <span class="help-block with-errors">{% if errors.city %}{{ errors.city }}{% endif %}</span>
-                    </div>
-                    <div class="col-sm-2">
-                        <button class="btn btn-default" type="button" id="getcoordonate">Verifier</button>
-                    </div>
-                </div>
-                <div class="form-group {{ (errors.description) ? 'has-error' : '' }}">
-                    <label for="city" class="col-sm-2 control-label">Description</label>
+                    <h1>{{ user.type }} <span>{{ (type == "FREELANCE") ? user.freelance.experience : '' }}</span></h1>
 
-                    <div class="col-sm-10">
+                    {% set picture = (user.picture is empty) ? image ~ 'user-profile.png' : home ~ user.picture %}
+                    <img src="{{ picture }}" alt="Freelance"/>
+                    <input type="file" class="btn" id="picture" name="picture" class="form-control">
+
+
+                    <h2>{{ user.firstname ~ ' ' ~ user.lastname }}
+                        <span>
+                            {% if type == "FREELANCE" %}
+                                <input type="text" name="freelance[activity]"
+                                       value="{% if user.freelance.activity %}{{ user.freelance.activity }}{% endif %}"
+                                       class="form-control" id="activity" placeholder="Description de votre activité">
+                                <span class="help-block with-errors">{% if errors.freelance.activity %}{{ errors.freelance.activity }}{% endif %}</span>
+
+                            {% elseif type == "CLIENT" %}
+                                <input type="text" name="client[activity]"
+                                       value="{% if user.client.activity %}{{ user.client.activity }}{% endif %}"
+                                       class="form-control" id="activity" placeholder="Description de votre activité">
+                                <span class="help-block with-errors">
+                                    {% if errors.client.activity %}{{ errors.client.activity }}{% endif %}
+                                </span>
+                            {% endif %}
+                        </span>
+                    </h2>
+
+                    <ul>
+                        {% if type == "FREELANCE" %}
+                            <li>Projets réalisés <span>23</span></li>
+                        {% elseif type == "CLIENT" %}
+                            <li>Projets proposés <span>2</span></li>
+                        {% endif %}
+
+                        {% if type == "FREELANCE" %}
+                            <li>Note des clients
+                                <div class="stars">
+                                    <form action="">
+                                        <input class="star star-5" id="star-5" type="radio" name="star"/>
+                                        <label class="star star-5" for="star-5"></label>
+                                        <input class="star star-4" id="star-4" type="radio" name="star"/>
+                                        <label class="star star-4" for="star-4"></label>
+                                        <input class="star star-3" id="star-3" type="radio" checked name="star"/>
+                                        <label class="star star-3" for="star-3"></label>
+                                        <input class="star star-2" id="star-2" type="radio" checked name="star"/>
+                                        <label class="star star-2" for="star-2"></label>
+                                        <input class="star star-1" id="star-1" type="radio" checked name="star"/>
+                                        <label class="star star-1" for="star-1"></label>
+                                    </form>
+                                </div>
+                            </li>
+                        {% endif %}
+
+                        {% if type == "FREELANCE" %}
+                            <li>
+                                <input type="url" name="freelance[url]"
+                                       value="{% if user.freelance.url %}{{ user.freelance.url }}{% endif %}"
+                                       class="form-control" id="url" placeholder="Url de votre site personnel">
+                            </li>
+                        {% endif %}
+                        <li>Me situer</li>
+                    </ul>
+                    <div id="maps" style="width: 348px; height: 245px;"></div>
+                </div><!-- end PROFILE INFO -->
+
+                <div id="profileDescription">
+
+                    <h3>Description</h3>
+
+                    <p class="infoList">
                         <textarea name="account[description]" class="form-control" rows="3"
-                                  placeholder="Description de votre profil"
-                                  readonly>{% if user.description %}{{ user.description }}{% endif %}</textarea>
-                        <img src="" alt="edit">
-                    </div>
+                                  placeholder="Description de votre profil">{% if user.description %}{{ user.description }}{% endif %}</textarea>
+                    </p>
+
+                    {% if type == "FREELANCE" %}
+                        <h3>Mes compétences</h3>
+                        <div class="skills">
+                            <input name="freelance[skills]" type="text" class="form-control" id="skills"
+                                   value="{% for skill in user.freelance.skills %}{{ skill.name ~ ',' }}{% endfor %}">
+                        </div>
+                    {% endif %}
                 </div>
 
-                {% if user.type == "FREELANCE" %}
-                    <div class="form-group {{ (errors.activity) ? 'has-error' : '' }}">
-                        <label for="activity" class="col-sm-2 control-label">Activité</label>
+                <div class="listProjet">
+                    <h3>Informations complémentaires</h3>
+
+                    <div class="form-group {{ (errors.phone) ? 'has-error' : '' }}">
+                        <label for="phone" class="col-sm-2 control-label">Téléphone</label>
 
                         <div class="col-sm-10">
-                            <input type="text" name="freelance[activity]"
-                                   value="{% if user.freelance.activity %}{{ user.freelance.activity }}{% endif %}"
-                                   class="form-control" id="activity" placeholder="Description de votre activité"
-                                   readonly>
-                            <img src="" alt="edit">
-                            <span class="help-block with-errors">{% if errors.freelance.activity %}{{ errors.freelance.activity }}{% endif %}</span>
+                            <input type="tel" name="account[phone]"
+                                   value="{% if user.phone %}{{ user.phone }}{% endif %}"
+                                   class="form-control" id="phone" placeholder="Votre numero de téléphone">
+                            <span class="help-block with-errors">{% if errors.phone %}{{ errors.phone }}{% endif %}</span>
                         </div>
                     </div>
-                    <div class="form-group {{ (errors.url) ? 'has-error' : '' }}">
-                        <label for="url" class="col-sm-2 control-label">Site personnel</label>
 
-                        <div class="col-sm-10">
-                            <input type="url" name="freelance[url]"
-                                   value="{% if user.freelance.url %}{{ user.freelance.url }}{% endif %}"
-                                   class="form-control" id="url" placeholder="Url de votre site personnel" readonly>
-                            <img src="" alt="edit">
-                            <span class="help-block with-errors">{% if errors.url %}{{ errors.url }}{% endif %}</span>
+                    <div class="form-group {{ (errors.city) ? 'has-error' : '' }}">
+                        <label for="city" class="col-sm-2 control-label">Ville</label>
+
+                        <div class="col-sm-8">
+                            <input type="text" name="account[city]" value="{% if user.city %}{{ user.city }}{% endif %}"
+                                   class="form-control" id="city" placeholder="Votre ville">
+                            <input type="hidden" name="account[lat]">
+                            <input type="hidden" name="account[lng]">
+                            <span class="help-block with-errors">{% if errors.city %}{{ errors.city }}{% endif %}</span>
+                        </div>
+                        <div class="col-sm-2">
+                            <button class="btn btn-default" type="button" id="getcoordonate">Verifier</button>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label for="type" class="col-sm-2 control-label">Experience en tant que Freelance</label>
 
@@ -89,92 +134,82 @@
                             </select>
                         </div>
                     </div>
+
                     <div class="form-group">
-                        <label for="type" class="col-sm-2 control-label">Compétences</label>
-
-                        <div class="col-sm-10">
-                            <input name="freelance[skills]" type="text" class="form-control" id="skills"
-                                   value="{% for skill in user.freelance.skills %}{{ skill.name ~ ',' }}{% endfor %}">
-                            <img src="" alt="edit">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button id="submit" type="submit" class="btn btn-default">Enregistrer les informations
+                            </button>
                         </div>
                     </div>
 
-                {% elseif user.type == "CLIENT" %}
-
-                    <div class="form-group {{ (errors.activity) ? 'has-error' : '' }}">
-                        <label for="activity" class="col-sm-2 control-label">Activité</label>
-
-                        <div class="col-sm-10">
-                            <input type="text" name="client[activity]"
-                                   value="{% if user.client.activity %}{{ user.client.activity }}{% endif %}"
-                                   class="form-control" id="activity" placeholder="Description de votre activité"
-                                   readonly>
-                            <img src="" alt="edit">
-                            <span class="help-block with-errors">{% if errors.client.activity %}{{ errors.client.activity }}{% endif %}</span>
-                        </div>
-                    </div>
-
-                {% endif %}
-
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button id="submit" type="submit" class="btn btn-default">Enregistrer les informations</button>
-                    </div>
                 </div>
-            </form>
-        </div>
-    </div>
+
+                <hr class="clear"/>
+
+            </div><!-- end WRAPPER -->
+        </form>
+        <!-- end FORM -->
+
+    </div><!-- end PROFILE VIEW -->
+
+    <div class="push"></div>
+
 {% endblock %}
 
-{% block partial_js %}
-    {{ parent() }}
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBINLv5Zv0AOt5n54TdBDQn-T9sJ5ZIqHg"></script>
-    <script>
-        $(document).ready(function () {
-            var geocoder = new google.maps.Geocoder();
-            $('#getcoordonate').click(function () {
-                geocoder.geocode(
-                        {address: $('#city').val()},
-                        function (result, status) {
-                            if (status === 'OK') {
-                                $('#getcoordonate').removeClass().addClass('btn btn-success');
-                                $('#submit').prop('disabled', false);
-                            } else {
-                                $('#getcoordonate').removeClass().addClass('btn btn-danger');
-                                $('#submit').prop('disabled', true);
-                            }
-                            if (result.length > 0) {
-                                var coordonate = result[0].geometry.location;
-                                // console.log(coordonate.lat() + " - " + coordonate.lng());
-                                $('input[name="account[lat]"]').val(coordonate.lat());
-                                $('input[name="account[lng]"]').val(coordonate.lng());
-                            }
+    {% block partial_js %}
+        {{ parent() }}
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBINLv5Zv0AOt5n54TdBDQn-T9sJ5ZIqHg"></script>
+        <script>
+
+            function getPosition(callback) {
+                var lat = "{{ user.lat }}";
+                var lng = "{{ user.lng }}";
+                var position;
+
+                if (lat == "" || lat == "") {
+                    geocoder = new google.maps.Geocoder();
+                    geocoder.geocode({
+                        address: "Paris, France"
+                    }, function (result, status) {
+                        if (status === "OK") {
+                            position = result[0].geometry.location;
+                            callback.call(this, position);
                         }
-                );
-            });
-
-            // Set editable field or not editable
-            var allEdit = $('img[alt="edit"]');
-
-            for (var i = 0; i < allEdit.length; i++) {
-                allEdit[i].addEventListener('click', editInput, false);
-                $(allEdit[i]).prev()[0].addEventListener('blur', focusOut, false);
+                    });
+                }
+                callback.call(this, new google.maps.LatLng(lat, lng));
             }
 
-            function editInput() {
-                var inputSelected = $(this).prev()[0];
-                inputSelected.removeAttribute('readonly');
-                inputSelected.classList.remove("not-editable");
-                inputSelected.classList.add("editable");
-                inputSelected.focus();
+
+            function initialize() {
+                getPosition(function (position) {
+                    var mapOptions = {
+                        center: position,
+                        zoom: 13
+                    };
+
+                    var map = new google.maps.Map(document.getElementById("maps"),
+                            mapOptions);
+
+                    var marker = new google.maps.Marker({
+                        title: "Adresse",
+                        visible: true,
+                        map: map,
+                        position: position,
+                    });
+
+                    marker.info = new google.maps.InfoWindow({
+                        content: "<p>{{ user.firstname ~ " " ~ user.lastname }}</p><p>{{ user.city }}</p><p>{{ user.phone }}</p>",
+                        position: position
+                    });
+
+                    google.maps.event.addListener(marker, 'click', function (e) {
+                        marker.info.open(map, marker);
+                    });
+                });
             }
 
-            function focusOut() {
-                this.setAttribute('readonly', '');
-                this.classList.remove("editable");
-                this.classList.add("not-editable");
-            }
+            google.maps.event.addDomListener(window, 'load', initialize);
 
-        });
-    </script>
-{% endblock %}
+        </script>
+    {% endblock %}
