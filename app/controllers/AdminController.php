@@ -11,11 +11,17 @@ class AdminController extends AppController
         parent::__construct();
     }
 
+    /*
+     * Back-office's home
+    */
     public function main()
     {
         $this->render('admin/');
     }
 
+    /*
+     * Add type of project
+    */
     public function projectType()
     {
         if ($this->request() == "POST") {
@@ -29,14 +35,32 @@ class AdminController extends AppController
         $this->render('admin/projects/type', compact('types'));
     }
 
+
+    /*
+     * Manage step of project
+    */
     public function projectStep()
     {
 
         if ($this->request() == "POST") 
         {
             $request = $this->f3->get('POST');
-            var_dump($request);
-            die();
+
+            $questions = new ProjectQuestion();
+            foreach ($request['question'] as $key => $question) 
+            {
+                $questions->where('id', $key)->update(['question' => $question]);
+            }
+
+            /*
+             * Remove question à développer :
+             * Rechercher dans Project_step quel row dispose de project_question_id et l'a supprimer
+             * Puis supprimer dans Project_question la question avec : $questions->destroy(id_question); 
+            */
+
+            $this->setFlash("Les étapes ont bien été mises à jours");
+            $this->f3->reroute($this->f3->get('PATTERN'));
+        
 
         }
 
@@ -47,10 +71,13 @@ class AdminController extends AppController
             ->get();
 
         $this->render('admin/projects/step', compact('steps', 'types'));
-
-
     }
 
+
+
+    /*
+     * Add questions for one type of project
+    */
     public function projectQuestion()
     {
         $error = array();
@@ -88,6 +115,10 @@ class AdminController extends AppController
         $this->render('admin/projects/question', compact('types', 'error'));
     }
 
+
+    /*
+     * For answer one question added previously
+    */
     public function projectResponse()
     {
 
@@ -107,6 +138,10 @@ class AdminController extends AppController
         $this->render('admin/projects/response', compact('questions', 'responses'));
     }
 
+
+    /*
+     * Function for add answer
+    */
     public function addResponses($request, $idQuestion = null)
     {
 
@@ -150,6 +185,26 @@ class AdminController extends AppController
 
             }
         }
+    }
+
+
+    /**
+     * POST request for add skill in the database
+     */
+    public function freelanceSkillNew()
+    {
+        if($this->request() == "POST")
+        {
+
+            if( Skill::create($this->f3->get('POST')))
+            {
+                $this->setFlash("La compétence a bien été ajouté.");
+                $this->f3->reroute($this->f3->get('PATTERN'));
+            }
+        }
+
+        $categories = CategorySkill::all();
+        $this->render('admin/freelance/skill/new', compact('categories'));
     }
 
 

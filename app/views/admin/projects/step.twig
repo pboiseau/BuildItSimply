@@ -1,27 +1,29 @@
 {% extends 'layouts/' ~ layout ~ '.twig' %}
 
 {% block body %}
-
+	<h2>Gérer les étapes</h2>
+	
 	<form method="post" action="{{ home ~ request }}" class="form-horizontal">
+	<div class="form-group">
 	{% for type in types %}
 		<div class=" panel panel-primary">
 			<div class="panel-heading">
 				<h3 class="panel-title">
-					<input type="checkbox" name="{{type.id}}" value="type"> 
+					<input type="checkbox" name="checked_type[{{type.id}}]" value="type"> 
 					{{type.type}}
 				</h3>
 			</div>
 			{% for step in steps if step.project_type_id == type.id %}
 			  	<div class="panel-body">
-			 		<input type="checkbox" name="{{step.project_question_id}}" value="question">
+			 		<input type="checkbox" name="checked_question[{{step.project_question_id}}]" value="question">
 			  		ETAPE {{step.step}}  
-			  		<input type="text" name"{{type.id}}" class="form-control" value="{{step.question}}">
+			  		<input class="form-control" type="text" name="question[{{step.project_question_id}}]" class="form-control" value="{{step.question}}">
 
 			  	</div>
 			{% endfor %}
 	 	</div>
 	{% endfor %}
-
+	</div>
 
 	    <div class="form-group">
 	    	<div class="col-sm-1">
@@ -32,8 +34,8 @@
 	            <button id="submit" type="submit" class="btn btn-danger btn-default">Supprimer la selection
 	            </button>
 	        </div>
-
 	    </div>
+
 	</form>
 
 {% endblock %}
