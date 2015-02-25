@@ -708,41 +708,52 @@ textarea::-webkit-input-placeholder, input::-webkit-input-placeholder {
   border: 1px solid #f2f2f2;
 }
 /* line 15, ../sass/_show.scss */
+#profileInfo div.stars {
+  float: right;
+  width: 150px;
+}
+/* line 18, ../sass/_show.scss */
+#profileInfo div.stars label.star {
+  font-size: 16px;
+  margin: 0 3px;
+  padding: 0;
+}
+/* line 24, ../sass/_show.scss */
 #profileInfo h1 {
   font-size: 21px;
 }
-/* line 17, ../sass/_show.scss */
+/* line 26, ../sass/_show.scss */
 #profileInfo h1 span {
   font-family: "montserratlight", helvetica, arial, sans-serif;
   letter-spacing: normal;
 }
-/* line 22, ../sass/_show.scss */
+/* line 31, ../sass/_show.scss */
 #profileInfo h2 {
   font-size: 18px;
   margin-bottom: 30px;
 }
-/* line 25, ../sass/_show.scss */
+/* line 34, ../sass/_show.scss */
 #profileInfo h2 span {
   font-size: 16px;
   text-transform: none;
   color: #5d6e72;
   display: block;
 }
-/* line 32, ../sass/_show.scss */
+/* line 41, ../sass/_show.scss */
 #profileInfo h1, #profileInfo h2 {
   padding: 0;
 }
-/* line 35, ../sass/_show.scss */
+/* line 44, ../sass/_show.scss */
 #profileInfo img {
   display: block;
   margin: 0 auto;
   padding: 30px 0 20px 0;
 }
-/* line 40, ../sass/_show.scss */
+/* line 49, ../sass/_show.scss */
 #profileInfo ul {
   margin-top: 40px;
 }
-/* line 42, ../sass/_show.scss */
+/* line 51, ../sass/_show.scss */
 #profileInfo ul li {
   float: left;
   text-align: left;
@@ -753,8 +764,12 @@ textarea::-webkit-input-placeholder, input::-webkit-input-placeholder {
   padding: 10px 0;
   width: 100%;
 }
+/* line 60, ../sass/_show.scss */
+#profileInfo ul li span {
+  float: right;
+}
 
-/* line 54, ../sass/_show.scss */
+/* line 66, ../sass/_show.scss */
 #profileDescription {
   width: 650px;
   float: right;
@@ -763,22 +778,22 @@ textarea::-webkit-input-placeholder, input::-webkit-input-placeholder {
   background: #005f78;
   border-radius: 2px;
 }
-/* line 61, ../sass/_show.scss */
+/* line 73, ../sass/_show.scss */
 #profileDescription h3 {
   text-align: left;
   color: white;
 }
-/* line 65, ../sass/_show.scss */
+/* line 77, ../sass/_show.scss */
 #profileDescription p {
   color: #eeeeee;
   font-family: "montserratlight", helvetica, arial, sans-serif;
   margin: 20px 0;
 }
-/* line 69, ../sass/_show.scss */
+/* line 81, ../sass/_show.scss */
 #profileDescription p:last-of-type {
   margin-bottom: 0;
 }
-/* line 74, ../sass/_show.scss */
+/* line 86, ../sass/_show.scss */
 #profileDescription .tagList a {
   padding: 5px 10px;
   color: #666666;
@@ -792,28 +807,28 @@ textarea::-webkit-input-placeholder, input::-webkit-input-placeholder {
   -webkit-transition: all, 0.2s, linear;
   transition: all, 0.2s, linear;
 }
-/* line 83, ../sass/_show.scss */
+/* line 95, ../sass/_show.scss */
 #profileDescription .tagList a:hover {
   background: white;
   color: #005f78;
 }
 
-/* line 90, ../sass/_show.scss */
+/* line 102, ../sass/_show.scss */
 #profileView {
   position: relative;
 }
-/* line 92, ../sass/_show.scss */
+/* line 104, ../sass/_show.scss */
 #profileView .listProjet {
   text-align: center;
   width: 650px;
   position: relative;
 }
-/* line 96, ../sass/_show.scss */
+/* line 108, ../sass/_show.scss */
 #profileView .listProjet h3:first-of-type {
   text-align: left;
   padding: 40px 0 20px 0;
 }
-/* line 100, ../sass/_show.scss */
+/* line 112, ../sass/_show.scss */
 #profileView .listProjet h4 {
   font-size: 21px;
   color: #005f78;
@@ -822,74 +837,74 @@ textarea::-webkit-input-placeholder, input::-webkit-input-placeholder {
   margin-bottom: 3px;
   padding: 25px 25px 0 25px;
 }
-/* line 107, ../sass/_show.scss */
+/* line 119, ../sass/_show.scss */
 #profileView .listProjet h4 a {
   -moz-transition: all, 0.2s, linear;
   -o-transition: all, 0.2s, linear;
   -webkit-transition: all, 0.2s, linear;
   transition: all, 0.2s, linear;
 }
-/* line 109, ../sass/_show.scss */
+/* line 121, ../sass/_show.scss */
 #profileView .listProjet h4 a:hover {
   color: #004456;
 }
-/* line 115, ../sass/_show.scss */
+/* line 127, ../sass/_show.scss */
 #profileView .listProjet ul li {
   text-align: left;
 }
-/* line 118, ../sass/_show.scss */
+/* line 130, ../sass/_show.scss */
 #profileView .listProjet li {
   background: white;
 }
 
-/* line 123, ../sass/_show.scss */
+/* line 135, ../sass/_show.scss */
 .listProjet#profileAvis {
   width: 100%;
   float: left;
 }
 
-/* line 128, ../sass/_show.scss */
+/* line 140, ../sass/_show.scss */
 #profileAvis li {
   width: 49%;
   float: left;
   padding: 25px 0;
   position: relative;
 }
-/* line 133, ../sass/_show.scss */
+/* line 145, ../sass/_show.scss */
 #profileAvis li:nth-child(odd) {
   margin-right: 21px;
 }
-/* line 137, ../sass/_show.scss */
+/* line 149, ../sass/_show.scss */
 #profileAvis img {
   margin-left: 25px;
   float: left;
 }
-/* line 141, ../sass/_show.scss */
+/* line 153, ../sass/_show.scss */
 #profileAvis p {
   float: left;
   width: 365px;
 }
-/* line 144, ../sass/_show.scss */
+/* line 156, ../sass/_show.scss */
 #profileAvis p:last-of-type {
   font-size: 14px;
 }
-/* line 148, ../sass/_show.scss */
+/* line 160, ../sass/_show.scss */
 #profileAvis .recruteurAvis {
   padding-left: 25px;
   width: 230px;
 }
-/* line 151, ../sass/_show.scss */
+/* line 163, ../sass/_show.scss */
 #profileAvis .recruteurAvis a {
   -moz-transition: all, 0.2s, linear;
   -o-transition: all, 0.2s, linear;
   -webkit-transition: all, 0.2s, linear;
   transition: all, 0.2s, linear;
 }
-/* line 153, ../sass/_show.scss */
+/* line 165, ../sass/_show.scss */
 #profileAvis .recruteurAvis a:hover, #profileAvis .recruteurAvis a:hover span {
   color: #004456;
 }
-/* line 156, ../sass/_show.scss */
+/* line 168, ../sass/_show.scss */
 #profileAvis .recruteurAvis a span {
   -moz-transition: all, 0.2s, linear;
   -o-transition: all, 0.2s, linear;
@@ -898,31 +913,34 @@ textarea::-webkit-input-placeholder, input::-webkit-input-placeholder {
   color: #5d6e72;
   font-size: 14px;
 }
-/* line 160, ../sass/_show.scss */
+/* line 172, ../sass/_show.scss */
 #profileAvis .recruteurAvis a span:hover {
   color: #004456;
 }
-/* line 166, ../sass/_show.scss */
+/* line 178, ../sass/_show.scss */
 #profileAvis .buttonWhite {
   margin-top: 40px;
 }
-
-/* line 172, ../sass/_show.scss */
-div.stars {
-  width: 200px;
-  display: inline-block;
-  margin-left: 20px;
+/* line 181, ../sass/_show.scss */
+#profileAvis div.stars {
   position: absolute;
   top: 15px;
   right: 25px;
 }
 
-/* line 181, ../sass/_show.scss */
+/* line 189, ../sass/_show.scss */
+div.stars {
+  width: 200px;
+  display: inline-block;
+  margin-left: 20px;
+}
+
+/* line 196, ../sass/_show.scss */
 input.star {
   display: none;
 }
 
-/* line 185, ../sass/_show.scss */
+/* line 200, ../sass/_show.scss */
 label.star {
   float: right;
   padding: 5px;
@@ -931,24 +949,24 @@ label.star {
   transition: all .2s;
 }
 
-/* line 192, ../sass/_show.scss */
+/* line 207, ../sass/_show.scss */
 input.star:checked ~ label.star:before {
   content: '\f005';
   color: #00657f;
   transition: all .25s;
 }
 
-/* line 199, ../sass/_show.scss */
+/* line 214, ../sass/_show.scss */
 input.star-5:checked ~ label.star:before {
   color: #00657f;
 }
 
-/* line 204, ../sass/_show.scss */
+/* line 219, ../sass/_show.scss */
 input.star-1:checked ~ label.star:before {
   color: #00657f;
 }
 
-/* line 207, ../sass/_show.scss */
+/* line 222, ../sass/_show.scss */
 label.star:before {
   content: '\f005';
   color: #d4d4d4;

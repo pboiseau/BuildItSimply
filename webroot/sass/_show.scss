@@ -12,6 +12,15 @@
 	border-radius: 2px;
 	background: white;
 	border: 1px solid #f2f2f2;
+	div.stars{
+		float: right;
+		width: 150px;
+		label.star{
+			font-size: 16px;
+			margin: 0 3px;
+			padding: 0;
+		}
+	}
 	h1{
 		font-size: 21px;
 		span{
@@ -48,6 +57,9 @@
 			border-bottom: 1px solid #e8e8e8;
 			padding: 10px 0;
 			width: 100%;
+			span{
+				float: right;
+			}
 		}
 	}
 }
@@ -166,6 +178,11 @@
 	.buttonWhite{
 		margin-top: 40px;
 	}
+	div.stars{
+	  position: absolute;
+	  top: 15px;
+	  right: 25px;
+	}
 }
 
 
@@ -173,10 +190,8 @@ div.stars{
   width: 200px;
   display: inline-block;
   margin-left: 20px;
-  position: absolute;
-  top: 15px;
-  right: 25px;
 }
+
 
 input.star{
   display: none;
