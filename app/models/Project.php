@@ -91,6 +91,15 @@ class Project extends AppModel
     }
 
     /**
+     * Count all publish project
+     * @return int
+     */
+    public function countPublish()
+    {
+        return $this->whereNotIn('status', ['EN CREATION', 'ANNULE'])->count();
+    }
+
+    /**
      * @param array $project
      * @return static
      */

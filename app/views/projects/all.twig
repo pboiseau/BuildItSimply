@@ -24,7 +24,7 @@
             </ul>
         </div>
         <div id="listMenu">
-            <p>{{ projects | length }} Projets trouvés</p>
+            <p>{{ number }} Projets trouvés</p>
             <span class="custom-dropdown big">
                 <select>
                     <option>Projet récent</option>
@@ -69,12 +69,13 @@
         <hr class="clear"/>
         <div id="pagination">
             <ul>
-                <li class="previous"><a href="#">← Précédent</a></li>
-                <li class="pageActive"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li class="next"><a href="#">Suivant →</a></li>
+                {% if page > 0 %}
+                    <li class="previous"><a href="{{ home }}projects/page/{{ page - 1 }}">← Précédent</a></li>
+                {% endif %}
+                {% for i in 1 .. number_page %}
+                    <li><a href="{{ home }}projects/page/{{ i }}">{{ i }}</a></li>
+                {% endfor %}
+                <li class="next"><a href="{{ home }}projects/page/{{ page + 1 }}">Suivant →</a></li>
             </ul>
             <hr class="clear"/>
         </div>

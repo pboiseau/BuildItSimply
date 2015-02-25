@@ -118,9 +118,22 @@ class ProjectController extends AppController
      */
     public function all()
     {
+        $validator = new Validate();
+        $page = (!empty($this->f3->get('PARAMS.page'))) ? $this->f3->get('PARAMS.page') : 0;
+
+        if (!$validator->isNumber($page)) {
+            $page = 0;
+        }
+
+        $offset = ($page > 0) ? ($page - 1) * ($this->f3->get('PROJECT_PER_PAGE')) : $this->f3->get('PROJECT_PER_PAGE');
+
+        $number_project = $this->Project->countPublish();
+        $number_page = ceil($number_project / $this->f3->get('PROJECT_PER_PAGE'));
+
         $projects = $this->Project->whereNotIn('status', ['EN CREATION', 'ANNULE'])
             ->join('project_type', 'project_type.id', '=', 'project_type_id')
             ->orderBy('projects.created_at', 'desc')
+            ->take(6)->skip($offset)
             ->get([
                 'projects.*',
                 'project_type.type'
@@ -133,7 +146,7 @@ class ProjectController extends AppController
             $projects[$key]['tags'] = $project->tags;
         }
 
-        $this->render('projects/all', compact('projects', 'categories'));
+        $this->render('projects/all', compact('projects', 'categories', 'number_project', 'number_page', 'page'));
     }
 
 
@@ -445,6 +458,3 @@ class ProjectController extends AppController
 
 
 }
-
-
-?>
