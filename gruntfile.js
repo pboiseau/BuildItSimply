@@ -24,7 +24,7 @@ module.exports = function (grunt) {
                         "host": "localhost",
                         "backup_to": "dump/dump_buildmyproject.sql"
                     }
-                },
+                }
             },
             concat: {
                 options: {},
@@ -34,8 +34,7 @@ module.exports = function (grunt) {
                         'bower_components/jquery-ui/jquery-ui.js',
                         'bower_components/bootstrap/dist/bootstrap.js',
                         'webroot/js/bootstrap-tokenfield.js',
-                        'webroot/js/app.js',
-                        'webroot/js/*.js'
+                        'webroot/js/app.js'
                     ],
                     dest: 'webroot/js/dist.js'
                 },

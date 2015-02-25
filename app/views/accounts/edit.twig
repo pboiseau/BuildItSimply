@@ -5,7 +5,7 @@
 
     <div id="profileView">
         <!-- begin FORM -->
-        <form method="post" action="{{ home }}users/profile/update" class="form-horizontal">
+        <form method="post" action="{{ home }}users/profile/update" class="form-horizontal" enctype="multipart/form-data">
             <div class="wrapper">
 
                 <div id="profileInfo">
@@ -72,7 +72,8 @@
                         <li>Me situer</li>
                     </ul>
                     <div id="maps" style="width: 348px; height: 245px;"></div>
-                </div><!-- end PROFILE INFO -->
+                </div>
+                <!-- end PROFILE INFO -->
 
                 <div id="profileDescription">
 
@@ -121,19 +122,21 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="type" class="col-sm-2 control-label">Experience en tant que Freelance</label>
+                    {% if type == "FREELANCE" %}
+                        <div class="form-group">
+                            <label for="type" class="col-sm-2 control-label">Experience en tant que Freelance</label>
 
-                        <div class="col-sm-10">
-                            <select name="freelance[experience]" id="type" class="form-control">
-                                <option value="" disabled>Votre niveau ?</option>
-                                {% for experience in experiences %}
-                                    <option {{ (user.freelance.experience == experience) ? 'selected' : '' }}
-                                            value="{{ experience }}">{{ experience|lower }}</option>
-                                {% endfor %}
-                            </select>
+                            <div class="col-sm-10">
+                                <select name="freelance[experience]" id="type" class="form-control">
+                                    <option value="" disabled>Votre niveau ?</option>
+                                    {% for experience in experiences %}
+                                        <option {{ (user.freelance.experience == experience) ? 'selected' : '' }}
+                                                value="{{ experience }}">{{ experience|lower }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                         </div>
-                    </div>
+                    {% endif %}
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
@@ -146,7 +149,8 @@
 
                 <hr class="clear"/>
 
-            </div><!-- end WRAPPER -->
+            </div>
+            <!-- end WRAPPER -->
         </form>
         <!-- end FORM -->
 
@@ -156,60 +160,60 @@
 
 {% endblock %}
 
-    {% block partial_js %}
-        {{ parent() }}
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBINLv5Zv0AOt5n54TdBDQn-T9sJ5ZIqHg"></script>
-        <script>
+{% block partial_js %}
+    {{ parent() }}
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBINLv5Zv0AOt5n54TdBDQn-T9sJ5ZIqHg"></script>
+    <script>
 
-            function getPosition(callback) {
-                var lat = "{{ user.lat }}";
-                var lng = "{{ user.lng }}";
-                var position;
+        function getPosition(callback) {
+            var lat = "{{ user.lat }}";
+            var lng = "{{ user.lng }}";
+            var position;
 
-                if (lat == "" || lat == "") {
-                    geocoder = new google.maps.Geocoder();
-                    geocoder.geocode({
-                        address: "Paris, France"
-                    }, function (result, status) {
-                        if (status === "OK") {
-                            position = result[0].geometry.location;
-                            callback.call(this, position);
-                        }
-                    });
-                }
-                callback.call(this, new google.maps.LatLng(lat, lng));
-            }
-
-
-            function initialize() {
-                getPosition(function (position) {
-                    var mapOptions = {
-                        center: position,
-                        zoom: 13
-                    };
-
-                    var map = new google.maps.Map(document.getElementById("maps"),
-                            mapOptions);
-
-                    var marker = new google.maps.Marker({
-                        title: "Adresse",
-                        visible: true,
-                        map: map,
-                        position: position,
-                    });
-
-                    marker.info = new google.maps.InfoWindow({
-                        content: "<p>{{ user.firstname ~ " " ~ user.lastname }}</p><p>{{ user.city }}</p><p>{{ user.phone }}</p>",
-                        position: position
-                    });
-
-                    google.maps.event.addListener(marker, 'click', function (e) {
-                        marker.info.open(map, marker);
-                    });
+            if (lat == "" || lat == "") {
+                geocoder = new google.maps.Geocoder();
+                geocoder.geocode({
+                    address: "Paris, France"
+                }, function (result, status) {
+                    if (status === "OK") {
+                        position = result[0].geometry.location;
+                        callback.call(this, position);
+                    }
                 });
             }
+            callback.call(this, new google.maps.LatLng(lat, lng));
+        }
 
-            google.maps.event.addDomListener(window, 'load', initialize);
 
-        </script>
-    {% endblock %}
+        function initialize() {
+            getPosition(function (position) {
+                var mapOptions = {
+                    center: position,
+                    zoom: 13
+                };
+
+                var map = new google.maps.Map(document.getElementById("maps"),
+                        mapOptions);
+
+                var marker = new google.maps.Marker({
+                    title: "Adresse",
+                    visible: true,
+                    map: map,
+                    position: position,
+                });
+
+                marker.info = new google.maps.InfoWindow({
+                    content: "<p>{{ user.firstname ~ " " ~ user.lastname }}</p><p>{{ user.city }}</p><p>{{ user.phone }}</p>",
+                    position: position
+                });
+
+                google.maps.event.addListener(marker, 'click', function (e) {
+                    marker.info.open(map, marker);
+                });
+            });
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+{% endblock %}
