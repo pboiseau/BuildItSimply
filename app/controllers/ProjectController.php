@@ -119,7 +119,7 @@ class ProjectController extends AppController
     public function all()
     {
         $validator = new Validate();
-        $page = (!empty($this->f3->get('PARAMS.page'))) ? $this->f3->get('PARAMS.page') : 0;
+        $page = ($this->f3->get('PARAMS.page')) ? $this->f3->get('PARAMS.page') : 0;
 
         if (!$validator->isNumber($page)) {
             $page = 0;
@@ -210,7 +210,7 @@ class ProjectController extends AppController
      */
     public function join()
     {
-        $project = $this->Project->getById($this->f3->get('PARAMS.id'));
+        $project = Project::find($this->f3->get('PARAMS.id'));
         $user = $this->f3->get('SESSION.user');
 
         // check if project is status OPEN
@@ -425,10 +425,10 @@ class ProjectController extends AppController
             $response = ProjectResponse::find($request['choice']);
 
             $this->f3->set('SESSION.step.' . $current_step, $request['choice']);
-            $this->f3->set('SESSION.project.price', $this->f3->get('SESSION.project.price') + $response->price);
             $this->f3->set('SESSION.project.project_type_id', $request['type']);
 
             if (!empty($response['tag']) && $current_step > 0) {
+                $this->f3->set('SESSION.project.price', $this->f3->get('SESSION.project.price') + $response->price);
                 $this->f3->set('SESSION.project.tag',
                     $this->f3->get('SESSION.project.tag') . ',' . $response['tag']);
             }

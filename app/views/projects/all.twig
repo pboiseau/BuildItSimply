@@ -17,9 +17,12 @@
 
             <h2>Catégorie des projets</h2>
             <ul id="listCategorie">
-                <li class="listActive"><a href="{{ home }}projects/">Toutes les catégories <span>{{ number_project }}</span></a></li>
+                <li class="listActive"><a href="{{ home }}projects/">Toutes les catégories
+                        <span>{{ number_project }}</span></a></li>
                 {% for category in categories %}
-                    <li><a class="filter_category" href="{{ home }}projects/category/{{ category.id }}" data-category="{{ category.id }}">{{ category.type | capitalize }} <span>{{ category.number_project }}</span></a></li>
+                    <li><a class="filter_category" href="{{ home }}projects/category/{{ category.id }}"
+                           data-category="{{ category.id }}">{{ category.type | capitalize }}
+                            <span>{{ category.number_project }}</span></a></li>
                 {% endfor %}
             </ul>
         </div>
@@ -75,7 +78,12 @@
                 {% for i in 1 .. number_page %}
                     <li><a href="{{ home }}projects/page/{{ i }}">{{ i }}</a></li>
                 {% endfor %}
-                <li class="next"><a href="{{ home }}projects/page/{{ (page == 0) ? page + 2 : page + 1 }}">Suivant →</a></li>
+                {% if page < number_page %}
+                    <li class="next">
+                        <a href="{{ home }}projects/page/{{ (page == 0) ? page + 2 : page + 1 }}">Suivant
+                            →</a>
+                    </li>
+                {% endif %}
             </ul>
             <hr class="clear"/>
         </div>
@@ -90,16 +98,16 @@
 {% block partial_js %}
     {{ parent() }}
     <script>
-        function getByCategory(e){
+        function getByCategory(e) {
             e.preventDefault();
             var category = $(e.currentTarget).attr('data-category');
 
             $.ajax({
                 url: "{{ home }}projects/category/" + category,
                 type: "GET"
-            }).done(function(data, textStatus, jqXHR){
+            }).done(function (data, textStatus, jqXHR) {
                 $('#project-list').empty().append(data);
-            }).fail(function(error){
+            }).fail(function (error) {
                 console.log(error);
             });
         }

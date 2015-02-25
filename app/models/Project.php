@@ -86,7 +86,7 @@ class Project extends AppModel
     public function getById($id, $field = array('*'))
     {
         return $this->where($this->table . '.id', $id)
-            ->join('accounts', 'client_id', '=', 'accounts.id')
+            ->join('accounts', 'projects.client_id', '=', 'accounts.id')
             ->first($field);
     }
 
@@ -105,11 +105,18 @@ class Project extends AppModel
                 'projects.*',
                 'project_type.type'
             ]);
+
+        // get participation and tags
+        foreach ($projects as $key => $project) {
+            $projects[$key]['proposition'] = $project->participates()->count();
+            $projects[$key]['tags'] = $project->tags;
+        }
+
         return ($projects->count() > 0) ? $projects : false;
     }
 
     /**
-     * @param $category
+     * @param $category_id
      * @return mixed
      */
     public function countCategory($category_id)
@@ -177,7 +184,7 @@ class Project extends AppModel
     public function publish($id, $project)
     {
         if ($this->validate($project)) {
-            $project['status'] = 'EN COURS';
+            $project['status'] = 'OUVERT';
             return $this->where('id', $id)->update($project);
         }
         return false;
