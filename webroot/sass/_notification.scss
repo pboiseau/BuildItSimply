@@ -1,2 +1,55 @@
 // _notification.scss
 
+#notification{
+	.wrapper{
+		width: 700px;
+	}
+	p{
+		&:first-of-type{
+			color: #666666;
+			font-family: $fontLight;
+			font-size: 18px;
+			margin: 0 auto;
+			display: block;
+			text-align: center;
+		}	
+	}
+	.notBloc{
+		margin-top: 30px;
+		p{
+			font-size: 16px;
+			color: #666666;
+			text-align: left;			
+		}
+		.dateNot{
+				color: $colorCla;
+				padding-bottom: 5px;
+				margin-bottom: 20px;
+				font-size: 18px;
+				text-transform: uppercase;
+				border-bottom: 2px solid #888888;
+				font-family: $font;
+		}
+		ul li{
+			margin-bottom: 20px;
+			img{
+				float: left;
+			}
+			p{
+				position: relative;
+				top: 20px;
+				left: 20px;
+				a:first-of-type{
+					font-family: $font;
+				}
+				a{
+					@include transition(all,0.2s,linear);
+					&:hover{
+						color: $colorClaHover;
+					}
+				}
+			}
+		}
+	}
+	
+}

@@ -1397,6 +1397,69 @@ label#largeFile input#file {
   color: rgba(0, 0, 0, 0.4);
 }
 
+/* line 4, ../sass/_notification.scss */
+#notification .wrapper {
+  width: 700px;
+}
+/* line 8, ../sass/_notification.scss */
+#notification p:first-of-type {
+  color: #666666;
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+  font-size: 18px;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+}
+/* line 17, ../sass/_notification.scss */
+#notification .notBloc {
+  margin-top: 30px;
+}
+/* line 19, ../sass/_notification.scss */
+#notification .notBloc p {
+  font-size: 16px;
+  color: #666666;
+  text-align: left;
+}
+/* line 24, ../sass/_notification.scss */
+#notification .notBloc .dateNot {
+  color: #005f78;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #888888;
+  font-family: "montserratregular", helvetica, arial, sans-serif;
+}
+/* line 33, ../sass/_notification.scss */
+#notification .notBloc ul li {
+  margin-bottom: 20px;
+}
+/* line 35, ../sass/_notification.scss */
+#notification .notBloc ul li img {
+  float: left;
+}
+/* line 38, ../sass/_notification.scss */
+#notification .notBloc ul li p {
+  position: relative;
+  top: 20px;
+  left: 20px;
+}
+/* line 42, ../sass/_notification.scss */
+#notification .notBloc ul li p a:first-of-type {
+  font-family: "montserratregular", helvetica, arial, sans-serif;
+}
+/* line 45, ../sass/_notification.scss */
+#notification .notBloc ul li p a {
+  -moz-transition: all, 0.2s, linear;
+  -o-transition: all, 0.2s, linear;
+  -webkit-transition: all, 0.2s, linear;
+  transition: all, 0.2s, linear;
+}
+/* line 47, ../sass/_notification.scss */
+#notification .notBloc ul li p a:hover {
+  color: #004456;
+}
+
 /* line 3, ../sass/_pagination.scss */
 #pagination {
   width: 700px;
