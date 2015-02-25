@@ -1,0 +1,30 @@
+{% block body %}
+    <ul>
+        {% for project in projects %}
+            <li>
+                <h3><a href="{{ home }}projects/{{ project.id }}">{{ project.name }}</a></h3>
+
+                <p class="infoList">
+                            <span><img src="{{ image }}calendar.png"
+                                       alt="Date de l'offre"/>{{ project.created_at }}</span>
+                            <span><img src="{{ image }}user-list.png" alt="Nombre d'offre"/>{{ project.proposition }}
+                                demande(s)</span>
+                </p>
+
+                <p class="textList">{{ project.description }}</p>
+
+                <p class="tagList">
+                    <a href="">{{ project.type | capitalize }}</a>
+                    {% for tag in project.tags %}
+                        <a href="">{{ tag.tag | capitalize }}</a>
+                    {% endfor %}
+                </p>
+
+                <p class="budgetList">Budget estimé<span>{{ project.price }} €</span></p>
+
+                <p class="etatList"><a href="{{ home }}projects/{{ project.id }}">{{ project.status }}</a></p>
+                <hr class="clear"/>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

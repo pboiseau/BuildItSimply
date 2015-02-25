@@ -85,9 +85,38 @@ class Project extends AppModel
      */
     public function getById($id, $field = array('*'))
     {
-        return $this->where($this->table.'.id', $id)
+        return $this->where($this->table . '.id', $id)
             ->join('accounts', 'client_id', '=', 'accounts.id')
             ->first($field);
+    }
+
+    /**
+     * Get projects by category ID
+     * @param $category_id
+     * @return bool
+     */
+    public function getByCategory($category_id)
+    {
+        $projects = $this->whereNotIn('status', ['EN CREATION', 'ANNULE'])
+            ->where('project_type_id', $category_id)
+            ->join('project_type', 'project_type.id', '=', 'project_type_id')
+            ->orderBy('projects.created_at', 'DESC')
+            ->get([
+                'projects.*',
+                'project_type.type'
+            ]);
+        return ($projects->count() > 0) ? $projects : false;
+    }
+
+    /**
+     * @param $category
+     * @return mixed
+     */
+    public function countCategory($category_id)
+    {
+        return $this->where('project_type_id', $category_id)
+            ->whereNotIn('status', ['EN CREATION', 'ANNULE'])
+            ->count();
     }
 
     /**
@@ -147,7 +176,7 @@ class Project extends AppModel
      */
     public function publish($id, $project)
     {
-        if($this->validate($project)){
+        if ($this->validate($project)) {
             $project['status'] = 'EN COURS';
             return $this->where('id', $id)->update($project);
         }

@@ -140,6 +140,9 @@ class ProjectController extends AppController
             ]);
 
         $categories = $this->ProjectType->all();
+        $categories->each(function($type){
+            $type->number_project = $this->Project->countCategory($type->id);
+        });
 
         foreach ($projects as $key => $project) {
             $projects[$key]['proposition'] = $project->participates()->count();
@@ -147,6 +150,22 @@ class ProjectController extends AppController
         }
 
         $this->render('projects/all', compact('projects', 'categories', 'number_project', 'number_page', 'page'));
+    }
+
+    /**
+     * Get a list of project by category
+     */
+    public function category()
+    {
+        if($this->f3->get('AJAX')){
+            if($category = $this->f3->get('PARAMS.category')){
+                $projects = $this->Project->getByCategory($category);
+
+                $this->render('projects/list', compact('projects'));
+            }else{
+                $this->f3->reroute($this->f3->get('PATTERN'));
+            }
+        }
     }
 
 

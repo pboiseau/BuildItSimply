@@ -17,14 +17,14 @@
 
             <h2>Catégorie des projets</h2>
             <ul id="listCategorie">
-                <li class="listActive"><a href="#">Toutes les catégories <span>126</span></a></li>
+                <li class="listActive"><a href="{{ home }}projects/">Toutes les catégories <span>{{ number_project }}</span></a></li>
                 {% for category in categories %}
-                    <li><a href="#">{{ category.type | capitalize }} <span>46</span></a></li>
+                    <li><a class="filter_category" href="{{ home }}projects/category/{{ category.id }}" data-category="{{ category.id }}">{{ category.type | capitalize }} <span>{{ category.number_project }}</span></a></li>
                 {% endfor %}
             </ul>
         </div>
         <div id="listMenu">
-            <p>{{ number }} Projets trouvés</p>
+            <p>{{ number_project }} Projets trouvés</p>
             <span class="custom-dropdown big">
                 <select>
                     <option>Projet récent</option>
@@ -35,7 +35,7 @@
             </span>
         </div>
 
-        <div class="listProjet">
+        <div id="project-list" class="listProjet">
 
             <ul>
                 {% for project in projects %}
@@ -85,4 +85,25 @@
 
     <div class="push"></div>
     </div><!-- end page -->
+{% endblock %}
+
+{% block partial_js %}
+    {{ parent() }}
+    <script>
+        function getByCategory(e){
+            e.preventDefault();
+            var category = $(e.currentTarget).attr('data-category');
+
+            $.ajax({
+                url: "{{ home }}projects/category/" + category,
+                type: "GET"
+            }).done(function(data, textStatus, jqXHR){
+                $('#project-list').empty().append(data);
+            }).fail(function(error){
+                console.log(error);
+            });
+        }
+
+        $('.filter_category').click(getByCategory);
+    </script>
 {% endblock %}
