@@ -75,7 +75,7 @@
                 {% for i in 1 .. number_page %}
                     <li><a href="{{ home }}projects/page/{{ i }}">{{ i }}</a></li>
                 {% endfor %}
-                <li class="next"><a href="{{ home }}projects/page/{{ page + 1 }}">Suivant →</a></li>
+                <li class="next"><a href="{{ home }}projects/page/{{ (page == 0) ? page + 2 : page + 1 }}">Suivant →</a></li>
             </ul>
             <hr class="clear"/>
         </div>

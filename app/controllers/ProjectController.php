@@ -125,15 +125,15 @@ class ProjectController extends AppController
             $page = 0;
         }
 
-        $offset = ($page > 0) ? ($page - 1) * ($this->f3->get('PROJECT_PER_PAGE')) : $this->f3->get('PROJECT_PER_PAGE');
-
+        $offset = ($page > 0) ? ($page - 1) * ($this->f3->get('PROJECT_PER_PAGE')) : 0;
+        
         $number_project = $this->Project->countPublish();
         $number_page = ceil($number_project / $this->f3->get('PROJECT_PER_PAGE'));
 
         $projects = $this->Project->whereNotIn('status', ['EN CREATION', 'ANNULE'])
             ->join('project_type', 'project_type.id', '=', 'project_type_id')
-            ->orderBy('projects.created_at', 'desc')
-            ->take(6)->skip($offset)
+            ->orderBy('projects.created_at', 'DESC')
+            ->skip($offset)->limit(6)
             ->get([
                 'projects.*',
                 'project_type.type'
