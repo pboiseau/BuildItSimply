@@ -2,7 +2,7 @@
 
 {% block body %}
 	<h2>Gérer les étapes</h2>
-	
+
 	<form method="post" action="{{ home ~ request }}" class="form-horizontal">
 	<div class="form-group">
 	{% for type in types %}
@@ -27,11 +27,11 @@
 
 	    <div class="form-group">
 	    	<div class="col-sm-1">
-	        	<button id="submit" type="submit" class="btn btn-success btn-default">Enregistrer les modifications
+	        	<button id="submit" type="submit" name="button" value="update" class="btn btn-success btn-default">Enregistrer les modifications
 	            </button>
 	        </div>
 	        <div class="col-sm-offset-3">
-	            <button id="submit" type="submit" class="btn btn-danger btn-default">Supprimer la selection
+	            <button id="submit" type="submit" name="button" value="remove" class="btn btn-danger btn-default">Supprimer la selection
 	            </button>
 	        </div>
 	    </div>

@@ -46,19 +46,34 @@ class AdminController extends AppController
         {
             $request = $this->f3->get('POST');
 
-            $questions = new ProjectQuestion();
-            foreach ($request['question'] as $key => $question) 
+            if(!empty($request))
             {
-                $questions->where('id', $key)->update(['question' => $question]);
+                $questions = new ProjectQuestion();
+
+                // Si l'utilisateur veut update
+                if($request['button']=='update')
+                {
+                    foreach ($request['question'] as $key => $question) 
+                    {
+                        $questions->where('id', $key)->update(['question' => $question]);
+                    }
+                    $this->setFlash("Les étapes ont bien été mises à jours");
+                }
+
+                // Si l'utilisateur veut remove
+                else if($request['button']=='remove')
+                {
+                    $steps = new ProjectStep();
+
+                    foreach ($request['checked_question'] as $key => $value) 
+                    {
+                        $steps->where('project_question_id', $key)->delete();
+                        $questions->destroy($key);
+                    }
+                    $this->setFlash("La sélection a bien été supprimé");
+                }
             }
 
-            /*
-             * Remove question à développer :
-             * Rechercher dans Project_step quel row dispose de project_question_id et l'a supprimer
-             * Puis supprimer dans Project_question la question avec : $questions->destroy(id_question); 
-            */
-
-            $this->setFlash("Les étapes ont bien été mises à jours");
             $this->f3->reroute($this->f3->get('PATTERN'));
         
 
