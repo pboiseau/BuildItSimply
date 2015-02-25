@@ -10,3 +10,4 @@ bower_components/
 
 webroot/js/dist.js
 webroot/uploads/
+composer.lock
