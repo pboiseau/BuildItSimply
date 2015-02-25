@@ -31,10 +31,23 @@
                 <a href="{{home}}admin"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
             </li>
             <li>
+                <a href="javascript:;" data-toggle="collapse" data-target="#client"><i
+                            class="fa fa-fw fa-arrows-v"></i>
+                    Client<i class="fa fa-fw fa-caret-down"></i></a>
+                <ul id="client" class="collapse">
+                    <li>
+                        <a href="{{home}}admin/client/list">Afficher la liste</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
                 <a href="javascript:;" data-toggle="collapse" data-target="#freelance"><i
                             class="fa fa-fw fa-arrows-v"></i>
                     Freelance<i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="freelance" class="collapse">
+                    <li>
+                        <a href="{{home}}admin/freelance/list">Afficher la liste</a>
+                    </li>
                     <li>
                         <a href="{{home}}admin/freelance/skill/new">Ajouter une compétence</a>
                     </li>

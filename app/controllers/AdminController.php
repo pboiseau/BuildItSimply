@@ -24,8 +24,24 @@ class AdminController extends AppController
     */
     public function projectType()
     {
-        if ($this->request() == "POST") {
-            ProjectType::create($this->f3->get('POST'));
+        if ($this->request() == "POST") 
+        {
+
+            $request = $this->f3->get('POST');
+
+            if (!empty($this->f3->get('FILES.image.name')))
+            {
+                $upload = new UploadHelper($this->f3->get('PROJECT_TYPE_FILES'));
+                $filename = $upload->upload();
+
+                if ($filename) 
+                    $request['image'] = $this->f3->get('RESPONSE_FILES').$filename;
+            }
+
+            ProjectType::create($request);
+
+
+
             $this->setFlash("Le type de project a bien été crée");
             $this->f3->reroute($this->f3->get('PATTERN'));
         }
@@ -221,6 +237,92 @@ class AdminController extends AppController
         $categories = CategorySkill::all();
         $this->render('admin/freelance/skill/new', compact('categories'));
     }
+
+
+
+    /*
+     *  List of freelances
+     */
+    public function freelanceList()
+    {
+        if($this->request() == "POST")
+        {
+            $request = $this->f3->get('POST');
+
+            $this->listManagement($request, 'freelance');
+        }
+
+        $freelances = Account::where('type', '=', 'FREELANCE')->get();
+        $this->render('admin/freelance/list', compact('freelances'));
+    }
+
+
+    /*
+     *  List of clients
+     */
+    public function clientList()
+    {
+        if($this->request() == "POST")
+        {
+            $request = $this->f3->get('POST');
+
+            $this->listManagement($request, 'client');
+        }
+
+        $clients = Account::where('type', '=', 'CLIENT')->get();
+        $this->render('admin/client/list', compact('clients'));
+    }
+
+
+
+    /*
+     *  Manage list of persons
+     *  @params String $type type of person: freelance | client
+     */
+    public function listManagement($request, $type)
+    {
+        // After submit modifications 
+        if(!empty($request['submit']))
+        {
+
+            Account::where('id', $request['id'])->update(
+                [
+                    'lastname' => $request['lastname'],
+                    'firstname' => $request['firstname'],
+                    'mail' => $request['mail'],
+                ]);
+
+            $this->setFlash("L'utilisateur a bien été mis à jour.");
+            $this->f3->reroute($this->f3->get('PATTERN'));
+        }
+
+        // After select one user for modify
+        else if(!empty($request['modify']))
+        {
+            $user = Account::where('id', $request['modify'])->first();
+            $this->render('admin/'.$type.'/modify', compact('user'));
+        }
+
+        // If multiple remove requested
+        else if(!empty($request['button']) && $request['button']=='remove')
+        {
+            $accounts = new Account();
+
+            if($type == 'freelance')
+                $users =   new Freelance();
+            else if($type == 'client')
+                $users =   new Client();
+
+            foreach ($request['checked_user'] as $key => $value) 
+            {
+                $users->where('account_id', $key)->delete();
+                $accounts->destroy($key);
+            }
+            $this->setFlash("La sélection a bien été supprimé.");
+            $this->f3->reroute($this->f3->get('PATTERN'));
+        }
+    }
+
 
 
 }

@@ -1,0 +1,40 @@
+{% extends 'layouts/' ~ layout ~ '.twig' %}
+
+{% block body %}
+	<h2>Liste des clients</h2>
+
+	<form method="post" action="{{ home ~ request }}" class="form-horizontal">
+
+	<table class="table table-striped">
+	    <thead>
+	      <tr>
+	        <th>Prénom</th>
+	        <th>Nom</th>
+	        <th>E-mail</th>
+	        <th>Modifier</th>
+	        <th>Supprimer</th>
+
+	      </tr>
+	    </thead>
+	    <tbody>
+		{% for client in clients %}
+	      <tr>
+	        <td>{{client.firstname}}</td>
+	        <td>{{client.lastname}}</td>
+	        <td>{{client.mail}}</td>
+	        <td><button type="submit" name="modify" value="{{client.id}}" class="glyphicon glyphicon-pencil" style="border:none; background-color:transparent">
+	        <td><input type="checkbox" name="checked_user[{{client.id}}]" value="remove"></td>
+	      </tr>
+		{% endfor %}
+	    </tbody>
+  	</table>
+    <div class="form-group">
+        <div class="col-sm-1">
+            <button id="submit" type="submit" name="button" value="remove" class="btn btn-danger btn-default">Supprimer la selection
+            </button>
+        </div>
+    </div>
+
+	</form>
+
+{% endblock %}
