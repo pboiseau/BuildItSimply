@@ -37,7 +37,7 @@ module.exports = function (grunt) {
                         'webroot/js/app.js',
                         'webroot/js/*.js'
                     ],
-                    dest: 'webroot/js/dist.js',
+                    dest: 'webroot/js/dist.js'
                 },
                 css_dist: {
                     src: [
@@ -61,7 +61,10 @@ module.exports = function (grunt) {
             compass: {
                 dev: {
                     options: {
-                        config: 'config.rb'
+                        httpPath: '/builditsimply/',
+                        cssDir: 'webroot/css',
+                        sassDir: 'webroot/sass',
+                        imagesDir: 'webroot/images'
                     }
                 },
                 dist: {

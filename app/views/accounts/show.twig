@@ -19,23 +19,31 @@
                 <a class="buttonWhite" href="#">Envoyer une offre</a>
 
                 <ul>
-                    <li>Projets réalisés <span>23</span></li>
-                    <li>Note des clients
-                        <div class="stars">
-                            <form action="">
-                              <input class="star star-5" id="star-5" type="radio" name="star"/>
-                              <label class="star star-5" for="star-5"></label>
-                              <input class="star star-4" id="star-4" type="radio"  name="star"/>
-                              <label class="star star-4" for="star-4"></label>
-                              <input class="star star-3" id="star-3" type="radio" checked name="star"/>
-                              <label class="star star-3" for="star-3"></label>
-                              <input class="star star-2" id="star-2" type="radio" checked name="star"/>
-                              <label class="star star-2" for="star-2"></label>
-                              <input class="star star-1" id="star-1" type="radio" checked name="star"/>
-                              <label class="star star-1" for="star-1"></label>
-                          </form>
-                      </div>
-                    </li>
+                    {% if type == "FREELANCE" %}
+                        <li>Projets réalisés <span>23</span></li>
+                    {% elseif type == "CLIENT" %}
+                        <li>Projets proposés <span>2</span></li>
+                    {% endif %}
+
+                    {% if type == "FREELANCE" %}
+                        <li>Note des clients
+                            <div class="stars">
+                                <form action="">
+                                    <input class="star star-5" id="star-5" type="radio" name="star"/>
+                                    <label class="star star-5" for="star-5"></label>
+                                    <input class="star star-4" id="star-4" type="radio" name="star"/>
+                                    <label class="star star-4" for="star-4"></label>
+                                    <input class="star star-3" id="star-3" type="radio" checked name="star"/>
+                                    <label class="star star-3" for="star-3"></label>
+                                    <input class="star star-2" id="star-2" type="radio" checked name="star"/>
+                                    <label class="star star-2" for="star-2"></label>
+                                    <input class="star star-1" id="star-1" type="radio" checked name="star"/>
+                                    <label class="star star-1" for="star-1"></label>
+                                </form>
+                            </div>
+                        </li>
+                    {% endif %}
+
                     {% if type == "FREELANCE" %}
                         <li>
                             <a href="{{ user.freelance.url }}" target="_blank">{{ user.freelance.url }}</a>
@@ -66,7 +74,11 @@
 
 
             <div class="listProjet">
-                <h3>Derniers projets réalisés</h3>
+                {% if type == "FREELANCE" %}
+                    <h3>Derniers projets réalisés</h3>
+                {% elseif type == "CLIENT" %}
+                    <h3>Derniers projets proposés</h3>
+                {% endif %}
                 <ul>
 
                     <li>
@@ -104,55 +116,66 @@
                 <a class="buttonWhite" href="#">Voir tous les projets</a>
             </div>
 
-            <div class="listProjet" id="profileAvis">
-                <h3>Avis des clients</h3>
-                <ul>
 
-                    <li>
-                        <img src="{{ image }}recruteur-picture.png" alt="recruteur picture"/>
-                        <p class="recruteurAvis"><a href="#">Jocyeline Bon<!--  <span>Peintre en batiment</span> --></a></p>
-                        <div class="stars">
-                            <form action="">
-                              <input class="star star-5" id="star-5" type="radio" name="star"/>
-                              <label class="star star-5" for="star-5"></label>
-                              <input class="star star-4" id="star-4" type="radio"  name="star"/>
-                              <label class="star star-4" for="star-4"></label>
-                              <input class="star star-3" id="star-3" type="radio" checked name="star"/>
-                              <label class="star star-3" for="star-3"></label>
-                              <input class="star star-2" id="star-2" type="radio" checked name="star"/>
-                              <label class="star star-2" for="star-2"></label>
-                              <input class="star star-1" id="star-1" type="radio" checked name="star"/>
-                              <label class="star star-1" for="star-1"></label>
-                          </form>
-                      </div>
-                      <p class="textList">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                      <hr class="clear"/>
-                  </li>
+            {% if type == "FREELANCE" %}
+                <div class="listProjet" id="profileAvis">
+                    <h3>Avis des clients</h3>
+                    <ul>
 
-                    <li>
-                        <img src="{{ image }}recruteur-picture.png" alt="recruteur picture"/>
-                        <p class="recruteurAvis"><a href="#">Jocyeline Bon<!--  <span>Peintre en batiment</span> --></a></p>
-                        <div class="stars">
-                            <form action="">
-                              <input class="star star-5" id="star-5" type="radio" name="star"/>
-                              <label class="star star-5" for="star-5"></label>
-                              <input class="star star-4" id="star-4" type="radio"  name="star"/>
-                              <label class="star star-4" for="star-4"></label>
-                              <input class="star star-3" id="star-3" type="radio" checked name="star"/>
-                              <label class="star star-3" for="star-3"></label>
-                              <input class="star star-2" id="star-2" type="radio" checked name="star"/>
-                              <label class="star star-2" for="star-2"></label>
-                              <input class="star star-1" id="star-1" type="radio" checked name="star"/>
-                              <label class="star star-1" for="star-1"></label>
-                          </form>
-                      </div>
-                      <p class="textList">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                      <hr class="clear"/>
-                  </li>
+                        <li>
+                            <img src="{{ image }}recruteur-picture.png" alt="recruteur picture"/>
 
-                </ul>
-                <a class="buttonWhite" href="#">Voir tous les avis</a>
-            </div>
+                            <p class="recruteurAvis"><a href="#">Jocyeline Bon
+                                    <!--  <span>Peintre en batiment</span> --></a>
+                            </p>
+
+                            <div class="stars">
+                                <form action="">
+                                    <input class="star star-5" id="star-5" type="radio" name="star"/>
+                                    <label class="star star-5" for="star-5"></label>
+                                    <input class="star star-4" id="star-4" type="radio" name="star"/>
+                                    <label class="star star-4" for="star-4"></label>
+                                    <input class="star star-3" id="star-3" type="radio" checked name="star"/>
+                                    <label class="star star-3" for="star-3"></label>
+                                    <input class="star star-2" id="star-2" type="radio" checked name="star"/>
+                                    <label class="star star-2" for="star-2"></label>
+                                    <input class="star star-1" id="star-1" type="radio" checked name="star"/>
+                                    <label class="star star-1" for="star-1"></label>
+                                </form>
+                            </div>
+                            <p class="textList">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <hr class="clear"/>
+                        </li>
+
+                        <li>
+                            <img src="{{ image }}recruteur-picture.png" alt="recruteur picture"/>
+
+                            <p class="recruteurAvis"><a href="#">Jocyeline Bon
+                                    <!--  <span>Peintre en batiment</span> --></a>
+                            </p>
+
+                            <div class="stars">
+                                <form action="">
+                                    <input class="star star-5" id="star-5" type="radio" name="star"/>
+                                    <label class="star star-5" for="star-5"></label>
+                                    <input class="star star-4" id="star-4" type="radio" name="star"/>
+                                    <label class="star star-4" for="star-4"></label>
+                                    <input class="star star-3" id="star-3" type="radio" checked name="star"/>
+                                    <label class="star star-3" for="star-3"></label>
+                                    <input class="star star-2" id="star-2" type="radio" checked name="star"/>
+                                    <label class="star star-2" for="star-2"></label>
+                                    <input class="star star-1" id="star-1" type="radio" checked name="star"/>
+                                    <label class="star star-1" for="star-1"></label>
+                                </form>
+                            </div>
+                            <p class="textList">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <hr class="clear"/>
+                        </li>
+
+                    </ul>
+                    <a class="buttonWhite" href="#">Voir tous les avis</a>
+                </div>
+            {% endif %}
 
             <hr class="clear"/>
         </div>
