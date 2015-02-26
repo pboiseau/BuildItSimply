@@ -57,6 +57,11 @@ class Project extends AppModel
         return $this->hasMany('ProjectTag', 'project_id', 'id');
     }
 
+    public function type()
+    {
+        return $this->belongsTo('ProjectType', 'project_type_id', 'id');
+    }
+
     /**
      * Check if project exists in the database
      * @param $id

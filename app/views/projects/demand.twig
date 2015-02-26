@@ -1,7 +1,8 @@
-{% block body %}
+{#{% block body %}
 
     <div class="jumbotron">
         <h3>Vos propositions</h3>
+
         <div id="demand-message" class="message alert alert-danger" style="display: none;" role="alert"></div>
         <ul class="propositions" style="list-style: none;">
             {% for proposition in propositions %}
@@ -41,5 +42,55 @@
         <a class="btn btn-success btn-sm" href="{{ home }}projects/{{ project.id }}/proposition/close">Cloturer les
             demandes</a>
     </div>
+
+{% endblock %}#}
+
+{% block body %}
+    <div class="listProjet">
+        <h3>Ils souhaitent participer <span>3 Demandes</span></h3>
+
+        <div class="notBloc">
+            <p class="dateNot">Aujourd'hui</p>
+            {% for proposition in propositions %}
+            <ul>
+                <li>
+                    <img src="{{ home ~ proposition.picture }}" height="66px" width="66px" alt="Notification user"/>
+
+                    <p>
+                        <a href="{{ home }}users/profile/{{ proposition.id }}">{{ proposition.firstname ~ " " ~ proposition.lastname }}</a>
+                        souhaite participer à votre projet</p>
+
+                    <div class="choice" style="float: right;">
+                        {% if proposition.status == "ACCEPT" or proposition.status == "PENDING" %}
+                            <button class="demand btn btn-sm {{ (proposition.status == "ACCEPT") ? "btn-success" : "" }}" {{ (disable) ? "disabled" }}
+                                    data-choice="accept"
+                                    data-project-id="{{ project.id }}"
+                                    data-freelance-id="{{ proposition.freelance_id }}">Accepter
+                            </button>
+                        {% endif %}
+
+                        {% if proposition.status == "DECLINE" or proposition.status == "PENDING" %}
+                            <button class="demand btn btn-sm {{ (proposition.status == "DECLINE") ? "btn-danger" : "" }}" {{ (disable) ? "disabled" }}
+                                    data-choice="decline"
+                                    data-project-id="{{ project.id }}"
+                                    data-freelance-id="{{ proposition.freelance_id }}">Refuser
+                            </button>
+                        {% endif %}
+                    </div>
+
+                    <hr class="clear"/>
+                </li>
+                {% endfor %}
+
+            </ul>
+        </div>
+
+    </div>
+
+    <hr class="clear"/>
+    </div>
+
+    <a class="btn btn-success btn-sm" href="{{ home }}projects/{{ project.id }}/proposition/close">Cloturer les
+        demandes</a>
 
 {% endblock %}

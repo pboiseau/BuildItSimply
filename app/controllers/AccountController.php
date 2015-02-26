@@ -236,7 +236,10 @@ class AccountController extends AppController
             $this->f3->reroute('/');
         }
 
-        $participations = $this->Participate->groupByDate($participations);
+        // check if user have notifications
+        if($participations) {
+            $participations = $this->Participate->groupByDate($participations);
+        }
 
         $this->render('accounts/notification', compact('participations'));
     }
