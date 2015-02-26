@@ -1097,6 +1097,111 @@ label#largeFile input#file {
   cursor: pointer;
 }
 
+/* line 4, ../sass/_showproject.scss */
+#projectView {
+  background: #f5f5f5;
+}
+/* line 6, ../sass/_showproject.scss */
+#projectView h2 {
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+  margin-top: 30px;
+}
+/* line 10, ../sass/_showproject.scss */
+#projectView .buttonWhite {
+  margin: 0 auto;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  display: block;
+  width: 148px;
+}
+/* line 17, ../sass/_showproject.scss */
+#projectView .listProjet li {
+  background: transparent;
+}
+/* line 24, ../sass/_showproject.scss */
+#projectView #profileDescription p {
+  margin-bottom: 25px;
+}
+/* line 26, ../sass/_showproject.scss */
+#projectView #profileDescription p:last-of-type {
+  margin-bottom: 0;
+}
+/* line 31, ../sass/_showproject.scss */
+#projectView .listProjet {
+  text-align: left;
+  width: 650px;
+  position: relative;
+}
+/* line 35, ../sass/_showproject.scss */
+#projectView .listProjet h3:first-of-type {
+  text-align: left;
+  padding: 40px 0 0 0;
+}
+/* line 38, ../sass/_showproject.scss */
+#projectView .listProjet h3:first-of-type span {
+  font-size: 14px;
+  color: #999999;
+  float: right;
+}
+/* line 46, ../sass/_showproject.scss */
+#projectView ul li:last-of-type {
+  border: none;
+}
+/* line 49, ../sass/_showproject.scss */
+#projectView ul li a {
+  -moz-transition: all, 0.2s, linear;
+  -o-transition: all, 0.2s, linear;
+  -webkit-transition: all, 0.2s, linear;
+  transition: all, 0.2s, linear;
+}
+/* line 51, ../sass/_showproject.scss */
+#projectView ul li a:hover {
+  color: #004456;
+}
+/* line 56, ../sass/_showproject.scss */
+#projectView ul li .tagList a {
+  padding: 5px 10px;
+  color: #666666;
+  background: #e3e3e3;
+  border-radius: 3px;
+  font-size: 14px;
+  margin-right: 10px;
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+}
+/* line 64, ../sass/_showproject.scss */
+#projectView ul li .tagList a:hover {
+  background: #dbdbdb;
+  color: #005f78 !important;
+}
+/* line 68, ../sass/_showproject.scss */
+#projectView ul li .tagList a:last-of-type {
+  margin-right: 0;
+}
+
+/* line 78, ../sass/_showproject.scss */
+.projectFiche p {
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #555555;
+  margin-top: 25px;
+}
+/* line 83, ../sass/_showproject.scss */
+.projectFiche p span {
+  font-size: 12px;
+  color: #888888;
+  position: relative;
+  top: 6px;
+}
+/* line 90, ../sass/_showproject.scss */
+.projectFiche ul {
+  margin-top: 0 !important;
+}
+/* line 92, ../sass/_showproject.scss */
+.projectFiche ul li {
+  border-bottom: none !important;
+  padding: 5px 0 !important;
+}
+
 /* line 4, ../sass/_all.scss */
 #sidebar {
   width: 275px;
@@ -1410,54 +1515,59 @@ label#largeFile input#file {
   display: block;
   text-align: center;
 }
-/* line 17, ../sass/_notification.scss */
-#notification .notBloc {
+
+/* line 19, ../sass/_notification.scss */
+.notBloc {
   margin-top: 30px;
 }
-/* line 19, ../sass/_notification.scss */
-#notification .notBloc p {
+/* line 21, ../sass/_notification.scss */
+.notBloc p {
   font-size: 16px;
   color: #666666;
-  text-align: left;
+  text-align: left !important;
 }
-/* line 24, ../sass/_notification.scss */
-#notification .notBloc .dateNot {
-  color: #005f78;
-  padding-bottom: 5px;
-  margin-bottom: 20px;
-  font-size: 18px;
+/* line 26, ../sass/_notification.scss */
+.notBloc .dateNot {
+  color: #005f78 !important;
+  padding-bottom: 5px !important;
+  margin-bottom: 20px !important;
+  font-size: 18px !important;
   text-transform: uppercase;
   border-bottom: 2px solid #888888;
-  font-family: "montserratregular", helvetica, arial, sans-serif;
-}
-/* line 33, ../sass/_notification.scss */
-#notification .notBloc ul li {
-  margin-bottom: 20px;
+  font-family: "montserratregular", helvetica, arial, sans-serif !important;
 }
 /* line 35, ../sass/_notification.scss */
-#notification .notBloc ul li img {
+.notBloc ul li {
+  margin-bottom: 20px;
+}
+/* line 37, ../sass/_notification.scss */
+.notBloc ul li img {
   float: left;
 }
-/* line 38, ../sass/_notification.scss */
-#notification .notBloc ul li p {
+/* line 40, ../sass/_notification.scss */
+.notBloc ul li p {
   position: relative;
   top: 20px;
   left: 20px;
 }
-/* line 42, ../sass/_notification.scss */
-#notification .notBloc ul li p a:first-of-type {
+/* line 44, ../sass/_notification.scss */
+.notBloc ul li p a:first-of-type {
   font-family: "montserratregular", helvetica, arial, sans-serif;
 }
-/* line 45, ../sass/_notification.scss */
-#notification .notBloc ul li p a {
+/* line 47, ../sass/_notification.scss */
+.notBloc ul li p a {
   -moz-transition: all, 0.2s, linear;
   -o-transition: all, 0.2s, linear;
   -webkit-transition: all, 0.2s, linear;
   transition: all, 0.2s, linear;
 }
-/* line 47, ../sass/_notification.scss */
-#notification .notBloc ul li p a:hover {
+/* line 49, ../sass/_notification.scss */
+.notBloc ul li p a:hover {
   color: #004456;
+}
+/* line 55, ../sass/_notification.scss */
+.notBloc:last-of-type ul li:last-of-type {
+  margin-bottom: 0;
 }
 
 /* line 3, ../sass/_pagination.scss */

@@ -1,0 +1,99 @@
+// _showproject.scss
+
+
+#projectView{
+	background: #f5f5f5;
+	h2{
+		font-family: $fontLight;
+		margin-top: 30px;
+	}
+	.buttonWhite{
+		margin: 0 auto;
+		margin-top: 25px;
+		margin-bottom: 25px;
+		display: block;
+		width: 148px;
+	}
+	.listProjet li{
+		background: transparent;
+	}
+	.notBloc{
+
+	}
+	#profileDescription{
+		p{
+			margin-bottom: 25px;
+			&:last-of-type{
+				margin-bottom: 0;
+			}
+		}
+	}
+	.listProjet {
+		text-align: left;
+		width: 650px;
+		position: relative;
+		h3:first-of-type {
+			text-align: left;
+			padding: 40px 0 0 0;
+			span{
+				font-size: 14px;
+				color: #999999;
+				float: right;
+			}
+		}
+	}
+	ul li{
+		&:last-of-type{
+			border: none;
+		}
+		a{
+			@include transition(all,0.2s,linear);
+			&:hover{
+				color: $colorClaHover;
+			}
+		}
+		.tagList{
+			a{
+				padding: 5px 10px;
+				color: #666666;
+				background: #e3e3e3;
+				border-radius: 3px;
+				font-size: 14px;
+				margin-right: 10px;
+				font-family: $fontLight;
+				&:hover{
+					background: #dbdbdb;
+					color: #005f78 !important;
+				}
+				&:last-of-type{
+					margin-right: 0;
+				}
+			}
+		}
+
+
+	}
+}
+.projectFiche{
+	p{
+		font-size: 18px;
+		text-transform: uppercase;
+		color: #555555;
+		margin-top: 25px;
+		span{
+			font-size: 12px;
+			color: #888888;
+			position: relative;
+			top: 6px;
+		}
+	}
+	ul{
+		margin-top: 0 !important;
+		li{
+			border-bottom: none !important;
+			padding: 5px 0 !important;
+		}
+	}
+}
+
+

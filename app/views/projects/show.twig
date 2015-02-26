@@ -1,32 +1,89 @@
 {% extends 'layouts/' ~ layout ~ '.twig' %}
 
 {% block body %}
-    <h2>{{ project.name }}</h2>
-    <div class="jumbotron">
-        <p>{{ project.description }}</p>
+    
 
-        <p>Proposé par
-            <a href="{{ home }}users/profile/{{ project.client.id }}">
-                {{ project.client.firstname ~ ' ' ~ project.client.lastname }}
-            </a>
-        </p>
+<div id="projectView">
+    <div class="wrapper">
 
-        <p>Status: {{ project.status }}</p>
+        <div id="profileInfo">
 
-        <ul class="targets">
-            {% set targets = project.targets|split(',') %}
-            {% for target in targets %}
-                <li>{{ target }}</li>
-            {% endfor %}
-        </ul>
-        
-        {% if login.type == 'FREELANCE' and project.status == "OUVERT" %}
-        <div class="participate">
-            <a class="btn btn-primary btn-md" href="{{ home }}projects/join/{{ project.id }}" role="button">Je souhaite participer</a>
+            <h1>Game one application</h1>
+
+            <h2><span>Proposé par </span>Marcel Patulacci</h2>
+
+            <ul>
+
+                <li>Date <span>23 Février 2015</span></li>
+                <li>Cibles <span>Enfants, Adultes, Garagiste</span></li>
+                <li>Site web <span><a href="#">Aucun</a></span></li>
+                <li>Estimation <span>2350 €</span></li>
+                <li>
+                    <p class="tagList"><a href="#">tag</a><a href="#">tag</a><a href="#">tag</a></p>
+                </li>
+                <li class="projectFiche">
+                    <p>Fichiers utiles <span>Télécharger</span></p>
+                    <ul>
+                        <li><a href="#">chartegraphique.pdf</a></li>
+                        <li><a href="#">logoLorem.pdf</a></li>
+                        <li><a href="#">texte.pdf</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+            <hr class="clear"/>
+
+            <a class="buttonWhite" href="#">Je participe</a>
+
+
         </div>
-        {% elseif (login.type == 'CLIENT') and (login.id == project.client_id) %}
-            <a class="btn btn-primary btn-md" href="{{ home }}projects/delete/{{ project.id }}" role="button">Annuler ce projet</a>
-        {% endif %}
 
+        <div id="profileDescription">
+
+            <h3>Description du projet</h3>
+
+            <p class="infoList">Je fais caca sur l'inté parce que c'est pas marrant</p>
+
+            <h3>Mes recommandations</h3>
+
+            <p class="infoList">Faite gaffe devant Pumir, le roi du caca!</p>
+
+        </div>
+
+        <div class="listProjet">
+            <h3>Ils souhaitent participer <span>3 Demandes</span></h3>
+            <div class="notBloc">
+                <p class="dateNot">Aujourd'hui</p>
+                <ul>
+                    <li>
+                        <img src="{{ image }}notification-user.png" alt="Notification user"/>
+                        <p><a href="#">Marcel Pattulacci</a> souhaite participer à votre projet</p>
+                        <hr class="clear"/>
+                    </li>
+                    <li>
+                        <img src="{{ image }}notification-user.png" alt="Notification user"/>
+                        <p><a href="#">Marcel Pattulacci</a> souhaite participer à votre projet</p>
+                        <hr class="clear"/>
+                    </li>
+                </ul>
+            </div>
+            <div class="notBloc">
+                <p class="dateNot">24 Février</p>
+                <ul>
+                    <li>
+                        <img src="{{ image }}notification-user.png" alt="Notification user"/>
+                        <p><a href="#">Marcel Pattulacci</a> souhaite participer à votre projet</p>
+                        <hr class="clear"/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <hr class="clear"/>
     </div>
+<div class="push"></div>
+</div>
+</div>
+
+
 {% endblock %}
