@@ -43,6 +43,11 @@
 		}
 	}
 	ul li{
+		font-family: $font;
+		span{
+			color: #4e5c5f;
+			font-family: $fontLight;
+		}
 		&:last-of-type{
 			border: none;
 		}
@@ -52,14 +57,19 @@
 				color: $colorClaHover;
 			}
 		}
+		&:nth-of-type(5){
+			padding: 5px 0;
+		}
 		.tagList{
+			width: 100%;
 			a{
 				padding: 5px 10px;
+				margin: 5px 10px 5px 0;
+				display: inline-block;
 				color: #666666;
 				background: #e3e3e3;
 				border-radius: 3px;
 				font-size: 14px;
-				margin-right: 10px;
 				font-family: $fontLight;
 				&:hover{
 					background: #dbdbdb;

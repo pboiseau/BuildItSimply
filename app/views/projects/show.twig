@@ -1,94 +1,89 @@
 {% extends 'layouts/' ~ layout ~ '.twig' %}
 
 {% block body %}
+    
 
+<div id="projectView">
+    <div class="wrapper">
 
-    <div id="projectView">
-        <div class="wrapper">
+        <div id="profileInfo">
 
-            <div id="profileInfo">
+            <h1>Game one application</h1>
 
-                <h1>{{ project.name }}</h1>
+            <h2><span>Proposé par </span>Marcel Patulacci</h2>
 
-                <h2>
-                    <span>Proposé par </span>
-                    <a href="{{ home }}users/profile/{{ project.client.id }}">{{ project.client.firstname ~ " " ~ project.client.lastname }}</a>
-                </h2>
+            <ul>
 
-                <ul>
-
-                    <li>Date <span>{{ project.created_at | date("d F Y") }}</span></li>
-                    <li>Cibles <span>{{ project.targets | capitalize }}</span></li>
-                    <li>Site web
-                    <span>
-                        {% if project.url %}
-                            <a href="{{ project.url }}" target="_blank">{{ project.url }}</a>
-                        {% else %}
-                            Aucun
-                        {% endif %}
-                    </span>
-                    </li>
-                    <li>Estimation <span>{{ project.price }} €</span></li>
-                    <li>
-                        <p class="tagList">
-                            <a href="#">{{ project.type.type | capitalize }}</a>
-                            {% for tag in tags %}
-                                <a href="#">{{ tag.tag | capitalize }}</a>
-                            {% endfor %}
-                        </p>
-                    </li>
-                    <li class="projectFiche">
-                        <p>Fichiers utiles <span>Télécharger</span></p>
-                        <ul>
-                            <li><a href="#">chartegraphique.pdf</a></li>
-                            <li><a href="#">logoLorem.pdf</a></li>
-                            <li><a href="#">texte.pdf</a></li>
-                        </ul>
-                    </li>
-
-                </ul>
-                <hr class="clear"/>
-
-                <a class="buttonWhite" href="{{ home }}projects/join/{{ project.id }}">Je participe</a>
-
-
-            </div>
-
-            <div id="profileDescription">
-
-                <h3>Description du projet</h3>
-
-                <p class="infoList">{{ project.description }}</p>
-
-                <h3>Mes recommandations</h3>
-
-                <p class="infoList">{{ project.recommendation }}</p>
-
-            </div>
-
-            <div class="listProjet">
-                <h3>Ils souhaitent participer <span>{{ propositions | length }} Demandes</span></h3>
-
-                <div class="notBloc">
-                    <p class="dateNot">Propositions</p>
+                <li>Date <span>23 Février 2015</span></li>
+                <li>Cibles <span>Enfants, Adultes, Garagiste, Lorem, Lorem, Lorem, Lorem</span></li>
+                <li>Site web <span><a href="#">Aucun</a></span></li>
+                <li>Estimation <span>2350 €</span></li>
+                <li>
+                    <p class="tagList"><a href="#">tag</a><a href="#">tag</a><a href="#">tag</a><a href="#">tag</a><a href="#">tag</a><a href="#">tag</a><a href="#">tag</a><a href="#">tag</a><a href="#">tag</a></p>
+                </li>
+                <li class="projectFiche">
+                    <p>Fichiers utiles <span>Télécharger</span></p>
                     <ul>
-                        {% for proposition in propositions %}
-                            <li>
-                                <img src="{{ home ~ proposition.picture }}" height="66px" width="66px" alt="Notification user"/>
-
-                                <p><a href="{{ home }}users/profile/{{ proposition.id }}">{{ proposition.firstname ~ " " ~ proposition.lastname }}</a> souhaite participer au projet</p>
-                                <hr class="clear"/>
-                            </li>
-                        {% endfor %}
+                        <li><a href="#">chartegraphique.pdf</a></li>
+                        <li><a href="#">logoLorem.pdf</a></li>
+                        <li><a href="#">texte.pdf</a></li>
                     </ul>
-                </div>
-            </div>
+                </li>
 
+            </ul>
             <hr class="clear"/>
-            <div class="push"></div>
+
+            <a class="buttonWhite" href="#">Je participe</a>
+
 
         </div>
+
+        <div id="profileDescription">
+
+            <h3>Description du projet</h3>
+
+            <p class="infoList">Je fais caca sur l'inté parce que c'est pas marrant</p>
+
+            <h3>Mes recommandations</h3>
+
+            <p class="infoList">Faite gaffe devant Pumir, le roi du caca!</p>
+
+        </div>
+
+        <div class="listProjet">
+            <h3>Ils souhaitent participer <span>3 Demandes</span></h3>
+            <div class="notBloc">
+                <p class="dateNot">Aujourd'hui</p>
+                <ul>
+                    <li>
+                        <img src="{{ image }}notification-user.png" alt="Notification user"/>
+                        <p><a href="#">Marcel Pattulacci</a> souhaite participer à votre projet</p>
+                        <hr class="clear"/>
+                    </li>
+                    <li>
+                        <img src="{{ image }}notification-user.png" alt="Notification user"/>
+                        <p><a href="#">Marcel Pattulacci</a> souhaite participer à votre projet</p>
+                        <hr class="clear"/>
+                    </li>
+                </ul>
+            </div>
+            <div class="notBloc">
+                <p class="dateNot">24 Février</p>
+                <ul>
+                    <li>
+                        <img src="{{ image }}notification-user.png" alt="Notification user"/>
+                        <p><a href="#">Marcel Pattulacci</a> souhaite participer à votre projet</p>
+                        <hr class="clear"/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <hr class="clear"/>
     </div>
+<div class="push"></div>
+</div>
+</div>
 
 
 {% endblock %}

@@ -59,12 +59,14 @@
 			text-align: left;
 			clear: both;
 			color: #5d6e72;
-			font-family: $fontLight;
+			font-family: $font;
 			border-bottom: 1px solid #e8e8e8;
 			padding: 10px 0;
 			width: 100%;
 			span{
 				float: right;
+				color: #4e5c5f;
+				font-family: $fontLight;
 			}
 		}
 	}
