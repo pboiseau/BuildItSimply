@@ -121,8 +121,18 @@ class Participate extends AppModel
             $participations = $this->where('freelance_id', $user_id)
                 ->where('participates.status', '!=', 'PENDING')
                 ->join('projects', 'project_id', '=', 'id')
+                ->join('accounts', 'projects.client_id', '=', 'accounts.id')
                 ->orderBy('participates.updated_at', 'desc')
-                ->get(['projects.id', 'projects.name', 'participates.status', 'participates.updated_at']);
+                ->get([
+                    'projects.id as project_id',
+                    'projects.name',
+                    'projects.client_id',
+                    'participates.status',
+                    'participates.updated_at',
+                    'accounts.firstname',
+                    'accounts.lastname',
+                    'accounts.picture'
+                ]);
 
         } else if($user_type == 'client') {
 
@@ -131,10 +141,25 @@ class Participate extends AppModel
                     $query->select('id')
                         ->from('projects')
                         ->where('client_id', $this->user_id);
-                })->orderBy('created_at', 'desc')->get();
+                })
+                ->orderBy('created_at', 'desc')
+                ->get();
         }
 
         return ($participations->count() > 0) ? $participations : false;
+    }
+
+    /**
+     * Group collection by date
+     * @param Collection $participations
+     * @return array of Collection
+     */
+    public function groupByDate($participations)
+    {
+        return $participations->groupBy(function ($self) {
+            $date = new DateTime($self->created_at);
+            return $date->format('d');
+        });
     }
 
 }

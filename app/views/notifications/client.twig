@@ -1,11 +1,25 @@
 {% block body %}
-    <ul class="notifications">
-        {% for participation in participations %}
-            <li>
-                <a href="{{ home }}users/profile/{{ participation.freelance.id }}">{{ participation.freelance.firstname ~ " " ~ participation.freelance.lastname }}</a>
-                souhaite participer au projet <a
-                        href="{{ home }}projects/{{ participation.project.id }}">{{ participation.project.name }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+
+    {% for date, participation in participations %}
+        <div class="notBloc">
+            <p class="dateNot">{{ participation.0.created_at |date("d F Y") }}</p>
+            <ul>
+                {% for notification in participation %}
+                    <li>
+                        <img src="{{ home ~ notification.freelance.picture }}" alt="Notification user"/>
+
+                        <p>
+                            <a href="{{ home }}users/profile/{{ notification.freelance.id }}">{{ notification.freelance.firstname ~ notification.freelance.lastname }}</a>
+                            souhaite participer à votre projet <a
+                                    href="{{ home }}projects/{{ notification.project_id }}">{{ notification.project.name }}</a>
+                        </p>
+
+                        <hr class="clear"/>
+                    </li>
+                {% endfor %}
+
+            </ul>
+        </div>
+    {% endfor %}
+
 {% endblock %}

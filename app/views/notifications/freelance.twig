@@ -1,11 +1,24 @@
 {% block body %}
-    <ul class="notifications">
-        {% for participation in participations %}
-            <li>
-                <p>Votre demande de participation au projet <a
-                            href="{{ home }}projects/{{ participation.id }}">{{ participation.name }}</a> vient
-                    d'être {{ participation.status }}</p>
-            </li>
-        {% endfor %}
-    </ul>
+    {% for date, participation in participations %}
+        <div class="notBloc">
+            <p class="dateNot">{{ participation.0.created_at |date("d F Y") }}</p>
+            <ul>
+                {% for notification in participation %}
+                    <li>
+                        <img src="{{ home ~ notification.picture }}" alt="Notification user"/>
+
+                        <p>
+                            Votre demande de participation concernant le projet <a
+                                    href="{{ home }}projects/{{ notification.project_id }}">{{ notification.name }}</a>
+                            a été {{ notification.status }} par <a
+                                    href="{{ home }}users/profile/{{ notification.client_id }}">{{ notification.firstname ~ " " ~ notification.lastname }}</a>
+                        </p>
+
+                        <hr class="clear"/>
+                    </li>
+                {% endfor %}
+
+            </ul>
+        </div>
+    {% endfor %}
 {% endblock %}

@@ -228,15 +228,15 @@ class AccountController extends AppController
                 }
             }
 
+        } else if ($this->Auth->is('freelance')) {
+
+            $participations = $this->Participate->notification($this->Auth->getId(), 'freelance');
+
         } else {
-            if ($this->Auth->is('freelance')) {
-
-                $participations = $this->Participate->notification($this->Auth->getId(), 'freelance');
-
-            } else {
-                $this->f3->reroute('/');
-            }
+            $this->f3->reroute('/');
         }
+
+        $participations = $this->Participate->groupByDate($participations);
 
         $this->render('accounts/notification', compact('participations'));
     }
