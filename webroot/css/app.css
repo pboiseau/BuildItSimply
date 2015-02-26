@@ -1849,6 +1849,12 @@ label#largeFile input#file {
   padding-bottom: 80px;
 }
 
+/* line 168, ../sass/_init.scss */
+.buttonWhite:focus {
+  text-decoration: none;
+  color: white;
+}
+
 /* line 2, ../sass/_footer.scss */
 footer {
   background: #f4f4f4;
