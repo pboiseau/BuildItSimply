@@ -64,6 +64,7 @@ class Account extends AppModel
             $user['firstname'] = ucfirst(strtolower($user['firstname']));
             $user['lastname'] = ucfirst(strtolower($user['lastname']));
             $user['password'] = $this->hash($user['password']);
+            $user['picture'] = Base::instance()->get('AVATAR_DEFAULT');
 
             $newUser = $this->create($user);
             return (!empty($newUser)) ? $newUser : false;
