@@ -28,13 +28,6 @@
 			&:nth-of-type(2){
 				margin: 0 97px 0 89px;
 			}
-			// &:nth-of-type(2):before{
-			// 	width: 145px;
-			// 	height: 2px;
-			// 	background: #c8c8c8;
-			// 	content: "";
-			// 	display: block;
-			// }
 		}
 	}
 }
@@ -42,6 +35,7 @@
 #ProjetInfo{
 	.wrapper{
 		text-align: center;
+		position: relative;
 		p{
 			font-size: 18px;
 			color: #666666;
@@ -96,3 +90,81 @@
 	box-shadow: none;
 	border-color: #2c3e50;
 }
+
+#gabaritBG{
+	background: #f5f5f5;
+	.wrapper{
+		padding-bottom: 30px;
+	}
+}
+
+.projetBugdet{
+	margin-top: 20px;
+	p{
+		font-size: 24px !important;
+		color: #555555 !important;
+		font-family: $font !important;
+		span{
+			color: $colorCla;
+			font-size: 16px;
+			text-transform: uppercase;
+			display: block;
+		}
+	}
+}
+.previousQ{
+	position: absolute;
+	top: 97px;
+	left: 0;
+	text-transform: uppercase;
+	font-size: 14px;
+	color: #a8a8a8;
+	@include transition(all,0.2s,linear);
+	&:hover{
+		color: #888888;
+	}
+}
+#projetGabarit{
+	text-align: center;
+	ul{
+		float: left;
+		margin-bottom: 55px;
+		li{
+			padding: 30px;
+			float: left;
+			cursor: pointer;
+			width: 325px;
+			background: white;
+			border: 3px solid transparent;
+			border-radius: 2px;
+			@include transition(all,0.4s,linear);
+			&:nth-of-type(2){
+				margin: 0 52px;
+			}
+			&:hover{
+				border: 3px solid $colorCla;
+			}
+			h3{
+				font-size: 16px;
+				text-transform: uppercase;
+				color: $colorCla;
+				font-family: $font;
+				margin: 5px 0;
+			}
+			p{
+				color: #888888;
+				font-size: 14px;
+				font-family: $fontLight;
+			}
+		}
+	}
+	.wrapper{
+		padding-top: 0;
+		padding-bottom: 80px;
+	}
+}
+
+
+
+
+

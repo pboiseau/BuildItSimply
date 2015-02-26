@@ -1672,11 +1672,12 @@ label#largeFile input#file {
   margin: 0 97px 0 89px;
 }
 
-/* line 43, ../sass/_init.scss */
+/* line 36, ../sass/_init.scss */
 #ProjetInfo .wrapper {
   text-align: center;
+  position: relative;
 }
-/* line 45, ../sass/_init.scss */
+/* line 39, ../sass/_init.scss */
 #ProjetInfo .wrapper p {
   font-size: 18px;
   color: #666666;
@@ -1684,18 +1685,18 @@ label#largeFile input#file {
   text-align: center;
   margin: 0 auto;
 }
-/* line 52, ../sass/_init.scss */
+/* line 46, ../sass/_init.scss */
 #ProjetInfo .wrapper form {
   margin-top: 60px;
 }
-/* line 55, ../sass/_init.scss */
+/* line 49, ../sass/_init.scss */
 #ProjetInfo .wrapper .form-group {
   width: 845px;
   clear: both;
   margin: 0 !important;
   margin-bottom: 13px !important;
 }
-/* line 60, ../sass/_init.scss */
+/* line 54, ../sass/_init.scss */
 #ProjetInfo .wrapper .form-group label {
   text-align: right;
   float: left;
@@ -1706,22 +1707,22 @@ label#largeFile input#file {
   text-transform: uppercase;
   color: #005f78;
 }
-/* line 70, ../sass/_init.scss */
+/* line 64, ../sass/_init.scss */
 #ProjetInfo .wrapper .form-group input, #ProjetInfo .wrapper .form-group textarea {
   width: 100%;
   max-width: 485px;
 }
-/* line 74, ../sass/_init.scss */
+/* line 68, ../sass/_init.scss */
 #ProjetInfo .wrapper .form-group .form-group input {
   max-width: 485px;
   width: 100%;
 }
-/* line 78, ../sass/_init.scss */
+/* line 72, ../sass/_init.scss */
 #ProjetInfo .wrapper .form-group .col-sm-10 {
   width: 485px;
   float: right;
 }
-/* line 82, ../sass/_init.scss */
+/* line 76, ../sass/_init.scss */
 #ProjetInfo .wrapper .form-group .tokenfield {
   text-align: left;
 }
@@ -1746,10 +1747,106 @@ label#largeFile input#file {
   text-align: left;
 }
 
-/* line 95, ../sass/_init.scss */
+/* line 89, ../sass/_init.scss */
 .tokenfield.focus {
   box-shadow: none;
   border-color: #2c3e50;
+}
+
+/* line 94, ../sass/_init.scss */
+#gabaritBG {
+  background: #f5f5f5;
+}
+/* line 96, ../sass/_init.scss */
+#gabaritBG .wrapper {
+  padding-bottom: 30px;
+}
+
+/* line 101, ../sass/_init.scss */
+.projetBugdet {
+  margin-top: 20px;
+}
+/* line 103, ../sass/_init.scss */
+.projetBugdet p {
+  font-size: 24px !important;
+  color: #555555 !important;
+  font-family: "montserratregular", helvetica, arial, sans-serif !important;
+}
+/* line 107, ../sass/_init.scss */
+.projetBugdet p span {
+  color: #005f78;
+  font-size: 16px;
+  text-transform: uppercase;
+  display: block;
+}
+
+/* line 115, ../sass/_init.scss */
+.previousQ {
+  position: absolute;
+  top: 97px;
+  left: 0;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #a8a8a8;
+  -moz-transition: all, 0.2s, linear;
+  -o-transition: all, 0.2s, linear;
+  -webkit-transition: all, 0.2s, linear;
+  transition: all, 0.2s, linear;
+}
+/* line 123, ../sass/_init.scss */
+.previousQ:hover {
+  color: #888888;
+}
+
+/* line 127, ../sass/_init.scss */
+#projetGabarit {
+  text-align: center;
+}
+/* line 129, ../sass/_init.scss */
+#projetGabarit ul {
+  float: left;
+  margin-bottom: 55px;
+}
+/* line 132, ../sass/_init.scss */
+#projetGabarit ul li {
+  padding: 30px;
+  float: left;
+  cursor: pointer;
+  width: 325px;
+  background: white;
+  border: 3px solid transparent;
+  border-radius: 2px;
+  -moz-transition: all, 0.4s, linear;
+  -o-transition: all, 0.4s, linear;
+  -webkit-transition: all, 0.4s, linear;
+  transition: all, 0.4s, linear;
+}
+/* line 141, ../sass/_init.scss */
+#projetGabarit ul li:nth-of-type(2) {
+  margin: 0 52px;
+}
+/* line 144, ../sass/_init.scss */
+#projetGabarit ul li:hover {
+  border: 3px solid #005f78;
+}
+/* line 147, ../sass/_init.scss */
+#projetGabarit ul li h3 {
+  font-size: 16px;
+  text-transform: uppercase;
+  color: #005f78;
+  font-family: "montserratregular", helvetica, arial, sans-serif;
+  margin: 5px 0;
+}
+/* line 154, ../sass/_init.scss */
+#projetGabarit ul li p {
+  color: #888888;
+  font-size: 14px;
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+}
+/* line 161, ../sass/_init.scss */
+#projetGabarit .wrapper {
+  padding-top: 0;
+  padding-bottom: 80px;
 }
 
 /* line 2, ../sass/_footer.scss */

@@ -1,29 +1,63 @@
 {% extends 'layouts/' ~ layout ~ '.twig' %}
 
 {% block body %}
-    <div class="container">
-        <h2>Dites nous en un peu plus sur votre projet</h2>
-
-        <div id="type-container" class="type">
-            <h3>Etape {{ step }}</h3>
-
-            <h3>De quoi s'agit-il ?</h3>
-
-            {% for type in types %}
-                <div class="col-md-4">
-                    <div class="col-md-12">
-                        <a href="#" class="nextStep" data-choice="{{ type.id }}" data-step="{{ step }}"
-                           data-type="{{ type.id }}" data-change="next">
-                            <img src="{{ home ~ type.image }}" alt="" class="img-rounded">
-                        </a>
-                    </div>
-                    <div class="col-md-12">{{ type.type | capitalize }}</div>
-                    <div class="col-md-12"><p>{{ type.description }}</p></div>
-                </div>
-            {% endfor %}
-        </div>
-
+    <div id="timelineHead" class="pageHead">
+        <ul>
+            <li><span></span>Information</li>
+            <li class="timelineActive"><span></span>Détails</li>
+            <li><span></span>Validation</li>
+        </ul>
+        <hr class="clear"/>
     </div>
+
+<div id="gabaritBG">
+
+    <div id="ProjetInfo">
+
+        <div class="wrapper">
+            <h1>Création graphique</h1>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+            <div class="projetBugdet">
+            <p>650€<span>Budget estimé</span></p>
+            </div>
+
+            <a class="previousQ" href="#">← Question précédente</a>
+
+        </div>
+        
+    </div>
+
+    <div id="projetGabarit">
+        <div class="wrapper">
+            <ul>
+                <li>
+                    <img src="{{ image }}icon-oppotunites.png" alt=" ">
+                    <h3>logo</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+                </li>
+                <li>
+                    <img src="{{ image }}icon-oppotunites.png" alt=" ">
+                    <h3>logo</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+                </li>
+                <li>
+                    <img src="{{ image }}icon-oppotunites.png" alt=" ">
+                    <h3>logo</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+                </li>
+            </ul>
+            <hr class="clear"/>
+
+            <a class="buttonWhite" href="#">Continuer</a>
+        </div>
+    </div>
+</div><!-- end gabarit bg -->
+
+ <div class="push"></div>
+</div><!-- end page -->
+
 {% endblock %}
 
 {% block partial_js %}
