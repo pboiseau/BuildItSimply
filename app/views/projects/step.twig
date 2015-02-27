@@ -1,29 +1,50 @@
 {% block body %}
 
-    <div id="type-container">
-        <h3>Etape {{ step }}</h3>
+    <div id="ProjetInfo">
 
-        <h3>{{ questions.0.question }}</h3>
-        {% for question in questions %}
-            <div class="col-md-4">
-                <div class="col-md-12">
-                    <a href="#" class="nextStep" data-step="{{ step }}" data-type="{{ type }}"
-                       data-choice="{{ question.response_id }}" data-change="next">
-                        {#<img src="http://placehold.it/250x275" alt="" class="img-rounded">#}
-                        <img src="{{ home ~ question.image }}" alt="" class="img-rounded">
-                    </a>
-                </div>
-                <div class="col-md-12">{{ question.response }}</div>
-                <div class="col-md-12"><p>{{ question.description }}</p></div>
+        <div class="wrapper">
+
+            <h3>Etape {{ step }}</h3>
+
+            <h3>{{ questions.0.question }}</h3>
+
+            <p>{{ questions.0.question_description }}</p>
+
+            <div class="projetBugdet">
+                <p>650€<span>Budget estimé</span></p>
             </div>
-        {% endfor %}
-        {% if step > 1 %}
-            <button id="prevStep" class="btn btn-default btn-sm" type="button"
-                    data-choice="{{ question.response_id }}" data-step="{{ step }}"
-                    data-type="{{ type }}" data-change="prev">Précédent
-            </button>
-        {% endif %}
+
+            {% if step > 1 %}
+                <button id="prevStep" class="previousQ" type="button"
+                        data-choice="{{ question.response_id }}" data-step="{{ step }}"
+                        data-type="{{ type }}" data-change="prev">← Question précédente
+                </button>
+            {% endif %}
+        </div>
+
     </div>
 
+    <div id="projetGabarit">
+        <div class="wrapper">
+            <ul>
+                {% for question in questions %}
+                    <li>
+                        <a href="#" class="nextStep" data-step="{{ step }}" data-type="{{ type }}"
+                           data-choice="{{ question.response_id }}" data-change="next">
+                            <img src="{{ home ~ question.image }}" alt=" ">
+                        </a>
+
+                        <h3>{{ question.response }}</h3>
+
+                        <p>{{ question.description }}</p>
+                    </li>
+                {% endfor %}
+
+            </ul>
+            <hr class="clear"/>
+
+            {#<a class="buttonWhite" href="#">Continuer</a>#}
+        </div>
+    </div>
 
 {% endblock %}

@@ -10,53 +10,45 @@
         <hr class="clear"/>
     </div>
 
-<div id="gabaritBG">
+    <div id="gabaritBG">
 
-    <div id="ProjetInfo">
+        <div id="ProjetInfo">
 
-        <div class="wrapper">
-            <h1>Création graphique</h1>
-
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
-            <div class="projetBugdet">
-            <p>650€<span>Budget estimé</span></p>
+            <div class="wrapper">
+                <h3>Etape {{ step }}</h3>
+                <h3>Dites nous en un peu plus sur votre projet</h3>
+                <p>De quoi s'agit-il ?</p>
             </div>
 
-            <a class="previousQ" href="#">← Question précédente</a>
-
         </div>
-        
-    </div>
 
-    <div id="projetGabarit">
-        <div class="wrapper">
-            <ul>
-                <li>
-                    <img src="{{ image }}icon-oppotunites.png" alt=" ">
-                    <h3>logo</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-                </li>
-                <li>
-                    <img src="{{ image }}icon-oppotunites.png" alt=" ">
-                    <h3>logo</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-                </li>
-                <li>
-                    <img src="{{ image }}icon-oppotunites.png" alt=" ">
-                    <h3>logo</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-                </li>
-            </ul>
-            <hr class="clear"/>
+        <div id="projetGabarit">
+            <div class="wrapper">
+                <ul>
+                    {% for type in types %}
+                        <li>
+                            <a href="#" class="nextStep" data-choice="{{ type.id }}" data-step="{{ step }}"
+                               data-type="{{ type.id }}" data-change="next">
+                                <img src="{{ image }}icon-oppotunites.png" alt=" ">
+                            </a>
 
-            <a class="buttonWhite" href="#">Continuer</a>
+                            <h3>{{ type.type | capitalize }}</h3>
+
+                            <p>{{ type.description }}</p>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+                <hr class="clear"/>
+
+                {#<a class="buttonWhite" href="#">Continuer</a>#}
+            </div>
         </div>
-    </div>
-</div><!-- end gabarit bg -->
 
- <div class="push"></div>
-</div><!-- end page -->
+    </div><!-- end gabarit bg -->
+
+    <div class="push"></div>
+    </div><!-- end page -->
 
 {% endblock %}
 
@@ -68,6 +60,7 @@
         $('#prevStep').click(changeStep);
 
         function changeStep(e) {
+            e.preventDefault();
             var step = $(e.currentTarget).attr('data-step');
             var change = $(e.currentTarget).attr('data-change');
 
@@ -89,7 +82,7 @@
                         choice: $(e.currentTarget).attr('data-choice')
                     }
                 }).done(function (data, textStatus, jqXHR) {
-                    $('#type-container').empty().append(data);
+                    $('#gabaritBG').empty().append(data);
                     $('.nextStep').click(changeStep);
                     $('#prevStep').click(changeStep);
 

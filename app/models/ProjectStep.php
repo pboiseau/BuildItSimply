@@ -34,6 +34,7 @@ class ProjectStep extends AppModel
             ->get([
                 'project_question.id AS project_id',
                 'project_question.question',
+                'project_question.description AS question_description',
                 'project_response.id AS response_id',
                 'project_response.response',
                 'project_response.description',

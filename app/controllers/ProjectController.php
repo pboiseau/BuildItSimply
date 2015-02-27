@@ -396,6 +396,7 @@ class ProjectController extends AppController
         $types = ProjectType::all();
         $this->f3->set('SESSION.project.price', 0);
         $this->f3->set('SESSION.project.tag', '');
+        $this->f3->clear('SESSION.step');
         $this->render('projects/start', compact('types', 'step'));
     }
 
