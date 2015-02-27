@@ -28,9 +28,8 @@
                     {% for type in types %}
                         <li class="nextStep" data-choice="{{ type.id }}" data-step="{{ step }}"
                             data-type="{{ type.id }}" data-change="next">
-                            <img src="{{ image }}icon-oppotunites.png" alt=" ">
+                            <img src="{{ home ~ type.image }}" alt="image-project-type">
                             
-
                             <h3>{{ type.type | capitalize }}</h3>
 
                             <p>{{ type.description }}</p>
