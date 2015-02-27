@@ -11,17 +11,17 @@ class AdminController extends AppController
         parent::__construct();
     }
 
-    /*
+    /**
      * Back-office's home
-    */
+     */
     public function main()
     {
         $this->render('admin/');
     }
 
-    /*
+    /**
      * Add type of project
-    */
+     */
     public function projectType()
     {
         if ($this->request() == "POST") 
@@ -52,11 +52,13 @@ class AdminController extends AppController
     }
 
 
-    /*
-     * Manage step of project
-    */
+    /**
+      * Manage step of project
+     */
     public function projectStep()
     {
+        $responses  = new ProjectResponse();
+        $steps = new ProjectStep();
 
         if ($this->request() == "POST") 
         {
@@ -69,23 +71,42 @@ class AdminController extends AppController
                 // Si l'utilisateur veut update
                 if($request['button']=='update')
                 {
+
                     foreach ($request['question'] as $key => $question) 
                     {
                         $questions->where('id', $key)->update(['question' => $question]);
                     }
+                    
+                    foreach ($request['response'] as $key => $response) 
+                    {
+                        $responses->where('id', $key)
+                            ->update($this->generateUpdateResponse($response));
+                    }
+
                     $this->setFlash("Les étapes ont bien été mises à jours");
                 }
 
                 // Si l'utilisateur veut remove
                 else if($request['button']=='remove')
                 {
-                    $steps = new ProjectStep();
-
-                    foreach ($request['checked_question'] as $key => $value) 
+                    if(!empty($request['checked_question']))
                     {
-                        $steps->where('project_question_id', $key)->delete();
-                        $questions->destroy($key);
+                       foreach ($request['checked_question'] as $key => $value) 
+                        {
+                            $steps->where('project_question_id', $key)->delete();
+                            $questions->destroy($key);
+                        } 
                     }
+                    
+                    if(!empty($request['checked_response']))
+                    {
+                        foreach ($request['checked_response'] as $key => $value) 
+                        {
+                            $responses->destroy($key);
+                        }
+                    }
+
+
                     $this->setFlash("La sélection a bien été supprimé");
                 }
             }
@@ -96,19 +117,45 @@ class AdminController extends AppController
         }
 
         $types = ProjectType::all(array('id', 'type'));
-        $steps = ProjectStep::where('project_question_id', '>', 0)
+        $steps = $steps->where('project_question_id', '>', 0)
             ->join('project_question', 'project_step.project_question_id', '=', 'project_question.id')
             ->orderBy('project_step.step', 'asc')
             ->get();
 
-        $this->render('admin/projects/step', compact('steps', 'types'));
+        $responses = $responses->all();
+
+        $this->render('admin/projects/step', compact('steps', 'types', 'responses'));
     }
 
+    /**
+     *    Unset all empty field
+     *    @param array data
+     *    @return array $data cleaned
+     */
+    private function generateUpdateResponse($data = array())
+    {
 
+        if (empty($data['response']))
+            unset($data['response']);
 
-    /*
+        if (empty($data['image']))
+            unset($data['image']);
+
+        if (empty($data['description']))
+            unset($data['description']);
+
+        if (empty($data['tag']))
+            unset($data['tag']);
+
+        if (empty($data['price'])) 
+            unset($data['price']);
+
+        return $data;
+    }
+
+    /**
      * Add questions for one type of project
-    */
+     */
     public function projectQuestion()
     {
         $error = array();
@@ -147,9 +194,9 @@ class AdminController extends AppController
     }
 
 
-    /*
+    /**
      * For answer one question added previously
-    */
+     */
     public function projectResponse()
     {
 
@@ -170,9 +217,11 @@ class AdminController extends AppController
     }
 
 
-    /*
+    /**
      * Function for add answer
-    */
+     * @param array $request contain post's data
+     * @param int idQuestion 
+     */
     public function addResponses($request, $idQuestion = null)
     {
 
@@ -240,7 +289,7 @@ class AdminController extends AppController
 
 
 
-    /*
+    /**
      *  List of freelances
      */
     public function freelanceList()
@@ -257,7 +306,7 @@ class AdminController extends AppController
     }
 
 
-    /*
+    /**
      *  List of clients
      */
     public function clientList()
@@ -275,9 +324,10 @@ class AdminController extends AppController
 
 
 
-    /*
+    /**
      *  Manage list of persons
-     *  @params String $type type of person: freelance | client
+     *  @param array $request  post's data
+     *  @param String $type type of person: freelance | client
      */
     public function listManagement($request, $type)
     {

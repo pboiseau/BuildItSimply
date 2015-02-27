@@ -18,7 +18,22 @@
 			 		<input type="checkbox" name="checked_question[{{step.project_question_id}}]" value="question">
 			  		ETAPE {{step.step}}  
 			  		<input class="form-control" type="text" name="question[{{step.project_question_id}}]" class="form-control" value="{{step.question}}">
+			  		{% for response in responses if response.question_id == step.project_question_id %}
+			  		<div class="col-sm-offset-1">
+			  			<input type="checkbox" name="checked_response[{{response.id}}]" value="response"> 
+			  			<label for="response[{{response.id}}]" class="control-label">Réponse </label>
+			  			<input id="response[{{response.id}}]" class="form-control" type="text" name="response[{{response.id}}][response]"  value="{{response.response}}" placeholder="Intitulé de la réponse">
+			  			<div class="col-sm-offset-1">
+			  				<label for="description[{{response.id}}]" class="control-label">Description </label>
+			  				<textarea id="description[{{response.id}}]" class="form-control" rows="3" name="response[{{response.id}}][description]" placeholder="Description de la réponse">{{response.description}}</textarea>
+			  				<label for="tag[{{response.id}}]" class="control-label">Tag </label>
+			  				<input id="tag[{{response.id}}]" class="form-control" type="text" name="response[{{response.id}}][tag]"  value="{{response.tag}}" placeholder="Tags liés à la réponse">
+			  				<label for="price[{{response.id}}]" class="control-label">Prix </label>
+			  				<input id="price[{{response.id}}]" class="form-control" type="text" name="response[{{response.id}}][price]"  value="{{response.price}}" placeholder="Le prix de l'élément">
+			  			</div>
+			  		</div>
 
+			  		{% endfor %}	
 			  	</div>
 			{% endfor %}
 	 	</div>
