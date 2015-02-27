@@ -118,6 +118,8 @@
 	left: 0;
 	text-transform: uppercase;
 	font-size: 14px;
+	background: transparent;
+	border: none;
 	color: #a8a8a8;
 	@include transition(all,0.2s,linear);
 	&:hover{
@@ -126,10 +128,27 @@
 }
 #projetGabarit{
 	text-align: center;
+	.projet2{
+		padding: 0px 180px;
+		li{
+			width: 325px;
+			padding: 30px;
+			img{
+				width: 200px;
+			}
+			&:nth-of-type(2){
+				margin: 0;
+				margin-left: 52px;
+			}
+		}
+	}
 	.projet3{
 		li{
 			width: 325px;
 			padding: 30px;
+			img{
+				width: 200px;
+			}
 			&:nth-of-type(2){
 				margin: 0 52px;
 			}
@@ -235,6 +254,9 @@
 	}
 	&:last-of-type{
 		margin-top: 30px !important;
+		button{
+			float: right;
+		}
 	}
 }
 .valFichier{
@@ -245,6 +267,10 @@
 	float: right;
 	width: 350px;
 	text-align: center;
+	img{
+		width: 140px;
+		margin-top: 30px;
+	}
 	h3{
 		text-align: center;
 	}
@@ -252,7 +278,19 @@
 		text-transform: uppercase;
 		color: #666666;
 		font-size: 14px;
-		margin-top: 10px;
+		margin-top: 5px;
+	}
+	.col-md-12:first-of-type:after{
+		display: none;
+	}
+	.col-md-12:after{
+		content: '';
+		width: 1px;
+		height: 25px;
+		position: absolute;
+		border: 1px dashed #aaaaaa;
+		top: 5px;
+		left: 173px;
 	}
 }
 .form-group textarea{
