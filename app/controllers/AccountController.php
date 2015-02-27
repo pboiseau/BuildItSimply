@@ -160,10 +160,10 @@ class AccountController extends AppController
 
             if (!empty($this->f3->get('FILES.picture.name'))) {
                 $upload = new UploadHelper();
-                $filename = $upload->upload();
+                $filename = $upload->upload(true)[0];
 
                 if ($filename) {
-                    $profile['account']['picture'] = $this->f3->get('UPLOADS') . $filename;
+                    $profile['account']['picture'] = $filename;
                 }
             }
 

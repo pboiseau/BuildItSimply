@@ -32,10 +32,10 @@ class AdminController extends AppController
             if (!empty($this->f3->get('FILES.image.name')))
             {
                 $upload = new UploadHelper($this->f3->get('PROJECT_TYPE_FILES'));
-                $filename = $upload->upload();
+                $filename = current($upload->upload());
 
                 if ($filename) 
-                    $request['image'] = $this->f3->get('RESPONSE_FILES').$filename;
+                    $request['image'] = $filename;
             }
 
             ProjectType::create($request);
@@ -71,26 +71,28 @@ class AdminController extends AppController
                 // Si l'utilisateur veut update
                 if($request['button']=='update')
                 {
-                    $files = $this->f3->get('FILES.image.name');
+                    $filesList = $this->f3->get('FILES.image.name');
 
                     foreach ($request['question'] as $key => $question) 
                     {
                         $questions->where('id', $key)->update(['question' => $question]);
                     }
-                    
+
+                    // Recuperation of images
+                    $upload = new UploadHelper($this->f3->get('RESPONSE_FILES'));
+                    $files = $upload->upload();
+
                     foreach ($request['response'] as $key => $response) 
                     {
-
-                        if (!empty($this->f3->get('FILES.image.name')[$key])) 
+                        $new_response = $response;
+                        if (!empty($filesList[$key])) 
                         {
-                            $upload = new UploadHelper($this->f3->get('RESPONSE_FILES'));
-                            $filename = $upload->upload();
-
-                            if ($filename) 
-                                $response['image'] = $this->f3->get('RESPONSE_FILES') . $filename;
+                            $new_response['image'] = current($files);
+                            next($files);
                         }
+    
                         $responses->where('id', $key)
-                            ->update($this->generateUpdateResponse($response));
+                            ->update($this->generateUpdateResponse($new_response));
                     }
 
                     $this->setFlash("Les étapes ont bien été mises à jours");
@@ -238,36 +240,38 @@ class AdminController extends AppController
         if(empty($idQuestion))
             $idQuestion = $request['project_question'];
 
+        $upload = new UploadHelper($this->f3->get('RESPONSE_FILES'));
+        $files = $upload->upload();
+        $fileList = $this->f3->get('FILES.image.name');
+
         foreach ($request['response'] as $key => $response) 
         {
-            if ($this->ProjectResponse->validate($response)) 
+
+            $new_response = $response;
+            if ($this->ProjectResponse->validate($new_response)) 
             {
-
-                if (!empty($this->f3->get('FILES.image.name')[$key])) 
+                if (!empty($fileList[$key])) 
                 {
-                    $upload = new UploadHelper($this->f3->get('RESPONSE_FILES'));
-                    $filename = $upload->upload();
-
-                    if ($filename) 
-                        $response['image']= $this->f3->get('RESPONSE_FILES') . $filename;
+                    $new_response['image']= current($files);
+                    next($files);
                 }
 
-                if(!empty($response['image']))
+                if(!empty($new_response['image']))
                 {
                     ProjectResponse::create([
-                        'response'      => $response['response'],
-                        'description'   => $response['description'],
+                        'response'      => $new_response['response'],
+                        'description'   => $new_response['description'],
                         'price'         => $request['price'],
                         'tag'           => $request['tag'],
                         'question_id'   => $idQuestion,
-                        'image'         => $response['image']
+                        'image'         => $new_response['image']
                     ]);
                 }
                 else
                 {
                     ProjectResponse::create([
-                        'response'      => $response['response'],
-                        'description'   => $response['description'],
+                        'response'      => $new_response['response'],
+                        'description'   => $new_response['description'],
                         'price'         => $request['price'],
                         'tag'           => $request['tag'],
                         'question_id'   => $idQuestion

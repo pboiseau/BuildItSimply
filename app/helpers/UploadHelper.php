@@ -20,23 +20,36 @@ class UploadHelper extends BaseHelper
      * @return mixed
      * @throws Exception
      */
-    public function upload()
+    public function upload($resize = false)
     {
         //Upload the file in the repository
-        if (!$files = $this->web->receive(function ($file) {
-            $this->checkSize($file['type'], $file['size']);
+        if (!$files = $this->web->receive(function ($file) 
+        {
+            $this->checkSize($file['type'], $file['size']);    
         }, true, function ($file) {
             $tab = explode('.', $file);
             $extension = $tab[count($tab) - 1];
             $this->file = uniqid() . '.' . $extension;
             return $this->file;
         })
-        ) {
+        ) 
+        {
             throw new Exception('Error during upload');
         }
 
-        $this->resize($this->f3->get('UPLOADS') . $this->file);
-        return $this->file;
+        // Resize if needed, and return cleaned array
+        $new_array = [];
+        foreach ($files as $key => $file)
+        {
+            if($file)
+            {
+                $new_array[] = $key;
+                if($resize)
+                    $this->resize($key);
+            }
+        }
+
+        return $new_array;
 
     }
 
