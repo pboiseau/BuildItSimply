@@ -1,21 +1,32 @@
 {% extends 'layouts/' ~ layout ~ '.twig' %}
 
 {% block body %}
-    <div class="container">
 
-        <div class="header">
-            <h2>Validation du projet</h2>
+    <div id="timelineHead" class="pageHead">
+        <ul>
+            <li><span></span>Information</li>
+            <li><span></span>Détails</li>
+            <li class="timelineActive"><span></span>Validation</li>
+        </ul>
+        <hr class="clear"/>
+    </div>
+
+
+    <div id="projetInfo" class="projetValidation">
+        <div class="wrapper">
+
+        <h1>Validation du projet</h1>
 
             <p>Voici un récapitulatif de votre projet et des options choisies. Vous pouvez également ajouter des
                 fichiers utiles pour le freelance.</p>
-        </div>
+        
 
         <div class="info">
             <h3>Informations générales du projet</h3>
 
             <p>Veuillez vérifier que les informations ci-dessous sont exactes.</p>
 
-            <div class="col-md-10">
+            <div class="formVal">
 
                 <form method="post" action="{{ home ~ request }}" class="form-horizontal" enctype="multipart/form-data">
                     <div class="form-group {{ (errors.name) ? 'has-error' : '' }}">
@@ -64,15 +75,14 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group valFichier">
                         <h3>Ajouter des fichiers</h3>
 
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad amet blanditiis
-                            commodi eaque, earum fugit harum, iste, modi nobis non perspiciatis quisquam ratione
-                            reiciendis repellat repudiandae sapiente velit voluptatibus!</p>
+                            commodi eaque, earum fugit harum iste.</p>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group fileProjet">
                         <label for="file" class="col-sm-2 control-label">Fichier 1</label>
 
                         <div class="col-sm-10">
@@ -80,7 +90,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group fileProjet">
                         <label for="file" class="col-sm-2 control-label">Fichier 2</label>
 
                         <div class="col-sm-10">
@@ -88,7 +98,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group fileProjet">
                         <label for="file" class="col-sm-2 control-label">Fichier 3</label>
 
                         <div class="col-sm-10">
@@ -98,13 +108,13 @@
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default">Valider et publier le projet</button>
+                            <button type="submit" class="btn buttonWhite btn-default">Valider et publier le projet</button>
                         </div>
                     </div>
                 </form>
             </div>
 
-            <div class="col-md-2">
+            <div class="saveIcon">
 
                 <h3>Récapitulatif</h3>
 
@@ -121,6 +131,12 @@
 
             </div>
         </div>
+            <hr class="clear"/>
+        </div>
     </div>
+
+
+    <div class="push"></div>
+</div>
 {% endblock %}
 

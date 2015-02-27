@@ -1860,6 +1860,108 @@ label#largeFile input#file {
   color: white;
 }
 
+/* line 173, ../sass/_init.scss */
+.projetStep {
+  text-transform: uppercase;
+  color: #999999;
+}
+
+/* line 177, ../sass/_init.scss */
+#projetInfo p {
+  font-size: 18px;
+  color: #666666;
+  width: 700px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* line 184, ../sass/_init.scss */
+.info {
+  margin-top: 50px;
+}
+/* line 186, ../sass/_init.scss */
+.info h3 {
+  text-align: left;
+}
+/* line 189, ../sass/_init.scss */
+.info p {
+  text-align: left !important;
+  font-size: 14px !important;
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+  margin-left: 0 !important;
+}
+
+/* line 196, ../sass/_init.scss */
+.formVal {
+  margin-top: 30px;
+  float: left;
+}
+
+/* line 200, ../sass/_init.scss */
+.formVal .form-group {
+  width: 677px;
+  clear: both;
+  margin: 0 !important;
+  margin-bottom: 13px !important;
+}
+/* line 205, ../sass/_init.scss */
+.formVal .form-group label {
+  text-align: right;
+  float: left;
+  width: 171px;
+  padding: 0;
+  position: relative;
+  top: 10px;
+  text-transform: uppercase;
+  color: #005f78;
+}
+/* line 215, ../sass/_init.scss */
+.formVal .form-group .col-sm-10 {
+  width: 485px;
+  float: right;
+}
+/* line 219, ../sass/_init.scss */
+.formVal .form-group:last-of-type {
+  margin-top: 30px !important;
+}
+
+/* line 223, ../sass/_init.scss */
+.valFichier {
+  padding-top: 25px !important;
+}
+
+/* line 227, ../sass/_init.scss */
+.saveIcon {
+  float: right;
+  width: 350px;
+  text-align: center;
+}
+/* line 231, ../sass/_init.scss */
+.saveIcon h3 {
+  text-align: center;
+}
+/* line 234, ../sass/_init.scss */
+.saveIcon h4 {
+  text-transform: uppercase;
+  color: #666666;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* line 241, ../sass/_init.scss */
+.form-group textarea {
+  max-width: 100%;
+}
+
+/* line 245, ../sass/_init.scss */
+.fileProjet input {
+  background: transparent;
+  border: none;
+  margin-top: 10px;
+  color: #777777;
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+}
+
 /* line 2, ../sass/_footer.scss */
 footer {
   background: #f4f4f4;
