@@ -257,7 +257,7 @@ class ProjectController extends AppController
      */
     public function edit()
     {
-        $project = $this->Project->find($this->f3->get('PARAMS.id'));
+        $project = $this->Project->show($this->f3->get('PARAMS.id'));
 
 
         // if project doesn't exist or isn't own by the client
