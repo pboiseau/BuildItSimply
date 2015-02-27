@@ -173,36 +173,43 @@ class ProjectController extends AppController
 
 
     /**
+     * Call in AJAX
      * Get projects that contains keywords and display them on a list
      */
     public function search()
     {
-        if ($this->request() == "POST") {
+        if ($this->request() == "POST" && $this->f3->get('AJAX')) {
             $this->validator = new Validate();
             $searchWords = $this->f3->get('POST')['searchWords'];
             $this->words = explode(' ', $searchWords);
 
-            $request = $this->Project->whereNotIn('status', ['ANNULE']);
+            $request = $this->Project->whereNotIn('status', ['ANNULE'])
+                ->join('project_type', 'project_type.id', '=', 'project_type_id');
+
 
             $request->where(function ($query) {
                 foreach ($this->words as $word) {
                     if ($this->validator->isKeyword($word, 100)) {
-                        $query->orWhere('name', 'like', '%' . $word . '%')
-                            ->orWhere('description', 'like', '%' . $word . '%')
-                            ->orWhere('targets', 'like', '%' . $word . '%');
+                        $query->orWhere('projects.name', 'like', '%' . $word . '%')
+                            ->orWhere('projects.description', 'like', '%' . $word . '%')
+                            ->orWhere('projects.targets', 'like', '%' . $word . '%');
                     }
                 }
             });
 
-            $projects = $request->orderBy('created_at', 'desc')->get();
+            $projects = $request->orderBy('created_at', 'desc')->get([
+                'projects.*',
+                'type'
+            ]);
 
             foreach ($projects as $key => $project) {
                 $projects[$key]['client'] = $project->account()->first();
+                $projects[$key]['tags'] = $project->tags;
             }
 
-            $this->render('projects/all', compact('projects', 'searchWords'));
+            $this->render('projects/list', compact('projects', 'searchWords'));
         }
-
+        return 1;
     }
 
 
@@ -252,6 +259,7 @@ class ProjectController extends AppController
     {
         $project = $this->Project->find($this->f3->get('PARAMS.id'));
 
+
         // if project doesn't exist or isn't own by the client
         if (empty($project) || $project->client_id != $this->f3->get('SESSION.user.id')) {
             return $this->f3->reroute('/projects/');
@@ -263,6 +271,9 @@ class ProjectController extends AppController
          */
         $status = ($project->status == 'EN COURS') ? 'ACCEPT' : null;
         $propositions = $this->Participate->proposition($project->id, $status);
+        $project['type'] = $project->type()->first();
+        $tags = $this->ProjectTag->where('project_id', $this->f3->get('PARAMS.id'))->get();
+
 
         if ($this->request() == "POST") {
             if ($this->Project->updateProject($project->id, $this->f3->get('POST'))) {
@@ -271,7 +282,7 @@ class ProjectController extends AppController
             }
         }
 
-        $this->render('projects/edit', compact('project', 'propositions'));
+        $this->render('projects/edit', compact('project', 'propositions', 'tags'));
     }
 
     /**
@@ -297,7 +308,9 @@ class ProjectController extends AppController
      */
     public function client_list()
     {
-        $projects = $this->Project->where('client_id', $this->f3->get('SESSION.user.id'))->get();
+        $projects = $this->Project->where('client_id', $this->f3->get('SESSION.user.id'))
+            ->whereIn('status', ['OUVERT', 'EN COURS', 'TERMINE'])
+            ->get();
 
         $this->render('projects/client_list', compact('projects'));
     }
@@ -449,6 +462,10 @@ class ProjectController extends AppController
     {
         $project = $this->f3->get('SESSION.project');
         $steps = $this->f3->get('SESSION.step');
+
+        if(empty($project)){
+            $this->f3->reroute($this->f3->get('PATTERN'));
+        }
 
         $type = ProjectType::find($project['project_type_id']);
         $responses = $this->ProjectResponse->getResponses($steps);

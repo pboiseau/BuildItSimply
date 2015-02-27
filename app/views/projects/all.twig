@@ -10,7 +10,7 @@
         <div id="sidebar">
             <h2>Rechercher un projet <span>par mot clé</span></h2>
 
-            <form method="post" action="{{ home }}projects/search" class="form-horizontal form-group">
+            <form id="form-search" method="post" action="{{ home }}projects/search" class="form-horizontal form-group">
                 <input type="text" name="searchWords" value="{% if searchWords %}{{ searchWords }}{% endif %}"
                        class="form-control" id="search" placeholder="Saisir des mots clés">
             </form>
@@ -112,6 +112,22 @@
             });
         }
 
+        function search(e){
+            e.preventDefault();
+            var search = $(e.currentTarget).children('input').val();
+
+            $.ajax({
+                url: "{{ home }}projects/search",
+                type: "POST",
+                data: {
+                    searchWords: search
+                }
+            }).done(function(data, textStatus, jqXHR){
+                $('#project-list').empty().append(data);
+            });
+        }
+
         $('.filter_category').click(getByCategory);
+        $('#form-search').submit(search);
     </script>
 {% endblock %}

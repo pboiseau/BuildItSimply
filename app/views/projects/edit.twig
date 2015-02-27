@@ -1,75 +1,104 @@
 {% extends 'layouts/' ~ layout ~ '.twig' %}
 
 {% block body %}
-    <div class="container">
-        <h2></h2>
 
-        <form method="post" action="{{ home }}projects/edit/{{ project.id }}" class="form-horizontal">
-            <div class="form-group {{ (errors.name) ? 'has-error' : '' }}">
-                <label for="name" class="col-sm-2 control-label">Titre du projet</label>
+    <div id="projectView">
 
-                <div class="col-sm-10">
-                    <input type="text" name="name" value="{% if project.name %}{{ project.name }}{% endif %}"
-                           class="form-control" id="name" placeholder="Titre du projet">
-                    <span class="help-block with-errors">{% if errors.name %}{{ errors.name }}{% endif %}</span>
-                </div>
-            </div>
-            <div class="form-group {{ (errors.description) ? 'has-error' : '' }}">
-                <label for="description" class="col-sm-2 control-label">Description</label>
+        <div class="wrapper">
 
-                <div class="col-sm-10">
-                    <textarea name="description" id="description" class="form-control" rows="5"
-                              placeholder="Veuillez décrire brievement votre projet">{{ (project.description) ? project.description : "" }}</textarea>
-                    <span class="help-block with-errors">{% if errors.description %}{{ errors.description }}{% endif %}</span>
-                </div>
-            </div>
-            <div class="form-group {{ (errors.url) ? 'has-error' : '' }}">
-                <label for="url" class="col-sm-2 control-label">URL</label>
+            <form method="post" action="{{ home }}projects/edit/{{ project.id }}" class="form-horizontal">
 
-                <div class="col-sm-10">
-                    <input type="url" name="url" value="{% if project.url %}{{ project.url }}{% endif %}"
-                           class="form-control" id="url" placeholder="Adresse URL du projet (si existant)">
-                    <span class="help-block with-errors">{% if errors.url %}{{ errors.url }}{% endif %}</span>
-                </div>
-            </div>
-            <div class="form-group  {{ (errors.targets) ? 'has-error' : '' }}">
-                <label for="targets" class="col-sm-2 control-label">Cibles</label>
+                <div id="profileInfo">
 
-                <div class="col-sm-10">
-                    <input name="targets" type="text" class="form-control" id="targets"
-                           placeholder="Adulte, Jeune, Femme ..." value="{{ project.targets }}">
-                    <span class="help-block with-errors">{% if errors.targets %}{{ errors.targets }}{% endif %}</span>
-                </div>
-            </div>
-            <div class="form-group {{ (errors.recommendation) ? 'has-error' : '' }}">
-                <label for="recommendation" class="col-sm-2 control-label">Recommendations</label>
+                    <h1>
+                        Titre du projet
+                        <input type="text" name="name" value="{% if project.name %}{{ project.name }}{% endif %}"
+                               class="form-control" id="name" placeholder="Titre du projet">
+                        <span class="help-block with-errors">{% if errors.name %}{{ errors.name }}{% endif %}</span>
+                    </h1>
 
-                <div class="col-sm-10">
-                    <textarea name="recommendation" id="recommendation" class="form-control" rows="5"
-                              placeholder="Mentionner toutes informations complémentaires pouvant faciliter le travail des Freelances.">{{ (project.recommendation) ? project.recommendation : "" }}</textarea>
-                    <span class="help-block with-errors">{% if errors.recommendation %}{{ errors.recommendation }}{% endif %}</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-5">
-                    <button type="submit" class="btn btn-default">Mettre à jour les informations</button>
-                </div>
-                <div class="col-sm-offset-3 col-sm-2">
+                    <h2>
+                        <span>Proposé par </span>
+                        <a href="{{ home }}users/profile/{{ project.client.id }}">{{ project.client.firstname ~ " " ~ project.client.lastname }}</a>
+                    </h2>
+
+                    <ul>
+
+                        <li>Date <span>{{ project.created_at | date("d F Y") }}</span></li>
+                        <li>Cibles
+                            <input name="targets" type="text" class="form-control" id="targets"
+                                   placeholder="Adulte, Jeune, Femme ..." value="{{ project.targets }}"/>
+                            <span class="help-block with-errors">{% if errors.targets %}{{ errors.targets }}{% endif %}</span>
+                        </li>
+                        <li>Site web
+                            <input type="url" name="url" value="{% if project.url %}{{ project.url }}{% endif %}"
+                                   class="form-control" id="url" placeholder="Adresse URL du projet (si existant)">
+                            <span class="help-block with-errors">{% if errors.url %}{{ errors.url }}{% endif %}</span>
+                            </span>
+                        </li>
+                        <li>Estimation <span>{{ project.price }} €</span></li>
+                        <li>
+                            <p class="tagList">
+                                <a href="#">{{ project.type.type | capitalize }}</a>
+                                {% for tag in tags %}
+                                    <a href="#">{{ tag.tag | capitalize }}</a>
+                                {% endfor %}
+                            </p>
+                        </li>
+                        <li class="projectFiche">
+                            <p>Fichiers utiles <span>Télécharger</span></p>
+                            <ul>
+                                <li><a href="#">chartegraphique.pdf</a></li>
+                                <li><a href="#">logoLorem.pdf</a></li>
+                                <li><a href="#">texte.pdf</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <hr class="clear"/>
+
+                    <button type="submit" class="buttonWhite">Enregistrer les modifications</button>
                     <a class="btn btn-default" href="{{ home }}projects/delete/{{ project.id }}">Annuler le projet</a>
+
                 </div>
+
+                <div id="profileDescription">
+
+                    <h3>Description du projet</h3>
+
+                    <p class="infoList">
+                        <textarea name="description" id="description" class="form-control" rows="5"
+                                  placeholder="Veuillez décrire brievement votre projet">{{ (project.description) ? project.description : "" }}</textarea>
+                        <span class="help-block with-errors">{% if errors.description %}{{ errors.description }}{% endif %}</span>
+                    </p>
+
+                    <h3>Commentaires</h3>
+
+                    <p class="infoList">
+                        <textarea name="recommendation" id="recommendation" class="form-control" rows="5"
+                                  placeholder="Mentionner toutes informations complémentaires pouvant faciliter le travail des Freelances.">{{ (project.recommendation) ? project.recommendation : "" }}</textarea>
+                        <span class="help-block with-errors">{% if errors.recommendation %}{{ errors.recommendation }}{% endif %}</span>
+                    </p>
+
+                </div>
+
+            </form>
+
+
+            <div class="listProjet">
+                {% if project.status == "OUVERT" %}
+                    {% include 'projects/demand.twig' ignore missing %}
+                {% elseif project.status == "EN COURS" %}
+                    {% include 'projects/selection.twig' ignore missing %}
+                {% endif %}
             </div>
-        </form>
+
+            <hr class="clear"/>
+            <div class="push"></div>
+
+        </div>
     </div>
 
-    {# include the list of freelance demand #}
-    <div class="container">
-        {% if project.status == "OUVERT" %}
-            {% include 'projects/demand.twig' ignore missing %}
-        {% elseif project.status == "EN COURS" %}
-            {% include 'projects/selection.twig' ignore missing %}
-        {% endif %}
-    </div>
-    {# include the list of freelance demand #}
 
 {% endblock %}
 
@@ -77,6 +106,7 @@
     {{ parent() }}
     <script>
         $('.demand').click(function (e) {
+            e.preventDefault();
             var project_id = $(this).attr("data-project-id");
             var freelance_id = $(this).attr("data-freelance-id");
             var choice = $(this).attr("data-choice");
@@ -97,7 +127,7 @@
                 var button;
 
                 // if not error
-                if(!data.proposition.error){
+                if (!data.proposition.error) {
                     container.empty();
 
                     if (data.proposition.status == "accept") {
@@ -106,7 +136,7 @@
                         button = $("<button class='demand btn btn-sm btn-danger'>Refuser</button>");
                     }
                     container.append(button);
-                }else{
+                } else {
                     // else show error message
                     $('#demand-message').text(data.proposition.message).fadeIn();
                 }
