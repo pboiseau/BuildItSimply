@@ -117,7 +117,7 @@ $gray : #666666;
 			font-size: 16px;
 			color: #666666;
 			font-family: $fontLight;
-			margin: 15px 0;
+			margin-top: 15px;
 			padding: 0 25px;
 		}
 		.tagList{
@@ -125,6 +125,8 @@ $gray : #666666;
 			margin-bottom: 25px;
 		}
 		.tagList a{
+			margin-top: 15px;
+			display: inline-block;
 			padding: 5px 10px;
 			color: #666666;
 			background: #e3e3e3;
