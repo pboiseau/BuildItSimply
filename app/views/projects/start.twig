@@ -16,6 +16,7 @@
 
             <div class="wrapper">
                 <h3>Dites nous en un peu plus sur votre projet</h3>
+
                 <p>De quoi s'agit-il ?</p>
             </div>
 
@@ -25,11 +26,10 @@
             <div class="wrapper">
                 <ul>
                     {% for type in types %}
-                        <li>
-                            <a href="#" class="nextStep" data-choice="{{ type.id }}" data-step="{{ step }}"
-                               data-type="{{ type.id }}" data-change="next">
-                                <img src="{{ image }}icon-oppotunites.png" alt=" ">
-                            </a>
+                        <li class="nextStep" data-choice="{{ type.id }}" data-step="{{ step }}"
+                            data-type="{{ type.id }}" data-change="next">
+                            <img src="{{ image }}icon-oppotunites.png" alt=" ">
+                            
 
                             <h3>{{ type.type | capitalize }}</h3>
 
@@ -54,9 +54,6 @@
 {% block partial_js %}
     {{ parent() }}
     <script>
-
-        $('.nextStep').click(changeStep);
-        $('#prevStep').click(changeStep);
 
         function changeStep(e) {
             e.preventDefault();
@@ -95,6 +92,8 @@
             }
         }
 
+        $('.nextStep').click(changeStep);
+        $('#prevStep').click(changeStep);
 
     </script>
 {% endblock %}

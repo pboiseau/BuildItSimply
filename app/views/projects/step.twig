@@ -26,11 +26,10 @@
         <div class="wrapper">
             <ul>
                 {% for question in questions %}
-                    <li>
-                        <a href="#" class="nextStep" data-step="{{ step }}" data-type="{{ type }}"
-                           data-choice="{{ question.response_id }}" data-change="next">
-                            <img src="{{ home ~ question.image }}" alt=" ">
-                        </a>
+                    <li class="nextStep" data-step="{{ step }}" data-type="{{ type }}"
+                        data-choice="{{ question.response_id }}" data-change="next">
+                        
+                        <img src="{{ home ~ question.image }}" alt=" ">
 
                         <h3>{{ question.response }}</h3>
 
