@@ -3,7 +3,7 @@
 {% block body %}
 	<h2>Gérer les étapes</h2>
 
-	<form method="post" action="{{ home ~ request }}" class="form-horizontal">
+	<form method="post" action="{{ home ~ request }}" class="form-horizontal" enctype="multipart/form-data">
 	<div class="form-group">
 	{% for type in types %}
 		<div class=" panel panel-primary">
@@ -32,6 +32,7 @@
 				  				<input id="tag[{{response.id}}]" class="form-control" type="text" name="response[{{response.id}}][tag]"  value="{{response.tag}}" placeholder="Tags liés à la réponse">
 				  				<label for="price[{{response.id}}]" class="control-label">Prix </label>
 				  				<input id="price[{{response.id}}]" class="form-control" type="text" name="response[{{response.id}}][price]"  value="{{response.price}}" placeholder="Le prix de l'élément">
+				  				<input type="file" name="image[{{response.id}}]"/>
 				  			</div>
 				  		</div>
 

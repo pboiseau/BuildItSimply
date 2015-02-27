@@ -71,6 +71,7 @@ class AdminController extends AppController
                 // Si l'utilisateur veut update
                 if($request['button']=='update')
                 {
+                    $files = $this->f3->get('FILES.image.name');
 
                     foreach ($request['question'] as $key => $question) 
                     {
@@ -79,6 +80,15 @@ class AdminController extends AppController
                     
                     foreach ($request['response'] as $key => $response) 
                     {
+
+                        if (!empty($this->f3->get('FILES.image.name')[$key])) 
+                        {
+                            $upload = new UploadHelper($this->f3->get('RESPONSE_FILES'));
+                            $filename = $upload->upload();
+
+                            if ($filename) 
+                                $response['image'] = $this->f3->get('RESPONSE_FILES') . $filename;
+                        }
                         $responses->where('id', $key)
                             ->update($this->generateUpdateResponse($response));
                     }
@@ -232,6 +242,7 @@ class AdminController extends AppController
         {
             if ($this->ProjectResponse->validate($response)) 
             {
+
                 if (!empty($this->f3->get('FILES.image.name')[$key])) 
                 {
                     $upload = new UploadHelper($this->f3->get('RESPONSE_FILES'));
