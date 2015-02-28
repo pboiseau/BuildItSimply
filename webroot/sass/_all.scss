@@ -247,7 +247,9 @@ $gray : #666666;
   right: 20px;
 	top: 18px;
 }
-
+.btn{
+	@include transition(all,0.2s,linear);
+}
 // .custom-dropdown::before {
 //   width: 40px;
 //   right: 0;
@@ -261,4 +263,21 @@ $gray : #666666;
 
 .custom-dropdown::after {
   color: rgba(0,0,0,.4);
+}
+
+
+
+.saveInfo{
+	width: auto !important;
+	border: none !important;
+	margin-top: 50px !important;
+}
+.myProjet{
+	.wrapper{
+		width: 765px;
+		.listProjet{
+			float: none;
+		}
+	}
+	
 }

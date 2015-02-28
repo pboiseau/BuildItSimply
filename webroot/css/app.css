@@ -1529,9 +1529,33 @@ label#largeFile input#file {
   top: 18px;
 }
 
-/* line 262, ../sass/_all.scss */
+/* line 250, ../sass/_all.scss */
+.btn {
+  -moz-transition: all, 0.2s, linear;
+  -o-transition: all, 0.2s, linear;
+  -webkit-transition: all, 0.2s, linear;
+  transition: all, 0.2s, linear;
+}
+
+/* line 264, ../sass/_all.scss */
 .custom-dropdown::after {
   color: rgba(0, 0, 0, 0.4);
+}
+
+/* line 270, ../sass/_all.scss */
+.saveInfo {
+  width: auto !important;
+  border: none !important;
+  margin-top: 50px !important;
+}
+
+/* line 276, ../sass/_all.scss */
+.myProjet .wrapper {
+  width: 765px;
+}
+/* line 278, ../sass/_all.scss */
+.myProjet .wrapper .listProjet {
+  float: none;
 }
 
 /* line 4, ../sass/_notification.scss */

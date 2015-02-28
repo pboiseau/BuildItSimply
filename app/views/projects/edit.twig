@@ -57,7 +57,7 @@
                     </ul>
                     <hr class="clear"/>
 
-                    <button type="submit" class="buttonWhite">Enregistrer les modifications</button>
+                    
                     <a class="btn btn-default" href="{{ home }}projects/delete/{{ project.id }}">Annuler le projet</a>
 
                 </div>
@@ -91,6 +91,9 @@
                 {% elseif project.status == "EN COURS" %}
                     {% include 'projects/selection.twig' ignore missing %}
                 {% endif %}
+
+                <button type="submit" class="buttonWhite saveInfo">Enregistrer les modifications</button>
+
             </div>
 
             <hr class="clear"/>

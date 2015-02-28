@@ -1,11 +1,72 @@
 {% extends 'layouts/' ~ layout ~ '.twig' %}
 
 {% block body %}
-    <ul>
-        {% for project in projects %}
-            <li>
-                <a href="{{ home }}projects/{{ project.id }}">{{ project.name }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+
+	<div class="pageHead">
+        <h1>Mes projets</h1>
+    </div>
+
+    <div class="myProjet">
+
+    	<div class="wrapper">
+
+    	<div class="listProjet">
+    		<ul>
+		        {% for project in projects %}
+		            <li>
+		                <h3><a href="{{ home }}projects/{{ project.id }}">{{ project.name }}</a></h3>
+
+		                <p class="infoList">
+		                            <span><img src="{{ image }}calendar.png"
+		                                       alt="Date de l'offre"/>{{ project.created_at }}</span>
+		                            <span><img src="{{ image }}user-list.png" alt="Nombre d'offre"/>14
+		                                demande(s)</span>
+		                </p>
+
+		                <p class="textList">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+
+		                <p class="tagList">
+		                    <a href="#">tag</a><a href="#">tag</a><a href="#">tag</a>
+		                    
+		                </p>
+
+		                <hr class="clear"/>
+		            </li>
+
+		            <li>
+		                <h3><a href="{{ home }}projects/{{ project.id }}">{{ project.name }}</a></h3>
+
+		                <p class="infoList">
+		                            <span><img src="{{ image }}calendar.png"
+		                                       alt="Date de l'offre"/>{{ project.created_at }}</span>
+		                            <span><img src="{{ image }}user-list.png" alt="Nombre d'offre"/>14
+		                                demande(s)</span>
+		                </p>
+
+		                <p class="textList">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+
+		                <p class="tagList">
+		                    <a href="#">tag</a><a href="#">tag</a><a href="#">tag</a>
+		                    
+		                </p>
+
+		                <hr class="clear"/>
+		            </li>
+		        {% endfor %}
+		    </ul>
+		    <hr class="clear"/>
+		 </div>
+    	</div>
+
+
+    </div>
+
+    
+
+	<div class="push"></div>
+
+</div>
+
 {% endblock %}
