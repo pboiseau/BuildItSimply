@@ -9,7 +9,7 @@
             <p>{{ questions.0.question_description }}</p>
 
             <div class="projetBugdet">
-                <p>650€<span>Budget estimé</span></p>
+                <p>{{ price }}€<span>Budget estimé</span></p>
             </div>
 
             {% if step > 1 %}
@@ -24,7 +24,7 @@
 
     <div id="projetGabarit">
         <div class="wrapper">
-            <ul class="projet4">
+            <ul class="projet{{ questions | length }}">
                 {% for question in questions %}
                     <li class="nextStep" data-step="{{ step }}" data-type="{{ type }}"
                         data-choice="{{ question.response_id }}" data-change="next">

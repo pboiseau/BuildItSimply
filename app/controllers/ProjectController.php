@@ -427,18 +427,6 @@ class ProjectController extends AppController
             $questions = $this->ProjectStep->changeStep($request['step'], $request['type']);
             $current_step = $request['step'] - 1;
 
-            if ($questions) {
-                $step = $request['step'];
-                $type = $request['type'];
-
-                $this->render('projects/step', compact('step', 'questions', 'type'));
-            } else {
-                // all step finish send json object for redirect client to the validation page
-                echo $this->encode('step',
-                    ['status' => 'finish', 'redirect' => $this->config['home'] . 'projects/finish']);
-            }
-
-
             $response = ProjectResponse::find($request['choice']);
 
             $this->f3->set('SESSION.step.' . $current_step, $request['choice']);
@@ -448,6 +436,18 @@ class ProjectController extends AppController
                 $this->f3->set('SESSION.project.price', $this->f3->get('SESSION.project.price') + $response->price);
                 $this->f3->set('SESSION.project.tag',
                     $this->f3->get('SESSION.project.tag') . ',' . $response['tag']);
+            }
+
+            if ($questions) {
+                $step = $request['step'];
+                $type = $request['type'];
+                $price = $this->f3->get('SESSION.project.price');
+
+                $this->render('projects/step', compact('step', 'questions', 'type', 'price'));
+            } else {
+                // all step finish send json object for redirect client to the validation page
+                echo $this->encode('step',
+                    ['status' => 'finish', 'redirect' => $this->config['home'] . 'projects/finish']);
             }
 
         }
