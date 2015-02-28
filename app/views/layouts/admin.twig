@@ -6,13 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="Paul Boiseau">
 
     <title>Administration BuildItSimply</title>
 
-    <link href="{{ root }}/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-    <link href="{{ root }}/webroot/css/sb-admin.css" rel="stylesheet">
-    <link href="{{ root }}/bower_components/fontawesome/css/font-awesome.css" rel="stylesheet">
+    {% if not prod %}
+        <link href="{{ root }}/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+        <link href="{{ root }}/webroot/css/sb-admin.css" rel="stylesheet">
+        <link href="{{ root }}/bower_components/fontawesome/css/font-awesome.css" rel="stylesheet">
+    {% else %}
+        <link rel="stylesheet" href="{{ css }}admin_dist.css"/>
+    {% endif %}
+
 </head>
 
 <body>

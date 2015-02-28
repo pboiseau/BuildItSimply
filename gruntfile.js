@@ -38,6 +38,13 @@ module.exports = function (grunt) {
                     ],
                     dest: 'webroot/js/dist.js'
                 },
+                js_admin_dist: {
+                    src: [
+                        'bower_components/jquery/dist/jquery.js',
+                        'bower_components/bootstrap/dist/js/bootstrap.js'
+                    ],
+                    dest: 'webroot/js/admin_dist.js'
+                },
                 css_dist: {
                     src: [
                         'webroot/css/bootstrap.css',
@@ -47,6 +54,14 @@ module.exports = function (grunt) {
                         'webroot/css/app.css'
                     ],
                     dest: 'webroot/css/dist.css'
+                },
+                css_admin_dist: {
+                    src: [
+                        'bower_components/bootstrap/dist/css/bootstrap.css',
+                        'webroot/css/sb-admin.css',
+                        'bower_components/fontawesome/css/font-awesome.css'
+                    ],
+                    dest: 'webroot/css/admin_dist.css'
                 }
             },
             uglify: {
@@ -54,6 +69,11 @@ module.exports = function (grunt) {
                 js_dist: {
                     files: {
                         'webroot/js/dist.js': ['webroot/js/dist.js']
+                    }
+                },
+                js_admin_dist: {
+                    files: {
+                        'webroot/js/admin_dist.js': ['webroot/js/admin_dist.js']
                     }
                 }
             },
