@@ -312,6 +312,10 @@ class ProjectController extends AppController
             ->whereIn('status', ['OUVERT', 'EN COURS', 'TERMINE'])
             ->get();
 
+        foreach ($projects as $key => $project) {
+            $projects[$key]['tags'] = $this->ProjectTag->where('project_id', $project->id)->get();
+        }
+
         $this->render('projects/client_list', compact('projects'));
     }
 
@@ -354,6 +358,9 @@ class ProjectController extends AppController
         }
     }
 
+    /**
+     *
+     */
     public function sendResponse()
     {
         if ($this->f3->get('AJAX')) {

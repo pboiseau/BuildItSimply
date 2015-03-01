@@ -1,0 +1,27 @@
+{% extends 'layouts/mail.twig' %}
+
+{% block content %}
+
+    <h1>Bienvenue {{ data.firstname ~ " " ~ data.lastname }}</h1>
+
+    <p>Bonjour {{ data.firstname }} votre compte a été créé avec succès !</p>
+
+    <p>
+        <b>À présent, soumettez votre projet en suivant nos différentes étapes simplifiées.</b>
+    </p>
+
+    <p>Pour soumettre votre projet, rien de plus simple:</p>
+
+    <ul>
+        <li>Décrivez votre projet en quelques lignes</li>
+        <li>Détaillez le en choisissant les options qui vous intéressent </li>
+        <li>Ajoutez des fichiers qui permettront de renseigner le freelance</li>
+    </ul>
+
+    <p>En vous souhaitant beaucoup de succès sur Build it Simply,</p>
+
+    <p>L’équipe de Build it Simply</p>
+
+    <a href="">Je soumets mon projet</a>
+
+{% endblock %}

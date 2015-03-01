@@ -1,15 +1,32 @@
 {% extends 'layouts/mail.twig' %}
 
-{% block title %}
-    {{ data.firstname ~ " " ~ data.lastname }} souhaite participer à votre projet {{ data.project.name }}
-{% endblock %}
-
 {% block content %}
-    <p>Nouvelle demande pour votre projet {{ data.project.name }}</p>
+    <h1>Un freelance souhaite travailler pour vous !</h1>
 
-    <h3>Bonjour,</h3>
-    <p>
-        {{ data.firstname ~ " " ~ data.lastname }} souhaite participer à votre projet {{ data.project.name }}
-    </p>
+    <p>Bonjour {{ data.firstname }}, nous vous informons qu’un freelance a postulé pour votre projet {{ data.project.name }}</p>
+
+    <p>N’hésitez pas à regarder son profil dans les moindres détails (avis, notes, compétences...).</p>
+
+    <div>
+        <div>
+            <img src="{{ data.picture }}" alt="avatar-picture"/>
+        </div>
+        <div>
+            <div>
+                {{ data.description }}
+            </div>
+            <div>
+                <div>{{ data.firstname ~ " " ~ data.lastname }} - {{ data.activity }}</div>
+                <div><a href="">Découvrir son profil</a></div>
+            </div>
+        </div>
+    </div>
+
+    <p>Au bout de 3 freelances choisis et après confirmation de vos choix, ces derniers vous feront un devis.</p>
+
+    <p>Prenez votre temps et trouvez le freelance qu’il vous faut !</p>
+
+    <p>L’équipe de Build it Simply</p>
+
 {% endblock %}
 

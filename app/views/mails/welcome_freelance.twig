@@ -1,0 +1,30 @@
+{% extends 'layouts/mail.twig' %}
+
+{% block content %}
+
+    <h1>Bienvenue {{ data.firstname ~ " " ~ data.lastname }}</h1>
+    
+    <p>Bonjour {{ data.firstname }} votre compte a été créé avec succès !</p>
+
+    <p>
+        <b>À présent, complétez le à 100% pour augmenter vos chances de décrocher un job.</b>
+    </p>
+
+    <p>Voici nos conseils pour profiter au mieux de Build it Simply :</p>
+
+    <ul>
+        <li>Ajoutez une photo de vous, cela rassure le recruteur</li>
+        <li>Connectez-vous fréquemment pour suivre les nouveaux projets</li>
+        <li>Lorsque vous êtes sélectionné par le recruteur, répondez lui rapidement</li>
+        <li>Postulez aux projets qui correspondent réellement à votre profil</li>
+    </ul>
+
+    <p>À présent, c’est à vous de jouer !</p>
+
+    <p>En vous souhaitant beaucoup de succès sur Build it Simply,</p>
+
+    <p>L’équipe de Build it Simply</p>
+
+    <a href="">Je complète mon profil</a>
+
+{% endblock %}

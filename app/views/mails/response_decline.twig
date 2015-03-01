@@ -1,0 +1,19 @@
+{% extends 'layouts/mail.twig' %}
+
+{% block content %}
+
+    <h1>D’autres projets sont ouverts à vous !</h1>
+
+    <p>Bonjour {{ data.firstname }}</p>
+
+    <p>Malheureusement, un autre freelance a été choisi pour travailler sur le projet {{ data.project.name }}</p>
+
+    <p><b>Ceci étant dit, de nouveaux projets sont ouverts à vous sur Build It Simply !</b></p>
+
+    <p>Prenez votre temps et trouvez le projet fait pour vous !</p>
+
+    <p>L’équipe de Build it Simply</p>
+
+    <a href="projects">Acceder aux projets</a>
+
+{% endblock %}
