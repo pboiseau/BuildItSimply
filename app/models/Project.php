@@ -36,6 +36,9 @@ class Project extends AppModel
         return $this->belongsToMany('Freelance', 'participates', 'project_id', 'freelance_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function accounts()
     {
         return $this->belongsToMany('Account', 'participates', 'project_id', 'freelance_id');
@@ -57,6 +60,9 @@ class Project extends AppModel
         return $this->hasMany('ProjectTag', 'project_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function type()
     {
         return $this->belongsTo('ProjectType', 'project_type_id', 'id');
@@ -84,6 +90,7 @@ class Project extends AppModel
     }
 
     /**
+     * Get project by ID
      * @param $id
      * @param array $field
      * @return mixed
@@ -121,6 +128,7 @@ class Project extends AppModel
     }
 
     /**
+     * Count category by category ID
      * @param $category_id
      * @return mixed
      */
@@ -141,6 +149,8 @@ class Project extends AppModel
     }
 
     /**
+     * Initialize a project and create project with first essentials data
+     * Put it in "EN CREATION" status
      * @param array $project
      * @return static
      */
@@ -156,6 +166,7 @@ class Project extends AppModel
     }
 
     /**
+     * Get project and client information
      * @param $id
      * @return mixed
      */

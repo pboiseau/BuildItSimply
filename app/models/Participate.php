@@ -28,6 +28,7 @@ class Participate extends AppModel
     }
 
     /**
+     * Create new participation
      * @param $project_id
      * @param $freelance_id
      * @return bool|static
@@ -46,6 +47,7 @@ class Participate extends AppModel
     }
 
     /**
+     * Check if participation exist
      * @param $project_id
      * @param $freelance_id
      * @return mixed
@@ -58,6 +60,7 @@ class Participate extends AppModel
 
 
     /**
+     * Update participate status with the choice of the client
      * @param $project_id
      * @param $freelance_id
      * @param $status

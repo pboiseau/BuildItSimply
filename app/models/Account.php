@@ -26,6 +26,7 @@ class Account extends AppModel
     }
 
     /**
+     * Get account by ID and select field
      * @param $id
      * @param array $field
      * @return mixed
@@ -37,8 +38,10 @@ class Account extends AppModel
     }
 
     /**
-     *
-     **/
+     * Check the couple login/password for authenticate client
+     * @param array $login
+     * @return bool
+     */
     public function login($login = array())
     {
         $user = $this->where('mail', $login['email'])
@@ -74,7 +77,8 @@ class Account extends AppModel
     }
 
     /**
-     *
+     * Update user account
+     * @params array $user
      **/
     public function updateAccount($user)
     {
@@ -87,7 +91,8 @@ class Account extends AppModel
     }
 
     /**
-     *
+     * Set user data in Session
+     * @param array $user
      **/
     public function setSession($user)
     {
@@ -173,7 +178,7 @@ class Account extends AppModel
     }
 
     /**
-     *    Verify syntax of each field before update informations in database
+     * Verify syntax of each field before update informations in database
      * @param array $data
      * @return boolean
      **/
@@ -192,5 +197,3 @@ class Account extends AppModel
     }
 
 }
-
-?>

@@ -10,6 +10,7 @@ class ProjectStep extends AppModel
     protected $guarded = array('id');
 
     /**
+     * Check if project step exist by project_type and step
      * @param $project_type
      * @param $step
      * @return bool
@@ -21,6 +22,7 @@ class ProjectStep extends AppModel
     }
 
     /**
+     * Get question and response by step
      * @param $step
      * @param $type
      * @return bool

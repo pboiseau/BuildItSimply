@@ -9,11 +9,17 @@ class Skill extends AppModel
     protected $table = 'skills';
     protected $guarded = array('id');
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function freelance()
     {
         return $this->belongsToMany('Freelance', 'freelances_skills', 'skill_id', 'account_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function categories_skills()
     {
         return $this->belongsTo('CategorySkill', 'category_skill_id', 'id');

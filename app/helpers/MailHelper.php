@@ -12,7 +12,7 @@ class MailHelper extends BaseHelper{
             $this->f3->get('HOST_MAIL'),
             $this->f3->get('PORT_MAIL'),
             'ssl',
-            'paul.boiseau@hetic.net',
+            $this->f3->get('ACCOUNT_MAIL'),
             $this->f3->get('PWD_MAIL')
         );
     }

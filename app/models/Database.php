@@ -13,7 +13,7 @@ class Database
     private $capsule;
 
     /**
-     *
+     * Create new Capsule and init database connection
      */
     public function __construct()
     {
@@ -26,7 +26,7 @@ class Database
     }
 
     /**
-     *
+     * Get database configuration
      */
     private function initSettings()
     {

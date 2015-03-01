@@ -9,6 +9,11 @@ class ProjectQuestion extends AppModel
     protected $table = 'project_question';
     protected $guarded = array('id');
 
+    /**
+     * Check validate date of question
+     * @param array $data
+     * @return bool
+     */
     public function validate($data = array())
     {
         $validator = new Validate();

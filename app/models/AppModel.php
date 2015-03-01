@@ -10,7 +10,7 @@ class AppModel extends Eloquent
     private $salt = '4234ePc9M28eWyx9';
 
     /**
-     *    Hash string using sha256 algorithm
+     * Hash string using sha256 algorithm
      * @param string $data
      * @return string hashed
      **/
@@ -20,9 +20,9 @@ class AppModel extends Eloquent
     }
 
     /**
-     *    Get enumerate values from a table field
-     *    Feature not supported in Eloquent ORM
-     *    Need to use F3 DB for SQL request
+     * Get enumerate values from a table field
+     * Feature not supported in Eloquent ORM
+     * Need to use F3 DB for SQL request
      * @param string $field
      * @return array $values
      **/
@@ -40,7 +40,7 @@ class AppModel extends Eloquent
     }
 
     /**
-     *    Return new F3 DB instance (using only if necessary)
+     * Return new F3 DB instance (using only if necessary)
      * @return object $db
      **/
     private function getFFdb()

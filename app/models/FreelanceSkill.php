@@ -9,16 +9,26 @@ class FreelanceSkill extends AppModel
     protected $table = 'freelances_skills';
     protected $fillable = array('account_id', 'skill_id');
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function freelance()
     {
         return $this->hasOne('Freelance', 'account_id', 'account_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function skills()
     {
         return $this->hasOne('Skill', 'id', 'skill_id');
     }
 
+    /**
+     * Add skill
+     * @param array $skills
+     */
     public function add($skills = array())
     {
         $f3 = Base::instance();
@@ -38,7 +48,7 @@ class FreelanceSkill extends AppModel
     }
 
     /**
-     *    Get all Freelance Skills with restriction by account_id or skill_id
+     * Get all Freelance Skills with restriction by account_id or skill_id
      * @param string $field
      * @param int $id
      * @return array of Freelance Skills or false

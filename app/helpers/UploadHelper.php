@@ -92,6 +92,8 @@ class UploadHelper extends BaseHelper
 
     /**
      * Change the upload directory
+     * Set the global variable UPLOADS
+     * @param string $filepath
      */
     private function url($filepath)
     {
