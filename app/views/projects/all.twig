@@ -47,7 +47,7 @@
 
                         <p class="infoList">
                             <span><img src="{{ image }}calendar.png"
-                                       alt="Date de l'offre"/>{{ project.created_at }}</span>
+                                       alt="Date de l'offre"/>{{ project.created_at | date("d F Y") }}</span>
                             <span><img src="{{ image }}user-list.png" alt="Nombre d'offre"/>{{ project.proposition }}
                                 demande(s)</span>
                         </p>

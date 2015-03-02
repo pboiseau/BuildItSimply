@@ -310,12 +310,14 @@ class ProjectController extends AppController
     {
         $projects = $this->Project->where('client_id', $this->f3->get('SESSION.user.id'))
             ->whereIn('status', ['OUVERT', 'EN COURS', 'TERMINE'])
+            ->orderBy('created_at', 'DESC')
             ->get();
 
         foreach ($projects as $key => $project) {
             $projects[$key]['tags'] = $this->ProjectTag->where('project_id', $project->id)->get();
+            $projects[$key]['proposition'] = $project->participates()->count();
         }
-
+        
         $this->render('projects/client_list', compact('projects'));
     }
 
