@@ -47,8 +47,9 @@
 
                 </ul>
                 <hr class="clear"/>
-
-                <a class="buttonWhite" href="{{ home }}projects/join/{{ project.id }}">Je participe</a>
+                {% if project.status == "OUVERT" %}
+                    <a class="buttonWhite" href="{{ home }}projects/join/{{ project.id }}">Je participe</a>
+                {% endif %}
 
 
             </div>
@@ -73,9 +74,12 @@
                     <ul>
                         {% for proposition in propositions %}
                             <li>
-                                <img src="{{ home ~ proposition.picture }}" height="66px" width="66px" alt="Notification user"/>
+                                <img src="{{ home ~ proposition.picture }}" height="66px" width="66px"
+                                     alt="Notification user"/>
 
-                                <p><a href="{{ home }}users/profile/{{ proposition.id }}">{{ proposition.firstname ~ " " ~ proposition.lastname }}</a> souhaite participer au projet</p>
+                                <p>
+                                    <a href="{{ home }}users/profile/{{ proposition.id }}">{{ proposition.firstname ~ " " ~ proposition.lastname }}</a>
+                                    souhaite participer au projet</p>
                                 <hr class="clear"/>
                             </li>
                         {% endfor %}

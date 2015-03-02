@@ -1,10 +1,11 @@
 {% block body %}
     <div class="listProjet">
-        <h3>Ils souhaitent participer <span>3 Demandes</span></h3>
+        <h3>Ils souhaitent participer <span>{{ propositions | length }} Demandes</span></h3>
 
         <div class="notBloc">
             <p class="dateNot">Aujourd'hui</p>
             {% for proposition in propositions %}
+            {% set disable = (proposition.status != "PENDING") ? true : false %}
             <ul>
                 <li>
                     <img src="{{ home ~ proposition.picture }}" height="66px" width="66px" alt="Notification user"/>
@@ -41,7 +42,6 @@
     </div>
 
     <hr class="clear"/>
-    </div>
 
     <a class="btn btn-success btn-sm" href="{{ home }}projects/{{ project.id }}/proposition/close">Cloturer les
         demandes</a>

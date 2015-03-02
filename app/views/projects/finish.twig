@@ -15,135 +15,137 @@
     <div id="projetInfo" class="projetValidation">
         <div class="wrapper">
 
-        <h1>Validation du projet</h1>
+            <h1>Validation du projet</h1>
 
             <p>Voici un récapitulatif de votre projet et des options choisies. Vous pouvez également ajouter des
                 fichiers utiles pour le freelance.</p>
-        
 
-        <div class="info">
-            <h3>Informations générales du projet</h3>
 
-            <p>Veuillez vérifier que les informations ci-dessous sont exactes.</p>
+            <div class="info">
+                <h3>Informations générales du projet</h3>
 
-            <div class="formVal">
+                <p>Veuillez vérifier que les informations ci-dessous sont exactes.</p>
 
-                <form method="post" action="{{ home ~ request }}" class="form-horizontal" enctype="multipart/form-data">
-                    <div class="form-group {{ (errors.name) ? 'has-error' : '' }}">
-                        <label for="name" class="col-sm-2 control-label">Titre du projet</label>
+                <div class="formVal">
 
-                        <div class="col-sm-10">
-                            <input type="text" name="name" value="{{ project.name }}"
-                                   class="form-control" id="name" placeholder="Titre du projet">
-                            <span class="help-block with-errors">{% if errors.name %}{{ errors.name }}{% endif %}</span>
+                    <form method="post" action="{{ home ~ request }}" class="form-horizontal"
+                          enctype="multipart/form-data">
+                        <div class="form-group {{ (errors.name) ? 'has-error' : '' }}">
+                            <label for="name" class="col-sm-2 control-label">Titre du projet</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" name="name" value="{{ project.name }}"
+                                       class="form-control" id="name" placeholder="Titre du projet">
+                                <span class="help-block with-errors">{% if errors.name %}{{ errors.name }}{% endif %}</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group {{ (errors.description) ? 'has-error' : '' }}">
-                        <label for="description" class="col-sm-2 control-label">Description</label>
+                        <div class="form-group {{ (errors.description) ? 'has-error' : '' }}">
+                            <label for="description" class="col-sm-2 control-label">Description</label>
 
-                        <div class="col-sm-10">
-                            <textarea name="description" id="description" class="form-control" rows="5"
-                                      placeholder="Veuillez décrire brievement votre projet">{{ project.description }}</textarea>
-                            <span class="help-block with-errors">{% if errors.description %}{{ errors.description }}{% endif %}</span>
+                            <div class="col-sm-10">
+                                <textarea name="description" id="description" class="form-control" rows="5"
+                                          placeholder="Veuillez décrire brievement votre projet">{{ project.description }}</textarea>
+                                <span class="help-block with-errors">{% if errors.description %}{{ errors.description }}{% endif %}</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group {{ (errors.url) ? 'has-error' : '' }}">
-                        <label for="url" class="col-sm-2 control-label">URL</label>
+                        <div class="form-group {{ (errors.url) ? 'has-error' : '' }}">
+                            <label for="url" class="col-sm-2 control-label">URL</label>
 
-                        <div class="col-sm-10">
-                            <input type="url" name="url" value="{{ project.url }}"
-                                   class="form-control" id="url" placeholder="Adresse URL du projet (si existant)">
-                            <span class="help-block with-errors">{% if errors.url %}{{ errors.url }}{% endif %}</span>
+                            <div class="col-sm-10">
+                                <input type="url" name="url" value="{{ project.url }}"
+                                       class="form-control" id="url" placeholder="Adresse URL du projet (si existant)">
+                                <span class="help-block with-errors">{% if errors.url %}{{ errors.url }}{% endif %}</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group  {{ (errors.targets) ? 'has-error' : '' }}">
-                        <label for="targets" class="col-sm-2 control-label">Cibles</label>
+                        <div class="form-group  {{ (errors.targets) ? 'has-error' : '' }}">
+                            <label for="targets" class="col-sm-2 control-label">Cibles</label>
 
-                        <div class="col-sm-10">
-                            <input name="targets" type="text" class="form-control" id="targets"
-                                   placeholder="Adulte, Jeune, Femme ..." value="{{ project.targets }}">
-                            <span class="help-block with-errors">{% if errors.targets %}{{ errors.targets }}{% endif %}</span>
+                            <div class="col-sm-10">
+                                <input name="targets" type="text" class="form-control" id="targets"
+                                       placeholder="Adulte, Jeune, Femme ..." value="{{ project.targets }}">
+                                <span class="help-block with-errors">{% if errors.targets %}{{ errors.targets }}{% endif %}</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group {{ (errors.recommendation) ? 'has-error' : '' }}">
-                        <label for="recommendation" class="col-sm-2 control-label">Recommendations</label>
+                        <div class="form-group {{ (errors.recommendation) ? 'has-error' : '' }}">
+                            <label for="recommendation" class="col-sm-2 control-label">Recommendations</label>
 
-                        <div class="col-sm-10">
-                            <textarea name="recommendation" id="recommendation" class="form-control" rows="5"
-                                      placeholder="Mentionner toutes informations complémentaires pouvant faciliter le travail des Freelances.">{{ project.recommendation }}</textarea>
-                            <span class="help-block with-errors">{% if errors.recommendation %}{{ errors.recommendation }}{% endif %}</span>
+                            <div class="col-sm-10">
+                                <textarea name="recommendation" id="recommendation" class="form-control" rows="5"
+                                          placeholder="Mentionner toutes informations complémentaires pouvant faciliter le travail des Freelances.">{{ project.recommendation }}</textarea>
+                                <span class="help-block with-errors">{% if errors.recommendation %}{{ errors.recommendation }}{% endif %}</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="recommendation" class="col-sm-2 control-label">Budget estimé</label>
+                        <div class="form-group">
+                            <label for="recommendation" class="col-sm-2 control-label">Budget estimé</label>
 
-                        <div class="col-sm-10">
-                            <span>{{ project.price }} €</span>
+                            <div class="col-sm-10">
+                                <span>{{ project.price }} €</span>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group valFichier">
-                        <h3>Ajouter des fichiers</h3>
+                        <div class="form-group valFichier">
+                            <h3>Ajouter des fichiers</h3>
 
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad amet blanditiis
-                            commodi eaque, earum fugit harum iste.</p>
-                    </div>
-
-                    <div class="form-group fileProjet">
-                        <label for="file" class="col-sm-2 control-label">Fichier 1</label>
-
-                        <div class="col-sm-10">
-                            <input type="file" name="file[]"/>
+                            <p>N’hésitez pas à joindre n’importe quel fichier en complément de votre description (par ex
+                                : logo, charte graphique, inspiration, etc.)</p>
                         </div>
-                    </div>
 
-                    <div class="form-group fileProjet">
-                        <label for="file" class="col-sm-2 control-label">Fichier 2</label>
+                        <div class="form-group fileProjet">
+                            <label for="file" class="col-sm-2 control-label">Fichier 1</label>
 
-                        <div class="col-sm-10">
-                            <input type="file" name="file[]"/>
+                            <div class="col-sm-10">
+                                <input type="file" name="file[]"/>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group fileProjet">
-                        <label for="file" class="col-sm-2 control-label">Fichier 3</label>
+                        <div class="form-group fileProjet">
+                            <label for="file" class="col-sm-2 control-label">Fichier 2</label>
 
-                        <div class="col-sm-10">
-                            <input type="file" name="file[]"/>
+                            <div class="col-sm-10">
+                                <input type="file" name="file[]"/>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn buttonWhite btn-default">Valider et publier le projet</button>
+                        <div class="form-group fileProjet">
+                            <label for="file" class="col-sm-2 control-label">Fichier 3</label>
+
+                            <div class="col-sm-10">
+                                <input type="file" name="file[]"/>
+                            </div>
                         </div>
-                    </div>
-                </form>
-            </div>
 
-            <div class="saveIcon">
-
-                <h3>Récapitulatif</h3>
-
-                <div class="col-md-12">
-                    <img src="{{ home ~ type.image }}" alt=""/>
-                    <h4>{{ type.type | capitalize }}</h4>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn buttonWhite btn-default">Valider et publier le projet
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                {% for response in responses %}
-                    <div class="col-md-12">
-                        <img src="{{ home ~ response.image }}" alt=""/>
-                        <h4>{{ response.response | capitalize }}</h4>
-                    </div>
-                {% endfor %}
 
+                <div class="saveIcon">
+
+                    <h3>Récapitulatif</h3>
+
+                    <div class="col-md-12">
+                        <img src="{{ home ~ type.image }}" alt=""/>
+                        <h4>{{ type.type | capitalize }}</h4>
+                    </div>
+                    {% for response in responses %}
+                        <div class="col-md-12">
+                            <img src="{{ home ~ response.image }}" alt=""/>
+                            <h4>{{ response.response | capitalize }}</h4>
+                        </div>
+                    {% endfor %}
+
+                </div>
             </div>
-        </div>
             <hr class="clear"/>
         </div>
     </div>
 
 
     <div class="push"></div>
-</div>
+    </div>
 {% endblock %}
 

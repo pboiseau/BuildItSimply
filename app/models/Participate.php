@@ -165,4 +165,20 @@ class Participate extends AppModel
         });
     }
 
+    /**
+     * @param $project_status
+     * @return bool|string
+     */
+    public function statusReference($project_status){
+        switch($project_status){
+            case "OUVERT":
+                return "PENDING";
+            case "DECISION":
+                return "ACCEPT";
+            case "EN COURS":
+                return "CHOOSEN";
+        }
+        return false;
+    }
+
 }

@@ -26,8 +26,7 @@
 
                         <li>Date <span>{{ project.created_at | date("d F Y") }}</span></li>
                         <li>Cibles
-                            <input name="targets" type="text" class="form-control" id="targets"
-                                   placeholder="Adulte, Jeune, Femme ..." value="{{ project.targets }}"/>
+                            <input name="targets" type="text" class="form-control" id="targets" value="{{ project.targets }}"/>
                             <span class="help-block with-errors">{% if errors.targets %}{{ errors.targets }}{% endif %}</span>
                         </li>
                         <li>Site web
@@ -57,7 +56,7 @@
                     </ul>
                     <hr class="clear"/>
 
-                    
+
                     <a class="btn btn-default" href="{{ home }}projects/delete/{{ project.id }}">Annuler le projet</a>
 
                 </div>
@@ -82,17 +81,21 @@
 
                 </div>
 
+                <div class="profileEnd">
+                    <button type="submit" class="buttonWhite saveInfo">Enregistrer les modifications</button>
+                </div>
+
             </form>
 
 
             <div class="listProjet">
                 {% if project.status == "OUVERT" %}
                     {% include 'projects/demand.twig' ignore missing %}
-                {% elseif project.status == "EN COURS" %}
+                {% elseif project.status == "DECISION" %}
                     {% include 'projects/selection.twig' ignore missing %}
+                {% elseif project.status == "EN COURS" %}
+                    {% include 'projects/choice.twig' ignore missing %}
                 {% endif %}
-
-                <button type="submit" class="buttonWhite saveInfo">Enregistrer les modifications</button>
 
             </div>
 
@@ -110,44 +113,49 @@
     <script>
         $('.demand').click(function (e) {
             e.preventDefault();
-            var project_id = $(this).attr("data-project-id");
-            var freelance_id = $(this).attr("data-freelance-id");
-            var choice = $(this).attr("data-choice");
-            var self = $(this);
+
+            if (confirm('Etes-vous sur ?')) {
+
+                var project_id = $(this).attr("data-project-id");
+                var freelance_id = $(this).attr("data-freelance-id");
+                var choice = $(this).attr("data-choice");
+                var self = $(this);
 
 
-            $.ajax({
-                url: "{{ home }}projects/proposition/choice",
-                type: "POST",
-                data: {
-                    project_id: project_id,
-                    freelance_id: freelance_id,
-                    status: choice
-                }
-            }).done(function (data, textStatus, jqXHR) {
-                // removing button
-                var container = self.parent();
-                var button;
-
-                // if not error
-                if (!data.proposition.error) {
-                    container.empty();
-
-                    if (data.proposition.status == "accept") {
-                        button = $("<button class='demand btn btn-sm btn-success'>Accepter</button>");
-                    } else if (data.proposition.status == "decline") {
-                        button = $("<button class='demand btn btn-sm btn-danger'>Refuser</button>");
+                $.ajax({
+                    url: "{{ home }}projects/proposition/choice",
+                    type: "POST",
+                    data: {
+                        project_id: project_id,
+                        freelance_id: freelance_id,
+                        status: choice
                     }
-                    container.append(button);
-                } else {
-                    // else show error message
-                    $('#demand-message').text(data.proposition.message).fadeIn();
-                }
+                }).done(function (data, textStatus, jqXHR) {
+                    // removing button
+                    var container = self.parent();
+                    var button;
 
-            }).fail(function (error) {
-                console.log(error);
-            });
+                    // if not error
+                    if (typeof data.proposition !== 'undefined') {
+                        if (!data.proposition.error) {
+                            container.empty();
 
+                            if (data.proposition.status == "accept") {
+                                button = $("<button class='demand btn btn-sm btn-success'>Accepter</button>");
+                            } else if (data.proposition.status == "decline") {
+                                button = $("<button class='demand btn btn-sm btn-danger'>Refuser</button>");
+                            }
+                            container.append(button);
+                        }
+                    } else {
+                        // else show error message
+                        $('#demand-message').text(data.proposition.message).fadeIn();
+                    }
+
+                }).fail(function (error) {
+                    console.log(error);
+                });
+            }
         });
     </script>
 {% endblock %}

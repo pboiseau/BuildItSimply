@@ -1,11 +1,36 @@
 {% block body %}
-    <div class="jumbotron">
-        <h3>Votre selection</h3>
+<div class="listProjet">
+    <div class="notBloc">
+        <p class="dateNot">Votre selection</p>
+        <p>Vous avez fait votre selection parmi les propositions qui vous ont été faites</p>
+        <p>Veuillez maintenant faire votre choix final et choisir le Freelance avec qui vous souhaitez travailler</p>
+        {% for proposition in propositions %}
         <ul>
-            {% for proposition in propositions %}
-                <li>{{ proposition.firstname ~ " " ~ proposition.lastname}}</li>
+            <li>
+                <img src="{{ home ~ proposition.picture }}" height="66px" width="66px" alt="Notification user"/>
+
+                <p>
+                    <a href="{{ home }}users/profile/{{ proposition.id }}">{{ proposition.firstname ~ " " ~ proposition.lastname }}</a>
+                    a été selectionné pour votre projet
+                </p>
+
+                <div class="choice" style="float: right;">
+                        <button class="demand btn btn-sm"
+                                data-choice="choosen"
+                                data-project-id="{{ project.id }}"
+                                data-freelance-id="{{ proposition.freelance_id }}">Choisir se freelance
+                        </button>
+                </div>
+
+                <hr class="clear"/>
+            </li>
             {% endfor %}
+
         </ul>
     </div>
+
+</div>
+
+<hr class="clear"/>
 
 {% endblock %}

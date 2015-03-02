@@ -267,14 +267,14 @@ class ProjectController extends AppController
 
         /*
          * Get all proposition filter by status accept
-         * if project is in progress
+         * if project is in status DECISION
          */
-        $status = ($project->status == 'EN COURS') ? 'ACCEPT' : null;
+        $status = $this->Participate->statusReference($project->status);
         $propositions = $this->Participate->proposition($project->id, $status);
         $project['type'] = $project->type()->first();
         $tags = $this->ProjectTag->where('project_id', $this->f3->get('PARAMS.id'))->get();
 
-
+        // update project information
         if ($this->request() == "POST") {
             if ($this->Project->updateProject($project->id, $this->f3->get('POST'))) {
                 $this->setFlash("Les modifications de votre projet ont bien été effectué.");
@@ -317,7 +317,7 @@ class ProjectController extends AppController
             $projects[$key]['tags'] = $this->ProjectTag->where('project_id', $project->id)->get();
             $projects[$key]['proposition'] = $project->participates()->count();
         }
-        
+
         $this->render('projects/client_list', compact('projects'));
     }
 
@@ -338,11 +338,16 @@ class ProjectController extends AppController
                 ->where('freelance_id', $req['freelance_id'])
                 ->first();
 
-            if ($participate->status == "PENDING") {
+            if (in_array($participate->status, ["PENDING", "ACCEPT"])) {
+
+                // check for status ACCEPT for security
+                if($participate->status == "ACCEPT"){
+                    $update = $this->Participate->choice($req['project_id'], $req['freelance_id'], "CHOOSEN");
+                }else if($participate->status == "PENDING") {
+                    $update = $this->Participate->choice($req['project_id'], $req['freelance_id'], $req['status']);
+                }
 
                 // update status
-                $update = $this->Participate->choice($req['project_id'], $req['freelance_id'], $req['status']);
-
                 if ($update) {
                     echo $this->encode("proposition", [
                         "error" => false,
@@ -396,7 +401,7 @@ class ProjectController extends AppController
 
         if ($propositions->where('status', 'ACCEPT')->count() >= 1) {
             $update = $this->Project->where('id', $project_id)->update([
-                'status' => 'EN COURS'
+                'status' => 'DECISION'
             ]);
             if ($update) {
                 $this->setFlash("Les demandes pour votre projet sont maintenant fermés.");
@@ -504,6 +509,5 @@ class ProjectController extends AppController
 
         $this->render('projects/finish', compact('project', 'responses', 'type'));
     }
-
 
 }
