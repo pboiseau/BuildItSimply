@@ -14,7 +14,7 @@ class AppController
     public function __construct()
     {
         $this->f3 = Base::instance();
-        $this->twig = $this->f3->get('TWIG');
+        $this->twig = $this->get('TWIG');
         $this->twigExtention();
 
         // instanciate helpers
@@ -22,16 +22,17 @@ class AppController
         $this->Auth = new AuthHelper();
 
         $this->config = [
-            'prod' => $this->f3->get('PROD'),
-            'root' => ($this->f3->get('PROD')) ? $this->f3->get('ROOT') : $this->f3->get('DEV_ROOT'),
-            'home' => ($this->f3->get('PROD')) ? $this->f3->get('ROOT') : $this->f3->get('DEV_ROOT') . '/',
-            'webroot' => $this->f3->get('WEBROOT'),
-            'css' => $this->f3->get('CSS'),
-            'js' => $this->f3->get('JS'),
-            'image' => ($this->f3->get('PROD')) ? $this->f3->get('ROOT') . $this->f3->get('IMAGE') : $this->f3->get('DEV_ROOT') . '/' . $this->f3->get('IMAGE'),
-            'request' => substr($this->f3->get('PATTERN'), 1, strlen($this->f3->get('PATTERN'))),
-            'message' => $this->f3->get('SESSION.message'),
-            'login' => $this->f3->get('SESSION.user'),
+            'prod' => $this->get('PROD'),
+            'root' => ($this->get('PROD')) ? $this->get('ROOT') : $this->get('DEV_ROOT'),
+            'home' => ($this->get('PROD')) ? $this->get('ROOT') : $this->get('DEV_ROOT') . '/',
+            'webroot' => $this->get('WEBROOT'),
+            'css' => $this->get('CSS'),
+            'js' => $this->get('JS'),
+            'image' => ($this->get('PROD')) ? $this->get('ROOT') . $this->get('IMAGE') : $this->get('DEV_ROOT') . '/' . $this->get('IMAGE'),
+            'request' => substr($this->get('PATTERN'), 1, strlen($this->get('PATTERN'))),
+            'message' => $this->get('SESSION.message'),
+            'login' => $this->get('SESSION.user'),
+            'url' => $this->get('URL')
         ];
 
         if (!empty($this->uses)) {
@@ -47,8 +48,8 @@ class AppController
      **/
     public function beforeroute()
     {
-        if (!$this->Auth->isLogin() && !$this->f3->get('ERROR')) {
-            if (!in_array($this->f3->get('PATTERN'), ['/', '/howitworks', '/users/login', '/users/register'])) {
+        if (!$this->Auth->isLogin() && !$this->get('ERROR')) {
+            if (!in_array($this->get('PATTERN'), ['/', '/howitworks', '/users/login', '/users/register'])) {
                 $this->setFlash("Vous devez vous authentifier pour effectuer cette action.");
                 $this->f3->reroute('/');
             }
@@ -60,7 +61,7 @@ class AppController
      */
     public function error()
     {
-        $error = $this->f3->get('ERROR');
+        $error = $this->get('ERROR');
         $this->render('errors/' . $error['code'], compact('error'));
     }
 
@@ -78,8 +79,8 @@ class AppController
             array_merge($data, $this->config)
         );
 
-        if ($this->f3->get('SESSION.message')) {
-            $this->f3->set('SESSION.message', '');
+        if ($this->get('SESSION.message')) {
+            $this->set('SESSION.message', '');
         }
     }
 
@@ -98,7 +99,7 @@ class AppController
      **/
     protected function setFlash($message)
     {
-        $this->f3->set('SESSION.message', $message);
+        $this->set('SESSION.message', $message);
     }
 
 
@@ -127,6 +128,26 @@ class AppController
         return '{"' . $name . '": ' . json_encode($data, CASE_LOWER) . '}';
     }
 
+    /**
+     * Fatfree get method
+     * @param $params
+     * @return mixed
+     */
+    protected function get($params)
+    {
+        return $this->f3->get($params);
+    }
+
+    /**
+     * Fatfree set method
+     * @param $key
+     * @param $value
+     */
+    protected function set($key, $value)
+    {
+        $this->f3->set($key, $value);
+    }
+
 
     /**
      * Instanciate and load a database model
@@ -148,7 +169,7 @@ class AppController
     private function twigExtention()
     {
         $this->twig->addFunction(new \Twig_SimpleFunction('javascript', function ($file) {
-            echo sprintf("<script src='/%s'></script>", $this->f3->get('JS') . $file);
+            echo sprintf("<script src='/%s'></script>", $this->get('JS') . $file);
         }));
 
         $this->twig->addFunction(new \Twig_SimpleFunction('translateStatus', function ($status) {

@@ -36,7 +36,7 @@ if (config.request[config.request.length - 1] === "profile") {
                 source: skills,
                 delay: 100
             },
-            showAutocompleteOnFocus: true,
+            showAutocompleteOnFocus: false,
             inputType: 'text',
             minLength: 1,
             limit: 25

@@ -118,11 +118,7 @@ class Project extends AppModel
                 'project_type.type'
             ]);
 
-        // get participation and tags
-        foreach ($projects as $key => $project) {
-            $projects[$key]['proposition'] = $project->participates()->count();
-            $projects[$key]['tags'] = $project->tags;
-        }
+        $projects = $this->getInformation($projects);
 
         return ($projects->count() > 0) ? $projects : false;
     }
@@ -163,6 +159,14 @@ class Project extends AppModel
         } else {
             return false;
         }
+    }
+
+    public function getInformation($projects)
+    {
+        return $projects->each(function ($project) {
+            $project['proposition'] = $project->participates()->count();
+            $project['tags'] = $project->tags;
+        });
     }
 
     /**

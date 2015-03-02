@@ -29,18 +29,18 @@ class ProjectController extends AppController
         // call parent beforeroute
         parent::beforeroute();
 
-        if ($this->f3->get('PATTERN') == "/projects/@id") {
-            $project = $this->Project->find($this->f3->get('PARAMS.id'));
+        if ($this->get('PATTERN') == "/projects/@id") {
+            $project = $this->Project->find($this->get('PARAMS.id'));
             if ($project) {
                 if ($project->client_id == $this->Auth->getId()) {
-                    $this->f3->reroute('/projects/edit/' . $this->f3->get('PARAMS.id'));
+                    $this->f3->reroute('/projects/edit/' . $this->get('PARAMS.id'));
                 }
             } else {
                 $this->f3->reroute('/projects/');
             }
         }
 
-        if ($this->f3->get('PATTERN') == "/projects/edit/@id") {
+        if ($this->get('PATTERN') == "/projects/edit/@id") {
             if (!$this->Auth->is('client')) {
                 $this->setFlash("En tant que Freelance vous ne pouvez pas acceder à cette zone");
                 $this->f3->reroute('/projects/');
@@ -49,23 +49,23 @@ class ProjectController extends AppController
 
         // if request content @id params
         // check if project exist
-        if (!empty($this->f3->get('PARAMS.id'))) {
-            if (!$this->Project->exists($this->f3->get('PARAMS.id'))) {
+        if (!empty($this->get('PARAMS.id'))) {
+            if (!$this->Project->exists($this->get('PARAMS.id'))) {
                 $this->setFlash("Ce projet n'existe pas.");
                 $this->f3->reroute('/projects/');
             }
         }
 
-        if (in_array($this->f3->get('PATTERN'),
+        if (in_array($this->get('PATTERN'),
             ["/projects/detail/step", "/projects/detail/step/@step", "/projects/finish"])) {
 
             // if user is not client or haven't create project
-            if (!$this->Auth->is('client') || !$this->f3->get('SESSION.project')) {
+            if (!$this->Auth->is('client') || !$this->get('SESSION.project')) {
                 $this->f3->reroute('/projects/');
             }
 
             // if project already publish redirect to project edit page
-            if ($project = $this->f3->get('SESSION.project')) {
+            if ($project = $this->get('SESSION.project')) {
 
                 if ($this->Project->getStatus($project['id']) != "EN CREATION") {
                     $this->f3->reroute('/projects/' . $project['id']);
@@ -83,10 +83,10 @@ class ProjectController extends AppController
         $errors = array();
 
         if ($this->request() == "POST") {
-            $newProject = $this->f3->get('POST');
+            $newProject = $this->get('POST');
             if ($project = $this->Project->initialize($newProject)) {
                 $newProject['id'] = $project->id;
-                $this->f3->set('SESSION.project', $newProject);
+                $this->set('SESSION.project', $newProject);
                 $this->f3->reroute('/projects/detail/step');
 
             } else {
@@ -103,9 +103,9 @@ class ProjectController extends AppController
      */
     public function show()
     {
-        $project = $this->Project->show($this->f3->get('PARAMS.id'));
-        $tags = $this->ProjectTag->where('project_id', $this->f3->get('PARAMS.id'))->get();
-        $propositions = $this->Participate->proposition($this->f3->get('PARAMS.id'));
+        $project = $this->Project->show($this->get('PARAMS.id'));
+        $tags = $this->ProjectTag->where('project_id', $this->get('PARAMS.id'))->get();
+        $propositions = $this->Participate->proposition($this->get('PARAMS.id'));
         $project['type'] = $project->type()->first();
 
         if ($project) {
@@ -122,34 +122,35 @@ class ProjectController extends AppController
     public function all()
     {
         $validator = new Validate();
-        $page = ($this->f3->get('PARAMS.page')) ? $this->f3->get('PARAMS.page') : 0;
+        $page = ($this->get('PARAMS.page')) ? $this->get('PARAMS.page') : 0;
 
         if (!$validator->isNumber($page)) {
             $page = 0;
         }
 
-        $offset = ($page > 0) ? ($page - 1) * ($this->f3->get('PROJECT_PER_PAGE')) : 0;
+        $offset = ($page > 0) ? ($page - 1) * ($this->get('PROJECT_PER_PAGE')) : 0;
         
         $number_project = $this->Project->countPublish();
-        $number_page = ceil($number_project / $this->f3->get('PROJECT_PER_PAGE'));
+        $number_page = ceil($number_project / $this->get('PROJECT_PER_PAGE'));
 
         $projects = $this->Project->whereNotIn('status', ['EN CREATION', 'ANNULE'])
             ->join('project_type', 'project_type.id', '=', 'project_type_id')
             ->orderBy('projects.created_at', 'DESC')
-            ->skip($offset)->limit(6)
+            ->skip($offset)->limit($this->get('PROJECT_PER_PAGE'))
             ->get([
                 'projects.*',
                 'project_type.type'
             ]);
 
         $categories = $this->ProjectType->all();
-        $categories->each(function($type){
+        $categories->each(function ($type) {
             $type->number_project = $this->Project->countCategory($type->id);
         });
 
-        foreach ($projects as $key => $project) {
-            $projects[$key]['proposition'] = $project->participates()->count();
-            $projects[$key]['tags'] = $project->tags;
+        if ($projects->count() > 0) {
+            $projects = $this->Project->getInformation($projects);
+        } else {
+            $this->setFlash("Aucun projet.");
         }
 
         $this->render('projects/all', compact('projects', 'categories', 'number_project', 'number_page', 'page'));
@@ -160,13 +161,13 @@ class ProjectController extends AppController
      */
     public function category()
     {
-        if($this->f3->get('AJAX')){
-            if($category = $this->f3->get('PARAMS.category')){
+        if($this->get('AJAX')){
+            if($category = $this->get('PARAMS.category')){
                 $projects = $this->Project->getByCategory($category);
 
                 $this->render('projects/list', compact('projects'));
             }else{
-                $this->f3->reroute($this->f3->get('PATTERN'));
+                $this->f3->reroute($this->get('PATTERN'));
             }
         }
     }
@@ -178,9 +179,9 @@ class ProjectController extends AppController
      */
     public function search()
     {
-        if ($this->request() == "POST" && $this->f3->get('AJAX')) {
+        if ($this->request() == "POST" && $this->get('AJAX')) {
             $this->validator = new Validate();
-            $searchWords = $this->f3->get('POST')['searchWords'];
+            $searchWords = $this->get('POST')['searchWords'];
             $this->words = explode(' ', $searchWords);
 
             $request = $this->Project->whereNotIn('status', ['ANNULE'])
@@ -202,9 +203,8 @@ class ProjectController extends AppController
                 'type'
             ]);
 
-            foreach ($projects as $key => $project) {
-                $projects[$key]['client'] = $project->account()->first();
-                $projects[$key]['tags'] = $project->tags;
+            if($projects->count() > 0){
+                $projects = $this->Project->getInformation($projects);
             }
 
             $this->render('projects/list', compact('projects', 'searchWords'));
@@ -220,8 +220,8 @@ class ProjectController extends AppController
      */
     public function join()
     {
-        $project = Project::find($this->f3->get('PARAMS.id'));
-        $user = $this->f3->get('SESSION.user');
+        $project = Project::find($this->get('PARAMS.id'));
+        $user = $this->get('SESSION.user');
 
         // check if project is status OPEN
         if ($project->status != "OUVERT") {
@@ -249,7 +249,7 @@ class ProjectController extends AppController
                 $this->setFlash("Vous participez déjà à ce projet.");
             }
         }
-        $this->f3->reroute('/projects/' . $this->f3->get('PARAMS.id'));
+        $this->f3->reroute('/projects/' . $this->get('PARAMS.id'));
     }
 
     /**
@@ -257,11 +257,11 @@ class ProjectController extends AppController
      */
     public function edit()
     {
-        $project = $this->Project->show($this->f3->get('PARAMS.id'));
+        $project = $this->Project->show($this->get('PARAMS.id'));
 
 
         // if project doesn't exist or isn't own by the client
-        if (empty($project) || $project->client_id != $this->f3->get('SESSION.user.id')) {
+        if (empty($project) || $project->client_id != $this->get('SESSION.user.id')) {
             return $this->f3->reroute('/projects/');
         }
 
@@ -272,11 +272,11 @@ class ProjectController extends AppController
         $status = $this->Participate->statusReference($project->status);
         $propositions = $this->Participate->proposition($project->id, $status);
         $project['type'] = $project->type()->first();
-        $tags = $this->ProjectTag->where('project_id', $this->f3->get('PARAMS.id'))->get();
+        $tags = $this->ProjectTag->where('project_id', $this->get('PARAMS.id'))->get();
 
         // update project information
         if ($this->request() == "POST") {
-            if ($this->Project->updateProject($project->id, $this->f3->get('POST'))) {
+            if ($this->Project->updateProject($project->id, $this->get('POST'))) {
                 $this->setFlash("Les modifications de votre projet ont bien été effectué.");
                 $this->f3->reroute('/projects/edit/' . $project->id);
             }
@@ -291,8 +291,8 @@ class ProjectController extends AppController
      */
     public function delete()
     {
-        $project = $this->Project->find($this->f3->get('PARAMS.id'));
-        if ($project->client_id == $this->f3->get('SESSION.user.id')) {
+        $project = $this->Project->find($this->get('PARAMS.id'));
+        if ($project->client_id == $this->get('SESSION.user.id')) {
             $delete = $project->update([
                 'status' => 'ANNULE'
             ]);
@@ -300,7 +300,7 @@ class ProjectController extends AppController
                 $this->setFlash("Votre projet a bien été annulé");
             }
         }
-        $this->f3->reroute('/projects/' . $this->f3->get('PARAMS.id'));
+        $this->f3->reroute('/projects/' . $this->get('PARAMS.id'));
     }
 
     /**
@@ -308,14 +308,15 @@ class ProjectController extends AppController
      */
     public function client_list()
     {
-        $projects = $this->Project->where('client_id', $this->f3->get('SESSION.user.id'))
+        $projects = $this->Project->where('client_id', $this->get('SESSION.user.id'))
             ->whereIn('status', ['OUVERT', 'EN COURS', 'TERMINE'])
             ->orderBy('created_at', 'DESC')
             ->get();
 
-        foreach ($projects as $key => $project) {
-            $projects[$key]['tags'] = $this->ProjectTag->where('project_id', $project->id)->get();
-            $projects[$key]['proposition'] = $project->participates()->count();
+        if($projects->count() > 0){
+            $projects = $this->Project->getInformation($projects);
+        }else{
+            $this->setFlash("Aucun projet.");
         }
 
         $this->render('projects/client_list', compact('projects'));
@@ -329,10 +330,9 @@ class ProjectController extends AppController
      */
     public function choice()
     {
-        if ($this->f3->get('AJAX')) {
+        if ($this->get('AJAX')) {
 
-            $req = $this->f3->get('POST');
-
+            $req = $this->get('POST');
 
             $participate = $this->Participate->where('project_id', $req['project_id'])
                 ->where('freelance_id', $req['freelance_id'])
@@ -370,8 +370,8 @@ class ProjectController extends AppController
      */
     public function sendResponse()
     {
-        if ($this->f3->get('AJAX')) {
-            $req = $this->f3->get('POST');
+        if ($this->get('AJAX')) {
+            $req = $this->get('POST');
             $project = $this->Project->getById($req['project_id']);
             $freelance = $this->Account->getById($req['freelance_id']);
 
@@ -394,7 +394,7 @@ class ProjectController extends AppController
      */
     public function close()
     {
-        $project_id = $this->f3->get('PARAMS.id');
+        $project_id = $this->get('PARAMS.id');
 
         // stay in request builder mode
         $propositions = $this->Participate->where('project_id', $project_id);
@@ -421,8 +421,8 @@ class ProjectController extends AppController
     {
         $step = 0;
         $types = ProjectType::all();
-        $this->f3->set('SESSION.project.price', 0);
-        $this->f3->set('SESSION.project.tag', '');
+        $this->set('SESSION.project.price', 0);
+        $this->set('SESSION.project.tag', '');
         $this->f3->clear('SESSION.step');
         $this->render('projects/start', compact('types', 'step'));
     }
@@ -435,27 +435,27 @@ class ProjectController extends AppController
      */
     public function step()
     {
-        if ($this->f3->get('AJAX')) {
+        if ($this->get('AJAX')) {
 
-            $request = $this->f3->get('POST');
+            $request = $this->get('POST');
             $questions = $this->ProjectStep->changeStep($request['step'], $request['type']);
             $current_step = $request['step'] - 1;
 
             $response = ProjectResponse::find($request['choice']);
 
-            $this->f3->set('SESSION.step.' . $current_step, $request['choice']);
-            $this->f3->set('SESSION.project.project_type_id', $request['type']);
+            $this->set('SESSION.step.' . $current_step, $request['choice']);
+            $this->set('SESSION.project.project_type_id', $request['type']);
 
             if (!empty($response['tag']) && $current_step > 0) {
-                $this->f3->set('SESSION.project.price', $this->f3->get('SESSION.project.price') + $response->price);
-                $this->f3->set('SESSION.project.tag',
-                    $this->f3->get('SESSION.project.tag') . ',' . $response['tag']);
+                $this->set('SESSION.project.price', $this->get('SESSION.project.price') + $response->price);
+                $this->set('SESSION.project.tag',
+                    $this->get('SESSION.project.tag') . ',' . $response['tag']);
             }
 
             if ($questions) {
                 $step = $request['step'];
                 $type = $request['type'];
-                $price = $this->f3->get('SESSION.project.price');
+                $price = $this->get('SESSION.project.price');
 
                 $this->render('projects/step', compact('step', 'questions', 'type', 'price'));
             } else {
@@ -474,18 +474,18 @@ class ProjectController extends AppController
      */
     public function finish()
     {
-        $project = $this->f3->get('SESSION.project');
-        $steps = $this->f3->get('SESSION.step');
+        $project = $this->get('SESSION.project');
+        $steps = $this->get('SESSION.step');
 
         if(empty($project)){
-            $this->f3->reroute($this->f3->get('PATTERN'));
+            $this->f3->reroute($this->get('PATTERN'));
         }
 
         $type = ProjectType::find($project['project_type_id']);
         $responses = $this->ProjectResponse->getResponses($steps);
 
         if ($this->request() == "POST") {
-            $request = $this->f3->get('POST');
+            $request = $this->get('POST');
             $request['project_type_id'] = $project['project_type_id'];
             $request['price'] = $project['price'];
 
@@ -503,7 +503,7 @@ class ProjectController extends AppController
 
             } else {
                 $this->setFlash("Les informations renseignées ne sont pas valides.");
-                $this->f3->reroute($this->f3->get('PATTERN'));
+                $this->f3->reroute($this->get('PATTERN'));
             }
         }
 
