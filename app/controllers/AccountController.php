@@ -86,6 +86,8 @@ class AccountController extends AppController
 
                 $this->Account->setSession($newUser);
                 $this->setFlash("Votre compte a été crée et vous avez automatiquement été connecté.");
+                // send welcome email when account created
+                Account::created($this->Account->sendMail('welcome_' . strtolower($user['type']), $newUser));
                 $this->f3->reroute('/users/profile');
             } else {
                 $errors = $this->Account->errors;

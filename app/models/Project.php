@@ -69,6 +69,16 @@ class Project extends AppModel
     }
 
     /**
+     * Scope for getting project order by date
+     * @param $query
+     * @return mixed
+     */
+    public function scopeRecent($query)
+    {
+        return $query->orderBy('projects.created_at', 'DESC');
+    }
+
+    /**
      * Check if project exists in the database
      * @param $id
      * @return bool|\Illuminate\Support\Collection|null|static
@@ -112,7 +122,7 @@ class Project extends AppModel
         $projects = $this->whereNotIn('status', ['EN CREATION', 'ANNULE'])
             ->where('project_type_id', $category_id)
             ->join('project_type', 'project_type.id', '=', 'project_type_id')
-            ->orderBy('projects.created_at', 'DESC')
+            ->recent()
             ->get([
                 'projects.*',
                 'project_type.type'

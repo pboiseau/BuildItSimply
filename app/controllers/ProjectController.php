@@ -135,7 +135,7 @@ class ProjectController extends AppController
 
         $projects = $this->Project->whereNotIn('status', ['EN CREATION', 'ANNULE'])
             ->join('project_type', 'project_type.id', '=', 'project_type_id')
-            ->orderBy('projects.created_at', 'DESC')
+            ->recent()
             ->skip($offset)->limit($this->get('PROJECT_PER_PAGE'))
             ->get([
                 'projects.*',
@@ -198,7 +198,7 @@ class ProjectController extends AppController
                 }
             });
 
-            $projects = $request->orderBy('created_at', 'desc')->get([
+            $projects = $request->recent()->get([
                 'projects.*',
                 'type'
             ]);
@@ -310,7 +310,7 @@ class ProjectController extends AppController
     {
         $projects = $this->Project->where('client_id', $this->get('SESSION.user.id'))
             ->whereIn('status', ['OUVERT', 'EN COURS', 'TERMINE'])
-            ->orderBy('created_at', 'DESC')
+            ->recent()
             ->get();
 
         if($projects->count() > 0){

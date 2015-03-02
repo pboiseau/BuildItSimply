@@ -26,6 +26,21 @@ class Account extends AppModel
     }
 
     /**
+     * Send welcome mail
+     * @param $template
+     * @param $user
+     */
+    public function sendMail($template, $user)
+    {
+        $mailHelper = new MailHelper();
+        $mailHelper->sendMail($template, $user->mail, [
+            'subject' => "Bienvenue sur BuiltItSimply",
+            'firstname' => $user->firstname,
+            'lastname' => $user->lastname
+        ]);
+    }
+
+    /**
      * Get account by ID and select field
      * @param $id
      * @param array $field
