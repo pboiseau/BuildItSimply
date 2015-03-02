@@ -10,7 +10,7 @@
                         <p>
                             Votre demande de participation concernant le projet <a
                                     href="{{ home }}projects/{{ notification.project_id }}">{{ notification.name }}</a>
-                            a été {{ notification.status }} par <a
+                            a été {{ translateStatus(notification.status) }} par <a
                                     href="{{ home }}users/profile/{{ notification.client_id }}">{{ notification.firstname ~ " " ~ notification.lastname }}</a>
                         </p>
 

@@ -15,6 +15,7 @@ class AppController
     {
         $this->f3 = Base::instance();
         $this->twig = $this->f3->get('TWIG');
+        $this->twigExtention();
 
         // instanciate helpers
         $this->MailHelper = new MailHelper();
@@ -117,8 +118,10 @@ class AppController
 
         if ($status == "ok") {
             header("HTTP/1.0 200 OK");
-        } else if ($status == "ko") {
-            header("HTTP/1.0 404 Not Found");
+        } else {
+            if ($status == "ko") {
+                header("HTTP/1.0 404 Not Found");
+            }
         }
 
         return '{"' . $name . '": ' . json_encode($data, CASE_LOWER) . '}';
@@ -146,6 +149,25 @@ class AppController
     {
         $this->twig->addFunction(new \Twig_SimpleFunction('javascript', function ($file) {
             echo sprintf("<script src='/%s'></script>", $this->f3->get('JS') . $file);
+        }));
+
+        $this->twig->addFunction(new \Twig_SimpleFunction('translateStatus', function ($status) {
+            switch ($status) {
+                case "ACCEPT":
+                    echo sprintf("accepté");
+                    break;
+                case "DECLINE":
+                    echo sprintf("refusé");
+                    break;
+                case "PENDING":
+                    echo sprintf("en attente");
+                    break;
+                case "CHOOSEN":
+                    echo sprintf("choisi");
+                    break;
+                default:
+                    break;
+            }
         }));
     }
 
