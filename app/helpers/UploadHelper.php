@@ -8,10 +8,10 @@ class UploadHelper extends BaseHelper
     /**
      * Init the Folder
      */
-    public function __construct($filepath=null)
+    public function __construct($filepath=null, $organize = false)
     {
         parent::__construct();
-        $this->url($filepath);
+        $this->url($filepath, $organize);
     }
 
 
@@ -100,17 +100,19 @@ class UploadHelper extends BaseHelper
      * Set the global variable UPLOADS
      * @param string $filepath
      */
-    private function url($filepath)
+    private function url($filepath, $organize)
     {
-        if(!empty($filepath))
-            $this->f3->set('UPLOADS', $filepath);
-        else if ($this->f3->get('ORGANIZE_UPLOAD') === true) {
+        if(empty($filepath))
+            $filepath = 'webroot/uploads/';
+
+        if($organize && $this->f3->get('ORGANIZE_UPLOAD') === true)
+        {
             $years = date("Y");
             $month = date("m");
             $day = date("d");
-            $this->f3->set('UPLOADS', 'webroot/uploads/' . $years . '/' . $month . '/' . $day . '/');
-        } else {
-            $this->f3->set('UPLOADS', 'webroot/uploads/');
+            $this->f3->set('UPLOADS', $filepath . $years . '/' . $month . '/' . $day . '/');
         }
+        else 
+            $this->f3->set('UPLOADS', $filepath);
     }
 }

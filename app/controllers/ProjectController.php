@@ -493,7 +493,7 @@ class ProjectController extends AppController
             // Recuperation of images
                 
                 $filesList = $this->f3->get('FILES.file');
-                $upload = new UploadHelper($this->f3->get('PROJECT_FILES'));
+                $upload = new UploadHelper($this->f3->get('PROJECT_FILES'), true);
                 $files = $upload->upload();
 
             if ($this->Project->publish($project['id'], $request)) {
