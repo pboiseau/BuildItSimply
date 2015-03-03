@@ -20,12 +20,13 @@ class UploadHelper extends BaseHelper
      * @return mixed
      * @throws Exception
      */
-    public function upload($resize = false)
+    public function upload($profilPicture = false)
     {
+        $this->profilPicture = $profilPicture;
         //Upload the file in the repository
         if (!$files = $this->web->receive(function ($file) 
         {
-            $this->checkSize($file['type'], $file['size']);    
+            $this->checkSize($file['type'], $file['size'], $this->profilPicture);    
         }, true, function ($file) {
             $tab = explode('.', $file);
             $extension = $tab[count($tab) - 1];
@@ -44,7 +45,7 @@ class UploadHelper extends BaseHelper
             if($file)
             {
                 $new_array[] = $key;
-                if($resize)
+                if($this->profilPicture)
                     $this->resize($key);
             }
         }
@@ -80,14 +81,18 @@ class UploadHelper extends BaseHelper
      * @param $size
      * @return bool
      */
-    private function checkSize($fileType, $size)
+    private function checkSize($fileType, $size, $profilPicture)
     {
         $type = stristr($fileType, '/', true);
-        if ($type === 'image' && $size <= ($this->f3->get('MAX_FILE_SIZE') * 1024 * 1024)) {
-            return true;
-        } else {
+        if($size <= ($this->f3->get('MAX_FILE_SIZE') * 1024 * 1024))
+        {
+            if($type === 'image')
+                return true;
+            else if(!$profilPicture && $fileType ==='application/pdf')
+                return true;
             return false;
         }
+        return false;
     }
 
     /**
