@@ -11,7 +11,8 @@ class ProjectController extends AppController
         'ProjectType',
         'ProjectStep',
         'ProjectResponse',
-        'ProjectTag'
+        'ProjectTag',
+        'ProjectFile'
     );
 
     public function __construct()
@@ -109,7 +110,7 @@ class ProjectController extends AppController
         $project['type'] = $project->type()->first();
 
         if ($project) {
-            $this->render('projects/show', compact('project', 'tags', 'propositions'));
+            $this->render('projects/show', compact('project', 'tags', 'propositions', 'files'));
         } else {
             $this->setFlash("Ce projet n'existe pas.");
             $this->f3->reroute('/projects/');
@@ -259,7 +260,6 @@ class ProjectController extends AppController
     {
         $project = $this->Project->show($this->get('PARAMS.id'));
 
-
         // if project doesn't exist or isn't own by the client
         if (empty($project) || $project->client_id != $this->get('SESSION.user.id')) {
             return $this->f3->reroute('/projects/');
@@ -273,6 +273,7 @@ class ProjectController extends AppController
         $propositions = $this->Participate->proposition($project->id, $status);
         $project['type'] = $project->type()->first();
         $tags = $this->ProjectTag->where('project_id', $this->get('PARAMS.id'))->get();
+        $files = $project->files()->get();
 
         // update project information
         if ($this->request() == "POST") {
@@ -282,7 +283,7 @@ class ProjectController extends AppController
             }
         }
 
-        $this->render('projects/edit', compact('project', 'propositions', 'tags'));
+        $this->render('projects/edit', compact('project', 'propositions', 'tags', 'files'));
     }
 
     /**
@@ -498,20 +499,7 @@ class ProjectController extends AppController
 
             if ($this->Project->publish($project['id'], $request)) {
 
-                // add files to project_files
-                foreach ($files as $key => $file) 
-                {
-                    if (!empty($filesList['name'][$key])) 
-                    {
-                        echo $file;
-                        ProjectFiles::create([
-                            'name'         => $filesList['name'][$key],
-                            'file'         => $file,
-                            'project_id'   => $project['id']
-                        ]);
-                    }
-                }
-                
+                $this->ProjectFile->addFiles($files, $filesList, $project['id']);
 
                 // adding tags
                 $this->ProjectTag->addTags($project['id'], $project['tag']);
