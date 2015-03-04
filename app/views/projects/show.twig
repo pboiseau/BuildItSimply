@@ -39,9 +39,9 @@
                     <li class="projectFiche">
                         <p>Fichiers utiles <span>Télécharger</span></p>
                         <ul>
-                            <li><a href="#">chartegraphique.pdf</a></li>
-                            <li><a href="#">logoLorem.pdf</a></li>
-                            <li><a href="#">texte.pdf</a></li>
+                            {% for file in files %}
+                                <li><a href="{{ home ~ file.file }}" target="_blank">{{ file.name }}</a></li>
+                            {% endfor %}
                         </ul>
                     </li>
 

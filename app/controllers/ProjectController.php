@@ -105,11 +105,13 @@ class ProjectController extends AppController
     public function show()
     {
         $project = $this->Project->show($this->get('PARAMS.id'));
-        $tags = $this->ProjectTag->where('project_id', $this->get('PARAMS.id'))->get();
-        $propositions = $this->Participate->proposition($this->get('PARAMS.id'));
-        $project['type'] = $project->type()->first();
 
         if ($project) {
+            $tags = $project->tags()->get();
+            $propositions = $project->participates()->get();
+            $project['type'] = $project->type()->first();
+            $files = $project->files()->get();
+
             $this->render('projects/show', compact('project', 'tags', 'propositions', 'files'));
         } else {
             $this->setFlash("Ce projet n'existe pas.");
