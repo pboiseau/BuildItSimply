@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class Validate for check data with REGEX
+ */
 class Validate extends Audit
 {
 

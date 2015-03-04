@@ -2,6 +2,9 @@
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
+/**
+ * Main model class based on Laravel's ORM
+ */
 class AppModel extends Eloquent
 {
 
@@ -41,7 +44,7 @@ class AppModel extends Eloquent
 
     /**
      * Return new F3 DB instance (using only if necessary)
-     * @return object $db
+     * @return object|bool
      **/
     private function getFFdb()
     {

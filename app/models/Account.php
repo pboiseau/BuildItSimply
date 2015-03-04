@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class model Account
+ */
 class Account extends AppModel
 {
 
@@ -13,6 +16,7 @@ class Account extends AppModel
 
 
     /**
+    * Get one user by id
      * @param $type
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -31,6 +35,7 @@ class Account extends AppModel
 
 
     /**
+     * Get one Freelance by id
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function freelance()
@@ -39,6 +44,7 @@ class Account extends AppModel
     }
 
     /**
+     * Get one Client by id
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function client()
@@ -88,10 +94,9 @@ class Account extends AppModel
     }
 
     /**
-     *    Register a new account
+     * Register a new account
      * @param $user
      * @internal param array $use
-     *
      * @return bool|static
      */
     public function register($user)
@@ -150,7 +155,7 @@ class Account extends AppModel
 
 
     /**
-     * Update user account
+     * Update user profile
      * @params array $user
      **/
     public function updateAccount($user)

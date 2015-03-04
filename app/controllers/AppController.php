@@ -1,5 +1,8 @@
 <?php
 
+/**
+ *  Main controller class
+ */
 class AppController
 {
 
@@ -164,7 +167,7 @@ class AppController
     }
 
     /**
-     *
+     *  Add extension to twig
      */
     private function twigExtention()
     {

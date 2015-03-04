@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class for manage each question for a project
+ */
 class ProjectQuestion extends AppModel
 {
 

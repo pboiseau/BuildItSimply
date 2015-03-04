@@ -26,7 +26,7 @@ class UploadHelper extends BaseHelper
         //Upload the file in the repository
         if (!$files = $this->web->receive(function ($file) 
         {
-            $this->checkSize($file['type'], $file['size'], $this->profilPicture);    
+            $this->checkFile($file['type'], $file['size'], $this->profilPicture);    
         }, true, function ($file) {
             $tab = explode('.', $file);
             $extension = $tab[count($tab) - 1];
@@ -77,11 +77,13 @@ class UploadHelper extends BaseHelper
 
 
     /**
-     * @param $fileType
-     * @param $size
+     * Check if file's type and file's size are correct
+     * @param String $fileType
+     * @param int $size
+     * @param bool $profilPicture true if the file is used for user's profil
      * @return bool
      */
-    private function checkSize($fileType, $size, $profilPicture)
+    private function checkFile($fileType, $size, $profilPicture)
     {
         $type = stristr($fileType, '/', true);
         if($size <= ($this->f3->get('MAX_FILE_SIZE') * 1024 * 1024))
@@ -97,8 +99,10 @@ class UploadHelper extends BaseHelper
 
     /**
      * Change the upload directory
+     * Organize upload if needed
      * Set the global variable UPLOADS
      * @param string $filepath
+     * @param bool $organize
      */
     private function url($filepath, $organize)
     {

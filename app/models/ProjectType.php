@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class for use ProjectType table
+ */
 class ProjectType extends AppModel
 {
 

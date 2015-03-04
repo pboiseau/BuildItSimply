@@ -1,5 +1,8 @@
 <?php
 
+/**
+ *  Class for manage all data link to user's account 
+ */
 class AccountController extends AppController
 {
 

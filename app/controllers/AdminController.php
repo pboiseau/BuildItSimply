@@ -1,5 +1,8 @@
 <?php
 
+/**
+ *  Back office controller
+ */
 class AdminController extends AppController
 {
     public $uses = array('Project', 'ProjectType', 'ProjectQuestion', 'ProjectStep', 'ProjectResponse');
@@ -53,7 +56,7 @@ class AdminController extends AppController
 
 
     /**
-      * Manage step of project
+     * Manage steps of project
      */
     public function projectStep()
     {
@@ -140,7 +143,7 @@ class AdminController extends AppController
     }
 
     /**
-     *    Unset all empty field
+     *    Unset all empty field for response update
      *    @param array data
      *    @return array $data cleaned
      */
@@ -340,7 +343,7 @@ class AdminController extends AppController
 
 
     /**
-     *  Manage list of persons
+     *  Manage list of user
      *  @param array $request  post's data
      *  @param String $type type of person: freelance | client
      */

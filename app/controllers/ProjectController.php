@@ -1,5 +1,8 @@
 <?php
 
+/**
+ *  Projects controller
+ */
 class ProjectController extends AppController
 {
 
@@ -179,6 +182,7 @@ class ProjectController extends AppController
     /**
      * Call in AJAX
      * Get projects that contains keywords and display them on a list
+     * @return int 1
      */
     public function search()
     {
@@ -257,6 +261,7 @@ class ProjectController extends AppController
 
     /**
      * Edit a project with his ID
+     * @return reroute for break function
      */
     public function edit()
     {
@@ -290,7 +295,6 @@ class ProjectController extends AppController
 
     /**
      * Cancel a project and update his status to "ANNULE"
-     * @param GET ID of the project
      */
     public function delete()
     {
@@ -369,7 +373,7 @@ class ProjectController extends AppController
     }
 
     /**
-     *
+     * Send mail confirmation for project accepted
      */
     public function sendResponse()
     {
@@ -473,7 +477,7 @@ class ProjectController extends AppController
     }
 
     /**
-     *
+     *  Last step for add a project
      */
     public function finish()
     {

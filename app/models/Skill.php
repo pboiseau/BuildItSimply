@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class for manage skill
+ */
 class Skill extends AppModel
 {
 
@@ -10,6 +13,7 @@ class Skill extends AppModel
     protected $guarded = array('id');
 
     /**
+     * Get all Freelance who has this skill
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function freelance()
@@ -18,6 +22,7 @@ class Skill extends AppModel
     }
 
     /**
+     * Get the category of a skill
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function categories_skills()

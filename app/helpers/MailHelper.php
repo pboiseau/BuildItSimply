@@ -20,8 +20,8 @@ class MailHelper extends BaseHelper{
     /**
      * Send email using Fatfree SMTP class
      * @param $template
-     * @param $to
-     * @param array $data
+     * @param $to recipient of mail
+     * @param array $data mail's body
      * @return bool
      */
     public function sendMail($template, $to, $data = array())
@@ -34,6 +34,7 @@ class MailHelper extends BaseHelper{
     }
 
     /**
+     * Get render for one template mail
      * @param $template
      * @param array $data
      * @return mixed

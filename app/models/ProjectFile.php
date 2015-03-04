@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class for manage all files link to one project
+ */
 class ProjectFile extends AppModel
 {
 
@@ -17,6 +20,7 @@ class ProjectFile extends AppModel
     }
 
     /**
+     * Add several files to one Project
      * @param $files
      * @param $filesList
      * @param $project_id

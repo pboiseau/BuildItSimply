@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class model for manage Freelance's skills
+ */
 class FreelanceSkill extends AppModel
 {
 
@@ -18,6 +21,7 @@ class FreelanceSkill extends AppModel
     }
 
     /**
+     * Get all skills by one id
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function skills()

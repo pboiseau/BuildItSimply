@@ -1,12 +1,15 @@
 <?php
 
+/**
+ *  Home controller 
+ */
 class HomeController extends AppController
 {
 
     public $uses = array('Account', 'Client', 'Freelance', 'Project');
 
     /**
-     *
+     *   Initialize with AppController's construct
      */
     public function __construct()
     {
@@ -14,7 +17,7 @@ class HomeController extends AppController
     }
 
     /**
-     *
+     *  Show home page 
      */
     public function index()
     {
@@ -26,7 +29,7 @@ class HomeController extends AppController
     }
 
     /**
-     *
+     *   Show how it works page
      */
     public function howItWorks()
     {

@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class ProjectTag
+ */
 class ProjectTag extends AppModel
 {
 
