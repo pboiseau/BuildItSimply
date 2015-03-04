@@ -108,7 +108,7 @@ class ProjectController extends AppController
 
         if ($project) {
             $tags = $project->tags()->get();
-            $propositions = $project->participates()->get();
+            $propositions = $this->Participate->proposition($this->get('PARAMS.id'));
             $project['type'] = $project->type()->first();
             $files = $project->files()->get();
 
@@ -425,6 +425,7 @@ class ProjectController extends AppController
         $step = 0;
         $types = ProjectType::all();
         $this->set('SESSION.project.price', 0);
+        $this->set('SESSION.old_price', 0);
         $this->set('SESSION.project.tag', '');
         $this->f3->clear('SESSION.step');
         $this->render('projects/start', compact('types', 'step'));
@@ -449,10 +450,16 @@ class ProjectController extends AppController
             $this->set('SESSION.step.' . $current_step, $request['choice']);
             $this->set('SESSION.project.project_type_id', $request['type']);
 
+
             if (!empty($response['tag']) && $current_step > 0) {
+                $this->set('SESSION.old_price', $response->price);
                 $this->set('SESSION.project.price', $this->get('SESSION.project.price') + $response->price);
                 $this->set('SESSION.project.tag',
                     $this->get('SESSION.project.tag') . ',' . $response['tag']);
+            }
+
+            if($request['change'] == "prev"){
+                $this->set('SESSION.project.price', $this->get('SESSION.project.price') - $this->get('SESSION.old_price'));
             }
 
             if ($questions) {

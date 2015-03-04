@@ -74,7 +74,8 @@
                     data: {
                         type: $(e.currentTarget).attr('data-type'),
                         step: step,
-                        choice: $(e.currentTarget).attr('data-choice')
+                        choice: $(e.currentTarget).attr('data-choice'),
+                        change: change
                     }
                 }).done(function (data, textStatus, jqXHR) {
                     $('#gabaritBG').empty().append(data);

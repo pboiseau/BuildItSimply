@@ -120,7 +120,7 @@ class Participate extends AppModel
         $propositions = $this->where('project_id', $project_id)
             ->join('accounts', 'freelance_id', '=', 'id')
             ->join('freelances', 'freelance_id', '=', 'account_id')
-            ->orderBy('participates.created_at', 'desc');
+            ->recent();
 
         if ($status) {
             $propositions->status($status);
