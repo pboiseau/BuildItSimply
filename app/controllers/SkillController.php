@@ -1,5 +1,8 @@
 <?php
 
+/**
+ *  Manage Freelance's skills
+ */
 class SkillController extends AppController
 {
 
@@ -22,7 +25,7 @@ class SkillController extends AppController
     }
 
     /**
-     *
+     * Send all skills in AJAX
      */
     public function getAll()
     {

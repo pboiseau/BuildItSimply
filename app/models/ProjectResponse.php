@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class for manage each responses for a project
+ */
 class ProjectResponse extends AppModel
 {
 

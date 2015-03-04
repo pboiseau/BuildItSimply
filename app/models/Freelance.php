@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class model for manage Freelance table
+ */
 class Freelance extends AppModel
 {
 
@@ -11,6 +14,7 @@ class Freelance extends AppModel
     protected $guarded = array('created_at');
 
     /**
+     * Get Freelance's data
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function account()
@@ -19,6 +23,7 @@ class Freelance extends AppModel
     }
 
     /**
+     * Get skills link to the Freelance
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function skills()
@@ -27,6 +32,7 @@ class Freelance extends AppModel
     }
 
     /**
+     * Get Freelance's skills
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function freelances_skills()
@@ -35,6 +41,7 @@ class Freelance extends AppModel
     }
 
     /**
+     * Get all projects where the Freelance belongs
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function projects()
@@ -43,6 +50,7 @@ class Freelance extends AppModel
     }
 
     /**
+     * Get all projects where the Freelance participate
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function participates()

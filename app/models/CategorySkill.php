@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class model for skill's category
+ */
 class CategorySkill extends AppModel
 {
 

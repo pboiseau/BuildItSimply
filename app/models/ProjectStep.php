@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class for manage steps of a project
+ */
 class ProjectStep extends AppModel
 {
 

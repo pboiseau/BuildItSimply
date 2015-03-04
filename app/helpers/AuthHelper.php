@@ -12,7 +12,7 @@ class AuthHelper extends BaseHelper
     }
 
     /**
-     * Check user type
+     * Check if session user type equal to type in parameter
      * @param $type
      * @return bool
      */
@@ -25,12 +25,14 @@ class AuthHelper extends BaseHelper
      * Check if user log in
      * @return bool
      */
-    public function isLogin(){
+    public function isLogin()
+    {
         $user = $this->f3->get('SESSION.user');
         return (!empty($user)) ? true : false;
     }
 
     /**
+     * get user's id
      * @return int
      */
     public function getId()

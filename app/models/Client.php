@@ -1,8 +1,10 @@
 <?php
 
+/**
+ * Class model for manage Client table
+ */
 class Client extends AppModel
 {
-
     public $timestamps = true;
     public $errors;
 
@@ -11,6 +13,7 @@ class Client extends AppModel
     protected $guarded = array('created_at', 'updated_at');
 
     /**
+     * Get projects of the client by his id
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function project()
@@ -19,6 +22,7 @@ class Client extends AppModel
     }
 
     /**
+     * Get Client's data
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function account()
