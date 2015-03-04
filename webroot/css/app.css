@@ -1574,6 +1574,11 @@ label#largeFile input#file {
   float: none;
 }
 
+/* line 285, ../sass/_all.scss */
+.token .close {
+  color: #005f78;
+}
+
 /* line 4, ../sass/_notification.scss */
 #notification .wrapper {
   width: 700px;
