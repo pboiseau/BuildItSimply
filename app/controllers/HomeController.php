@@ -18,7 +18,7 @@ class HomeController extends AppController
      */
     public function index()
     {
-        $project = $this->Project->all()->count();
+        $project = $this->Project->publicated()->count();
         $client = $this->Client->all()->count();
         $freelance = $this->Freelance->all()->count();
 
