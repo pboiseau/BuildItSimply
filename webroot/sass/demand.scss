@@ -1,0 +1,47 @@
+// _demand.scss
+
+
+.userChoice{
+	ul{
+		li{
+			margin-bottom: 25px !important;
+			img{
+				width: 66px;
+				border-radius: 100%;
+			}
+			p{
+				max-width: 455px;
+			}
+			.choice{
+				position: relative;
+  				bottom: 5px;
+  				.buttonNot{
+  					background: #eb685a;
+	  					&:hover{
+	  						background: #e53e2d;
+	  					}
+  					}
+  					
+  					.buttonSuccess{
+  						margin-right: 10px;
+  						background: #128f76;
+  						
+  						&:hover{
+  							background: #10806a;
+  						}
+  					}
+  				button{
+  					color: white;
+  					&:hover{
+  						color: white;	
+  					}
+  					
+  				}
+			}
+		}
+	}
+	
+}
+.buttonProblem{
+	width: 300px !important;
+}

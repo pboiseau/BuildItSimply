@@ -1,0 +1,48 @@
+/* line 6, ../sass/demand.scss */
+.userChoice ul li {
+  margin-bottom: 25px !important;
+}
+/* line 8, ../sass/demand.scss */
+.userChoice ul li img {
+  width: 66px;
+  border-radius: 100%;
+}
+/* line 12, ../sass/demand.scss */
+.userChoice ul li p {
+  max-width: 455px;
+}
+/* line 15, ../sass/demand.scss */
+.userChoice ul li .choice {
+  position: relative;
+  bottom: 5px;
+}
+/* line 18, ../sass/demand.scss */
+.userChoice ul li .choice .buttonNot {
+  background: #eb685a;
+}
+/* line 20, ../sass/demand.scss */
+.userChoice ul li .choice .buttonNot:hover {
+  background: #e53e2d;
+}
+/* line 25, ../sass/demand.scss */
+.userChoice ul li .choice .buttonSuccess {
+  margin-right: 10px;
+  background: #128f76;
+}
+/* line 29, ../sass/demand.scss */
+.userChoice ul li .choice .buttonSuccess:hover {
+  background: #10806a;
+}
+/* line 33, ../sass/demand.scss */
+.userChoice ul li .choice button {
+  color: white;
+}
+/* line 35, ../sass/demand.scss */
+.userChoice ul li .choice button:hover {
+  color: white;
+}
+
+/* line 45, ../sass/demand.scss */
+.buttonProblem {
+  width: 300px !important;
+}
