@@ -69,7 +69,16 @@ h3{
         background: $colorClaHover;
     }
 }
-.btn{
+*{
+    outline: none;
+    outline-offset: none;
+    &:focus{
+        outline: none;
+        outline-offset: none;
+    }
+}
+
+.btn, button{
     outline: none !important;
     border-color: none !important;
     border: none !important;
@@ -78,7 +87,7 @@ h3{
         border-color: none !important;
     }
 }
-input, textarea{
+input, textarea, button{
     outline: none !important;
     &:focus{
         outline: none;
