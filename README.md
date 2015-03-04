@@ -8,8 +8,8 @@
   </tr>
   <tr>
     <td></td>
-    <td>Paul Boiseau</td>
-    <td><a href="https://www.linkedin.com/profile/view?id=264442596" target="_blank">Lead developer</a></td>
+    <td><a href="https://www.linkedin.com/profile/view?id=264442596" target="_blank">Paul Boiseau</a></td>
+    <td>Lead developer</td>
   </tr> 
   <tr>
     <td></td>
