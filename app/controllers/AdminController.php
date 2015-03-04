@@ -67,6 +67,7 @@ class AdminController extends AppController
         {
             $request = $this->f3->get('POST');
 
+
             if(!empty($request))
             {
                 $questions = new ProjectQuestion();
@@ -81,10 +82,20 @@ class AdminController extends AppController
                         $questions->where('id', $key)->update(['question' => $question]);
                     }
 
-                    // Recuperation of images
-                    $upload = new UploadHelper($this->f3->get('RESPONSE_FILES'));
-                    $files = $upload->upload();
+                    $uploadFile = false;
+                    foreach ($filesList as $key => $file)
+                    {
+                        if(!empty($file))
+                            $uploadFile = true;
+                    }
 
+                    if($uploadFile)
+                    {
+                        // Recuperation of images
+                        $upload = new UploadHelper($this->f3->get('RESPONSE_FILES'));
+                        $files = $upload->upload();
+                    }
+                    
                     foreach ($request['response'] as $key => $response) 
                     {
                         $new_response = $response;
