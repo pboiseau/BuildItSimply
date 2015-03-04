@@ -115,7 +115,7 @@ class Participate extends AppModel
      * @param $project_id
      * @return array|bool
      */
-    public function proposition($project_id, $status = null)
+    public function proposition($project_id, $status = array())
     {
         $propositions = $this->where('project_id', $project_id)
             ->join('accounts', 'freelance_id', '=', 'id')
@@ -123,7 +123,7 @@ class Participate extends AppModel
             ->recent();
 
         if ($status) {
-            $propositions->status($status);
+            $propositions->whereIn('status', $status);
         }
 
         return ($propositions->count() > 0) ? $propositions->get() : false;
@@ -186,16 +186,16 @@ class Participate extends AppModel
 
     /**
      * @param $project_status
-     * @return bool|string
+     * @return bool|array
      */
     public function statusReference($project_status){
         switch($project_status){
             case "OUVERT":
-                return "PENDING";
+                return ["PENDING", "ACCEPT", "DECLINE"];
             case "DECISION":
-                return "ACCEPT";
+                return ["ACCEPT"];
             case "EN COURS":
-                return "CHOOSEN";
+                return ["CHOOSEN"];
         }
         return false;
     }
