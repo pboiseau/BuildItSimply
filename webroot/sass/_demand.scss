@@ -45,3 +45,37 @@
 .buttonProblem{
 	width: 300px !important;
 }
+
+.notSelection{
+	p{
+		font-family: $fontLight;
+		&:nth-of-type(2){
+			color: #666666;
+			font-family: $font;
+		}
+	}
+	ul{
+		margin-top: 30px;
+		li{
+			margin-bottom: 25px !important;
+			p{
+				max-width: 455px;
+			}
+			.choice{
+				position: relative;
+  				bottom: 5px;
+  				button{
+  					color: white;
+  					background: $colorCla;
+  					&:hover{
+  						color: white;	
+  						background: $colorClaHover;
+  					}
+  					
+  				}
+			}
+		}
+	}
+}
+
+

@@ -2127,6 +2127,43 @@ label#largeFile input#file {
   width: 300px !important;
 }
 
+/* line 50, ../sass/_demand.scss */
+.notSelection p {
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+}
+/* line 52, ../sass/_demand.scss */
+.notSelection p:nth-of-type(2) {
+  color: #666666;
+  font-family: "montserratregular", helvetica, arial, sans-serif;
+}
+/* line 57, ../sass/_demand.scss */
+.notSelection ul {
+  margin-top: 30px;
+}
+/* line 59, ../sass/_demand.scss */
+.notSelection ul li {
+  margin-bottom: 25px !important;
+}
+/* line 61, ../sass/_demand.scss */
+.notSelection ul li p {
+  max-width: 455px;
+}
+/* line 64, ../sass/_demand.scss */
+.notSelection ul li .choice {
+  position: relative;
+  bottom: 5px;
+}
+/* line 67, ../sass/_demand.scss */
+.notSelection ul li .choice button {
+  color: white;
+  background: #005f78;
+}
+/* line 70, ../sass/_demand.scss */
+.notSelection ul li .choice button:hover {
+  color: white;
+  background: #004456;
+}
+
 /* line 2, ../sass/_footer.scss */
 footer {
   background: #f4f4f4;
