@@ -1908,6 +1908,10 @@ label#largeFile input#file {
   border: 3px solid #005f78;
 }
 /* line 183, ../sass/_init.scss */
+#projetGabarit ul li img {
+  width: 200px;
+}
+/* line 186, ../sass/_init.scss */
 #projetGabarit ul li h3 {
   font-size: 16px;
   text-transform: uppercase;
@@ -1915,31 +1919,31 @@ label#largeFile input#file {
   font-family: "montserratregular", helvetica, arial, sans-serif;
   margin: 5px 0;
 }
-/* line 190, ../sass/_init.scss */
+/* line 193, ../sass/_init.scss */
 #projetGabarit ul li p {
   color: #888888;
   font-size: 14px;
   font-family: "montserratlight", helvetica, arial, sans-serif;
 }
-/* line 197, ../sass/_init.scss */
+/* line 200, ../sass/_init.scss */
 #projetGabarit .wrapper {
   padding-top: 0;
   padding-bottom: 80px;
 }
 
-/* line 204, ../sass/_init.scss */
+/* line 207, ../sass/_init.scss */
 .buttonWhite:focus {
   text-decoration: none;
   color: white;
 }
 
-/* line 209, ../sass/_init.scss */
+/* line 212, ../sass/_init.scss */
 .projetStep {
   text-transform: uppercase;
   color: #999999;
 }
 
-/* line 213, ../sass/_init.scss */
+/* line 216, ../sass/_init.scss */
 #projetInfo p {
   font-size: 18px;
   color: #666666;
@@ -1948,15 +1952,15 @@ label#largeFile input#file {
   margin: 0 auto;
 }
 
-/* line 220, ../sass/_init.scss */
+/* line 223, ../sass/_init.scss */
 .info {
   margin-top: 50px;
 }
-/* line 222, ../sass/_init.scss */
+/* line 225, ../sass/_init.scss */
 .info h3 {
   text-align: left;
 }
-/* line 225, ../sass/_init.scss */
+/* line 228, ../sass/_init.scss */
 .info p {
   text-align: left !important;
   font-size: 14px !important;
@@ -1964,20 +1968,20 @@ label#largeFile input#file {
   margin-left: 0 !important;
 }
 
-/* line 232, ../sass/_init.scss */
+/* line 235, ../sass/_init.scss */
 .formVal {
   margin-top: 30px;
   float: left;
 }
 
-/* line 236, ../sass/_init.scss */
+/* line 239, ../sass/_init.scss */
 .formVal .form-group {
   width: 677px;
   clear: both;
   margin: 0 !important;
   margin-bottom: 13px !important;
 }
-/* line 241, ../sass/_init.scss */
+/* line 244, ../sass/_init.scss */
 .formVal .form-group label {
   text-align: right;
   float: left;
@@ -1988,52 +1992,52 @@ label#largeFile input#file {
   text-transform: uppercase;
   color: #005f78;
 }
-/* line 251, ../sass/_init.scss */
+/* line 254, ../sass/_init.scss */
 .formVal .form-group .col-sm-10 {
   width: 485px;
   float: right;
 }
-/* line 255, ../sass/_init.scss */
+/* line 258, ../sass/_init.scss */
 .formVal .form-group:last-of-type {
   margin-top: 30px !important;
 }
-/* line 257, ../sass/_init.scss */
+/* line 260, ../sass/_init.scss */
 .formVal .form-group:last-of-type button {
   float: right;
 }
 
-/* line 262, ../sass/_init.scss */
+/* line 265, ../sass/_init.scss */
 .valFichier {
   padding-top: 25px !important;
 }
 
-/* line 266, ../sass/_init.scss */
+/* line 269, ../sass/_init.scss */
 .saveIcon {
   float: right;
   width: 350px;
   text-align: center;
 }
-/* line 270, ../sass/_init.scss */
+/* line 273, ../sass/_init.scss */
 .saveIcon img {
   width: 140px;
   margin-top: 30px;
 }
-/* line 274, ../sass/_init.scss */
+/* line 277, ../sass/_init.scss */
 .saveIcon h3 {
   text-align: center;
 }
-/* line 277, ../sass/_init.scss */
+/* line 280, ../sass/_init.scss */
 .saveIcon h4 {
   text-transform: uppercase;
   color: #666666;
   font-size: 14px;
   margin-top: 5px;
 }
-/* line 283, ../sass/_init.scss */
+/* line 286, ../sass/_init.scss */
 .saveIcon .col-md-12:first-of-type:after {
   display: none;
 }
-/* line 286, ../sass/_init.scss */
+/* line 289, ../sass/_init.scss */
 .saveIcon .col-md-12:after {
   content: '';
   width: 1px;
@@ -2044,12 +2048,12 @@ label#largeFile input#file {
   left: 173px;
 }
 
-/* line 296, ../sass/_init.scss */
+/* line 299, ../sass/_init.scss */
 .form-group textarea {
   max-width: 100%;
 }
 
-/* line 300, ../sass/_init.scss */
+/* line 303, ../sass/_init.scss */
 .fileProjet input {
   background: transparent;
   border: none;
