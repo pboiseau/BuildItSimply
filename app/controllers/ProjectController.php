@@ -504,15 +504,26 @@ class ProjectController extends AppController
             $request['price'] = $project['price'];
 
 
-            // Recuperation of images
-                
-                $filesList = $this->f3->get('FILES.file');
+            $uploadFile = false;
+            $filesList = $this->f3->get('FILES.file');
+            foreach ($filesList['name'] as $key => $file)
+            {
+                if(!empty($file))
+                    $uploadFile = true;
+                    
+            }
+
+            if($uploadFile)
+            {
+                // Recuperation of images
                 $upload = new UploadHelper($this->f3->get('PROJECT_FILES'), true);
                 $files = $upload->upload();
+            }
 
             if ($this->Project->publish($project['id'], $request)) {
 
-                $this->ProjectFile->addFiles($files, $filesList, $project['id']);
+                if($uploadFile)
+                    $this->ProjectFile->addFiles($files, $filesList, $project['id']);
 
                 // adding tags
                 $this->ProjectTag->addTags($project['id'], $project['tag']);
