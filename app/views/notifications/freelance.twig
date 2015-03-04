@@ -1,7 +1,7 @@
 {% block body %}
     {% for date, participation in participations %}
         <div class="notBloc">
-            <p class="dateNot">{{ participation.0.created_at |date("d F Y") }}</p>
+            <p class="dateNot">{{ participation.0.created_at | date("d F Y") }}</p>
             <ul>
                 {% for notification in participation %}
                     <li>

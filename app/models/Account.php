@@ -133,7 +133,7 @@ class Account extends AppModel
             });
 
         } else if ($user->type == "CLIENT") {
-            $projects = $userWithType->project()->recent()->limit(4)->get();
+            $projects = $userWithType->project()->recent()->get();
 
             if($projects->count() > 0){
                 $projects->each(function($project){
@@ -147,6 +147,7 @@ class Account extends AppModel
 
         return (!empty($this->projects)) ? $this->projects : false;
     }
+
 
     /**
      * Update user account

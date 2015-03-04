@@ -40,9 +40,9 @@
 
                     <ul>
                         {% if type == "FREELANCE" %}
-                            <li>Projets réalisés <span>23</span></li>
+                            <li>Projets réalisés <span>{{ user.projects | length }}</span></li>
                         {% elseif type == "CLIENT" %}
-                            <li>Projets proposés <span>2</span></li>
+                            <li>Projets proposés <span>{{ user.projects | length }}</span></li>
                         {% endif %}
 
                         {% if type == "FREELANCE" %}

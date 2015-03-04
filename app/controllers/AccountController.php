@@ -117,22 +117,16 @@ class AccountController extends AppController
 
             $user['projects'] = $this->Account->getProjects($user);
 
+            $user[strtolower($user['type'])] = $user->type($user['type'])->first();
+
+            // if freelance get skills
             if ($user['type'] == "FREELANCE") {
-
-                // freelance user info
-                $user['freelance'] = $user->freelance;
-
                 $experiences = $this->Freelance->getEnumValues('experience');
                 $skills = $this->Skill->getFromFreelanceSkills(
                     $this->FreelanceSkill->getAll('account_id', $user->id)
                 );
 
                 $user['freelance']['skills'] = $skills;
-
-            } else if ($user['type'] == 'CLIENT') {
-
-                // client user
-                $user['client'] = $user->client;
             }
 
             if ($user->id == $this->get('SESSION.user.id')) {
@@ -228,10 +222,12 @@ class AccountController extends AppController
             $participations = $this->Participate->notification($this->Auth->getId(), 'client');
 
             if ($participations) {
-                foreach ($participations as $key => $participation) {
-                    $participations[$key]['freelance'] = $participation->account()->first();
-                    $participations[$key]['project'] = $participation->project()->first();
-                }
+
+                $participations->each(function($participation){
+                    $participation['freelance'] = $participation->account()->first();
+                    $participation['project'] = $participation->project()->first();
+                });
+
             }
 
         } else if ($this->Auth->is('freelance')) {
@@ -261,7 +257,7 @@ class AccountController extends AppController
             $participations = $this->Participate->where('freelance_id', $this->Auth->getId())
                 ->whereIn('participates.status', ['ACCEPT', 'CHOOSE'])
                 ->join('projects', 'project_id', '=', 'id')
-                ->orderBy('participates.created_at', 'desc')
+                ->recent()
                 ->get(['projects.id', 'projects.name', 'participates.status', 'participates.updated_at']);
 
             $this->render('accounts/participation', compact('participations'));

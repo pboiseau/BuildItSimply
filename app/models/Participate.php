@@ -22,6 +22,15 @@ class Participate extends AppModel
     }
 
     /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeRecent($query)
+    {
+        return $query->orderBy('participates.created_at', 'desc');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function account()
@@ -98,7 +107,7 @@ class Participate extends AppModel
      */
     public function number($project_id, $status = 'ACCEPT')
     {
-        return $this->where('project_id', $project_id)->where('status', $status)->count();
+        return $this->where('project_id', $project_id)->status($status)->count();
     }
 
     /**

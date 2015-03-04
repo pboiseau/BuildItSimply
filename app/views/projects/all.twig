@@ -20,7 +20,7 @@
                 <li class="listActive"><a href="{{ home }}projects/">Toutes les catégories
                         <span>{{ number_project }}</span></a></li>
                 {% for category in categories %}
-                    <li><a class="filter_category" href="{{ home }}projects/category/{{ category.id }}"
+                    <li class="category-{{ category.id }}"><a class="filter_category" href="{{ home }}projects/category/{{ category.id }}"
                            data-category="{{ category.id }}">{{ category.type | capitalize }}
                             <span>{{ category.number_project }}</span></a></li>
                 {% endfor %}
@@ -107,6 +107,8 @@
                 type: "GET"
             }).done(function (data, textStatus, jqXHR) {
                 $('#project-list').empty().append(data);
+                $('#listCategorie').children('li.listActive').removeClass('listActive');
+                $("#listCategorie").children('li.category-' + category).addClass('listActive');
             }).fail(function (error) {
                 console.log(error);
             });
