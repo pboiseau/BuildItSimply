@@ -19,7 +19,7 @@ class AccountController extends AppController
         parent::beforeroute();
 
         if ($this->Auth->isLogin()) {
-            $request = $this->f3->get('PATTERN');
+            $request = $this->get('PATTERN');
             if (in_array($request, ['/users/register', '/users/login'])) {
                 $this->setFlash("Vous etes déjà authentifié.");
                 $this->f3->reroute('/users/profile');
@@ -33,13 +33,13 @@ class AccountController extends AppController
     public function login()
     {
         if ($this->request() == 'POST') {
-            if ($user = $this->Account->login($this->f3->get('POST'))) {
+            if ($user = $this->Account->login($this->get('POST'))) {
                 $this->Account->setSession($user);
                 $this->setFlash("Authentification reussi.");
                 $this->f3->reroute('/');
             } else {
                 $this->setFlash("Les informations ne sont pas valides.");
-                $this->f3->reroute($this->f3->get('PATTERN'));
+                $this->f3->reroute($this->get('PATTERN'));
             }
         }
 
@@ -66,7 +66,7 @@ class AccountController extends AppController
         $errors = array();
 
         if ($this->request() == 'POST') {
-            $user = $this->f3->get('POST');
+            $user = $this->get('POST');
 
             if ($newUser = $this->Account->register($user)) {
 
@@ -107,13 +107,16 @@ class AccountController extends AppController
         $experiences = array();
 
         // get user profile by ID or with session ID
-        $user = $this->Account->find((!empty($this->f3->get('PARAMS.id'))) ?
-                $this->f3->get('PARAMS.id') :
-                $this->f3->get('SESSION.user.id')
+        $user = $this->Account->find((!empty($this->get('PARAMS.id'))) ?
+                $this->get('PARAMS.id') :
+                $this->get('SESSION.user.id')
         );
 
 
         if (!empty($user)) {
+
+            $user['projects'] = $this->Account->getProjects($user);
+
             if ($user['type'] == "FREELANCE") {
 
                 // freelance user info
@@ -121,7 +124,8 @@ class AccountController extends AppController
 
                 $experiences = $this->Freelance->getEnumValues('experience');
                 $skills = $this->Skill->getFromFreelanceSkills(
-                    $this->FreelanceSkill->getAll('account_id', $user->id));
+                    $this->FreelanceSkill->getAll('account_id', $user->id)
+                );
 
                 $user['freelance']['skills'] = $skills;
 
@@ -131,7 +135,7 @@ class AccountController extends AppController
                 $user['client'] = $user->client;
             }
 
-            if ($user->id == $this->f3->get('SESSION.user.id')) {
+            if ($user->id == $this->get('SESSION.user.id')) {
                 // render the profile editing view
                 $this->render('accounts/edit',
                     compact('user', (!empty($experiences) ? 'experiences' : '')));
@@ -153,14 +157,14 @@ class AccountController extends AppController
     public function update_profile()
     {
         if ($this->request() == 'POST') {
-            $profile = $this->f3->get('POST');
+            $profile = $this->get('POST');
 
-            $userId = $this->f3->get('SESSION.user.id');
+            $userId = $this->get('SESSION.user.id');
             $profile['account']['account_id'] = $userId;
             $profile['freelance']['account_id'] = $userId;
             $profile['client']['account_id'] = $userId;
 
-            if (!empty($this->f3->get('FILES.picture.name'))) {
+            if (!empty($this->get('FILES.picture.name'))) {
                 $upload = new UploadHelper();
                 $filename = $upload->upload(true)[0];
 

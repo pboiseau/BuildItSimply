@@ -9,6 +9,27 @@ class Account extends AppModel
     protected $table = 'accounts';
     protected $guarded = array('id');
 
+    private $projects = array();
+
+
+    /**
+     * @param $type
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function type($type)
+    {
+        $type = strtoupper($type);
+
+        if ($type == "FREELANCE") {
+            return $this->hasOne('Freelance', 'account_id', 'id');
+        } else {
+            if ($type == "CLIENT") {
+                return $this->hasOne('Client', 'account_id', 'id');
+            }
+        }
+    }
+
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -48,7 +69,7 @@ class Account extends AppModel
      */
     public function getById($id, $field = array('*'))
     {
-        return $this->where($this->table.'.id', $id)
+        return $this->where($this->table . '.id', $id)
             ->first($field);
     }
 
@@ -89,6 +110,42 @@ class Account extends AppModel
         } else {
             return false;
         }
+    }
+
+    /**
+     * Get all projets of a client
+     * Or get all projects build by the freelance
+     * @param Account $user
+     * @return array|bool
+     */
+    public function getProjects($user)
+    {
+        $userWithType = $user->type($user->type)->first();
+
+        if ($user->type == "FREELANCE") {
+            $participations = $userWithType->participates()->status('choosen')->get();
+
+            $participations->each(function ($participation) {
+                $project = $participation->project()->first();
+                $project['tags'] = $project->tags()->get();
+                $project['demand'] = $project->participates()->count();
+                $this->projects[] = $project;
+            });
+
+        } else if ($user->type == "CLIENT") {
+            $projects = $userWithType->project()->recent()->limit(4)->get();
+
+            if($projects->count() > 0){
+                $projects->each(function($project){
+                    $project['tags'] = $project->tags()->get();
+                    $project['demand'] = $project->participates()->count();
+                });
+                $this->projects = $projects;
+            }
+        }
+
+
+        return (!empty($this->projects)) ? $this->projects : false;
     }
 
     /**

@@ -16,7 +16,7 @@
                 <h2>{{ user.firstname ~ ' ' ~ user.lastname }}
                     <span>{{ (type == "FREELANCE") ? user.freelance.activity : user.client.activity }}</span></h2>
 
-                <a class="buttonWhite" href="#">Envoyer une offre</a>
+                {#<a class="buttonWhite" href="#">Envoyer une offre</a>#}
 
                 <ul>
                     {% if type == "FREELANCE" %}
@@ -80,38 +80,27 @@
                     <h3>Derniers projets proposés</h3>
                 {% endif %}
                 <ul>
+                    {% for project in user.projects %}
+                        <li>
+                            <h4><a href="{{ home }}projects/{{ project.id }}">{{ project.name }}</a></h4>
 
-                    <li>
-                        <h4><a href="#">Projet name</a></h4>
+                            <p class="infoList">
+                                <span><img src="{{ image }}calendar.png"
+                                           alt="Date de l'offre"/>{{ project.created_at | date("d F Y") }}</span>
+                                <span><img src="{{ image }}user-list.png" alt="Nombre d'offre"/>{{ project.demand }} demande(s)</span>
+                            </p>
 
-                        <p class="infoList">
-                            <span><img src="{{ image }}calendar.png" alt="Date de l'offre"/>12 Juin 2014</span>
-                            <span><img src="{{ image }}user-list.png" alt="Nombre d'offre"/>24 demande(s)</span>
-                        </p>
+                            <p class="textList">{{ project.description }}</p>
 
-                        <p class="textList">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et nisl
-                            tortor. Praesent vestibulum sem eu ligula rhoncus vestibulum.</p>
+                            <p class="tagList">
+                                {% for tag in project.tags %}
+                                    <a href="#">{{ tag.tag | capitalize }}</a>
+                                {% endfor %}
+                            </p>
 
-                        <p class="tagList"><a href="#">tag</a><a href="#">tag</a></p>
-
-                        <hr class="clear"/>
-                    </li>
-
-                    <li>
-                        <h4><a href="#">Projet name</a></h4>
-
-                        <p class="infoList">
-                            <span><img src="{{ image }}calendar.png" alt="Date de l'offre"/>12 Juin 2014</span>
-                            <span><img src="{{ image }}user-list.png" alt="Nombre d'offre"/>24 demande(s)</span>
-                        </p>
-
-                        <p class="textList">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et nisl
-                            tortor. Praesent vestibulum sem eu ligula rhoncus vestibulum.</p>
-
-                        <p class="tagList"><a href="#">tag</a><a href="#">tag</a></p>
-
-                        <hr class="clear"/>
-                    </li>
+                            <hr class="clear"/>
+                        </li>
+                    {% endfor %}
                 </ul>
                 <a class="buttonWhite" href="#">Voir tous les projets</a>
             </div>
@@ -182,7 +171,7 @@
         <hr class="clear"/>
     </div><!-- end PROFILE VIEW -->
     <div class="push"></div>
-</div>
+    </div>
 
 {% endblock %}
 

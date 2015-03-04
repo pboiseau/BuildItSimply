@@ -12,6 +12,16 @@ class Participate extends AppModel
     protected $guarded = array('created_at', 'updated_at');
 
     /**
+     * @param $query
+     * @param $status
+     * @return mixed
+     */
+    public function scopeStatus($query, $status)
+    {
+        return $query->where('status', strtoupper($status));
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function account()
@@ -104,7 +114,7 @@ class Participate extends AppModel
             ->orderBy('participates.created_at', 'desc');
 
         if ($status) {
-            $propositions->where('status', $status);
+            $propositions->status($status);
         }
 
         return ($propositions->count() > 0) ? $propositions->get() : false;

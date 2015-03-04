@@ -16,6 +16,10 @@
                 {% include 'notifications/freelance.twig' %}
             {% endif %}
 
+            {% if participations | length == 0 %}
+                <div>Aucune notification pour le moment</div>
+            {% endif %}
+
         </div>
     </div>
 
