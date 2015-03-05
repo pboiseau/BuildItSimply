@@ -115,18 +115,36 @@ height: 109px;
 #headerHome{
     background: image-url("background-header.jpg") no-repeat center center fixed;
     @include background-size(cover);
-    height: 610px;
+    height: calc(100vh - 211px);
     text-align: center;
+    position : relative;
     .headerSection{
         width: 50%;
         float: left;
-        margin-top: 160px;
+        height : calc(100vh - 71px);
+        line-height: calc(100vh - 71px);
+
+        .textCtn {
+            display: inline-block;
+            height:  150px;
+            line-height: normal;
+            vertical-align: middle;
+        }
     }
+    .button {
+            position: absolute;
+              left: 0;
+              bottom: 22%;
+              margin-left: -67.5px;
+              left: 50%;
+        }
     h2, p{
         width: 430px;
         margin: 0 auto;
         text-align: center;
         color: white;
+        
+
     }
     h2{
         padding: 0;
@@ -269,6 +287,12 @@ height: 109px;
     p{
       color: white;
       text-align: center;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    #headerHome {
+        height: calc(100vh - 71px);
     }
 }
 
