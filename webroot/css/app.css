@@ -2174,6 +2174,53 @@ label#largeFile input#file {
   width: 300px !important;
 }
 
+/* line 49, ../sass/_demand.scss */
+.selChoice p {
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+}
+/* line 51, ../sass/_demand.scss */
+.selChoice p:nth-of-type(2) {
+  font-family: "montserratregular", helvetica, arial, sans-serif;
+}
+/* line 55, ../sass/_demand.scss */
+.selChoice ul {
+  margin-top: 30px;
+}
+/* line 57, ../sass/_demand.scss */
+.selChoice ul li {
+  margin-bottom: 25px !important;
+}
+/* line 59, ../sass/_demand.scss */
+.selChoice ul li .choice {
+  position: relative;
+  bottom: 5px;
+}
+/* line 63, ../sass/_demand.scss */
+.selChoice ul li .choice button:hover {
+  background: #005f78;
+}
+
+/* line 73, ../sass/_demand.scss */
+.freeChoice img {
+  float: left;
+}
+/* line 76, ../sass/_demand.scss */
+.freeChoice .dateNot {
+  margin-bottom: 30px !important;
+}
+/* line 80, ../sass/_demand.scss */
+.freeChoice p:last-of-type {
+  max-width: 455px;
+  float: left;
+  position: relative;
+  top: 18px;
+  margin-left: 25px;
+}
+/* line 89, ../sass/_demand.scss */
+.freeChoice .saveInfo {
+  width: 225px !important;
+}
+
 /* line 2, ../sass/_footer.scss */
 footer {
   background: #f4f4f4;

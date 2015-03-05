@@ -45,3 +45,50 @@
 .buttonProblem{
 	width: 300px !important;
 }
+.selChoice{
+	p{
+		font-family: $fontLight;
+		&:nth-of-type(2){
+			font-family: $font;
+		}
+	}
+	ul{
+		margin-top: 30px;
+		li{
+			margin-bottom: 25px !important; 
+			.choice{
+				position: relative;
+  				bottom: 5px;
+  				button{
+  					&:hover{
+  						background: $colorCla;
+  					}
+  				}
+  				
+  			}
+		}
+	}
+}
+.freeChoice{
+	img{
+		float: left;
+	}
+	.dateNot{
+		margin-bottom: 30px !important;
+	}
+	p{
+		&:last-of-type{
+			max-width: 455px;
+			float: left;
+			  position: relative;
+			  top: 18px;
+			  margin-left: 25px;
+		}
+	}
+	
+	.saveInfo{
+		width: 225px !important;
+	}
+}
+
+
