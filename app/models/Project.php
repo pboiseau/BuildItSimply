@@ -132,14 +132,11 @@ class Project extends AppModel
      */
     public function getByCategory($category_id)
     {
-        $projects = $this->whereNotIn('status', ['EN CREATION', 'ANNULE'])
+        $projects = $this->publicated()
             ->where('project_type_id', $category_id)
-            ->join('project_type', 'project_type.id', '=', 'project_type_id')
             ->recent()
-            ->get([
-                'projects.*',
-                'project_type.type'
-            ]);
+            ->with('type')
+            ->get();
 
         $projects = $this->getInformation($projects);
 
