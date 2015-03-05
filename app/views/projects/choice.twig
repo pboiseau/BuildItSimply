@@ -1,12 +1,12 @@
 {% block body %}
     <div class="listProjet">
         <div class="notBloc">
-            <p class="dateNot">Votre choix</p>
+            <p class="dateNot">Votre Freelance</p>
 
-            <img src="{{ home ~ propositions.0.picture }}" height="66px" width="66px" alt="Notification user"/>
+            <img src="{{ home ~ propositions.0.account.picture }}" height="66px" width="66px" alt="Notification user"/>
 
             <p>
-                <a href="{{ home }}users/profile/{{ propositions.0.id }}">{{ propositions.0.firstname ~ " " ~ propositions.0.lastname }}</a>
+                <a href="{{ home }}users/profile/{{ propositions.0.account.id }}">{{ propositions.0.account.firstname ~ " " ~ propositions.0.account.lastname }}</a>
                 travail sur votre projet
             </p>
 

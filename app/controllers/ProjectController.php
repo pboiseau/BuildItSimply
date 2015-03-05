@@ -203,7 +203,6 @@ class ProjectController extends AppController
 
             $projects = $request->recent()->get();
 
-
             if($projects->count() > 0){
                 $projects = $this->Project->getInformation($projects);
             }
@@ -290,7 +289,7 @@ class ProjectController extends AppController
      */
     public function delete()
     {
-        $project = $this->Project->find($this->get('PARAMS.id'));
+        $project = Project::find($this->get('PARAMS.id'));
         if ($project->client_id == $this->get('SESSION.user.id')) {
             $delete = $project->update([
                 'status' => 'ANNULE'
@@ -428,7 +427,8 @@ class ProjectController extends AppController
                 $this->Project->updateProject($project->id, [
                     'status' => 'TERMINE'
                 ]);
-                $this->setFlash("Le projet est maintenant terminé, n'oubliez pas de laisser un commentaire pour votre freelance.");
+                $this->setFlash("Le projet est maintenant terminé,
+                n'oubliez pas de laisser un commentaire pour votre freelance.");
             }
         }else{
             $this->setFlash("Votre projet n'est pas en cours, vous ne pouvez donc pas le terminer.");

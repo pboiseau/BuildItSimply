@@ -7,10 +7,10 @@
         {% for proposition in propositions %}
         <ul>
             <li>
-                <img src="{{ home ~ proposition.picture }}" height="66px" width="66px" alt="Notification user"/>
+                <img src="{{ home ~ proposition.account.picture }}" height="66px" width="66px" alt="Notification user"/>
 
                 <p>
-                    <a href="{{ home }}users/profile/{{ proposition.id }}">{{ proposition.firstname ~ " " ~ proposition.lastname }}</a>
+                    <a href="{{ home }}users/profile/{{ proposition.id }}">{{ proposition.account.firstname ~ " " ~ proposition.account.lastname }}</a>
                     a été selectionné pour votre projet
                 </p>
 

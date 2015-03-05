@@ -5,7 +5,7 @@
         {% for participation in participations %}
             <li>
                 Vous avez participé au projet <a
-                        href="{{ home }}projects/{{ participation.id }}">{{ participation.name }}</a>
+                        href="{{ home }}projects/{{ participation.project.id }}">{{ participation.project.name }}</a>
             </li>
         {% endfor %}
     </ul>

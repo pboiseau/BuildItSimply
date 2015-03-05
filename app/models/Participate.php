@@ -38,6 +38,11 @@ class Participate extends AppModel
         return $this->belongsTo('Account', 'freelance_id', 'id');
     }
 
+    public function freelance()
+    {
+        return $this->belongsTo('Freelance', 'freelance_id', 'account_id');
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -118,8 +123,8 @@ class Participate extends AppModel
     public function proposition($project_id, $status = array())
     {
         $propositions = $this->where('project_id', $project_id)
-            ->join('accounts', 'freelance_id', '=', 'id')
-            ->join('freelances', 'freelance_id', '=', 'account_id')
+            ->with('account')
+            ->with('freelance')
             ->recent();
 
         if ($status) {
@@ -142,19 +147,10 @@ class Participate extends AppModel
 
             $participations = $this->where('freelance_id', $user_id)
                 ->where('participates.status', '!=', 'PENDING')
-                ->join('projects', 'project_id', '=', 'id')
-                ->join('accounts', 'projects.client_id', '=', 'accounts.id')
+                ->with('project')
+                ->with('account')
                 ->orderBy('participates.updated_at', 'desc')
-                ->get([
-                    'projects.id as project_id',
-                    'projects.name',
-                    'projects.client_id',
-                    'participates.status',
-                    'participates.updated_at',
-                    'accounts.firstname',
-                    'accounts.lastname',
-                    'accounts.picture'
-                ]);
+                ->get();
 
         } else if($user_type == 'client') {
 
@@ -164,7 +160,7 @@ class Participate extends AppModel
                         ->from('projects')
                         ->where('client_id', $this->user_id);
                 })
-                ->orderBy('created_at', 'desc')
+                ->recent()
                 ->get();
         }
 
@@ -179,7 +175,7 @@ class Participate extends AppModel
     public function groupByDate($participations)
     {
         return $participations->groupBy(function ($self) {
-            $date = new DateTime($self->created_at);
+            $date = new DateTime($self->updated_at);
             return $date->format('d');
         });
     }

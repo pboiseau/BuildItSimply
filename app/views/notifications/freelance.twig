@@ -5,13 +5,13 @@
             <ul>
                 {% for notification in participation %}
                     <li>
-                        <img src="{{ home ~ notification.picture }}" alt="Notification user"/>
+                        <img src="{{ home ~ notification.account.picture }}" alt="Notification user"/>
 
                         <p>
                             Votre demande de participation concernant le projet <a
-                                    href="{{ home }}projects/{{ notification.project_id }}">{{ notification.name }}</a>
+                                    href="{{ home }}projects/{{ notification.project.id }}">{{ notification.project.name }}</a>
                             a été {{ translateStatus(notification.status) }} par <a
-                                    href="{{ home }}users/profile/{{ notification.client_id }}">{{ notification.firstname ~ " " ~ notification.lastname }}</a>
+                                    href="{{ home }}users/profile/{{ notification.account.id }}">{{ notification.account.firstname ~ " " ~ notification.account.lastname }}</a>
                         </p>
 
                         <hr class="clear"/>

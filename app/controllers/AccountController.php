@@ -258,10 +258,10 @@ class AccountController extends AppController
         if ($this->Auth->is('freelance')) {
 
             $participations = $this->Participate->where('freelance_id', $this->Auth->getId())
-                ->whereIn('participates.status', ['ACCEPT', 'CHOOSE'])
-                ->join('projects', 'project_id', '=', 'id')
+                ->whereIn('participates.status', ['ACCEPT', 'CHOOSEN'])
+                ->with('project')
                 ->recent()
-                ->get(['projects.id', 'projects.name', 'participates.status', 'participates.updated_at']);
+                ->get();
 
             $this->render('accounts/participation', compact('participations'));
 
