@@ -238,25 +238,25 @@ footer .wrapper, .push {
   -o-background-size: cover;
   -webkit-background-size: cover;
   background-size: cover;
-  height: calc(100vh - 211px);
+  height: calc(100vh - 109px);
   text-align: center;
   position: relative;
 }
-/* line 121, ../sass/_styles.scss */
+/* line 122, ../sass/_styles.scss */
 #headerHome .headerSection {
   width: 50%;
   float: left;
   height: calc(100vh - 71px);
   line-height: calc(100vh - 71px);
 }
-/* line 127, ../sass/_styles.scss */
+/* line 128, ../sass/_styles.scss */
 #headerHome .headerSection .textCtn {
   display: inline-block;
   height: 150px;
   line-height: normal;
   vertical-align: middle;
 }
-/* line 134, ../sass/_styles.scss */
+/* line 135, ../sass/_styles.scss */
 #headerHome .button {
   position: absolute;
   left: 0;
@@ -264,26 +264,26 @@ footer .wrapper, .push {
   margin-left: -67.5px;
   left: 50%;
 }
-/* line 141, ../sass/_styles.scss */
+/* line 142, ../sass/_styles.scss */
 #headerHome h2, #headerHome p {
   width: 430px;
   margin: 0 auto;
   text-align: center;
   color: white;
 }
-/* line 149, ../sass/_styles.scss */
+/* line 150, ../sass/_styles.scss */
 #headerHome h2 {
   padding: 0;
   margin-bottom: 40px;
 }
-/* line 153, ../sass/_styles.scss */
+/* line 154, ../sass/_styles.scss */
 #headerHome p {
   color: white;
   font-family: "montserratlight", helvetica, arial, sans-serif;
   font-size: 20px;
   margin-bottom: 80px;
 }
-/* line 159, ../sass/_styles.scss */
+/* line 160, ../sass/_styles.scss */
 #headerHome img {
   position: absolute;
   bottom: 0;
@@ -291,16 +291,17 @@ footer .wrapper, .push {
   margin-left: -4px;
 }
 
-/* line 166, ../sass/_styles.scss */
+/* line 167, ../sass/_styles.scss */
 #homeTotal {
   background: #223843;
   position: relative;
+  height: 141px;
 }
-/* line 169, ../sass/_styles.scss */
+/* line 171, ../sass/_styles.scss */
 #homeTotal .wrapper {
   padding: 38px 0;
 }
-/* line 172, ../sass/_styles.scss */
+/* line 174, ../sass/_styles.scss */
 #homeTotal ul {
   z-index: 10;
   text-align: center;
@@ -309,7 +310,7 @@ footer .wrapper, .push {
   text-transform: uppercase;
   float: left;
 }
-/* line 179, ../sass/_styles.scss */
+/* line 181, ../sass/_styles.scss */
 #homeTotal ul li {
   color: #ebebeb;
   float: left;
@@ -318,26 +319,26 @@ footer .wrapper, .push {
   position: relative;
   height: 65px;
 }
-/* line 186, ../sass/_styles.scss */
+/* line 188, ../sass/_styles.scss */
 #homeTotal ul li span {
   font-size: 36px;
   position: relative;
   bottom: 5px;
   z-index: 10;
 }
-/* line 192, ../sass/_styles.scss */
+/* line 194, ../sass/_styles.scss */
 #homeTotal ul li p {
   z-index: 10;
   position: relative;
   bottom: 15px;
 }
-/* line 197, ../sass/_styles.scss */
+/* line 199, ../sass/_styles.scss */
 #homeTotal ul li:nth-child(2) {
   border-left: 1px solid #d9d9d9;
   border-right: 1px solid #d9d9d9;
 }
 
-/* line 204, ../sass/_styles.scss */
+/* line 206, ../sass/_styles.scss */
 .separateBack {
   position: absolute;
   z-index: 5;
@@ -348,109 +349,109 @@ footer .wrapper, .push {
   background-color: #263f4c;
 }
 
-/* line 213, ../sass/_styles.scss */
+/* line 215, ../sass/_styles.scss */
 #howitwork {
   text-align: center;
 }
-/* line 215, ../sass/_styles.scss */
+/* line 217, ../sass/_styles.scss */
 #howitwork ul {
   float: left;
   margin-bottom: 60px;
 }
-/* line 218, ../sass/_styles.scss */
+/* line 220, ../sass/_styles.scss */
 #howitwork ul li {
   width: 320px;
   margin: 0 20px;
   float: left;
   text-align: center;
 }
-/* line 223, ../sass/_styles.scss */
+/* line 225, ../sass/_styles.scss */
 #howitwork ul li img {
   height: 120px;
   width: 120px;
 }
-/* line 227, ../sass/_styles.scss */
+/* line 229, ../sass/_styles.scss */
 #howitwork ul li h3 {
   margin: 10px 0;
 }
-/* line 230, ../sass/_styles.scss */
+/* line 232, ../sass/_styles.scss */
 #howitwork ul li p {
   color: #888888;
   font-family: "montserratlight", helvetica, arial, sans-serif;
   font-size: 14px;
 }
 
-/* line 238, ../sass/_styles.scss */
+/* line 240, ../sass/_styles.scss */
 #testimonial {
   position: relative;
   background: #f2f2f2;
 }
-/* line 241, ../sass/_styles.scss */
+/* line 243, ../sass/_styles.scss */
 #testimonial .wrapper {
   position: relative;
   z-index: 10;
 }
-/* line 245, ../sass/_styles.scss */
+/* line 247, ../sass/_styles.scss */
 #testimonial .separateBack {
   background-color: #f8f8f8;
 }
-/* line 249, ../sass/_styles.scss */
+/* line 251, ../sass/_styles.scss */
 #testimonial ul li {
   width: 469px;
   float: left;
 }
-/* line 252, ../sass/_styles.scss */
+/* line 254, ../sass/_styles.scss */
 #testimonial ul li:first-of-type {
   margin-right: 142px;
 }
-/* line 255, ../sass/_styles.scss */
+/* line 257, ../sass/_styles.scss */
 #testimonial ul li img {
   float: left;
 }
-/* line 258, ../sass/_styles.scss */
+/* line 260, ../sass/_styles.scss */
 #testimonial ul li p {
   font-family: "montserratlight", helvetica, arial, sans-serif;
   padding-left: 130px;
 }
-/* line 262, ../sass/_styles.scss */
+/* line 264, ../sass/_styles.scss */
 #testimonial ul li p:last-of-type {
   color: #666666;
   margin: 13px 0;
 }
-/* line 265, ../sass/_styles.scss */
+/* line 267, ../sass/_styles.scss */
 #testimonial ul li p:last-of-type span {
   color: #5192a3;
 }
-/* line 269, ../sass/_styles.scss */
+/* line 271, ../sass/_styles.scss */
 #testimonial ul li img:last-of-type {
   padding-left: 30px;
 }
 
-/* line 275, ../sass/_styles.scss */
+/* line 277, ../sass/_styles.scss */
 .subsribe {
   padding: 75px 0;
   background: #005f78;
   text-align: center;
 }
 
-/* line 280, ../sass/_styles.scss */
+/* line 282, ../sass/_styles.scss */
 .pageHead {
   background: #005f78;
   padding: 40px 0;
 }
-/* line 283, ../sass/_styles.scss */
+/* line 285, ../sass/_styles.scss */
 .pageHead h1 {
   color: white;
   padding: 0;
 }
-/* line 287, ../sass/_styles.scss */
+/* line 289, ../sass/_styles.scss */
 .pageHead p {
   color: white;
   text-align: center;
 }
 
 @media screen and (max-width: 1400px) {
-  /* line 294, ../sass/_styles.scss */
+  /* line 296, ../sass/_styles.scss */
   #headerHome {
     height: calc(100vh - 71px);
   }
