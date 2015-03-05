@@ -2286,3 +2286,54 @@ footer ul li img {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
   opacity: 0.8;
 }
+
+/* line 3, ../sass/_errorPage.scss */
+#errorPage {
+  background: #005f78;
+  height: calc(100vh - 180px);
+  color: white;
+  text-align: center;
+  line-height: calc(100vh - 345px);
+}
+/* line 9, ../sass/_errorPage.scss */
+#errorPage .wrapper {
+  line-height: normal;
+  vertical-align: middle;
+  display: inline-block;
+  height: 255px;
+}
+/* line 15, ../sass/_errorPage.scss */
+#errorPage h1 {
+  color: white;
+  font-size: 46px;
+  font-weight: bold;
+  padding-bottom: 0;
+}
+/* line 20, ../sass/_errorPage.scss */
+#errorPage h1 span {
+  font-weight: normal;
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+}
+/* line 26, ../sass/_errorPage.scss */
+#errorPage p {
+  margin-bottom: 30px;
+}
+/* line 28, ../sass/_errorPage.scss */
+#errorPage p:first-of-type {
+  color: #929292;
+  margin-bottom: 30px;
+  font-size: 27px;
+  font-family: "montserratlight", helvetica, arial, sans-serif;
+  text-transform: uppercase;
+}
+/* line 35, ../sass/_errorPage.scss */
+#errorPage p:first-of-type:after {
+  content: "";
+  display: block;
+  vertical-align: bottom;
+  width: 100px;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 30px;
+  border-top: 1px solid #004456;
+}

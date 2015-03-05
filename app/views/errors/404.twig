@@ -1,5 +1,24 @@
 {% extends 'layouts/' ~ layout ~ '.twig' %}
 
 {% block body %}
-    {{ dump(error) }}
+    <!-- {{ dump(error) }} -->
+
+    <div id="errorPage">
+
+    	<div class="wrapper">
+
+    		<h1>404 <span>error</span></h1>
+
+    		<p>page introuvable</p>
+
+    		<p>Retrouvez votre chemin</p>
+
+    		<a class="button" href="#">Retournez a l'accueil</a>
+
+    	</div>
+
+    </div>
+
+    <div class="push"></div>
+    </div><!-- end page -->
 {% endblock %}
