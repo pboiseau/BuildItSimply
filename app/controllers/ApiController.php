@@ -27,7 +27,7 @@ class ApiController extends AppController
         $projects = $this->Project->publicated()
             ->with('account', 'participates', 'freelances')
             ->recent();
-        
+
         if($price = $this->get('PARAMS.price')){
             $projects = $projects->where('price', '<=', $price);
         }
