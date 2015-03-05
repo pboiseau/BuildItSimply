@@ -1,8 +1,22 @@
 # BuildItSimply
 
-<p>
-Build it Simply is a platform for the beginners of Web who need to be guided to concretize their project. Do you need to create a site, a poster, a webdesign or just an illustration? Build it Simply accompanies you through super-simplified steps to put you in connection with the freelance whom you need.
-</p>
+> Build it Simply is a platform for the beginners of Web who need to be guided to concretize their project. Do you need to > create a site, a poster, a webdesign or just an illustration? Build it Simply accompanies you through super-simplified steps > to put you in connection with the freelance whom you need.
+
+<h4>Technologies utilisés</h4>
+<ul>
+  <li>PHP avec FatFree Framework</li>
+  <li>Eloquent ORM</li>
+  <li>Twig moteur de template</li>
+</ul>
+
+<h4>Gestionnaires de developpement</h4>
+<ul>
+  <li>Composer</li>
+  <li>Bower</li>
+  <li>NPM</li>
+  <li>Grunt</li>
+</ul>
+
 
 <table>
   <tr>
