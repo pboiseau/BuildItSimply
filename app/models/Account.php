@@ -28,7 +28,6 @@ class Account extends AppModel
             return $this->hasOne('Freelance', 'account_id', 'id');
         else if ($type == "CLIENT") 
             return $this->hasOne('Client', 'account_id', 'id');
-        }
     }
 
 
