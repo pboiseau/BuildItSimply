@@ -12,9 +12,24 @@ class Project extends AppModel
     protected $table = 'projects';
     protected $guarded = array('id', 'created_at', 'updated_at');
 
+    /**
+     * Scope for getting only publicated project
+     * @param $query
+     * @return mixed
+     */
     public function scopePublicated($query)
     {
        return $query->whereNotIn('status', ['EN CREATION', 'ANNULE']);
+    }
+
+    /**
+     * Scope for getting project order by date
+     * @param $query
+     * @return mixed
+     */
+    public function scopeRecent($query)
+    {
+        return $query->orderBy('projects.created_at', 'DESC');
     }
 
     /**
@@ -82,16 +97,6 @@ class Project extends AppModel
     }
 
     /**
-     * Scope for getting project order by date
-     * @param $query
-     * @return mixed
-     */
-    public function scopeRecent($query)
-    {
-        return $query->orderBy('projects.created_at', 'DESC');
-    }
-
-    /**
      * Check if project exists in the database
      * @param $id
      * @return bool|\Illuminate\Support\Collection|null|static
@@ -110,19 +115,6 @@ class Project extends AppModel
     {
         $project = $this->where('id', $id)->first(['id', 'status']);
         return (!empty($project)) ? $project->status : false;
-    }
-
-    /**
-     * Get project by ID
-     * @param $id
-     * @param array $field
-     * @return mixed
-     */
-    public function getById($id, $field = array('*'))
-    {
-        return $this->where($this->table . '.id', $id)
-            ->join('accounts', 'projects.client_id', '=', 'accounts.id')
-            ->first($field);
     }
 
     /**
@@ -194,6 +186,11 @@ class Project extends AppModel
         ]);
     }
 
+    /**
+     * Get propositions and tags for a list of projects
+     * @param array $projects
+     * @return Collection | false
+     */
     public function getInformation($projects)
     {
         return $projects->each(function ($project) {

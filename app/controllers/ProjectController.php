@@ -374,8 +374,8 @@ class ProjectController extends AppController
     {
         if ($this->get('AJAX')) {
             $req = $this->get('POST');
-            $project = $this->Project->getById($req['project_id']);
-            $freelance = $this->Account->getById($req['freelance_id']);
+            $project = Project::find($req['project_id'])->with('account')->first();
+            $freelance = Account::find($req['freelance_id']);
 
             $this->MailHelper->sendMail('response', $freelance->mail, [
                 'subject' => "Votre demande concernant le projet " . $project->name,
@@ -413,6 +413,27 @@ class ProjectController extends AppController
         }
 
         $this->f3->reroute("/projects/" . $project_id);
+    }
+
+    /**
+     * When project is done and finish by the freelance
+     */
+    public function end()
+    {
+        $project = Project::find($this->get('PARAMS.id'));
+
+        if ($project->status == "EN COURS") {
+            if ($project->participates()->status('choosen')->count() == 1) {
+
+                $this->Project->updateProject($project->id, [
+                    'status' => 'TERMINE'
+                ]);
+                $this->setFlash("Le projet est maintenant terminé, n'oubliez pas de laisser un commentaire pour votre freelance.");
+            }
+        }else{
+            $this->setFlash("Votre projet n'est pas en cours, vous ne pouvez donc pas le terminer.");
+        }
+        $this->f3->reroute('projects/' . $project->id);
     }
 
     /**

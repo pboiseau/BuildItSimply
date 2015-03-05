@@ -47,10 +47,10 @@
                         <li class="projectFiche">
                             <p>Fichiers utiles <span>Télécharger</span></p>
                             <ul>
+                            </ul>
                                 {% for file in files %}
                                     <li><a href="{{ home ~ file.file }}" target="_blank">{{ file.name }}</a></li>
                                 {% endfor %}
-                            </ul>
                         </li>
 
                     </ul>
