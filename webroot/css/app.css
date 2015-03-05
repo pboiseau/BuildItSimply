@@ -1574,9 +1574,28 @@ label#largeFile input#file {
   float: none;
 }
 
-/* line 285, ../sass/_all.scss */
+/* line 284, ../sass/_all.scss */
 .token .close {
   color: #005f78;
+}
+
+/* line 289, ../sass/_all.scss */
+.profileEdit .tokenfield .token .token-label {
+  padding-right: 10px;
+}
+
+/* line 294, ../sass/_all.scss */
+.profileEdit .btn-default {
+  margin-top: 30px;
+}
+
+/* line 298, ../sass/_all.scss */
+#profileView {
+  background: #f5f5f5 url('/builditsimply/webroot/images/bg-test.png?1425518089') -250px -500px no-repeat;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
+  background-size: cover;
 }
 
 /* line 4, ../sass/_notification.scss */
