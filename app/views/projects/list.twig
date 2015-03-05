@@ -14,7 +14,7 @@
                 <p class="textList">{{ project.description }}</p>
 
                 <p class="tagList">
-                    <a href="">{{ project.type | capitalize }}</a>
+                    <a href="">{{ project.type.type | capitalize }}</a>
                     {% for tag in project.tags %}
                         <a href="">{{ tag.tag | capitalize }}</a>
                     {% endfor %}

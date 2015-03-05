@@ -184,6 +184,19 @@ class Project extends AppModel
         }
     }
 
+    /**
+     * Update project status
+     * @param $project_id
+     * @param $status
+     * @return mixed
+     */
+    public function updateStatus($project_id, $status)
+    {
+        return $this->where('id', $project_id)->update([
+            'status' => strtoupper($status)
+        ]);
+    }
+
     public function getInformation($projects)
     {
         return $projects->each(function ($project) {

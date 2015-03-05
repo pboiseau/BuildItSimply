@@ -25,6 +25,9 @@ function getSkills(callback) {
  **/
 if (config.request[config.request.length - 1] === "profile") {
 
+    /**
+     * Get all skills from the database by ajax call
+     */
     getSkills(function (data) {
         var skills = [];
         $.each(data.skills, function (key, value) {
@@ -37,6 +40,7 @@ if (config.request[config.request.length - 1] === "profile") {
                 delay: 100
             },
             showAutocompleteOnFocus: false,
+            createTokensOnBlur: true,
             inputType: 'text',
             minLength: 1,
             limit: 25
@@ -53,7 +57,10 @@ if (config.request[config.request.length - 1] === "profile") {
         });
     });
 
-    function getCoordonate(){
+    /**
+     * Get coordonate of an address using Google Maps API
+     */
+    function getCoordonate() {
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode(
             {address: $('#city').val()},
@@ -75,23 +82,6 @@ if (config.request[config.request.length - 1] === "profile") {
         );
     }
 
-    // Set editable field or not editable
-    var allEdit = $('img[alt="edit"]');
-
-    function editInput() {
-        var inputSelected = $(this).prev()[0];
-        inputSelected.removeAttribute('readonly');
-        inputSelected.classList.remove("not-editable");
-        inputSelected.classList.add("editable");
-        inputSelected.focus();
-    }
-
-    function focusOut() {
-        this.setAttribute('readonly', '');
-        this.classList.remove("editable");
-        this.classList.add("not-editable");
-    }
-
     /**
      * Event Listener
      */
@@ -108,5 +98,6 @@ if (config.request[config.request.length - 1] === "profile") {
  **/
 $('#targets').tokenfield({
     minLength: 2,
-    limit: 10
+    limit: 10,
+    createTokensOnBlur: true
 });

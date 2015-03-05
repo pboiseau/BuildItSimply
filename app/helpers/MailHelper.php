@@ -41,6 +41,7 @@ class MailHelper extends BaseHelper{
      */
     private function layout($template, $data = array())
     {
+        $data['url'] = $this->url;
         return $this->twig->render('mails/' . $template . '.twig', compact('data'));
     }
 }

@@ -140,15 +140,13 @@ class ProjectController extends AppController
         $number_page = ceil($number_project / $this->get('PROJECT_PER_PAGE'));
 
         $projects = $this->Project->whereNotIn('status', ['EN CREATION', 'ANNULE'])
-            ->join('project_type', 'project_type.id', '=', 'project_type_id')
-            ->recent()
-            ->skip($offset)->limit($this->get('PROJECT_PER_PAGE'))
-            ->get([
-                'projects.*',
-                'project_type.type'
-            ]);
+                    ->with('type')
+                    ->recent()
+                    ->skip($offset)->limit($this->get('PROJECT_PER_PAGE'))
+                    ->get();
 
         $categories = $this->ProjectType->all();
+
         $categories->each(function ($type) {
             $type->number_project = $this->Project->countCategory($type->id);
         });
@@ -191,9 +189,7 @@ class ProjectController extends AppController
             $searchWords = $this->get('POST')['searchWords'];
             $this->words = explode(' ', $searchWords);
 
-            $request = $this->Project->whereNotIn('status', ['ANNULE'])
-                ->join('project_type', 'project_type.id', '=', 'project_type_id');
-
+            $request = $this->Project->publicated()->with('type');
 
             $request->where(function ($query) {
                 foreach ($this->words as $word) {
@@ -205,10 +201,8 @@ class ProjectController extends AppController
                 }
             });
 
-            $projects = $request->recent()->get([
-                'projects.*',
-                'type'
-            ]);
+            $projects = $request->recent()->get();
+
 
             if($projects->count() > 0){
                 $projects = $this->Project->getInformation($projects);
@@ -236,7 +230,6 @@ class ProjectController extends AppController
             $this->f3->reroute("/projects/" . $project->id);
         }
 
-
         if ($project && $this->Auth->is('freelance')) {
 
             $client = $project->account()->first();
@@ -247,8 +240,7 @@ class ProjectController extends AppController
 
                 $this->MailHelper->sendMail("demand", $client->mail, [
                     'subject' => "Nouvelle demande pour votre projet " . $project->name,
-                    'firstname' => $user['firstname'],
-                    'lastname' => $user['lastname'],
+                    'user' => Account::find($user['id'])->with('freelance')->first(),
                     'project' => $project
                 ]);
 
@@ -349,7 +341,10 @@ class ProjectController extends AppController
 
                 // check for status ACCEPT for security
                 if($participate->status == "ACCEPT"){
+                    // update participation status
                     $update = $this->Participate->choice($req['project_id'], $req['freelance_id'], "CHOOSEN");
+                    // update project status
+                    $this->Project->updateStatus($req['project_id'], "EN COURS");
                 }else if($participate->status == "PENDING") {
                     $update = $this->Participate->choice($req['project_id'], $req['freelance_id'], $req['status']);
                 }

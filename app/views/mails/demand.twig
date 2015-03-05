@@ -3,21 +3,21 @@
 {% block content %}
     <h1>Un freelance souhaite travailler pour vous !</h1>
 
-    <p>Bonjour {{ data.firstname }}, nous vous informons qu’un freelance a postulé pour votre projet {{ data.project.name }}</p>
+    <p>Bonjour {{ data.user.firstname }}, nous vous informons qu’un freelance a postulé pour votre projet {{ data.project.name }}</p>
 
     <p>N’hésitez pas à regarder son profil dans les moindres détails (avis, notes, compétences...).</p>
 
     <div>
         <div>
-            <img src="{{ data.picture }}" alt="avatar-picture"/>
+            <img src="{{ data.url ~ data.user.picture }}" alt="avatar-picture"/>
         </div>
         <div>
             <div>
                 {{ data.description }}
             </div>
             <div>
-                <div>{{ data.firstname ~ " " ~ data.lastname }} - {{ data.activity }}</div>
-                <div><a href="">Découvrir son profil</a></div>
+                <div>{{ data.user.firstname ~ " " ~ data.user.lastname }} - {{ data.user.freelance.activity }}</div>
+                <div><a href="{{ data.url }}users/profile/{{ data.user.id }}">Découvrir son profil</a></div>
             </div>
         </div>
     </div>
