@@ -1,4 +1,4 @@
-
+app/config/config.ini
 lib/*
 sftp-config.json
 vendor/*
