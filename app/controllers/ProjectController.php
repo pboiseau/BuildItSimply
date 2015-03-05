@@ -433,7 +433,7 @@ class ProjectController extends AppController
         }else{
             $this->setFlash("Votre projet n'est pas en cours, vous ne pouvez donc pas le terminer.");
         }
-        $this->f3->reroute('projects/' . $project->id);
+        $this->f3->reroute('/projects/' . $project->id);
     }
 
     /**

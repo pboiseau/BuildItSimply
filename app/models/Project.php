@@ -49,6 +49,14 @@ class Project extends AppModel
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function recommendation()
+    {
+        return $this->hasOne('Recommendation', 'project_id', 'id');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function freelances()
