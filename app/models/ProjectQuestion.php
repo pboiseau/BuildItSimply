@@ -22,13 +22,11 @@ class ProjectQuestion extends AppModel
         $validator = new Validate();
         $errors = array();
 
-        if (empty($data['question'])) {
+        if (empty($data['question']))
             $errors['question'] = 'Question vide.';
-        }
 
-        if (empty($data['step'])) {
+        if (empty($data['step']))
             $errors['step'] = 'Etape vide';
-        }
 
         $this->errors = $errors;
         return (empty($errors)) ? true : false;

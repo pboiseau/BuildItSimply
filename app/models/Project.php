@@ -164,13 +164,14 @@ class Project extends AppModel
      */
     public function initialize($project = array())
     {
-        if ($this->validate($project)) {
+        if ($this->validate($project)) 
+        {
             $project['client_id'] = Base::instance()->get('SESSION.user.id');
             $project['status'] = 'EN CREATION';
             return $this->create($project);
-        } else {
+        } 
+        else
             return false;
-        }
     }
 
     /**
@@ -207,9 +208,9 @@ class Project extends AppModel
     public function show($id)
     {
         $project = $this->where('id', $id)->first();
-        if (!empty($project)) {
+        if (!empty($project))
             $project['client'] = $project->account()->first();
-        }
+
         return (!empty($project)) ? $project : false;
     }
 
@@ -233,7 +234,8 @@ class Project extends AppModel
      */
     public function publish($id, $project)
     {
-        if ($this->validate($project)) {
+        if ($this->validate($project)) 
+        {
             $project['status'] = 'OUVERT';
             return $this->where('id', $id)->update($project);
         }
@@ -251,21 +253,18 @@ class Project extends AppModel
         $validator = new Validate();
         $errors = array();
 
-        if (!empty($data['url']) && !$validator->url($data['url'])) {
+        if (!empty($data['url']) && !$validator->url($data['url']))
             $errors['url'] = "Ceci n'est pas une URL de site web valide.";
-        }
 
-        if (empty($data['name'])) {
+        if (empty($data['name']))
             $errors['name'] = "Le titre du projet ne peut pas être vide.";
-        }
 
-        if (empty($data['description'])) {
+        if (empty($data['description']))
             $errors['description'] = "La description du projet ne peut pas être vide.";
-        }
 
-        if (empty($data['targets'])) {
+        if (empty($data['targets']))
             $errors['targets'] = "Vous devez renseigner au moins une cible.";
-        }
+        
 
         $this->errors = $errors;
         return (empty($errors)) ? true : false;
