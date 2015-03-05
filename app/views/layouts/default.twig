@@ -1,43 +1,52 @@
 <!DOCTYPE html>
 <html lang="fr">
-	<head>
-		<meta charset="utf8">
-		<title>Build It Simply</title>
-		{% if not prod %}
-			<link rel="stylesheet" href="{{root ~ css}}bootstrap.css" type="text/css">
-			<link rel="stylesheet" href="{{root}}/bower_components/jquery-ui/themes/smoothness/jquery-ui.css" type="text/css">
-			<link rel="stylesheet" href="{{root ~ css}}bootstrap-tokenfield.css" type="text/css">
-			<link rel="stylesheet" href="{{root ~ css}}tokenfield-typeahead.css" type="text/css">
-			<link rel="stylesheet" type="text/css" href="{{root ~ css}}app.css">
-		{% else %}
-			<link rel="stylesheet" href="{{css}}dist.css" type="text/css">
-		{% endif %}
-	</head>
-	<body>
-		{% include 'partials/menu.twig' %}
+<head>
+    <title>Build It Simply</title>
+    <meta charset="utf8">
+    <meta name="description"
+          content="Build it Simply est une plateforme destinée aux débutants du web qui ont besoin d'être guidés pour concrétiser leur projet."/>
+    <meta name="keywords" content="site web, projet, freelance, developpeur, design, graphisme" />
+    <meta name="robots" content="index, follow" />
+    <link rel="icon" href="{{ image }}favicon.ico"/>
+    
+    {% if not prod %}
+        <link rel="stylesheet" href="{{ root ~ css }}bootstrap.css" type="text/css">
+        <link rel="stylesheet" href="{{ root }}/bower_components/jquery-ui/themes/smoothness/jquery-ui.css"
+              type="text/css">
+        <link rel="stylesheet" href="{{ root ~ css }}bootstrap-tokenfield.css" type="text/css">
+        <link rel="stylesheet" href="{{ root ~ css }}tokenfield-typeahead.css" type="text/css">
+        <link rel="stylesheet" type="text/css" href="{{ root ~ css }}app.css">
+    {% else %}
+        <link rel="stylesheet" href="{{ css }}dist.css" type="text/css">
+    {% endif %}
+</head>
+<body>
+{% include 'partials/menu.twig' %}
 
-		{% block message %}
-			{% if message %}
-				<div class="container alert alert-info" role="alert">{{ message }}</div>
-			{% endif %}
-		{% endblock %}
+{% block message %}
+    {% if message %}
+        <div class="container alert alert-info" role="alert">{{ message }}</div>
+    {% endif %}
+{% endblock %}
 
-		{% block body %}{% endblock %}
+<div role="main">
+    {% block body %}{% endblock %}
+</div>
 
-		{% include 'partials/footer.twig' ignore missing %}
+{% include 'partials/footer.twig' ignore missing %}
 
-		{% block js %}
-			{% if not prod %}
-				<script src="{{root}}/bower_components/jquery/dist/jquery.js"></script>
-				<script src="{{root}}/bower_components/jquery-ui/jquery-ui.js"></script>
-				<script src="{{root}}/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-				<script src="{{root ~ js}}bootstrap-tokenfield.js"></script>
-				<script src="{{root ~ js}}app.js"></script>
-			{% else %}
-				<script src="{{js}}dist.js"></script>
-			{% endif %}
-		{% endblock %}
+{% block js %}
+    {% if not prod %}
+        <script src="{{ root }}/bower_components/jquery/dist/jquery.js"></script>
+        <script src="{{ root }}/bower_components/jquery-ui/jquery-ui.js"></script>
+        <script src="{{ root }}/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="{{ root ~ js }}bootstrap-tokenfield.js"></script>
+        <script src="{{ root ~ js }}app.js"></script>
+    {% else %}
+        <script src="{{ js }}dist.js"></script>
+    {% endif %}
+{% endblock %}
 
-		{% block partial_js %} {% endblock %}
-	</body>
+{% block partial_js %} {% endblock %}
+</body>
 </html>

@@ -1,6 +1,6 @@
 var config = {
     'root': '/',
-    'dev_root': '/builditsimply',
+    'dev_root': '',
     'request': $(location).attr('pathname').split('/')
 }
 
