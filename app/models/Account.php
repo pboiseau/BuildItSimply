@@ -24,13 +24,10 @@ class Account extends AppModel
     {
         $type = strtoupper($type);
 
-        if ($type == "FREELANCE") {
+        if ($type == "FREELANCE")
             return $this->hasOne('Freelance', 'account_id', 'id');
-        } else {
-            if ($type == "CLIENT") {
-                return $this->hasOne('Client', 'account_id', 'id');
-            }
-        }
+        else if ($type == "CLIENT") 
+            return $this->hasOne('Client', 'account_id', 'id');
     }
 
 
@@ -75,8 +72,7 @@ class Account extends AppModel
      */
     public function getById($id, $field = array('*'))
     {
-        return $this->where($this->table . '.id', $id)
-            ->first($field);
+        return $this->where($this->table . '.id', $id)->first($field);
     }
 
     /**
@@ -102,7 +98,8 @@ class Account extends AppModel
     public function register($user)
     {
         // check valide user
-        if ($this->validate($user)) {
+        if ($this->validate($user)) 
+        {
             unset($user['repeatpassword']);
 
             $user['firstname'] = ucfirst(strtolower($user['firstname']));
@@ -112,9 +109,9 @@ class Account extends AppModel
 
             $newUser = $this->create($user);
             return (!empty($newUser)) ? $newUser : false;
-        } else {
+        } 
+        else
             return false;
-        }
     }
 
     /**
@@ -127,17 +124,21 @@ class Account extends AppModel
     {
         $userWithType = $user->type($user->type)->first();
 
-        if ($user->type == "FREELANCE") {
+        if ($user->type == "FREELANCE") 
+        {
             $participations = $userWithType->participates()->status('choosen')->get();
 
-            $participations->each(function ($participation) {
+            $participations->each(function ($participation) 
+            {
                 $project = $participation->project()->first();
                 $project['tags'] = $project->tags()->get();
                 $project['demand'] = $project->participates()->count();
                 $this->projects[] = $project;
             });
 
-        } else if ($user->type == "CLIENT") {
+        } 
+        else if ($user->type == "CLIENT") 
+        {
             $projects = $userWithType->project()->recent()->get();
 
             if($projects->count() > 0){
@@ -160,7 +161,8 @@ class Account extends AppModel
      **/
     public function updateAccount($user)
     {
-        if (($this->find($user['account_id'])) && ($this->validateUpdate($user))) {
+        if (($this->find($user['account_id'])) && ($this->validateUpdate($user)))
+        {
             return $this->where('id', $user['account_id'])->update(
                 $this->generateUpdate($user)
             );
@@ -192,26 +194,20 @@ class Account extends AppModel
     {
         unset($data['account_id']);
 
-        if (empty($data['phone'])) {
+        if (empty($data['phone']))
             unset($data['phone']);
-        }
 
-        if (empty($data['city'])) {
+        if (empty($data['city']))
             unset($data['city']);
-        }
 
-        if (empty($data['description'])) {
+        if (empty($data['description']))
             unset($data['description']);
-        }
 
-        if (empty($data['picture'])) {
+        if (empty($data['picture']))
             unset($data['picture']);
-        }
 
-
-        if (empty($data['lat']) || empty($data['lng'])) {
+        if (empty($data['lat']) || empty($data['lng']))
             unset($data['lat'], $data['lng']);
-        }
 
         return $data;
     }
@@ -227,29 +223,23 @@ class Account extends AppModel
         $validator = new Validate();
         $errors = array();
 
-        if (!$validator->email($data['mail'])) {
+        if (!$validator->email($data['mail']))
             $errors['mail'] = 'Adresse mail invalide.';
-        }
 
-        if (!$validator->isString($data['lastname'], 100)) {
+        if (!$validator->isString($data['lastname'], 100))
             $errors['lastname'] = 'Nom invalide.';
-        }
 
-        if (!$validator->isString($data['firstname'], 100)) {
+        if (!$validator->isString($data['firstname'], 100))
             $errors['firstname'] = 'Prenom invalide.';
-        }
 
-        if (!$validator->isPassword($data['password'], 15, 25)) {
+        if (!$validator->isPassword($data['password'], 15, 25))
             $errors['password'] = "Votre mot de passe doit faire entre 8 et 25 caractères.";
-        }
 
-        if (strcmp($data['password'], $data['repeatpassword']) != 0) {
+        if (strcmp($data['password'], $data['repeatpassword']) != 0)
             $errors['password'] = "Les mots de passe ne correspondent pas.";
-        }
 
-        if ($this->where('mail', '=', $data['mail'])->first()) {
+        if ($this->where('mail', '=', $data['mail'])->first())
             $errors['mail'] = 'Adresse mail déjà utilisé.';
-        }
 
         $this->errors = $errors;
         return (empty($errors)) ? true : false;
@@ -265,10 +255,8 @@ class Account extends AppModel
         $validator = new Validate();
         $errors = array();
 
-        if (!empty($data['phone']) && !$validator->isPhone($data['phone'], 16)) {
+        if (!empty($data['phone']) && !$validator->isPhone($data['phone'], 16))
             $errors['phone'] = 'Téléphone invalide.';
-        }
-
 
         $this->errors = $errors;
         return (empty($errors)) ? true : false;

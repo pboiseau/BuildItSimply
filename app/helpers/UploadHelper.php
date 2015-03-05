@@ -24,16 +24,20 @@ class UploadHelper extends BaseHelper
     {
         $this->profilPicture = $profilPicture;
         //Upload the file in the repository
-        if (!$files = $this->web->receive(function ($file) 
-        {
-            $this->checkFile($file['type'], $file['size'], $this->profilPicture);    
-        }, true, function ($file) {
-            $tab = explode('.', $file);
-            $extension = $tab[count($tab) - 1];
-            $this->file = uniqid() . '.' . $extension;
-            return $this->file;
-        })
-        ) 
+        if (!$files = $this->web->receive(
+            function ($file) 
+            {
+                $this->checkFile($file['type'], $file['size'], $this->profilPicture);    
+            }, 
+            true,
+            function ($file) 
+            {
+                $tab = explode('.', $file);
+                $extension = $tab[count($tab) - 1];
+                $this->file = uniqid() . '.' . $extension;
+                return $this->file;
+            })
+        )
         {
             throw new Exception('Error during upload');
         }
@@ -68,11 +72,10 @@ class UploadHelper extends BaseHelper
         $img->resize($width, $height, true);
         $img->save();
 
-        if (file_put_contents($filepath, $img->dump())) {
+        if (file_put_contents($filepath, $img->dump()))
             return true;
-        } else {
+        else
             return false;
-        }
     }
 
 

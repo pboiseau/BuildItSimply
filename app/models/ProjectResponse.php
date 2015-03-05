@@ -37,9 +37,8 @@ class ProjectResponse extends AppModel
         $validator = new Validate();
         $errors = array();
 
-        if (empty($data['response'])) {
+        if (empty($data['response']))
             $errors['response'] = 'Reponse vide.';
-        }
 
         $this->errors = $errors;
         return (empty($errors)) ? true : false;

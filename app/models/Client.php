@@ -37,9 +37,8 @@ class Client extends AppModel
      */
     public function updateProfile($client)
     {
-        if (!$this->validate($client)) {
+        if (!$this->validate($client))
             return false;
-        }
 
         if ($profile = $this->where('account_id', $client['account_id'])->first()) {
             // update client

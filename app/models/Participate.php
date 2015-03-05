@@ -92,11 +92,8 @@ class Participate extends AppModel
      */
     public function choice($project_id, $freelance_id, $status)
     {
-        if ($status == "accept") {
-            if ($this->number($project_id) >= 3) {
+        if (($status == "accept") && ($this->number($project_id) >= 3))
                 return false;
-            }
-        }
 
         return $this->where('project_id', $project_id)
             ->where('freelance_id', $freelance_id)
@@ -127,9 +124,8 @@ class Participate extends AppModel
             ->with('freelance')
             ->recent();
 
-        if ($status) {
+        if ($status)
             $propositions->whereIn('status', $status);
-        }
 
         return ($propositions->count() > 0) ? $propositions->get() : false;
     }
@@ -143,7 +139,8 @@ class Participate extends AppModel
     public function notification($user_id, $user_type)
     {
         $this->user_id = $user_id;
-        if ($user_type == 'freelance') {
+        if ($user_type == 'freelance') 
+        {
 
             $participations = $this->where('freelance_id', $user_id)
                 ->where('participates.status', '!=', 'PENDING')
@@ -152,8 +149,9 @@ class Participate extends AppModel
                 ->orderBy('participates.updated_at', 'desc')
                 ->get();
 
-        } else if($user_type == 'client') {
-
+        } 
+        else if($user_type == 'client') 
+        {
             $participations = $this->where('status', 'PENDING')
                 ->whereIn('project_id', function ($query) {
                     $query->select('id')
@@ -184,8 +182,10 @@ class Participate extends AppModel
      * @param $project_status
      * @return bool|array
      */
-    public function statusReference($project_status){
-        switch($project_status){
+    public function statusReference($project_status)
+    {
+        switch($project_status)
+        {
             case "OUVERT":
                 return ["PENDING", "ACCEPT", "DECLINE"];
             case "DECISION":
