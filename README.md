@@ -17,6 +17,15 @@
   <li>Grunt</li>
 </ul>
 
+<h4>Installation</h4>
+<p>Commencez par télécharger les dépendances PHP neccessaires au projet</p>
+<code>$ composer install</code>
+
+<p>Ensuite installer les dépendances CSS et Javascript</p>
+<code>$ bower install</code>
+
+<p>Et pour finir les modules nodeJS</p>
+<code>$ npm install</code>
 
 <table>
   <tr>
