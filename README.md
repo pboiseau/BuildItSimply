@@ -1,6 +1,6 @@
 # BuildItSimply
 
-> Build it Simply is a platform for the beginners of Web who need to be guided to concretize their project. Do you need to > create a site, a poster, a webdesign or just an illustration? Build it Simply accompanies you through super-simplified steps > to put you in connection with the freelance whom you need.
+> Build it Simply is a platform for the beginners of Web who need to be guided to concretize their project. Do you need to create a site, a poster, a webdesign or just an illustration? Build it Simply accompanies you through super-simplified steps to put you in connection with the freelance whom you need.
 
 <h4>Technologies utilisés</h4>
 <ul>
@@ -17,6 +17,15 @@
   <li>Grunt</li>
 </ul>
 
+<h4>Installation</h4>
+<p>Commencez par télécharger les dépendances PHP neccessaires au projet</p>
+<code>$ composer install</code>
+
+<p>Ensuite installer les dépendances CSS et Javascript</p>
+<code>$ bower install</code>
+
+<p>Et pour finir les modules nodeJS</p>
+<code>$ npm install</code>
 
 <table>
   <tr>
