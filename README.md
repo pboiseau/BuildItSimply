@@ -1,5 +1,9 @@
 # BuildItSimply
 
+<p>
+Build it Simply is a platform for the beginners of Web who need to be guided to concretize their project. Do you need to create a site, a poster, a webdesign or just an illustration? Build it Simply accompanies you through super-simplified steps to put you in connection with the freelance whom you need.
+</p>
+
 <table>
   <tr>
     <td></td>
