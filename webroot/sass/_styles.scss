@@ -115,7 +115,8 @@ height: 109px;
 #headerHome{
     background: image-url("background-header.jpg") no-repeat center center fixed;
     @include background-size(cover);
-    height: calc(100vh - 211px);
+    // height: calc(100vh - 211px);
+    height: calc(100vh - 109px);
     text-align: center;
     position : relative;
     .headerSection{
@@ -166,6 +167,7 @@ height: 109px;
 #homeTotal{
     background: #223843;
     position: relative;
+    height: 141px;
     .wrapper{
         padding: 38px 0;
     }
