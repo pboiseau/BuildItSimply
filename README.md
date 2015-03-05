@@ -6,32 +6,26 @@ Build it Simply is a platform for the beginners of Web who need to be guided to 
 
 <table>
   <tr>
-    <td></td>
-    <td>Youna Doh</td>
+    <td><a href="https://www.linkedin.com/profile/view?id=314884402" target="_blank">Youna Doh</a></td>
     <td>Project Manager</td>
   </tr>
   <tr>
-    <td></td>
     <td><a href="https://www.linkedin.com/profile/view?id=264442596" target="_blank">Paul Boiseau</a></td>
     <td>Lead developer</td>
   </tr> 
   <tr>
-    <td></td>
-    <td>Robin Mastromarino</td>
-    <td>UI Designer and Integrator</td>
+    <td><a href="https://www.linkedin.com/profile/view?id=248513272" target="_blank">Robin Mastromarino</a></td>
+    <td>UI Designer & Integrator</td>
   </tr> 
   <tr>
-    <td></td>
-    <td>Caroline Vien</td>
+    <td><a href="https://www.linkedin.com/profile/view?id=386364950" target="_blank">Caroline Vien</a></td>
     <td>UI/UX Designer</td>
   </tr> 
   <tr>
-    <td></td>
-    <td>Bernard Vong</td>
+    <td><a href="https://www.linkedin.com/profile/view?id=327161241" target="_blank">Bernard Vong</a></td>
     <td>Back-end Developer</td>
   </tr> 
   <tr>
-    <td></td>
     <td>Alexandre Serrano</td>
     <td>Database Administrator</td>
   </tr> 
