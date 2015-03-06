@@ -1,7 +1,85 @@
 {% extends 'layouts/' ~ layout ~ '.twig' %}
 
 {% block body %}
-    	<h1>How It Works</h1>
+
+	<div class="pageHead">
+        <h1>Comment ça marche ?</h1>
+    </div>
+	
+	<div class="stepHow">
+		<div class="wrapper">
+			
+			<p class="projetStep">Étape 1</p>
+			<h2>Lorem ipsum dolor</h2>
+		
+			<ul>
+				<li>
+					<img src="{{ image }}how-1.png" alt="Le client propose un projet"/>
+					<p>Le client propose un projet</p>
+				</li>
+				<li>
+					<img src="{{ image }}how-2.png" alt="Le client propose un projet"/>
+					<p>Les prestataires répondent aux annonces</p>
+				</li>
+
+
+			</ul>
+
+			<hr class="clear"/>
+		</div>
+	</div>
+
+	<div class="stepHow stepHowGray">
+		<div class="wrapper">
+			
+			<p class="projetStep">Étape 2</p>
+			<h2>Lorem ipsum dolor</h2>
+		
+			<ul>
+				<li>
+					<img src="{{ image }}how-3.png" alt="Le client propose un projet"/>
+					<p>Le client choisi trois prestataires</p>
+				</li>
+				<li>
+					<img src="{{ image }}how-4.png" alt="Le client propose un projet"/>
+					<p>Les prestataires font leurs devis</p>
+				</li>
+
+
+			</ul>
+
+			<hr class="clear"/>
+		</div>
+	</div>
+
+	<div class="stepHow stepHowlast">
+		<div class="wrapper">
+			
+			<p class="projetStep">Étape 3</p>
+			<h2>Lorem ipsum dolor</h2>
+		
+			<ul>
+				<li>
+					<img src="{{ image }}how-5.png" alt="Le client propose un projet"/>
+					<p>Le Client choisi son prestataire final</p>
+				</li>
+				<li>
+					<img src="{{ image }}how-6.png" alt="Le client propose un projet"/>
+					<p>Le projet commence !</p>
+				</li>
+
+
+			</ul>
+
+			<a class="buttonWhite" href="{{ home }}users/register">Proposer un projet</a>
+
+			<hr class="clear"/>
+		</div>
+	</div>
+
+
+
+
     	<div class="push"></div>
     </div><!-- end page -->
 

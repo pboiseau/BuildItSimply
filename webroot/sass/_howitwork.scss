@@ -1,0 +1,41 @@
+// _howitwork.scss
+
+.stepHow{
+		
+	.wrapper{
+		text-align: center;
+		h2{
+			font-size: 26px;
+		}
+		ul{
+			float: left;
+			li{
+				float: left;
+				width: 480px;
+				margin: 0;
+				&:first-of-type{
+					margin-left: 60px;
+				}
+				&:last-of-type{
+					margin-right: 60px;
+				}
+				img{
+					width: 200px;
+					margin-bottom: 5px;
+				}
+				p{
+					width: 250px;
+					margin: 0 auto;
+				}
+			}
+		}
+	}
+}
+.stepHowGray{
+	background: #F0F0F0;
+}
+.stepHowlast{
+	ul{
+		margin-bottom: 60px;	
+	}
+}

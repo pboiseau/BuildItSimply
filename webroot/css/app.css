@@ -1631,6 +1631,53 @@ label#largeFile input#file {
   background-size: cover;
 }
 
+/* line 5, ../sass/_howitwork.scss */
+.stepHow .wrapper {
+  text-align: center;
+}
+/* line 7, ../sass/_howitwork.scss */
+.stepHow .wrapper h2 {
+  font-size: 26px;
+}
+/* line 10, ../sass/_howitwork.scss */
+.stepHow .wrapper ul {
+  float: left;
+}
+/* line 12, ../sass/_howitwork.scss */
+.stepHow .wrapper ul li {
+  float: left;
+  width: 480px;
+  margin: 0;
+}
+/* line 16, ../sass/_howitwork.scss */
+.stepHow .wrapper ul li:first-of-type {
+  margin-left: 60px;
+}
+/* line 19, ../sass/_howitwork.scss */
+.stepHow .wrapper ul li:last-of-type {
+  margin-right: 60px;
+}
+/* line 22, ../sass/_howitwork.scss */
+.stepHow .wrapper ul li img {
+  width: 200px;
+  margin-bottom: 5px;
+}
+/* line 26, ../sass/_howitwork.scss */
+.stepHow .wrapper ul li p {
+  width: 250px;
+  margin: 0 auto;
+}
+
+/* line 34, ../sass/_howitwork.scss */
+.stepHowGray {
+  background: #F0F0F0;
+}
+
+/* line 38, ../sass/_howitwork.scss */
+.stepHowlast ul {
+  margin-bottom: 60px;
+}
+
 /* line 4, ../sass/_notification.scss */
 #notification .wrapper {
   width: 700px;
