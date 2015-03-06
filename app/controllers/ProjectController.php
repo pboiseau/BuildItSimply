@@ -272,6 +272,7 @@ class ProjectController extends AppController
         $project['type'] = $project->type()->first();
         $tags = $this->ProjectTag->where('project_id', $this->get('PARAMS.id'))->get();
         $files = $project->files()->get();
+        $recommendation = $project->recommendation()->count();
 
         // update project information
         if ($this->request() == "POST") {
@@ -281,7 +282,7 @@ class ProjectController extends AppController
             }
         }
 
-        $this->render('projects/edit', compact('project', 'propositions', 'tags', 'files'));
+        $this->render('projects/edit', compact('project', 'propositions', 'tags', 'files', 'recommendation'));
     }
 
     /**

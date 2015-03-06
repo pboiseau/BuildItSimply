@@ -87,7 +87,8 @@
                             <p class="infoList">
                                 <span><img src="{{ image }}calendar.png"
                                            alt="Date de l'offre"/>{{ project.created_at | date("d F Y") }}</span>
-                                <span><img src="{{ image }}user-list.png" alt="Nombre d'offre"/>{{ project.demand }} demande(s)</span>
+                                <span><img src="{{ image }}user-list.png" alt="Nombre d'offre"/>{{ project.demand }}
+                                    demande(s)</span>
                             </p>
 
                             <p class="textList">{{ project.description }}</p>
@@ -110,57 +111,26 @@
                 <div class="listProjet" id="profileAvis">
                     <h3>Avis des clients</h3>
                     <ul>
+                        {% for recommendation in recommendations %}
+                            <li>
+                                <img src="{{ home ~ recommendation.client.picture }}" alt="recruteur picture"/>
 
-                        <li>
-                            <img src="{{ image }}recruteur-picture.png" alt="recruteur picture"/>
+                                <p class="recruteurAvis">
+                                    <a href="{{ home }}users/profile/{{ recommendation.client.id }}">{{ recommendation.client.firstname ~ " " ~ recommendation.client.lastname }}</a>
+                                </p>
 
-                            <p class="recruteurAvis"><a href="#">Jocyeline Bon
-                                    <!--  <span>Peintre en batiment</span> --></a>
-                            </p>
-
-                            <div class="stars">
-                                <form action="">
-                                    <input class="star star-5" id="star-5" type="radio" name="star"/>
-                                    <label class="star star-5" for="star-5"></label>
-                                    <input class="star star-4" id="star-4" type="radio" name="star"/>
-                                    <label class="star star-4" for="star-4"></label>
-                                    <input class="star star-3" id="star-3" type="radio" checked name="star"/>
-                                    <label class="star star-3" for="star-3"></label>
-                                    <input class="star star-2" id="star-2" type="radio" checked name="star"/>
-                                    <label class="star star-2" for="star-2"></label>
-                                    <input class="star star-1" id="star-1" type="radio" checked name="star"/>
-                                    <label class="star star-1" for="star-1"></label>
-                                </form>
-                            </div>
-                            <p class="textList">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <hr class="clear"/>
-                        </li>
-
-                        <li>
-                            <img src="{{ image }}recruteur-picture.png" alt="recruteur picture"/>
-
-                            <p class="recruteurAvis"><a href="#">Jocyeline Bon
-                                    <!--  <span>Peintre en batiment</span> --></a>
-                            </p>
-
-                            <div class="stars">
-                                <form action="">
-                                    <input class="star star-5" id="star-5" type="radio" name="star"/>
-                                    <label class="star star-5" for="star-5"></label>
-                                    <input class="star star-4" id="star-4" type="radio" name="star"/>
-                                    <label class="star star-4" for="star-4"></label>
-                                    <input class="star star-3" id="star-3" type="radio" checked name="star"/>
-                                    <label class="star star-3" for="star-3"></label>
-                                    <input class="star star-2" id="star-2" type="radio" checked name="star"/>
-                                    <label class="star star-2" for="star-2"></label>
-                                    <input class="star star-1" id="star-1" type="radio" checked name="star"/>
-                                    <label class="star star-1" for="star-1"></label>
-                                </form>
-                            </div>
-                            <p class="textList">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <hr class="clear"/>
-                        </li>
-
+                                <div class="stars">
+                                    <form action="#">
+                                        {% for i in 1..5 %}
+                                            <input class="star star-{{ i }}" id="star-{{ i }}" type="radio" name="star"
+                                                    {{ (recommendation.grade == i) ? "checked" : "" }}/>
+                                        {% endfor %}
+                                    </form>
+                                </div>
+                                <p class="textList">{{ recommendation.message }}</p>
+                                <hr class="clear"/>
+                            </li>
+                        {% endfor %}
                     </ul>
                     <a class="buttonWhite" href="#">Voir tous les avis</a>
                 </div>

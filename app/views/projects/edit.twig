@@ -95,7 +95,7 @@
                     {% include 'projects/selection.twig' ignore missing %}
                 {% elseif project.status == "EN COURS" %}
                     {% include 'projects/choice.twig' ignore missing %}
-                {% elseif project.status == "TERMINE" %}
+                {% elseif project.status == "TERMINE" and recommendation == 0 %}
                     {% include 'projects/recommendation.twig' ignore missing %}
                 {% endif %}
 

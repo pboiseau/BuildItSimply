@@ -32,6 +32,14 @@ class Freelance extends AppModel
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function recommendations()
+    {
+        return $this->hasMany('Recommendation', 'freelance_id', 'account_id');
+    }
+
+    /**
      * Get Freelance's skills
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

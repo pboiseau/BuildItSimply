@@ -129,6 +129,11 @@ class AccountController extends AppController
                     $this->FreelanceSkill->getAll('account_id', $user->id)
                 );
 
+                $recommendations = $user->freelance()->first()
+                    ->recommendations()
+                    ->with('project', 'client')
+                    ->get();
+
                 $user['freelance']['skills'] = $skills;
             }
 
@@ -139,7 +144,7 @@ class AccountController extends AppController
             } else {
                 // render the profile show view
                 $this->render('accounts/show',
-                    compact('user', (!empty($experiences) ? 'experiences' : '')));
+                    compact('user', 'recommendations', (!empty($experiences) ? 'experiences' : '')));
             }
 
         } else {
