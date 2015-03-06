@@ -355,108 +355,109 @@ footer .wrapper, .push {
 }
 /* line 217, ../sass/_styles.scss */
 #howitwork ul {
+  background: url('/builditsimply/webroot/images/line-road.png?1425611642') no-repeat 230px 0px;
   float: left;
   margin-bottom: 60px;
 }
-/* line 220, ../sass/_styles.scss */
+/* line 221, ../sass/_styles.scss */
 #howitwork ul li {
   width: 320px;
   margin: 0 20px;
   float: left;
   text-align: center;
 }
-/* line 225, ../sass/_styles.scss */
+/* line 226, ../sass/_styles.scss */
 #howitwork ul li img {
   height: 120px;
   width: 120px;
 }
-/* line 229, ../sass/_styles.scss */
+/* line 230, ../sass/_styles.scss */
 #howitwork ul li h3 {
   margin: 10px 0;
 }
-/* line 232, ../sass/_styles.scss */
+/* line 233, ../sass/_styles.scss */
 #howitwork ul li p {
   color: #888888;
   font-family: "montserratlight", helvetica, arial, sans-serif;
   font-size: 14px;
 }
 
-/* line 240, ../sass/_styles.scss */
+/* line 241, ../sass/_styles.scss */
 #testimonial {
   position: relative;
   background: #f2f2f2;
 }
-/* line 243, ../sass/_styles.scss */
+/* line 244, ../sass/_styles.scss */
 #testimonial .wrapper {
   position: relative;
   z-index: 10;
 }
-/* line 247, ../sass/_styles.scss */
+/* line 248, ../sass/_styles.scss */
 #testimonial .separateBack {
   background-color: #f8f8f8;
 }
-/* line 251, ../sass/_styles.scss */
+/* line 252, ../sass/_styles.scss */
 #testimonial ul li {
   width: 469px;
   float: left;
 }
-/* line 254, ../sass/_styles.scss */
+/* line 255, ../sass/_styles.scss */
 #testimonial ul li:first-of-type {
   margin-right: 142px;
 }
-/* line 257, ../sass/_styles.scss */
+/* line 258, ../sass/_styles.scss */
 #testimonial ul li img {
   float: left;
 }
-/* line 260, ../sass/_styles.scss */
+/* line 261, ../sass/_styles.scss */
 #testimonial ul li p {
   font-family: "montserratlight", helvetica, arial, sans-serif;
   padding-left: 130px;
 }
-/* line 264, ../sass/_styles.scss */
+/* line 265, ../sass/_styles.scss */
 #testimonial ul li p:last-of-type {
   color: #666666;
   margin: 13px 0;
 }
-/* line 267, ../sass/_styles.scss */
+/* line 268, ../sass/_styles.scss */
 #testimonial ul li p:last-of-type span {
   color: #5192a3;
 }
-/* line 271, ../sass/_styles.scss */
+/* line 272, ../sass/_styles.scss */
 #testimonial ul li img:last-of-type {
   padding-left: 30px;
 }
 
-/* line 277, ../sass/_styles.scss */
+/* line 278, ../sass/_styles.scss */
 .subsribe {
   padding: 75px 0;
   background: #005f78;
   text-align: center;
 }
 
-/* line 282, ../sass/_styles.scss */
+/* line 283, ../sass/_styles.scss */
 .pageHead {
   background: #005f78;
   padding: 40px 0;
 }
-/* line 285, ../sass/_styles.scss */
+/* line 286, ../sass/_styles.scss */
 .pageHead h1 {
   color: white;
   padding: 0;
 }
-/* line 289, ../sass/_styles.scss */
+/* line 290, ../sass/_styles.scss */
 .pageHead p {
   color: white;
   text-align: center;
 }
 
 @media screen and (max-width: 1400px) {
-  /* line 296, ../sass/_styles.scss */
+  /* line 297, ../sass/_styles.scss */
   #headerHome {
     height: calc(100vh - 71px);
   }
 }
-/* line 301, ../sass/_styles.scss */
+/* line 302, ../sass/_styles.scss */
 #profileView .listProjet ul li:last-of-type {
   margin-bottom: 45px;
 }
@@ -1631,6 +1632,10 @@ label#largeFile input#file {
   background-size: cover;
 }
 
+/* line 3, ../sass/_howitwork.scss */
+.stepHow {
+  background: url('/builditsimply/webroot/images/bg-how.png?1425612633') no-repeat center center;
+}
 /* line 5, ../sass/_howitwork.scss */
 .stepHow .wrapper {
   text-align: center;
@@ -1671,9 +1676,14 @@ label#largeFile input#file {
 /* line 34, ../sass/_howitwork.scss */
 .stepHowGray {
   background: #F0F0F0;
+  background: #F0F0F0 url('/builditsimply/webroot/images/bg-how3.png?1425613162') no-repeat center center;
 }
 
 /* line 38, ../sass/_howitwork.scss */
+.stepHowlast {
+  background: url('/builditsimply/webroot/images/bg-how2.png?1425612911') no-repeat center center;
+}
+/* line 40, ../sass/_howitwork.scss */
 .stepHowlast ul {
   margin-bottom: 60px;
 }
