@@ -1,0 +1,30 @@
+// _avisForm.scss
+
+.avisForm{
+	h3{
+		padding-bottom: 20px !important;
+	}
+	p{
+		color: #555555;
+	}
+	.form-group{
+		width: 100%;
+		&:first-of-type{
+			.col-sm-10{
+				width: 80%;
+				float: right;
+			}		
+		}
+		&:last-of-type{
+			.control-label{
+				margin-bottom: 5px;
+			}
+			.col-sm-10{
+				margin-bottom: 30px;
+			}
+		}
+	}
+	.buttonWhite{
+		width: 230px !important;
+	}
+}

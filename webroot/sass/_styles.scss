@@ -297,5 +297,9 @@ height: 109px;
         height: calc(100vh - 71px);
     }
 }
-
+#profileView .listProjet ul li{
+    &:last-of-type{
+        margin-bottom: 45px;
+    }
+}
 

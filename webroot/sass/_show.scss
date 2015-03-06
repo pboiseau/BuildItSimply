@@ -198,6 +198,7 @@
 .listProjet#profileAvis{
 	width: 100%;
 	float: left;
+	margin-top: 10px;
 }
 #profileAvis{
 	li{
@@ -211,7 +212,10 @@
 	}
 	img{
 		margin-left: 25px;
-		float: left;		
+		float: left;
+		width: 104px;
+		height: 104px;
+		border-radius: 100%;		
 	}
 	p{
 		float: left;
