@@ -91,7 +91,8 @@ module.exports = function (grunt) {
                         httpPath: '/',
                         cssDir: 'webroot/css',
                         sassDir: 'webroot/sass',
-                        imagesDir: 'webroot/images'
+                        imagesDir: 'webroot/images',
+                        noLineComments: false
                     }
                 }
             }
