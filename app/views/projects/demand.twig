@@ -2,13 +2,17 @@
     <div class="listProjet">
         <h3>Ils souhaitent participer <span>{{ propositions | length }} Demandes</span></h3>
 
+        <p>Veuillez choisir au maximum 3 freelances parmi votre liste.
+            N'hésitez pas à consulter le profil de chaque freelance pour faire vos choix !</p>
+
         <div class="notBloc userChoice">
             <p class="dateNot">Aujourd'hui</p>
             {% for proposition in propositions %}
             {% set disable = (proposition.status != "PENDING") ? true : false %}
             <ul>
                 <li>
-                    <img src="{{ home ~ proposition.account.picture }}" height="66px" width="66px" alt="Notification user"/>
+                    <img src="{{ home ~ proposition.account.picture }}" height="66px" width="66px"
+                         alt="Notification user"/>
 
                     <p>
                         <a href="{{ home }}users/profile/{{ proposition.account.id }}">{{ proposition.account.firstname ~ " " ~ proposition.account.lastname }}</a>
@@ -43,7 +47,8 @@
 
     <hr class="clear"/>
 
-    <a class="btn btn-success buttonWhite buttonProblem btn-sm" href="{{ home }}projects/{{ project.id }}/proposition/close">Cloturer les
+    <a class="btn btn-success buttonWhite buttonProblem btn-sm"
+       href="{{ home }}projects/{{ project.id }}/proposition/close">Cloturer les
         demandes</a>
 
 {% endblock %}
