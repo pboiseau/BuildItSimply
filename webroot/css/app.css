@@ -462,6 +462,21 @@ footer .wrapper, .push {
   margin-bottom: 45px;
 }
 
+/* line 307, ../sass/_styles.scss */
+.alert-info {
+  width: 100%;
+  height: auto;
+  padding: 25px 65px;
+  margin: 0;
+}
+
+/* line 313, ../sass/_styles.scss */
+.alert {
+  border-radius: 0;
+  border: none;
+  margin: 0;
+}
+
 /* line 2, ../sass/_menu.scss */
 nav {
   background: white;
@@ -471,18 +486,49 @@ nav {
 /* line 6, ../sass/_menu.scss */
 .nav > li > a:hover, .nav > li > a:focus {
   background-color: transparent;
+  color: #004456;
 }
 
-/* line 9, ../sass/_menu.scss */
+/* line 10, ../sass/_menu.scss */
 .navbar-nav > li > a {
-  padding-top: 25px;
-  padding-bottom: 25px;
+  padding-top: 27px;
+  padding-bottom: 27px;
+  font-size: 14px;
+  -moz-transition: all, 0.2s, linear;
+  -o-transition: all, 0.2s, linear;
+  -webkit-transition: all, 0.2s, linear;
+  transition: all, 0.2s, linear;
 }
 
-/* line 13, ../sass/_menu.scss */
+/* line 16, ../sass/_menu.scss */
 .navbar-brand {
   padding: 25px;
   height: 71px;
+  -moz-transition: all, 0.2s, linear;
+  -o-transition: all, 0.2s, linear;
+  -webkit-transition: all, 0.2s, linear;
+  transition: all, 0.2s, linear;
+}
+/* line 20, ../sass/_menu.scss */
+.navbar-brand:hover {
+  color: #004456;
+}
+
+/* line 24, ../sass/_menu.scss */
+.menuLogin {
+  padding: 10px !important;
+  border: 2px solid #005f78;
+  margin: 15px !important;
+  border-radius: 2px;
+  -moz-transition: all, 0.2s, linear;
+  -o-transition: all, 0.2s, linear;
+  -webkit-transition: all, 0.2s, linear;
+  transition: all, 0.2s, linear;
+}
+/* line 30, ../sass/_menu.scss */
+.menuLogin:hover {
+  background: #005f78 !important;
+  color: white !important;
 }
 
 /* line 5, ../sass/_register.scss */
@@ -1676,7 +1722,7 @@ label#largeFile input#file {
 /* line 34, ../sass/_howitwork.scss */
 .stepHowGray {
   background: #F0F0F0;
-  background: #F0F0F0 url('/builditsimply/webroot/images/bg-how3.png?1425613162') no-repeat center center;
+  background: #F0F0F0 url('/builditsimply/webroot/images/bg-how3.png?1425613414') no-repeat center center;
 }
 
 /* line 38, ../sass/_howitwork.scss */

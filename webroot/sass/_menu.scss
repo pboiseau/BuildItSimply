@@ -5,12 +5,31 @@ nav{
 }
 .nav > li > a:hover, .nav > li > a:focus{
     background-color: transparent;
+    color: $colorClaHover;
 }
 .navbar-nav > li > a {
-    padding-top: 25px;
-    padding-bottom: 25px;
+    padding-top: 27px;
+    padding-bottom: 27px;
+    font-size: 14px;
+    @include transition(all,0.2s,linear);
 }
 .navbar-brand{
     padding: 25px;
     height: 71px;
+    @include transition(all,0.2s,linear);
+    &:hover{
+    	color: $colorClaHover;
+    }
 }
+.menuLogin{
+	  padding: 10px !important;
+  border: 2px solid $colorCla;
+  margin: 15px !important;;
+  border-radius: 2px;
+  @include transition(all,0.2s,linear);
+  &:hover{
+  	background: $colorCla !important;;
+  	color: white !important;;
+  }
+}
+

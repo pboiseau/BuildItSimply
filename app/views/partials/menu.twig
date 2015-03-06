@@ -25,10 +25,10 @@
                         {% endif %}
                         <li><a href="{{ home }}users/notifications">Notifications</a></li>
                         <li><a href="{{ home }}users/profile">Profil</a></li>
-                        <li><a href="{{ home }}users/logout">Se deconnecter</a></li>
+                        <li><a class="menuLogin" href="{{ home }}users/logout">Se deconnecter</a></li>
                     {% else %}
                         <li><a href="{{ home }}users/register">S'inscrire</a></li>
-                        <li><a href="{{ home }}users/login">Se connecter</a></li>
+                        <li><a class="menuLogin" href="{{ home }}users/login">Se connecter</a></li>
                     {% endif %}
                 </ul>
             </div>
