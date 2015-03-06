@@ -3,6 +3,13 @@ $colorCla: #005f78;
 $colorClaHover: #004456;
 $colorInputBg: #ececec;
 
+@mixin calc($property, $expression) { 
+  #{$property}: -webkit-calc(#{$expression}); 
+  #{$property}: -moz-calc(#{$expression}); 
+  #{$property}: calc(#{$expression}); 
+} 
+ 
+
 $font : "montserratregular", helvetica, arial, sans-serif;
 $fontLight : "montserratlight", helvetica, arial, sans-serif;
 body{
@@ -112,18 +119,28 @@ height: 109px;
 /************************************************************************/
 /*  PAGE
 /************************************************************************/
+@-moz-document url-prefix()
+        {
+            .headerSection {
+                line-height: 550px;
+            }
+        }
 #headerHome{
     background: image-url("background-header.jpg") no-repeat center center fixed;
     @include background-size(cover);
     // height: calc(100vh - 211px);
-    height: calc(100vh - 109px);
+    // height: calc(100vh - 109px);
+    @include calc(height, "100vh - 109px");
     text-align: center;
     position : relative;
     .headerSection{
         width: 50%;
         float: left;
-        height : calc(100vh - 71px);
-        line-height: calc(100vh - 71px);
+        // height : calc(100vh - 71px);
+        @include calc(height, "100vh - 71px");
+        line-height: calc(100vh - 71px) !important;
+        line-height: -moz-calc(100vh - 171px) !important;
+
 
         .textCtn {
             display: inline-block;
@@ -260,7 +277,7 @@ height: 109px;
             }
             p{
                 font-family: $fontLight;
-                padding-left: 130px;
+                padding-left: 180px;
             }
             p:last-of-type{
                 color: #666666;
@@ -295,7 +312,8 @@ height: 109px;
 
 @media screen and (max-width: 1400px) {
     #headerHome {
-        height: calc(100vh - 71px);
+        // height: calc(100vh - 71px);
+        @include calc(height, "100vh - 71px");
     }
 }
 #profileView .listProjet ul li{
