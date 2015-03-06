@@ -71,6 +71,11 @@
                     </li>
                 {% endfor %}
             </ul>
+
+            {% if projects | length == 0 %}
+                <p>Il n'y a aucun projet pour le moment.</p>
+            {% endif %}
+
         </div>
         <hr class="clear"/>
         <div id="pagination">
