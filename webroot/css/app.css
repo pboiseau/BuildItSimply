@@ -515,8 +515,8 @@ nav {
 
 /* line 16, ../sass/_menu.scss */
 .navbar-brand {
-  padding: 25px;
-  height: 71px;
+  padding: 27px;
+  height: 75px;
   -moz-transition: all, 0.2s, linear;
   -o-transition: all, 0.2s, linear;
   -webkit-transition: all, 0.2s, linear;
@@ -526,8 +526,17 @@ nav {
 .navbar-brand:hover {
   color: #004456;
 }
+/* line 23, ../sass/_menu.scss */
+.navbar-brand img {
+  float: left;
+  width: 30px;
+  vertical-align: middle;
+  position: relative;
+  bottom: 8px;
+  margin-right: 10px;
+}
 
-/* line 24, ../sass/_menu.scss */
+/* line 32, ../sass/_menu.scss */
 .menuLogin {
   padding: 10px !important;
   border: 2px solid #005f78;
@@ -538,7 +547,7 @@ nav {
   -webkit-transition: all, 0.2s, linear;
   transition: all, 0.2s, linear;
 }
-/* line 30, ../sass/_menu.scss */
+/* line 38, ../sass/_menu.scss */
 .menuLogin:hover {
   background: #005f78 !important;
   color: white !important;

@@ -14,11 +14,19 @@ nav{
     @include transition(all,0.2s,linear);
 }
 .navbar-brand{
-    padding: 25px;
-    height: 71px;
+    padding: 27px;
+    height: 75px;
     @include transition(all,0.2s,linear);
     &:hover{
     	color: $colorClaHover;
+    }
+    img{
+      float: left;
+      width: 30px;
+      vertical-align: middle;
+      position: relative;
+      bottom: 8px;
+      margin-right: 10px;
     }
 }
 .menuLogin{
