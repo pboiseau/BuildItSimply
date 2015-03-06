@@ -155,14 +155,14 @@ class Project extends AppModel
             ->count();
     }
 
-    /**
-     * Count all publish project
-     * @return int
-     */
-    public function countPublish()
-    {
-        return $this->whereNotIn('status', ['EN CREATION', 'ANNULE'])->count();
-    }
+//    /**
+//     * Count all publish project
+//     * @return int
+//     */
+//    public function countPublish()
+//    {
+//        return $this->whereNotIn('status', ['EN CREATION', 'ANNULE'])->count();
+//    }
 
     /**
      * Initialize a project and create project with first essentials data

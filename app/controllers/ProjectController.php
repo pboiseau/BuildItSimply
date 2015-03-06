@@ -135,8 +135,8 @@ class ProjectController extends AppController
         }
 
         $offset = ($page > 0) ? ($page - 1) * ($this->get('PROJECT_PER_PAGE')) : 0;
-        
-        $number_project = $this->Project->countPublish();
+
+        $number_project = $this->Project->publicated()->count();
         $number_page = ceil($number_project / $this->get('PROJECT_PER_PAGE'));
 
         $projects = $this->Project->whereNotIn('status', ['EN CREATION', 'ANNULE'])

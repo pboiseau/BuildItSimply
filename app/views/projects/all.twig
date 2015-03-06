@@ -78,7 +78,7 @@
                 {% if page > 0 %}
                     <li class="previous"><a href="{{ home }}projects/page/{{ page - 1 }}">← Précédent</a></li>
                 {% endif %}
-                {% for i in 1 .. number_page %}
+                {% for i in 1 .. number_page if number_page > 0 %}
                     <li><a href="{{ home }}projects/page/{{ i }}">{{ i }}</a></li>
                 {% endfor %}
                 {% if page < number_page %}
