@@ -2,29 +2,31 @@
 
 > Build it Simply is a platform for the beginners of Web who need to be guided to concretize their project. Do you need to create a site, a poster, a webdesign or just an illustration? Build it Simply accompanies you through super-simplified steps to put you in connection with the freelance whom you need.
 
-<h4>Technologies utilisés</h4>
+<a href="http://builditsimply.paulboiseau.com/" target="_blank">Web site URL</a>
+
+<h4>Technologies involved</h4>
 <ul>
-  <li>PHP avec FatFree Framework</li>
-  <li>Eloquent ORM</li>
-  <li>Twig moteur de template</li>
+  <li><a href="http://fatfreeframework.com/" target="_blank">Fat Free Framework</a></li>
+  <li><a href="http://laravel.com/docs/5.0/eloquent" target="_blank">Eloquent ORM</a></li>
+  <li><a href="http://twig.sensiolabs.org/" target="_blank">Twig template engine</a></li>
 </ul>
 
-<h4>Gestionnaires de developpement</h4>
+<h4>Development manager</h4>
 <ul>
-  <li>Composer</li>
-  <li>Bower</li>
-  <li>NPM</li>
-  <li>Grunt</li>
+  <li><a href="https://getcomposer.org/" target="_blank">Composer</a></li>
+  <li><a href="http://bower.io/" target="_blank">Bower</a></li>
+  <li><a href="https://www.npmjs.com/" target="_blank">NPM</a></li>
+  <li><a href="http://gruntjs.com/" target="_blank">Grunt</a></li>
 </ul>
 
-<h4>Installation</h4>
-<p>Commencez par télécharger les dépendances PHP neccessaires au projet</p>
+<h4>How to install</h4>
+<p>Get php dependencies</p>
 <code>$ composer install</code>
 
-<p>Ensuite installer les dépendances CSS et Javascript</p>
+<p>Get CSS and Javascript dependencies</p>
 <code>$ bower install</code>
 
-<p>Et pour finir les modules nodeJS</p>
+<p>Get node module</p>
 <code>$ npm install</code>
 
 <table>
