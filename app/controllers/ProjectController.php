@@ -237,6 +237,7 @@ class ProjectController extends AppController
 
                 $this->setFlash("Votre participation a bien été prise en compte.");
 
+                // send notification mail
                 $this->MailHelper->sendMail("demand", $client->mail, [
                     'subject' => "Nouvelle demande pour votre projet " . $project->name,
                     'user' => Account::find($user['id'])->with('freelance')->first(),
@@ -247,6 +248,7 @@ class ProjectController extends AppController
                 $this->setFlash("Vous participez déjà à ce projet.");
             }
         }
+
         $this->f3->reroute('/projects/' . $this->get('PARAMS.id'));
     }
 

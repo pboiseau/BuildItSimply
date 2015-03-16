@@ -12,17 +12,18 @@ class AppController
     protected $layout = 'default';
 
     /**
+     * Construct the require config app
      * @throws Exception
      */
     public function __construct()
     {
         $this->f3 = Base::instance();
         $this->twig = $this->get('TWIG');
-        $this->twigExtention();
 
-        // instanciate helpers
+        // Instanciate all helpers
         $this->MailHelper = new MailHelper();
         $this->Auth = new AuthHelper();
+        $this->TwigHelper = new TwigHelper();
 
         $this->config = [
             'prod' => $this->get('PROD'),
@@ -38,6 +39,9 @@ class AppController
             'url' => $this->get('URL')
         ];
 
+        /**
+         * Instanciate all models
+         */
         if (!empty($this->uses)) {
             foreach ($this->uses as $model) {
                 $this->loadModel($model);
@@ -166,35 +170,4 @@ class AppController
         }
     }
 
-    /**
-     *  Add extension to twig
-     */
-    private function twigExtention()
-    {
-        $this->twig->addFunction(new \Twig_SimpleFunction('javascript', function ($file) {
-            echo sprintf("<script src='/%s'></script>", $this->get('JS') . $file);
-        }));
-
-        $this->twig->addFunction(new \Twig_SimpleFunction('translateStatus', function ($status) {
-            switch ($status) {
-                case "ACCEPT":
-                    echo sprintf("accepté");
-                    break;
-                case "DECLINE":
-                    echo sprintf("refusé");
-                    break;
-                case "PENDING":
-                    echo sprintf("en attente");
-                    break;
-                case "CHOOSEN":
-                    echo sprintf("choisi");
-                    break;
-                default:
-                    break;
-            }
-        }));
-    }
-
 }
-
-?>

@@ -47,7 +47,7 @@
 
                 </ul>
                 <hr class="clear"/>
-                {% if project.status == "OUVERT" %}
+                {% if project.status == "OUVERT" and login.type == "FREELANCE" %}
                     <a class="buttonWhite" href="{{ home }}projects/join/{{ project.id }}">Je participe</a>
                 {% endif %}
 
