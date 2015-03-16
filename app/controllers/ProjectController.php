@@ -529,7 +529,7 @@ class ProjectController extends AppController
             {
                 if(!empty($file))
                     $uploadFile = true;
-                    
+
             }
 
             if($uploadFile)

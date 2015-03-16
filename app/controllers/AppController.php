@@ -20,7 +20,9 @@ class AppController
         $this->f3 = Base::instance();
         $this->twig = $this->get('TWIG');
 
-        // Instanciate all helpers
+        /**
+         * Instanciate all helpers
+         */
         $this->MailHelper = new MailHelper();
         $this->Auth = new AuthHelper();
         $this->TwigHelper = new TwigHelper();
@@ -38,6 +40,7 @@ class AppController
             'login' => $this->get('SESSION.user'),
             'url' => $this->get('URL')
         ];
+
 
         /**
          * Instanciate all models

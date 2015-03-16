@@ -11,6 +11,7 @@ class TwigHelper extends BaseHelper
 
         $this->addFunction('translateStatus', $this->translateStatus());
         $this->addFunction('javascript', $this->javascriptTag());
+        $this->addFunction('userType', $this->userType());
     }
 
 
@@ -55,6 +56,17 @@ class TwigHelper extends BaseHelper
                 default:
                     break;
             }
+        };
+    }
+
+    /**
+     * Check user type for view test
+     * @return callable
+     */
+    private function userType()
+    {
+        return function($type){
+            return strtoupper($type) === $this->f3->get('SESSION.user.type');
         };
     }
 
