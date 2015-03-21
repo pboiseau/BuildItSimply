@@ -15,6 +15,16 @@ class AdminController extends AppController
     }
 
     /**
+     *  TODO set admin role
+     */
+    public function beforeroute(){
+        parent::beforeroute();
+        if(!$this->Auth->is('admin')){
+            $this->f3->reroute('/');
+        }
+    }
+
+    /**
      * Back-office's home
      */
     public function main()
@@ -30,11 +40,11 @@ class AdminController extends AppController
         if ($this->request() == "POST") 
         {
 
-            $request = $this->f3->get('POST');
+            $request = $this->get('POST');
 
-            if (!empty($this->f3->get('FILES.image.name')))
+            if (!empty($this->get('FILES.image.name')))
             {
-                $upload = new UploadHelper($this->f3->get('PROJECT_TYPE_FILES'));
+                $upload = new UploadHelper($this->get('PROJECT_TYPE_FILES'));
                 $filename = current($upload->upload());
 
                 if ($filename) 
@@ -46,7 +56,7 @@ class AdminController extends AppController
 
 
             $this->setFlash("Le type de project a bien été crée");
-            $this->f3->reroute($this->f3->get('PATTERN'));
+            $this->f3->reroute($this->get('PATTERN'));
         }
 
         $types = ProjectType::all();
@@ -65,7 +75,7 @@ class AdminController extends AppController
 
         if ($this->request() == "POST") 
         {
-            $request = $this->f3->get('POST');
+            $request = $this->get('POST');
 
 
             if(!empty($request))
@@ -75,7 +85,7 @@ class AdminController extends AppController
                 // Si l'utilisateur veut update
                 if($request['button']=='update')
                 {
-                    $filesList = $this->f3->get('FILES.image.name');
+                    $filesList = $this->get('FILES.image.name');
 
                     foreach ($request['question'] as $key => $question) 
                     {
@@ -92,7 +102,7 @@ class AdminController extends AppController
                     if($uploadFile)
                     {
                         // Recuperation of images
-                        $upload = new UploadHelper($this->f3->get('RESPONSE_FILES'));
+                        $upload = new UploadHelper($this->get('RESPONSE_FILES'));
                         $files = $upload->upload();
                     }
                     
@@ -137,7 +147,7 @@ class AdminController extends AppController
                 }
             }
 
-            $this->f3->reroute($this->f3->get('PATTERN'));
+            $this->f3->reroute($this->get('PATTERN'));
         
 
         }
@@ -187,7 +197,7 @@ class AdminController extends AppController
         $error = array();
 
         if ($this->request() == "POST") {
-            $request = $this->f3->get('POST');
+            $request = $this->get('POST');
 
             if ($this->ProjectQuestion->validate($request)) {
                 $question = ProjectQuestion::create([
@@ -211,7 +221,7 @@ class AdminController extends AppController
             }
 
             $this->setFlash("La question a bien été ajouté  ");
-            $this->f3->reroute($this->f3->get('PATTERN'));
+            $this->f3->reroute($this->get('PATTERN'));
         }
 
         $types = ProjectType::all(array('id', 'type'));
@@ -228,12 +238,12 @@ class AdminController extends AppController
 
         if ($this->request() == "POST") 
         {
-            $request = $this->f3->get('POST');
+            $request = $this->get('POST');
 
             $this->addResponses($request);
 
             $this->setFlash("Les réponses ont bien été ajoutées");
-            $this->f3->reroute($this->f3->get('PATTERN'));
+            $this->f3->reroute($this->get('PATTERN'));
         }
 
         $questions = ProjectQuestion::all(array('id', 'question'));
@@ -254,9 +264,9 @@ class AdminController extends AppController
         if(empty($idQuestion))
             $idQuestion = $request['project_question'];
 
-        $upload = new UploadHelper($this->f3->get('RESPONSE_FILES'));
+        $upload = new UploadHelper($this->get('RESPONSE_FILES'));
         $files = $upload->upload();
-        $fileList = $this->f3->get('FILES.image.name');
+        $fileList = $this->get('FILES.image.name');
 
         foreach ($request['response'] as $key => $response) 
         {
@@ -305,10 +315,10 @@ class AdminController extends AppController
         if($this->request() == "POST")
         {
 
-            if( Skill::create($this->f3->get('POST')))
+            if( Skill::create($this->get('POST')))
             {
                 $this->setFlash("La compétence a bien été ajouté.");
-                $this->f3->reroute($this->f3->get('PATTERN'));
+                $this->f3->reroute($this->get('PATTERN'));
             }
         }
 
@@ -325,7 +335,7 @@ class AdminController extends AppController
     {
         if($this->request() == "POST")
         {
-            $request = $this->f3->get('POST');
+            $request = $this->get('POST');
 
             $this->listManagement($request, 'freelance');
         }
@@ -342,7 +352,7 @@ class AdminController extends AppController
     {
         if($this->request() == "POST")
         {
-            $request = $this->f3->get('POST');
+            $request = $this->get('POST');
 
             $this->listManagement($request, 'client');
         }
@@ -372,7 +382,7 @@ class AdminController extends AppController
                 ]);
 
             $this->setFlash("L'utilisateur a bien été mis à jour.");
-            $this->f3->reroute($this->f3->get('PATTERN'));
+            $this->f3->reroute($this->get('PATTERN'));
         }
 
         // After select one user for modify
@@ -398,7 +408,7 @@ class AdminController extends AppController
                 $accounts->destroy($key);
             }
             $this->setFlash("La sélection a bien été supprimé.");
-            $this->f3->reroute($this->f3->get('PATTERN'));
+            $this->f3->reroute($this->get('PATTERN'));
         }
     }
 

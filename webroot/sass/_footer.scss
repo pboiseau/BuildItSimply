@@ -1,45 +1,49 @@
 // _footer.scss
-footer{
-    background: #f4f4f4;
-    .wrapper{
-        padding: 45px 0 40px 0;
-    }
-    ul{
-        float: left;
-        width: 100%;
-        li{
-            float: left;
-            a{
-                color: #a5acb2;
-                font-size: 14px;
-                margin-right: 30px;
-                position: relative;
-                bottom: 2px;
-                @include transition(all,0.2s,linear);
-                &:hover{
-                    color: #939ba2;
-                }
-            }
-            img{
-                    margin-right: 110px;
-            }
+footer {
+  background: #f4f4f4;
+  .wrapper {
+    padding: 45px 0 40px 0;
+  }
+  ul {
+    float: left;
+    width: 100%;
+    li {
+      float: left;
+      a {
+        color: #a5acb2;
+        font-size: 14px;
+        margin-right: 30px;
+        position: relative;
+        bottom: 2px;
+        @include transition(all, 0.2s, linear);
+        &:hover {
+          color: #939ba2;
         }
+      }
+      img {
+        width: 30px;
+        margin-right: 10px;
+      }
     }
+  }
 }
-.socialFooter{
-    float: right;
-    @include transition(all,0.2s,linear);
-    a{
-        bottom: 0 !important;
-        right: 0;
-    }
-    a img{
-        margin-right: 0;
-    }
-    &:last-of-type a{
-        bottom: 1px !important;
-    }
-    &:hover{
-        @include opacity(0.80);
-    }
+
+.socialFooter {
+  float: right;
+  @include transition(all, 0.2s, linear);
+  a {
+    bottom: 0 !important;
+    right: 0;
+  }
+  a img {
+    width: 15px;
+    height: 15px;
+    margin-right: 0;
+  }
+  &:last-of-type a {
+    bottom: 1px !important;
+  }
+  &:hover {
+    @include opacity(0.80);
+  }
 }
