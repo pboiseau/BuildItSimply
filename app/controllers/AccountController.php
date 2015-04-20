@@ -128,6 +128,10 @@ class AccountController extends AppController
 
         if (!empty($user))
         {
+            $this->setSeo([
+                'title'       => $user->firstname . ' ' . $user->lastname,
+                'description' => $user->description
+            ]);
 
             $user['projects'] = $this->Account->getProjects($user);
 

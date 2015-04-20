@@ -11,6 +11,8 @@ class AppController
     protected $twig;
     protected $layout = 'default';
 
+    private $seo = [];
+
     /**
      * Construct the require config app
      *
@@ -42,7 +44,6 @@ class AppController
             'url'     => $this->get('URL')
         ];
 
-
         /**
          * Instanciate all models
          */
@@ -57,7 +58,7 @@ class AppController
     }
 
     /**
-     *    FatFree before route trigger
+     * FatFree before route trigger
      **/
     public function beforeroute()
     {
@@ -68,7 +69,11 @@ class AppController
                 '/howitworks',
                 '/users/login',
                 '/users/register',
-                '/users/profile/@id'
+                '/users/profile/@id',
+                '/projects',
+                '/projects/category/@category',
+                '/projects/search',
+                '/projects/page/@page'
             ];
 
             if (!in_array($this->get('PATTERN'), $autorize))
@@ -90,7 +95,7 @@ class AppController
 
 
     /**
-     *    Render a view using twig template
+     * Render a view using twig template
      *
      * @param string $template
      * @param array $data
@@ -100,7 +105,7 @@ class AppController
         $data['layout'] = $this->layout;
 
         echo $this->twig->render($template . '.twig',
-            array_merge($data, $this->config)
+            array_merge($data, $this->config, $this->seo)
         );
 
         if ($this->get('SESSION.message'))
@@ -148,12 +153,9 @@ class AppController
         if ($status == "ok")
         {
             header("HTTP/1.0 200 OK");
-        } else
+        } else if ($status == "ko")
         {
-            if ($status == "ko")
-            {
-                header("HTTP/1.0 404 Not Found");
-            }
+            header("HTTP/1.0 404 Not Found");
         }
 
         return '{"' . $name . '": ' . json_encode($data, CASE_LOWER) . '}';
@@ -179,6 +181,20 @@ class AppController
     protected function set($key, $value)
     {
         $this->f3->set($key, $value);
+    }
+
+    /**
+     * Initialize SEO params
+     *
+     * @param array $data
+     * @return $this
+     */
+    protected function setSeo(array $data)
+    {
+        $this->seo = [
+            'seo' => $data
+        ];
+        return $this;
     }
 
 

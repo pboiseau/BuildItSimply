@@ -3,16 +3,14 @@
     <nav>
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="{{ home }}"><img src="{{ image }}logo-buiditsimply.png" alt="logo build it simply"/>Build It Simply</a>
+                <a class="navbar-brand" href="{{ home }}"><img src="{{ image }}logo-buiditsimply.png"
+                                                               alt="logo build it simply"/>Build It Simply</a>
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="{{ home }}howitworks">Comment ça marche</a></li>
-                    {% if login %}
-                        <li><a href="{{ home }}projects/">Projets</a></li>
-                    {% endif %}
-
+                    <li><a href="{{ home }}projects/">Projets</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
@@ -34,4 +32,4 @@
             </div>
         </div>
     </nav>
-{% endblock %}
+    {% endblock %}

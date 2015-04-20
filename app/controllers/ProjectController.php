@@ -36,12 +36,19 @@ class ProjectController extends AppController
         if ($this->get('PATTERN') == "/projects/@id")
         {
             $project = $this->Project->find($this->get('PARAMS.id'));
+
             if ($project)
             {
+                $this->setSeo([
+                    'title'       => $project->name,
+                    'description' => $project->description
+                ]);
+
                 if ($project->client_id == $this->Auth->getId())
                 {
                     $this->f3->reroute('/projects/edit/' . $this->get('PARAMS.id'));
                 }
+
             } else
             {
                 $this->f3->reroute('/projects/');
@@ -144,6 +151,11 @@ class ProjectController extends AppController
      */
     public function all()
     {
+        $this->setSeo([
+            'title'       => "Nos projets disponibles",
+            'description' => "Les recruteurs ont besoin de vous, n’hésitez pas à proposer vos services !"
+        ]);
+
         $validator = new Validate();
         $page = ($this->get('PARAMS.page')) ? $this->get('PARAMS.page') : 0;
 

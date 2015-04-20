@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>Build It Simply</title>
+    <title>{{ seo.title ? "Build It Simply - " ~ seo.title : "Build It Simply - Realiser votre projet en toute simplicité" }}</title>
     <meta charset="utf8">
     <meta name="description"
-          content="Build it Simply est une plateforme destinée aux débutants du web qui ont besoin d'être guidés pour concrétiser leur projet."/>
+          content="{{ seo.description ? seo.description : "Build it Simply est une plateforme destinée aux débutants du web qui ont besoin d'être guidés pour concrétiser leur projet." }}"/>
     <meta name="keywords" content="site web, projet, freelance, developpeur, design, graphisme"/>
     <meta name="robots" content="index, follow"/>
     <link rel="icon" href="{{ image }}favicon.ico"/>
