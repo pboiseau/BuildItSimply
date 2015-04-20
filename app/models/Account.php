@@ -10,7 +10,8 @@ class Account extends AppModel
     public $errors;
 
     protected $table = 'accounts';
-    protected $guarded = array('id');
+    protected $guarded = ['id'];
+    protected $hidden = ['password'];
 
     private $projects = array();
 
@@ -26,7 +27,7 @@ class Account extends AppModel
 
         if ($type == "FREELANCE")
             return $this->hasOne('Freelance', 'account_id', 'id');
-        else if ($type == "CLIENT") 
+        else if ($type == "CLIENT")
             return $this->hasOne('Client', 'account_id', 'id');
     }
 
@@ -98,7 +99,7 @@ class Account extends AppModel
     public function register($user)
     {
         // check valide user
-        if ($this->validate($user)) 
+        if ($this->validate($user))
         {
             unset($user['repeatpassword']);
 
@@ -109,7 +110,7 @@ class Account extends AppModel
 
             $newUser = $this->create($user);
             return (!empty($newUser)) ? $newUser : false;
-        } 
+        }
         else
             return false;
     }
@@ -124,11 +125,11 @@ class Account extends AppModel
     {
         $userWithType = $user->type($user->type)->first();
 
-        if ($user->type == "FREELANCE") 
+        if ($user->type == "FREELANCE")
         {
             $participations = $userWithType->participates()->status('choosen')->get();
 
-            $participations->each(function ($participation) 
+            $participations->each(function ($participation)
             {
                 $project = $participation->project()->first();
                 $project['tags'] = $project->tags()->get();
@@ -136,8 +137,8 @@ class Account extends AppModel
                 $this->projects[] = $project;
             });
 
-        } 
-        else if ($user->type == "CLIENT") 
+        }
+        else if ($user->type == "CLIENT")
         {
             $projects = $userWithType->project()->publicated()->recent()->get();
 

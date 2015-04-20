@@ -1,12 +1,12 @@
 <?php
 
 /**
- *  Class for manage all data link to user's account 
+ *  Class for manage all data link to user's account
  */
 class AccountController extends AppController
 {
 
-    public $uses = array('Account', 'Freelance', 'Client', 'Skill', 'FreelanceSkill', 'Project', 'Participate');
+    public $uses = ['Account', 'Freelance', 'Client', 'Skill', 'FreelanceSkill', 'Project', 'Participate'];
 
     public function __construct()
     {
@@ -20,10 +20,12 @@ class AccountController extends AppController
     public function beforeroute()
     {
         parent::beforeroute();
+        $request = $this->get('PATTERN');
 
-        if ($this->Auth->isLogin()) {
-            $request = $this->get('PATTERN');
-            if (in_array($request, ['/users/register', '/users/login'])) {
+        if ($this->Auth->isLogin())
+        {
+            if (in_array($request, ['/users/register', '/users/login']))
+            {
                 $this->setFlash("Vous etes déjà authentifié.");
                 $this->f3->reroute('/users/profile');
             }
@@ -35,12 +37,15 @@ class AccountController extends AppController
      **/
     public function login()
     {
-        if ($this->request() == 'POST') {
-            if ($user = $this->Account->login($this->get('POST'))) {
+        if ($this->request() == 'POST')
+        {
+            if ($user = $this->Account->login($this->get('POST')))
+            {
                 $this->Account->setSession($user);
                 $this->setFlash("Authentification reussi.");
                 $this->f3->reroute('/');
-            } else {
+            } else
+            {
                 $this->setFlash("Les informations ne sont pas valides.");
                 $this->f3->reroute($this->get('PATTERN'));
             }
@@ -65,22 +70,26 @@ class AccountController extends AppController
      **/
     public function register()
     {
-        $user = array();
-        $errors = array();
+        $user = [];
+        $errors = [];
 
-        if ($this->request() == 'POST') {
+        if ($this->request() == 'POST')
+        {
             $user = $this->get('POST');
 
-            if ($newUser = $this->Account->register($user)) {
+            if ($newUser = $this->Account->register($user))
+            {
 
                 // initialize client or freelance special account
-                if ($user['type'] == "CLIENT") {
+                if ($user['type'] == "CLIENT")
+                {
 
                     $this->Client->create([
                         'account_id' => $newUser->id
                     ]);
 
-                } else if ($user['type'] == "FREELANCE") {
+                } else if ($user['type'] == "FREELANCE")
+                {
 
                     $this->Freelance->create([
                         'account_id' => $newUser->id
@@ -92,7 +101,8 @@ class AccountController extends AppController
                 // send welcome email when account created
                 Account::created($this->Account->sendMail('welcome_' . strtolower($user['type']), $newUser));
                 $this->f3->reroute('/users/profile');
-            } else {
+            } else
+            {
                 $errors = $this->Account->errors;
             }
         }
@@ -107,47 +117,52 @@ class AccountController extends AppController
     public function profile()
     {
 
-        $experiences = array();
+        $experiences = [];
 
         // get user profile by ID or with session ID
         $user = $this->Account->find((!empty($this->get('PARAMS.id'))) ?
-                $this->get('PARAMS.id') :
-                $this->get('SESSION.user.id')
+            $this->get('PARAMS.id') :
+            $this->get('SESSION.user.id')
         );
 
 
-        if (!empty($user)) {
+        if (!empty($user))
+        {
 
             $user['projects'] = $this->Account->getProjects($user);
 
             $user[strtolower($user['type'])] = $user->type($user['type'])->first();
 
             // if freelance get skills
-            if ($user['type'] == "FREELANCE") {
+            if ($user['type'] == "FREELANCE")
+            {
                 $experiences = $this->Freelance->getEnumValues('experience');
                 $skills = $this->Skill->getFromFreelanceSkills(
                     $this->FreelanceSkill->getAll('account_id', $user->id)
                 );
 
                 $recommendations = $user->freelance()->first()
-                    ->recommendations()
-                    ->with('project', 'client')
-                    ->get();
+                                        ->recommendations()
+                                        ->with('project', 'client')
+                                        ->get();
 
                 $user['freelance']['skills'] = $skills;
             }
 
-            if ($user->id == $this->get('SESSION.user.id')) {
+            if ($user->id == $this->get('SESSION.user.id'))
+            {
                 // render the profile editing view
                 $this->render('accounts/edit',
                     compact('user', (!empty($experiences) ? 'experiences' : '')));
-            } else {
+            } else
+            {
                 // render the profile show view
                 $this->render('accounts/show',
                     compact('user', 'recommendations', (!empty($experiences) ? 'experiences' : '')));
             }
 
-        } else {
+        } else
+        {
             $this->setFlash("Cet utilisateur n'existe pas.");
             $this->f3->reroute('/');
         }
@@ -158,7 +173,8 @@ class AccountController extends AppController
      **/
     public function update_profile()
     {
-        if ($this->request() == 'POST') {
+        if ($this->request() == 'POST')
+        {
             $profile = $this->get('POST');
 
             $userId = $this->get('SESSION.user.id');
@@ -166,49 +182,65 @@ class AccountController extends AppController
             $profile['freelance']['account_id'] = $userId;
             $profile['client']['account_id'] = $userId;
 
-            if (!empty($this->get('FILES.picture.name'))) {
+            if (!empty($this->get('FILES.picture.name')))
+            {
                 $upload = new UploadHelper();
                 $filename = $upload->upload(true)[0];
 
-                if ($filename) {
+                if ($filename)
+                {
                     $profile['account']['picture'] = $filename;
                 }
             }
 
-            if ($this->Auth->is('freelance')) {
+            if ($this->Auth->is('freelance'))
+            {
 
                 if ($this->Account->updateAccount($profile['account'])
                     && $this->Freelance->updateProfile($profile['freelance'])
-                ) {
+                )
+                {
                     $skills = $this->Skill->explodeSkills($profile['freelance']['skills']);
                     $this->FreelanceSkill->add($skills);
                     $this->setFlash("Votre profil a bien été mis à jour.");
-                } else {
+                } else
+                {
                     $this->setFlash("Certaines informations sont erronées");
-                    if ($this->Account->errors) {
-                        if ($this->Freelance->errors) {
+                    if ($this->Account->errors)
+                    {
+                        if ($this->Freelance->errors)
+                        {
                             $errors = array_merge($this->Account->errors, $this->Freelance->errors);
-                        } else {
+                        } else
+                        {
                             $errors = $this->Account->errors;
                         }
-                    } else {
+                    } else
+                    {
                         $errors = $this->Freelance->errors;
                     }
                 }
-            } else if ($this->Auth->is('client')) {
+            } else if ($this->Auth->is('client'))
+            {
                 if ($this->Account->updateAccount($profile['account'])
                     && $this->Client->updateProfile($profile['client'])
-                ) {
+                )
+                {
                     $this->setFlash("Votre profil a bien été mis à jour.");
-                } else {
+                } else
+                {
                     $this->setFlash("Certaines informations sont erronées");
-                    if ($this->Account->errors) {
-                        if ($this->Client->errors) {
+                    if ($this->Account->errors)
+                    {
+                        if ($this->Client->errors)
+                        {
                             $errors = array_merge($this->Account->errors, $this->Client->errors);
-                        } else {
+                        } else
+                        {
                             $errors = $this->Account->errors;
                         }
-                    } else {
+                    } else
+                    {
                         $errors = $this->Client->errors;
                     }
                 }
@@ -225,29 +257,35 @@ class AccountController extends AppController
     public function notification()
     {
         // get project demand if user is a client
-        if ($this->Auth->is('client')) {
+        if ($this->Auth->is('client'))
+        {
 
             $participations = $this->Participate->notification($this->Auth->getId(), 'client');
 
-            if ($participations) {
+            if ($participations)
+            {
 
-                $participations->each(function($participation){
+                $participations->each(function ($participation)
+                {
                     $participation['freelance'] = $participation->account()->first();
                     $participation['project'] = $participation->project()->first();
                 });
 
             }
 
-        } else if ($this->Auth->is('freelance')) {
+        } else if ($this->Auth->is('freelance'))
+        {
 
             $participations = $this->Participate->notification($this->Auth->getId(), 'freelance');
 
-        } else {
+        } else
+        {
             $this->f3->reroute('/');
         }
 
         // check if user have notifications
-        if($participations) {
+        if ($participations)
+        {
             $participations = $this->Participate->groupByDate($participations);
         }
 
@@ -260,9 +298,10 @@ class AccountController extends AppController
      */
     public function participations()
     {
-        if ($this->Auth->is('freelance')) {
-
-            $participations = $this->Participate->where('freelance_id', $this->Auth->getId())
+        if ($this->Auth->is('freelance'))
+        {
+            $participations = $this->Participate
+                ->where('freelance_id', $this->Auth->getId())
                 ->whereIn('participates.status', ['ACCEPT', 'CHOOSEN'])
                 ->with('project')
                 ->recent()
@@ -270,7 +309,8 @@ class AccountController extends AppController
 
             $this->render('accounts/participation', compact('participations'));
 
-        } else {
+        } else
+        {
             $this->setFlash("Vous n'êtes pas Freelance");
             $this->f3->reroute('/users/profile');
         }
