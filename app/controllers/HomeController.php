@@ -1,12 +1,12 @@
 <?php
 
 /**
- *  Home controller 
+ *  Home controller
  */
 class HomeController extends AppController
 {
 
-    public $uses = array('Account', 'Client', 'Freelance', 'Project');
+    public $uses = ['Account', 'Client', 'Freelance', 'Project'];
 
     /**
      *   Initialize with AppController's construct
@@ -17,7 +17,7 @@ class HomeController extends AppController
     }
 
     /**
-     *  Show home page 
+     *  Show home page
      */
     public function index()
     {
@@ -33,6 +33,12 @@ class HomeController extends AppController
      */
     public function howItWorks()
     {
+        $this->setSeo([
+            'title'       => "Comment ca marche",
+            'description' => "Vous avez une idée, un projet et vous ne savez pas vraiment qui contacter.
+Ne vous inquiétez pas, à travers différentes étapes ultra-simplifiées, nous allons vous accompagner dans la soumission de votre projet"
+        ]);
+
         $this->render('howitworks');
     }
 

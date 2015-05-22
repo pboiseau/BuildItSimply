@@ -37,6 +37,11 @@ class AccountController extends AppController
      **/
     public function login()
     {
+        $this->setSeo([
+            'title'       => "Connexion à votre compte",
+            'description' => "Connectez-vous pour accéder à votre compte personnel"
+        ]);
+
         if ($this->request() == 'POST')
         {
             if ($user = $this->Account->login($this->get('POST')))
@@ -70,6 +75,11 @@ class AccountController extends AppController
      **/
     public function register()
     {
+        $this->setSeo([
+            'title'       => "Rejoignez notre communauté de Freelance et de Recruteur",
+            'description' => "Pour rejoindre la communauté Build It Simply rien de plus simple, il vous suffit de creer un compte gratuitement"
+        ]);
+
         $user = [];
         $errors = [];
 
